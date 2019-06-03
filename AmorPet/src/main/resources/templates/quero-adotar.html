@@ -4,17 +4,15 @@
 <head>
 
 	<style type="text/css">
-    img {
-    border-radius: 8px;
-}
-.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
+    
+/*.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
 
 .navbar .navbar-collapse { position: relative; }
 
 .navbar .nav-collapse { position: absolute; z-index: 1; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 120px; padding-left: 80px; width: 100%; }
 /*.navbar.navbar-default .nav-collapse { background-color: #f8f8f8; }*/
 /*.navbar.navbar-inverse .nav-collapse { background-color: #222; }*/
-.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
+/*.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
 .nav-collapse>li { float: right; }
 
 .btn.btn-circle { border-radius: 50px; }
@@ -44,9 +42,12 @@
   <link rel="stylesheet" href="assets/mobirise/css/style.css">
   <link rel="stylesheet" href="assets/dropdown-menu/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+  <link rel="stylesheet" type="text/css" href="css-quero-adotar/quero-adotar.css">
 </head>
 <body>
 <div th:insert="header"></div>
+
 <br>
 <br>
 <br>
@@ -63,36 +64,88 @@
         <div class="row" id="filtros">
           
           <!-- Second navbar for sign in -->
-    <nav class="navbar navbar-default">
-      <div class="container">
-       
-    
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-2">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="btn btn-info" style="margin-right: 10px; color: #ffffff;" >TODOS</a></li>
-            <li><a href="#" class="btn btn-info" style="margin-right: 10px;color: #ffffff;">MACHO</a></li>
-            <li><a href="#" class="btn btn-info" style="margin-right: 10px;color: #ffffff;">FÊMEA</a></li>
-            <li><a href="#" class="btn btn-info" style="margin-right: 10px;color: #ffffff;">CACHORRO</a></li>
-            <li><a href="#" class="btn btn-info" style="margin-right: 10px;color: #ffffff;">GATO</a></li>
-          </ul>
-          
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav><!-- /.navbar -->
-            </select> 
-          
+        <!--<div class="container">
+    <div class="row">    
+        <div class="col-md-4">
+        <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-success btn-lg dropdown-toggle " data-toggle="dropdown" id="dropdownMenuButton">
+                      <span id="search_concept">Filtrar por</span> <span class="caret"></span>
+                    </button>
+                  <ul class="dropdown-menu design-list" role="menu">
+                     
+                          <li><a href="#contains">Todos</a></li>
+
+                  <li class="divider"></li>
+                    <li><br></li>
+                      <li class="dropdown-header">Espécie:</li> 
+                          <li><a href="#contains">Cães</a></li>
+                          <li><a href="#its_equal">Gatos</a></li>
+                          <li><br/></li>
+                  <li class="divider"></li>
+                    <li><br/></li> 
+                      <li class="dropdown-header">Sexo:</li> 
+                          <li><a href="#contains">Masculino</a></li>
+                          <li><a href="#its_equal">Feminino</a></li>
+                          <li><br/></li>
+                          <li class="divider"></li>
+                          <li><br/></li>
+                      <li class="dropdown-header">Porte:</li> 
+                          <li><a href="#contains">Pequeno</a></li>
+                          <li><a href="#its_equal">Médio</a></li>
+                          <li><a href="#its_equal">Grande</a></li>
+                          
+                    </ul>
+                </div>        
+            </div>
         </div>
-        <br>
+  </div>
+</div>-->
+<div class="filtro">
+  <h3 class="tit-filtro">Filtrar por:</h3>
+</div>
+  <div class="btn-group">
+ <div class="btn-group demoPadder color" role="group" aria-label="Basic example">
+ 
+      <button type="button" class="btn btn-info" disabled="">Espécie:</button>
+      <button type="button" class="btn btn-success">Todos</button>
+      <button type="button" class="btn btn-success">Cães</button>
+      <button type="button" class="btn btn-success">Gatos</button>
+    </div>
+    
+ <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
+
+      <button type="button" class="btn btn-info" disabled="">Porte:</button>
+      <button type="button" class="btn btn-success">P</button>
+      <button type="button" class="btn btn-success">M</button>
+      <button type="button" class="btn btn-success">G</button>
+    </div>
+    
+ <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-info" disabled="">Sexo:</button>
+      <button type="button" class="btn btn-success">Fêmea</button>
+      <button type="button" class="btn btn-success">Gatos</button>
+    </div>
+    </div>
+
+  <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-light">
+        <a th:href="@{/cadastrar-animal}">+</button></a>
+ </div>
+   
+          
+        <br><br/>
+
+        <!--AS IMAGENS DEVEM TER 2000 X 1334 PIXELS-->
       <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="img/animal1.jpeg"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="animais/animal1.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-              <p>Nome do Animal</p>
+              <p><h4>Fiora</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -101,12 +154,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="img/animal2.png"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="animais/animal2.png"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-              <p>Nome do animal</p>
+              <p><h4>Zed</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -115,12 +168,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="img/animal3.jpg"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="animais/animal3.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-              <p>Nome do animal</p>
+              <p><h4>Kayn</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -131,12 +184,12 @@
         <div class="row">
           <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-           <img src="img/animal5.jpg"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+           <img src="animais/animal4.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-             <p>Nome do animal</p>
+             <p><h4>Jhin</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -145,12 +198,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="img/animal4.jpg"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="animais/animal5.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-              <p>Nome do animal</p>
+              <p><h4>Kai'sa</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                 <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                 <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -159,33 +212,124 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-           <img src="img/animal6.jpg"  width="100%" height="225" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+           <img src="animais/animal6.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
-             <p>Nome do animal</p>
+             <p><h4>Darius</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" href="editar-dados-animais.html" role="button">Saiba Mais</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         </div>
+        <br/>
+         <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal7.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Neeko</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal8.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Rengar</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal9.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Gatito de Botas</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <br/>
+         <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal10.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Yuumi</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal11.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Yasuo</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="animais/animal12.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <div class="card-body">
+              <p><h4>Morgana</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
         
 </section>
+
+</div>
 <!-------------------------------Correto-------------------------------------->
 <br>
 <br>
+
 <div th:insert="footer"></div>
 
-
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smooth-scroll/smooth-scroll.js"></script>
-  <script src="assets/jarallax/jarallax.js"></script>
-  <script src="assets/mobirise/js/script.js"></script>
-  <script src="assets/dropdown-menu/script.js"></script>
-  
+  <script src="../assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/smooth-scroll/smooth-scroll.js"></script>
+  <script src="../assets/jarallax/jarallax.js"></script>
+  <script src="../assets/mobirise/js/script.js"></script>
+  <script src="../assets/dropdown-menu/script.js"></script>
+  <script src="js-quero-adotar/visu-animais.js"></script>
 
 
 </body>
