@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Site made with Mobirise Website Builder v4.10.1, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.10.1, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/amorpet-logo-1-128x128.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  <title>Home</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/soundcloud-plugin/style.css">
+  <link rel="stylesheet" href="assets/animate.css/animate.min.css">
+  <link rel="stylesheet" href="assets/mobirise/css/style.css">
+  <link rel="stylesheet" href="assets/dropdown-menu/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  <link rel="stylesheet" type="text/css" href="css/cadastro.css">
+  
+</head>
+<body>
+<div th:insert="header-user"></div>
+
+<br><br><br><br><br><br><br>
+
+<section>
+    <div class="row">
+    		<div class="col-md-3">
+    		     <div class="list-group ">
+                  <a href="#" class="list-group-item list-group-item-action active" id="ver-perfil">Perfil</a>
+                  <a href="#" class="list-group-item list-group-item-action" id="editar-perfil">Alterar Perfil</a>
+              </div> 
+        </div>
+        <div class="col-sm-9">
+        	<div class="col-sm-9" id="dados-perfil">
+	            <div class="row">
+			        <h4>Perfil</h4>
+	                <hr>
+	            </div>
+	            <div class="form-group row">
+	                	<div class="row">
+	                		<div class="col">
+	            				<img src="img/thanos.jpg" height="200px;" width="200px" style="border-radius: 50%; float: right; clear: both; margin-right: 50px;">
+	            			</div>
+		                	<div class="col">
+		                    	<label for="username" class="col-4 col-form-label">Nome</label>
+		                    	<p>Aqui vai o nome do usuário</p>
+		                    	<label for="name" class="col-4 col-form-label">Email</label>
+		                    	<p>Aqui vai o email do usuário</p>
+		                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
+		                    	<p>Aqui vai o telefone do usuário</p>
+		                    	<label for="text" class="col-4 col-form-label">Endereço</label>
+		                    	<p>Aqui vai o endereço do usuário</p>
+		                    </div>
+	                	</div>
+	            </div>
+       		</div>
+       		<div class="row">
+	       		<div class="col-sm-9" id="form-perfil">
+  				    <div class="card" >
+  				        <div class="card-body">
+  				            <div class="row">
+  				                <h4>Alterar Perfil</h4>
+  				                <hr>
+  				            </div>
+  				            <div class="row">
+  				                <div class="col-sm-12">
+                            <!-- form de NOME -->
+		                            <div class="row">
+			                            <label for="nome" class="col-form-label">Nome</label>
+			                            <span class="glyphicon glyphicon-pencil"></span>
+			                        </div>
+  									<form id="form-nome" action="" method="post">
+  										<div class="form-group row">
+	  										<div class="input-group">
+											  	<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+											  	<div class="input-group-addon">
+											  		<span class="glyphicon glyphicon-ok"></span>
+											  	</div>
+											  	<div class="input-group-addon">
+											  		<span class="glyphicon glyphicon-remove"></span>
+											  	</div>
+											</div>
+								    	</div>
+                            		</form>
+                            <!-- form de EMAIL -->
+		                            <div class="row">
+			                            <label for="email" class="col-form-label">Email</label>
+			                            <span class="glyphicon glyphicon-pencil"></span>
+			                        </div>
+		                            <form  id="form-email" action="" method="post">
+		  		                        <div class="form-group row">
+			  								<div class="input-group">
+												<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-ok"></span>
+												</div>
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-remove"></span>
+												</div>
+											</div>
+		  		                        </div>
+		                              	<div class="form-group row">
+			                                <div class="offset-4 col-8">
+			                                  <span class="badge badge-pill badge-info">Não recebeu o Email?</span>
+			                                  <button name="reenviar" class="btn btn-info">Reenviar</button>
+			                                </div>
+		                              	</div>
+		                           	 </form>
+                            <!-- form de SENHA -->
+		                            <form id="form-senha" action="" method="post">
+		                              <div class="form-group row">
+		                                <label for="antiga senha" class="col-4 col-form-label">Antiga Senha</label> 
+		                                <div class="col-8">
+		                                  <input id="senha" type="password" name="antiga-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
+		                                </div>
+		                              </div>
+		                              <div class="form-group row">
+		                                <label for="nova senha" class="col-4 col-form-label">Nova Senha</label> 
+		                                <div class="col-8">
+		                                  <input id="nova-senha" type="password" name="nova-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
+		                                </div>
+		                              </div>
+		                              <div class="form-group row">
+		                                <label for="confirme a senha" class="col-4 col-form-label">Confirme a Senha</label> 
+		                                <div class="col-8">
+		                                  <input id="confirme-senha" type="password" name="confirme-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
+		                                </div>
+		                              </div>
+		                              <div class="form-group row">
+		                                <div class="offset-4 col-8">
+		                                  <input type="submit" name="submit" class="btn btn-success" value="Salvar">
+		                                </div>
+		                              </div>
+		                            </form>
+                            <!-- form de TELEFONE -->
+		                            <div class="row">
+			                            <label for="telefone" class="col-form-label">Telefone</label>
+			                            <span class="glyphicon glyphicon-pencil"></span>
+			                        </div>
+		                            <form id="form-tel" action="" method="post">
+		  		                        <div class="form-group row">
+			  								<div class="input-group">
+												<input type="text" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-ok"></span>
+												</div>
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-remove"></span>
+												</div>
+											</div>
+		  		                        </div>
+		                            </form>
+                            <!-- form de ENDEREÇO -->
+		                            <div class="row">
+			                            <label for="endereço" class="col-form-label">Endereço</label>
+			                            <span class="glyphicon glyphicon-pencil"></span>
+			                        </div>
+		                            <form id="form-end" action="" method="post">
+		                              	<div class="form-group row">
+		                                	<label for="bairro" class="col-4 col-form-label">Bairro</label> 
+			  								<div class="input-group">
+												<input type="text" class="form-control" placeholder="Digite seu bairro" aria-describedby="Bairro">
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-ok"></span>
+												</div>
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-remove"></span>
+												</div>
+											</div>
+		                              	</div>
+		  		                        <div class="form-group row">
+		  		                          <label for="rua" class="col-4 col-form-label">Rua</label> 
+		    		                        <div class="input-group">
+												<input type="text" class="form-control" placeholder="Digite sua rua" aria-describedby="Rua">
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-ok"></span>
+												</div>
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-remove"></span>
+												</div>
+											</div>
+		  		                        </div>
+		                              	<div class="form-group row">
+		                              		<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label> 
+		                                	<div class="input-group">
+												<input type="text" class="form-control" placeholder="Digite Numero da casa" aria-describedby="Numero da casa">
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-ok"></span>
+												</div>
+												<div class="input-group-addon">
+													<span class="glyphicon glyphicon-remove"></span>
+												</div>
+											</div>
+		                              	</div>
+		                              	<div class="form-group row">
+		                                	<div class="offset-4 col-8">
+		                                  		<input type="submit" name="submit" class="btn btn-success" value="Salvar">
+		                                	</div>
+		                              	</div>
+		                            </form>
+  				            	</div>
+  				        	</div>
+  				    	</div>
+  					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<br/><br/><br/><br/><br/>
+
+<div th:insert="footer"></div>
+
+
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smooth-scroll/smooth-scroll.js"></script>
+  <script src="assets/jarallax/jarallax.js"></script>
+  <script src="assets/mobirise/js/script.js"></script>
+  <script src="assets/dropdown-menu/script.js"></script>
+  
+  <script type="text/javascript">
+
+    $("#form-perfil").hide().find('form').hide();
+    
+    $("#ver-perfil").click(function() {
+        $("#dados-perfil").fadeIn('slow');
+        $("#form-perfil").hide();
+    });
+
+    $("#editar-perfil").click(function() {
+      $("#form-perfil").fadeIn('slow');
+      $("#dados-perfil").hide();
+    });
+
+  </script>
+</body>
+</html>
