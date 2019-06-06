@@ -34,9 +34,9 @@ public class MenuController {
 	public ModelAndView adotar() {
 		return new ModelAndView("quero-adotar");
 	}
-	@GetMapping("/descricao-animail")
+	@GetMapping("/descricao-animal")
 	public String descricaoAnimal() {
-		return "editar-dados-animais";
+		return "descricao-animal";
 	}
 	
 }
