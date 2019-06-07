@@ -13,4 +13,14 @@ public class UserController {
 	public ModelAndView exibirPerfil() {
 		return new ModelAndView("/perfil");
 	}
+	
+	@GetMapping("/quero-adotar/parte-1")
+	public ModelAndView exibirFormUm() {
+		return new ModelAndView("/user/form-etapa-1");
+	}
+	
+	@GetMapping("/quero-adotar/parte-2")
+	public ModelAndView exibirFormDois() {
+		return new ModelAndView("/user/form-etapa-2");
+	}
 }

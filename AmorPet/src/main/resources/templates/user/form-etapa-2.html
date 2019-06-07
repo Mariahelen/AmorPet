@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Mobirise v4.10.1, mobirise.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<link rel="shortcut icon" href="assets/images/amorpet-logo-1-128x128.png" type="image/x-icon">
+<meta name="description" content="Web Generator Description">
+<title>Formulario da 2 Etapa</title>
+
+<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese}">
+<link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/animate.css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/assets/mobirise/css/style.css}">
+<link rel="stylesheet" th:href="@{/assets/dropdown-menu/style.css}">
+<link rel="stylesheet" th:href="@{/assets/mobirise/css/mbr-additional.css}" type="text/css">
+
+<!--Página de Cadastro CSS-->
+  
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/style.css}">
+<link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- header do usuario -->
+<div th:insert="navbar/header :: header"></div>
+
+<br/><br/><br/><br/>
+
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/assets/images/doguinho.jpg});|">
+	<div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-left mbr-after-navbar">
+		 <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);"></div>
+		    <div class="mbr-box__container mbr-section__container container">
+<section>
+<div class="position">
+        <div class="container">
+<br/>
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <!-- INICIO DO FORM -->
+        <form role="form">
+            <h2 class="tit-processo-1">PROCESSO ADOTIVO - ETAPA 2</h2>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Qual idade da pessoa que ficará responsável?</label><br>
+                <input type="number" class="form-control input-lg" min="18" placeholder="Idade do responsável em caso de ausência" tabindex="4">
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Nome da pessoa que ficará responsável?</label>
+            	<input type="text" class="form-control input-lg" placeholder="Nome do responsável em caso de ausência" tabindex="4">
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Telefone</label>
+            	<input type="text" class="form-control input-lg" placeholder="Telefone do responsável em caso de ausência" tabindex="4">
+            </div>
+            <h3 class="tit-processo-1">CASA</h3>
+            <div class="form-group">
+            	<label class="tit-processo-1">Tem muros altos?</label>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Tem janelas?</label>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Possui telas protetoras?</label>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Tem portões vedados, que impeçam alguma fuga?</label><br>
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <hr>
+            <h3 class="tit-processo-1">APARTAMENTO</h3>
+            <div class="form-group">
+            	<label class="tit-processo-1">Possui telas protetoras?</label>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">O condomínio permite animais?</label>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">SIM</span>&nbsp;&nbsp;
+            	<input type="radio" name="opc_muro">&nbsp;<span class="tit-processo-1">NÃO</span>
+            </div>
+            <div class="form-group">
+            	<label class="tit-processo-1">Qual andar?</label>
+            	<select class="form-control">
+            		<option value="0">Térreo</option>
+            		<option value="1">1º Andar</option>
+            		<option value="2">2º Andar</option>
+            		<option value="3">3º Andar ou mais</option>
+            	</select>
+            </div>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Enviar" class="btn btn-success btn-block btn-lg" tabindex="7"></div>
+                <div class="col-xs-12 col-md-6"><input type="reset" class="btn btn-primary btn-block btn-lg" value="Limpar"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+</div>
+</section>
+<br/><br/>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<div th:insert="footer/footer"></div>
+<!-- JAVASCRIPT -->
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/smooth-scroll/smooth-scroll.js"></script>
+<script src="assets/mobirise/js/script.js"></script>
+<script src="assets/dropdown-menu/script.js"></script>
+<script src="js/cadastro.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script type="text/javascript">
+    $("#celular").mask("(00) 0.0000-0000");
+  </script>
+</body>
+</html>
