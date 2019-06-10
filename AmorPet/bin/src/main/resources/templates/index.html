@@ -23,7 +23,7 @@
   
 </head>
 <body>
-<div th:insert="header"></div>
+<div th:insert="navbar/header :: header"></div>
 
 <section class="engine"><a href="https://mobirise.info/o">free portfolio website templates</a></section><section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" id="header1-1" data-rv-view="2" style="background-image: url(assets/images/cachorro-flor-wallpaper-1920x1200.jpg);">
     <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-left mbr-after-navbar">
@@ -35,7 +35,7 @@
                         <h1 class="mbr-hero__text">Adote um Aumigo!</h1>
                         <p class="mbr-hero__subtext">Atualmente no Brasil existe uma estimativa de cerca de 30 milhões de animais abandonados nas ruas. Nós da AmorPet lutamos diariamente para minimizar este número, e sua ajuda seria muito bem-vinda.</p>
                     </div>
-                    <div class="mbr-buttons btn-inverse mbr-buttons--left">  <a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-success" href="https://mobirise.com">QUERO ADOTAR!<br></a> </div>
+                    <div class="mbr-buttons btn-inverse mbr-buttons--left">  <a class="mbr-buttons__btn btn btn-lg animated fadeInUp delay btn-success" th:href="@{/adotar}">QUERO ADOTAR!<br></a> </div>
                 </div></div>
             </div></div>
         </div>
@@ -43,7 +43,7 @@
     </div>
 </section>
 
-<div th:insert="footer"></div>
+<div th:insert="footer/footer"></div>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>

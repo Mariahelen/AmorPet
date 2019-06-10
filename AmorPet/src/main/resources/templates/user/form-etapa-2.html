@@ -2,20 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Mobirise v4.10.1, mobirise.com">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-<link rel="shortcut icon" href="assets/images/amorpet-logo-1-128x128.png" type="image/x-icon">
-<meta name="description" content="Web Generator Description">
-<title>Formulario da 2 Etapa</title>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
 
-<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese}">
-<link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/assets/animate.css/animate.min.css}">
-<link rel="stylesheet" th:href="@{/assets/mobirise/css/style.css}">
-<link rel="stylesheet" th:href="@{/assets/dropdown-menu/style.css}">
-<link rel="stylesheet" th:href="@{/assets/mobirise/css/mbr-additional.css}" type="text/css">
+<title>Formulario da 2 Etapa</title>
 
 <!--Página de Cadastro CSS-->
   
@@ -28,7 +17,7 @@
 </head>
 <body>
 <!-- header do usuario -->
-<div th:insert="navbar/header :: header"></div>
+<div th:replace="conteudo-padrao/navbar :: navbar"></div>
 
 <br/><br/><br/><br/>
 
@@ -46,13 +35,6 @@
         <form role="form">
             <h2 class="tit-processo-1">PROCESSO ADOTIVO - ETAPA 2</h2>
             <hr class="colorgraph">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
             	<label class="tit-processo-1">Qual idade da pessoa que ficará responsável?</label><br>
                 <input type="number" class="form-control input-lg" min="18" placeholder="Idade do responsável em caso de ausência" tabindex="4">
@@ -125,13 +107,11 @@
 </section>
 
 <!-- FOOTER -->
-<div th:insert="footer/footer"></div>
+<div th:replace="conteudo-padrao/footer :: footer"></div>
+
 <!-- JAVASCRIPT -->
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/smooth-scroll/smooth-scroll.js"></script>
-<script src="assets/mobirise/js/script.js"></script>
-<script src="assets/dropdown-menu/script.js"></script>
+<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
 <script src="js/cadastro.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script type="text/javascript">

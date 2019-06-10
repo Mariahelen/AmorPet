@@ -46,7 +46,7 @@
   <link rel="stylesheet" type="text/css" href="css-quero-adotar/quero-adotar.css">
 </head>
 <body>
-<div th:insert="header"></div>
+<div th:insert="navbar/header :: header"></div>
 
 <br>
 <br>
@@ -130,7 +130,7 @@
 
   <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-light">
-        <a th:href="@{/cadastrar-animal}">+</button></a>
+        <a th:href="@{/cadastrar-animal}">+</a></button>
  </div>
    
           
@@ -140,12 +140,12 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal1.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal1.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Fiora</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -154,12 +154,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal2.png"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal2.png"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Zed</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -168,12 +168,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal3.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal3.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Kayn</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -184,12 +184,12 @@
         <div class="row">
           <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-           <img src="animais/animal4.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+           <img src="img/animais/animal4.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
              <p><h4>Jhin</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -198,12 +198,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal5.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal5.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Kai'sa</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                 <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                 <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -212,12 +212,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-           <img src="animais/animal6.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+           <img src="img/animais/animal6.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
              <p><h4>Darius</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -228,12 +228,12 @@
          <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal7.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal7.jpeg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Neeko</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -242,12 +242,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal8.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal8.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Rengar</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -256,12 +256,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal9.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal9.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Gatito de Botas</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -272,12 +272,12 @@
          <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal10.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal10.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Yuumi</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -286,12 +286,12 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal11.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal11.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Yasuo</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  <a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
@@ -300,19 +300,21 @@
 
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img src="animais/animal12.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
+            <img src="img/animais/animal12.jpg"  width="100%" height="100%" role="img" aria-label="Placeholder: miniatura"><rect width="100%" height="100%" fill="#55595c">
             <div class="card-body">
               <p><h4>Morgana</h4></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-info" th:href="@{/descricao-animais}" role="button">Mais Informações</a>
+                  	<a class="btn btn-info" th:href="@{/descricao-animal}" role="button">Mais Informações</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         </div>
-
+</div>
+</div>
+</div>
         
 </section>
 
@@ -321,7 +323,7 @@
 <br>
 <br>
 
-<div th:insert="footer"></div>
+<div th:insert="footer/footer"></div>
 
   <script src="../assets/web/assets/jquery/jquery.min.js"></script>
   <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
@@ -330,7 +332,6 @@
   <script src="../assets/mobirise/js/script.js"></script>
   <script src="../assets/dropdown-menu/script.js"></script>
   <script src="js-quero-adotar/visu-animais.js"></script>
-
 
 </body>
 </html>

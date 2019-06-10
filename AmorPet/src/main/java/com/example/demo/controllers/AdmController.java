@@ -13,4 +13,9 @@ public class AdmController {
 	public ModelAndView exibirPerfil() {
 		return new ModelAndView("perfil");
 	}
+	
+	@GetMapping("/candidatos")
+	public ModelAndView exibirCandidatos() {
+		return new ModelAndView("adm/candidatos");
+	}
 }
