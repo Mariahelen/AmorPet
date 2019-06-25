@@ -58,7 +58,7 @@
   	}
   	#form-perfil form input {
   		border-color: #c0c0c0;
-  		border-radius: 10px;
+  		border-radius: 50px;
   		margin-bottom: 20px;
   		margin-left: -15px;
   	}
@@ -75,9 +75,7 @@
   	}
   	#form-perfil form .row:not(:last-child) {
   		margin-bottom: 20px;
-  	}
-  	#form-perfil form .row:last-child button {
-  		margin-left: -15px;
+  		border-bottom: 2px solid #1bb8f0;
   	}
   	#form-perfil form .row:last-child .form-group {
   		padding-top: 10px;
@@ -88,8 +86,11 @@
   		color: #48554f;
   	}
   	#form-perfil form .form-group button {
-  		border-radius: 10px;
+  		border-radius: 45px;
   		border: none;
+  		float: right;
+  		margin-right: 10px;
+  		margin-bottom: 20px;
   	}
   	#form-perfil form label {
   		font-size: 15px;
