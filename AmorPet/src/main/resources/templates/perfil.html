@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+
 	<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
 	  
-  <title>Home</title>
+  <title>Perfil</title>
   
-  <link rel="stylesheet" type="text/css" href="css/cadastro.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/perfil.css}" media="all">
   
 </head>
 <body>
@@ -15,247 +17,250 @@
 <br><br><br><br><br><br><br>
 
 <section>
-<div class="container">
-    <div class="row">
-    		<div class="col-md-3">
-    		     <div class="list-group ">
-                  <a href="#" class="list-group-item list-group-item-action active" id="ver-perfil">Perfil</a>
-                  <a href="#" class="list-group-item list-group-item-action" id="editar-perfil">Alterar Perfil</a><br/>           
-              </div> 
-              <!-- Botão para acionar modal -->
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo">Desativar Conta</button>
-
-<!-- Modal -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmar de Desativação</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-         	 <label for="recipient-name" class="col-form-label">Senha</label>
-          		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Senha" tabindex="5">
-            <label for="recipient-name" class="col-form-label">Confirmar senhar</label>
-           	 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" tabindex="6">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-danger">Salvar mudanças</button>
-      </div>
-      
-    </div>
-  </div>
-</div>
-        </div>
-        <!-- INICIO DADOS DO PERFIL -->
-        <div class="col-sm-9">
-        	<div class="col-sm-9" id="dados-perfil">
-	            <div class="row">
-			        <h4>Perfil</h4>
-	                <hr>
-	            </div>
-	            <div class="form-group row">
-	                	<div class="row">
-	                		<div class="col">
-	            				<img src="img/thanos.jpg" height="200px;" width="200px" style="border-radius: 50%; float: right; clear: both; margin-right: 50px;">
-	            			</div>
-		                	<div class="col">
-		                    	<label for="username" class="col-4 col-form-label">Nome</label>
-		                    	<p>Aqui vai o nome do usuário</p>
-		                    	<label for="name" class="col-4 col-form-label">Email</label>
-		                    	<p>Aqui vai o email do usuário</p>
-		                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
-		                    	<p>Aqui vai o telefone do usuário</p>
-		                    	<label for="text" class="col-4 col-form-label">Endereço</label>
-		                    	<p>Aqui vai o endereço do usuário</p>
-		                    </div>
-	                	</div>
-	            </div>
-	            
-       		</div>
-       		<!-- INICIO FORM ALTERAR PERFIL -->
-       		<div class="row">
-	       		<div class="col-sm-9" id="form-perfil">
-  				    <div class="card" >
-  				        <div class="card-body">
-  				            <div class="row">
-  				                <h4>Alterar Perfil</h4>
-  				                <hr>
-  				            </div>
-  				            <div class="row">
-  				                <div class="col-sm-12">
-                            <!-- form de NOME -->
-		                            <div class="row">
-			                            <label for="nome" class="col-form-label">Nome</label>
-			                            <span class="glyphicon glyphicon-pencil"></span>
-			                        </div>
-  									<form id="form-nome" action="" method="post">
-  										<div class="form-group row">
-	  										<div class="input-group">
-											  	<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
-											  	<div class="input-group-addon">
-											  		<span class="glyphicon glyphicon-ok"></span>
-											  	</div>
-											  	<div class="input-group-addon">
-											  		<span class="glyphicon glyphicon-remove"></span>
-											  	</div>
-											</div>
-								    	</div>
-                            		</form>
-                            <!-- form de EMAIL -->
-		                            <div class="row">
-			                            <label for="email" class="col-form-label">Email</label>
-			                            <span class="glyphicon glyphicon-pencil"></span>
-			                        </div>
-		                            <form  id="form-email" action="" method="post">
-		  		                        <div class="form-group row">
-			  								<div class="input-group">
-												<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-ok"></span>
+	<div class="container" id="container">
+	    <div class="row">
+	    	<div class="col-sm-3">
+	   			<div class="list-group">
+				  	<button type="button" class="list-group-item list-group-item-info" id="ver-perfil">
+				  		<div class="glyphicon glyphicon-user"></div><span class="linha-marca">Perfil</span>
+				  	</button>
+	                <button type="button" class="list-group-item" id="editar-perfil">
+				  		<div class="glyphicon glyphicon-edit"></div><span>Editar Perfil</span>
+				  	</button>
+	           	</div>
+	           	<!-- Botão para acionar modal -->
+				<button type="button" id="btn-desativar-conta" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo">Desativar Conta</button>
+					
+				<!-- Modal -->
+				<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+					    	<div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Confirmar de Desativação</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+					     	</div>
+					      	<div class="modal-body">
+						        <form>
+						          <div class="form-group">
+						         	 <label for="recipient-name" class="col-form-label">Senha</label>
+						          		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Senha" tabindex="5">
+						            <label for="recipient-name" class="col-form-label">Confirmar senhar</label>
+						           	 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" tabindex="6">
+						          </div>
+						        </form>
+					      	</div>
+					      	<div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+						        <button type="button" class="btn btn-danger">Salvar mudanças</button>
+					      	</div>
+					    </div>
+					</div>
+				</div>
+	        </div>
+	        <div class="col-sm-9">
+	        	<!-- INICIO DADOS DO PERFIL -->
+	        	<div class="col-sm-10" id="dados-perfil">
+		            <div class="row">
+				        <h4 class="page-header">Perfil</h4>
+		            </div>
+		            <div class="row">
+		                	<div class="row">
+		                		<div class="col-sm-6">
+		            				<img th:src="@{/img/thanos.jpg}">
+		            				<div class='input-wrapper'>
+										<input id='foto-usuario' type='file'/>
+										<label for='foto-usuario'><span class="glyphicon glyphicon-open"></span> Adicionar foto</label>
+										<span id='nome-arquivo'></span>
+									</div>
+		            			</div>
+			                	<div class="col-sm-6">
+			                    	<label for="username" class="col-4 col-form-label">Nome</label>
+			                    	<p>Aqui vai o nome do usuário</p>
+			                    	<label for="name" class="col-4 col-form-label">Email</label>
+			                    	<p>Aqui vai o email do usuário</p>
+			                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
+			                    	<p>Aqui vai o telefone do usuário</p>
+			                    	<label for="text" class="col-4 col-form-label">Endereço</label>
+			                    	<p>Aqui vai o endereço do usuário</p>
+			                    </div>
+		                	</div>
+		            </div>
+	       		</div>
+	       		<!-- INICIO FORM ALTERAR PERFIL -->
+	       		<div class="col-sm-12" id="form-perfil">
+	       			<div class="row">
+		       			<div class="col-sm-10">
+	  				            <div class="row">
+	  				                <h4 class="page-header">Editar Perfil</h4>
+	  				            </div>
+	  				            <div class="row">
+	  				                <div class="col-sm-12">
+	  				                	<form action="" method="post">
+		                            		<!-- form de NOME -->
+				                            <div class="row">
+					                            <label for="nome" class="col-form-label">Nome</label>
+					                           	<span class="glyphicon glyphicon-pencil"></span>
+		  										<div class="form-group">
+		  											<div class="col-sm-10">
+													  	<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+													</div>
+													<div class="col-sm-2">
+														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													</div>
 												</div>
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-remove"></span>
+					                        </div>
+		                            		<!-- form de EMAIL -->
+				                            <div class="row">
+					                            <label for="email" class="col-form-label">Email</label>
+					                            <span class="glyphicon glyphicon-pencil"></span>
+					                            <span class="small" hidden>Não recebeu o Email?<a href="#">Reenviar</a></span>
+				  								<div class="form-group">
+					  								<div class="col-sm-10">
+														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+													</div>
+													<div class="col-sm-2">	
+														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													</div>
 												</div>
-											</div>
-		  		                        </div>
-		                              	<div class="form-group row">
-			                                <div class="offset-4 col-8">
-			                                  <span class="badge badge-pill badge-info">Não recebeu o Email?</span>
-			                                  <button name="reenviar" class="btn btn-info">Reenviar</button>
-			                                </div>
-		                              	</div>
-		                           	 </form>
-                            <!-- form de SENHA -->
-		                            <form id="form-senha" action="" method="post">
-		                              <div class="form-group row">
-		                                <label for="antiga senha" class="col-4 col-form-label">Antiga Senha</label> 
-		                                <div class="col-8">
-		                                  <input id="senha" type="password" name="antiga-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
-		                                </div>
-		                              </div>
-		                              <div class="form-group row">
-		                                <label for="nova senha" class="col-4 col-form-label">Nova Senha</label> 
-		                                <div class="col-8">
-		                                  <input id="nova-senha" type="password" name="nova-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
-		                                </div>
-		                              </div>
-		                              <div class="form-group row">
-		                                <label for="confirme a senha" class="col-4 col-form-label">Confirme a Senha</label> 
-		                                <div class="col-8">
-		                                  <input id="confirme-senha" type="password" name="confirme-senha" placeholder="Senha" class="form-control here" required="required" minlength="8">
-		                                </div>
-		                              </div>
-		                              <div class="form-group row">
-		                                <div class="offset-4 col-8">
-		                                  <input type="submit" name="submit" class="btn btn-success" value="Salvar">
-		                                </div>
-		                              </div>
-		                            </form>
-                            <!-- form de TELEFONE -->
-		                            <div class="row">
-			                            <label for="telefone" class="col-form-label">Telefone</label>
-			                            <span class="glyphicon glyphicon-pencil"></span>
-			                        </div>
-		                            <form id="form-tel" action="" method="post">
-		  		                        <div class="form-group row">
-			  								<div class="input-group">
-												<input type="text" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-ok"></span>
+			                              	</div>
+	                            			<!-- form de SENHA -->
+	                            			<div class="row">
+	                            				<label for="senha">Senha</label>
+	                            				<span class="glyphicon glyphicon-pencil"></span>
+					                            <div class="form-group">
+						                            <div class="col-sm-10">
+						                            	<div class="row">
+							                            	<div class="col-sm-6">
+																<input id="senha"type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
+															</div>
+															<div class="col-sm-6">
+																<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" minlength="8">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-2">
+														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													</div>
 												</div>
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-remove"></span>
+				                          	</div>
+	                            			<!-- form de TELEFONE -->
+	                            			<div class="row">
+	                            				<label for="telefone" class="col-form-label">Telefone</label>
+				                            	<span class="glyphicon glyphicon-pencil"></span>
+				                            	<div class="form-group">
+					  								<div class="col-sm-10">
+														<input type="text" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
+													</div>	
+													<div class="col-sm-2">
+														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													</div>
 												</div>
-											</div>
-		  		                        </div>
-		                            </form>
-                            <!-- form de ENDEREÇO -->
-		                            <div class="row">
-			                            <label for="endereço" class="col-form-label">Endereço</label>
-			                            <span class="glyphicon glyphicon-pencil"></span>
-			                        </div>
-		                            <form id="form-end" action="" method="post">
-		                              	<div class="form-group row">
-		                                	<label for="bairro" class="col-4 col-form-label">Bairro</label> 
-			  								<div class="input-group">
-												<input type="text" class="form-control" placeholder="Digite seu bairro" aria-describedby="Bairro">
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-ok"></span>
+				  		                    </div>
+	                           			 	<!-- form de ENDEREÇO -->
+			                            	<div class="row">
+					                            <label for="endereço" class="col-form-label">Endereço</label>
+												<span class="glyphicon glyphicon-pencil"></span>
+												<div class="form-group">
+													
+					  								<div class="col-sm-5">
+					  								<label for="bairro" class="col-4 col-form-label">Bairro</label>
+														<input type="text" class="form-control" placeholder="Digite seu bairro" aria-describedby="Bairro">
+													</div>
+													
+													<div class="col-sm-5">
+													<label for="rua" class="col-4 col-form-label">Rua</label>
+														<input type="text" class="form-control" placeholder="Digite sua rua" aria-describedby="Rua">
+													</div>
+													
+													<div class="col-sm-5">
+													<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label>
+														<input type="text" class="form-control" placeholder="Digite Numero da casa" aria-describedby="Numero da casa">
+													</div>
+													
+													<div class="col-sm-5">
+														<label>Algo</label>
+														<input type="text" class="form-control" placeholder="algo">
+													</div>
+													
+													<div class="col-sm-10">
+														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													</div>
 												</div>
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-remove"></span>
-												</div>
-											</div>
-		                              	</div>
-		  		                        <div class="form-group row">
-		  		                          <label for="rua" class="col-4 col-form-label">Rua</label> 
-		    		                        <div class="input-group">
-												<input type="text" class="form-control" placeholder="Digite sua rua" aria-describedby="Rua">
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-ok"></span>
-												</div>
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-remove"></span>
-												</div>
-											</div>
-		  		                        </div>
-		                              	<div class="form-group row">
-		                              		<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label> 
-		                                	<div class="input-group">
-												<input type="text" class="form-control" placeholder="Digite Numero da casa" aria-describedby="Numero da casa">
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-ok"></span>
-												</div>
-												<div class="input-group-addon">
-													<span class="glyphicon glyphicon-remove"></span>
-												</div>
-											</div>
-		                              	</div>
-		                              	<div class="form-group row">
-		                                	<div class="offset-4 col-8">
-		                                  		<input type="submit" name="submit" class="btn btn-success" value="Salvar">
-		                                	</div>
-		                              	</div>
-		                            </form>
-  				            	</div>
-  				        	</div>
-  				    	</div>
-  					</div>
+			                              	</div>
+			                            </form>
+	  				            	</div>
+	  				        	</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </section>
 <br/><br/><br/><br/><br/>
 
 <div th:replace="conteudo-padrao/footer :: footer"></div>
 
-
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
   
   <script type="text/javascript">
-
-    $("#form-perfil").hide().find('form').hide();
-    
+  
+  	$("#form-perfil").hide();
+	$("#btn-desativar-conta").hide();
+  
+  	// QUANDO O PERFIL FOR CLICADO
     $("#ver-perfil").click(function() {
-        $("#dados-perfil").fadeIn('slow');
+    	// muda a url sem da refresh
+    	window.history.pushState(null, "Perfil", "/user/perfil");
+    	
+    	$(this).addClass('list-group-item-info').find('span').addClass('linha-marca');
+    	$("#editar-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
+    	
+    	$("#dados-perfil").fadeIn('slow');
         $("#form-perfil").hide();
+        $("#btn-desativar-conta").hide();
     });
 
+  	// QUANDO O EDITAR PERFIL FOR CLICADO
     $("#editar-perfil").click(function() {
-      $("#form-perfil").fadeIn('slow');
-      $("#dados-perfil").hide();
+    	// muda a url sem da refresh
+    	window.history.pushState(null, "Editar Perfil", "/user/perfil/editar");
+    	
+    	$(this).addClass('list-group-item-info').find('span').addClass('linha-marca');
+    	$("#ver-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
+    	
+      	$("#form-perfil").fadeIn('slow');
+      	$("#dados-perfil").hide();
+      	$("#btn-desativar-conta").show();
     });
-
+    
+   	/* MOSTRA O NOME DO ARQUIVO DE FOTO */
+   	/* $("#foto-usuario").change(function() {
+   		$("#nome-arquivo").text($("input[type=file]").val());
+   	}); */
+   	
+  	
+  	/* Quando campo ficar vazio muda a classe do botao */
+  	$("#form-perfil .form-group input").keyup(function() {
+  			if(event.key === "Backspace" || event.key === "Delete") {
+		  		if($(this).val().length === 0) {
+		  			$(this).parent().parent()
+		  			.find('button').removeClass('btn-success').addClass('btn-primary');
+		  		}
+		  	}else {
+  				$(this).parent().parent()
+  					.find('button').removeClass('btn-primary').addClass('btn-success');
+		  	}
+  	});
+  	
+  	/* Verifica se a url tem /editar */
+	let url = location.href;
+  	if(url.indexOf("/editar") !== -1) {
+		$("#editar-perfil").click();
+	}
+  	
   </script>
 </body>
 </html>
