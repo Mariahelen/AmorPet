@@ -98,94 +98,102 @@
 	  				            <div class="row">
 	  				                <div class="col-sm-12">
 	  				                	<form action="" method="post">
-		                            		<!-- form de NOME -->
+		                            		
 				                            <div class="row">
-					                            <label for="nome" class="col-form-label">Nome</label>
-					                           	<span class="glyphicon glyphicon-pencil"></span>
 		  										<div class="form-group">
-		  											<div class="col-sm-10">
-													  	<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+		  										<!-- form de NOME -->
+		  											<div class="col-sm-12">
+			  											<label for="nome" class="col-form-label">Nome</label>
+						                           		<span class="glyphicon glyphicon-pencil"></span>
+														<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
 													</div>
-													<div class="col-sm-2">
-														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
-													</div>
-												</div>
-					                        </div>
-		                            		<!-- form de EMAIL -->
-				                            <div class="row">
-					                            <label for="email" class="col-form-label">Email</label>
-					                            <span class="glyphicon glyphicon-pencil"></span>
-					                            <span class="small" hidden>Não recebeu o Email?<a href="#">Reenviar</a></span>
-				  								<div class="form-group">
-					  								<div class="col-sm-10">
-														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
-													</div>
-													<div class="col-sm-2">	
-														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
-													</div>
-												</div>
-			                              	</div>
-	                            			<!-- form de SENHA -->
-	                            			<div class="row">
-	                            				<label for="senha">Senha</label>
-	                            				<span class="glyphicon glyphicon-pencil"></span>
-					                            <div class="form-group">
-						                            <div class="col-sm-10">
-						                            	<div class="row">
-							                            	<div class="col-sm-6">
-																<input id="senha"type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
-															</div>
-															<div class="col-sm-6">
-																<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" minlength="8">
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-2">
-														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
-													</div>
-												</div>
-				                          	</div>
-	                            			<!-- form de TELEFONE -->
-	                            			<div class="row">
-	                            				<label for="telefone" class="col-form-label">Telefone</label>
-				                            	<span class="glyphicon glyphicon-pencil"></span>
-				                            	<div class="form-group">
-					  								<div class="col-sm-10">
+					                       		<!-- form de TELEFONE -->
+					  								<div class="col-sm-12">
+					  									<label for="telefone" class="col-form-label">Telefone</label>
+				                            			<span class="glyphicon glyphicon-pencil"></span>
 														<input type="text" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
 													</div>	
-													<div class="col-sm-2">
-														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+													<div class="col-sm-12">
+														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
 												</div>
 				  		                    </div>
+				  		                    
+				  		                    
+		                            		<!-- form de EMAIL -->
+				                            <div class="row">
+				  								<div class="form-group">
+					  								<div class="col-sm-12">
+					  									<label for="email" class="col-form-label">Seu Email</label>
+					                            		<span class="glyphicon glyphicon-pencil"></span>
+					                            		<span class="small" hidden>Não recebeu o Email?<a href="#">Reenviar</a></span>
+														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+													</div>
+													<div class="col-sm-12">
+					  									<label for="email" class="col-form-label">Novo Email</label>
+					                            		<span class="glyphicon glyphicon-pencil"></span>
+														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+													</div>
+													<div class="col-sm-12">	
+														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+													</div>
+												</div>
+			                              	</div>
+			                              	
+			                              	
+	                            			<!-- form de SENHA -->
+	                            			<div class="row">
+					                            <div class="form-group">
+						                            <div class="col-sm-12">
+						                            	<label for="senha">Senha</label>
+	                            						<span class="glyphicon glyphicon-pencil"></span>
+														<input id="senha"type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
+													</div>
+													<div class="col-sm-12">
+														<label for="senha">Nova Senha</label>
+	                            						<span class="glyphicon glyphicon-pencil"></span>
+														<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" minlength="8">
+													</div>
+													<div class="col-sm-12">
+														<label for="senha">Confirme a Senha</label>
+	                            						<span class="glyphicon glyphicon-pencil"></span>
+														<input id="senha"type="password" name="confirme-senha" placeholder="Confirme a senha" class="form-control" required="required" minlength="8">
+													</div>
+													<div class="col-sm-12">
+														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+													</div>
+												</div>
+				                          	</div>
+	                            			
+	                            			
 	                           			 	<!-- form de ENDEREÇO -->
 			                            	<div class="row">
 					                            <label for="endereço" class="col-form-label">Endereço</label>
 												<span class="glyphicon glyphicon-pencil"></span>
 												<div class="form-group">
 													
-					  								<div class="col-sm-5">
-					  								<label for="bairro" class="col-4 col-form-label">Bairro</label>
+					  								<div class="col-sm-12">
+					  									<label for="bairro" class="col-4 col-form-label">Bairro</label>
 														<input type="text" class="form-control" placeholder="Digite seu bairro" aria-describedby="Bairro">
 													</div>
 													
-													<div class="col-sm-5">
-													<label for="rua" class="col-4 col-form-label">Rua</label>
+													<div class="col-sm-12">
+														<label for="rua" class="col-4 col-form-label">Rua</label>
 														<input type="text" class="form-control" placeholder="Digite sua rua" aria-describedby="Rua">
 													</div>
 													
-													<div class="col-sm-5">
-													<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label>
+													<div class="col-sm-6">
+														<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label>
 														<input type="text" class="form-control" placeholder="Digite Numero da casa" aria-describedby="Numero da casa">
 													</div>
 													
-													<div class="col-sm-5">
-														<label>Algo</label>
-														<input type="text" class="form-control" placeholder="algo">
+													<div class="col-sm-6">
+														<label for="complemento" class="col-4 col-form-label">Complemento</label>
+														<input type="text" class="form-control" placeholder="Complemento" aria-describedby="Complemento">
 													</div>
-													
-													<div class="col-sm-10">
-														<button class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+
+													<div class="col-sm-12">
+														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
 												</div>
 			                              	</div>
