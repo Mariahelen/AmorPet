@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
 
-	@GetMapping("/login-realizado")
+	@GetMapping({"/perfil", "/perfil/editar"})
 	public ModelAndView exibirPerfil() {
 		return new ModelAndView("/perfil");
 	}
