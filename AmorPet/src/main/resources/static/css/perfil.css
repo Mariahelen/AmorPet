@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+	/* CONTAINER ===========================*/
+  	#container {
+  		padding-bottom: 20px;
+  		padding-top: 20px;
+  		margin-bottom: -40px;
+  	}
+  	#container button {
+  		border-radius: 10px 10px 10px 10px;
+  	}
+  	#container button:hover {
+  		
+  	}
+  	#container .list-group-item:hover {
+  		background-color: lightblue;
+  	}
+  	#container .list-group button {
+  		width: 100%;
+  		border-radius: 2px;
+  	}
+  	#container label {
+  		font-size: 17px;
+  		font-family: sans-serif;
+  	}
+
+	/* DADOS-PERFIL ========================*/  	
+  	#dados-perfil img {
+  		height: 200px;
+  		width: 200px;
+  		border-radius: 50%;
+  	}
+  	#dados-perfil label, #dados-perfil p {
+  		margin-left: 2px;
+  	}
+  	
+  	/* LATERAL DO PERFIL ==================*/
+  	#btn-desativar-conta {
+  		margin-top: 200px;
+  		margin-left: 5px;
+  	}
+  	.list-group-item div, .list-group-item span {
+  		color: #555555;
+  		margin-left: 20px;
+  		float: left;
+  		font-size: 17px;
+  	}
+  	.linha-marca {
+  		border-bottom:2px solid #7ac673;
+  	}
+  	
+  	/* FORM-PERFIL =====================*/
+  	#form-perfil form {
+  		width: 100%;
+  	}
+  	#form-perfil form .form-group .col-sm-10 {
+  		margin-right: -40px;
+  	}
+  	#form-perfil form input {
+  		border-color: #c0c0c0;
+  		border-radius: 10px;
+  		margin-bottom: 20px;
+  		margin-left: -15px;
+  	}
+  	#form-perfil form input:hover {
+  		background-color: #f2f4f3;
+  		transition: 1s;
+  		box-shadow: 0px 0px 6px;
+  	}
+  	#form-perfil form input:focus {
+  		border-color: #158112;
+  		background-color: #ffffff;
+  		transition: 0.5s;
+  		box-shadow: 0px 0px 3px;
+  	}
+  	#form-perfil form .row:not(:last-child) {
+  		margin-bottom: 20px;
+  	}
+  	#form-perfil form .row:last-child button {
+  		margin-left: -15px;
+  	}
+  	#form-perfil form .row:last-child .form-group {
+  		padding-top: 10px;
+  	}
+  	#form-perfil form .row:last-child .form-group label {
+  		font-style: italic;
+  		font-size: 14px;
+  		color: #48554f;
+  	}
+  	#form-perfil form .form-group button {
+  		border-radius: 10px;
+  		border: none;
+  	}
+  	#form-perfil form label {
+  		font-size: 15px;
+  	}
+  	
+  	.page-header {
+  		margin-top: 15px;
+		border-bottom: none;
+		color: #7ac673;
+		font-size: 20px;
+  	}
+  	
+  	/* botão de add foto */
+  	input[type=file] {
+  		display: none;
+  	}
+  	
+	.input-wrapper label {
+	  background-color: #3498db;
+	  border-radius: 5px;
+	  color: #fff;
+	  padding: 5px 20px;
+	  margin-top: 5px;
+	  margin-left: 5px;
+	}
+	
+	.input-wrapper label:hover {
+	  background-color: #2980b9;
+	}
+  	
+  	/* RESPONSIVIDADE PARA TELAS ATE 990px ======================*/
+  	@media screen and (max-width: 990px) {
+  		
+  	}
+  	/* RESPONSIVIDADE PARA TELAS ATE 770px */
+  	@media screen and (max-width: 770px) {
+  		
+  	}
+  	
