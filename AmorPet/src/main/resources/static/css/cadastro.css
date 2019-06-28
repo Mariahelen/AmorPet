@@ -11,6 +11,13 @@
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
+.label-title{
+	
+	color: #F5F5F5;
+	text-align: center;
+	font-size: 20px;
+}
+
 .tit-processo-1{
 
     color: #7ac673;
@@ -27,7 +34,13 @@
 
 .terms{
 
-    color: #0000FF;
+    color: #FFFFFF;
+}
+
+a.terms:hover{
+	
+	transition: 1s;
+	color: #7ac673;
 }
 
 .h4-title{
@@ -35,10 +48,18 @@
     color: #ffffff;
 }
 
+.h4-title-1{
+	
+	color: #ffffff;
+
+	text-align: center;
+}
+
 .new-passwd{
 
     color: #ffffff;
     font-size: 18px;
+    text-decoration: none;
 }
 
 a.new-passwd:hover{
@@ -52,3 +73,7 @@ a.new-passwd:hover{
     text-decoration: none;
 }
 
+.heigth{
+	
+	margin-top: 13.5%;
+}
