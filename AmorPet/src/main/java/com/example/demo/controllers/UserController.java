@@ -52,7 +52,7 @@ public class UserController {
 		} catch (LoginInvalido e) {
 			ra.addFlashAttribute("mensagemErro", e.getMessage());
 			return "redirect:/";
-		} 
+		}
 		return "redirect:/user/perfil";
 	}
 	
