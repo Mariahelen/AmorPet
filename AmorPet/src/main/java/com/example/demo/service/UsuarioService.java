@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UsuarioDAO;
+import com.example.demo.model.Usuario;
 
 
 @Service
