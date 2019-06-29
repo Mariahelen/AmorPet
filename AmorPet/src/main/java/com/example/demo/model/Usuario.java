@@ -1,8 +1,8 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,12 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -24,24 +22,35 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Integer id;
+
 	@NotBlank(message = "O campo precisa ser preenchido")
+	@Column(length = 255, nullable = false)
 	private String nome;
+
 	@Email(message = "O campo precisa ser preenchido")
+	@Column(length = 255, nullable = false)
 	private String email;
+
 	@NotEmpty(message = "Precisar ter uma senha valida")
+	@Column(name = "hash_senha" ,length = 255, nullable = false)
 	private String hashSenha;
+	@NotEmpty
 	@Transient
 	private String confirmaSenha;
+
 	@Pattern(regexp = "[0-9]{2}[9]{1}[0-9]{8}", message = "O numero de telefone tem que ser valido")
+	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;
-	@FutureOrPresent(message = "A data tem que ser valida")
+
+	@Past(message = "A data tem que ser valida")
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nasc")
 	private Date dataNascimento;
 	@NotEmpty
+	@Column(length = 15, nullable = false)
 	private String role;
+	@Column(columnDefinition = "tinyint(1) default 1")
 	private boolean Ativo;
-	@NotNull
-	@Valid
 	@Embedded
 	private Endereco endereco;
 
