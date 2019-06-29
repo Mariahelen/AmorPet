@@ -11,7 +11,7 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	Usuario findUsuarioByEmail(String email);
 	
 	// CONSULTA SE OS DADOS DO USUÁRIO CONSTAM NO BD PARA FAZER LOGIN
-	@Query("select u from Usuario u where u.email = :email and u.senha = :senha")
+	@Query("select u from Usuario u where u.email = :email and u.hashSenha = :senha")
 	public Usuario efetuarLogin(String email, String senha);
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UsuarioDAO;
+import com.example.demo.exception.LoginInvalido;
 import com.example.demo.model.Usuario;
 
 
@@ -27,13 +28,13 @@ public class UsuarioService {
 		usuarioDAO.save(usuario);
 	}
 
-	public Usuario efetuarLogin(String email, String senha) throws Exception {
+	public Usuario efetuarLogin(String email, String senha) throws LoginInvalido {
 		Usuario usuario = this.usuarioDAO.efetuarLogin(email, senha);
 		if (usuario == null) {
-			throw new Exception("Login/senha não encontrados");
+			throw new LoginInvalido();
 		}
 		if (!usuario.isAtivo()) {
-			throw new Exception("Usuário [" + usuario.getNome() + "] está bloqueado");
+			throw new LoginInvalido();
 		}
 		return usuario;
 	}

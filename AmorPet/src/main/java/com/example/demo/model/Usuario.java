@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Entity
 public class Usuario {
 
 	@Id
@@ -33,7 +36,7 @@ public class Usuario {
 	private String telefone;
 	@FutureOrPresent(message = "A data tem que ser valida")
 	@Temporal(TemporalType.DATE)
-	private LocalDate dataNascimento;
+	private Date dataNascimento;
 	@NotEmpty
 	private String role;
 	private boolean Ativo;
@@ -90,11 +93,11 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

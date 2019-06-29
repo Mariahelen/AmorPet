@@ -50,7 +50,7 @@
             <hr class="colorgraph">
             <div class="row">
                 <div class="col-xs-12 col-md-6"><a th:href="@{/cadastro}" type="submit" class="btn btn-primary btn-block btn-lg" tabindex="7">Cadastre-se</a></div>
-                <div class="col-xs-12 col-md-6"><a th:href="@{/login-realizado}" class="btn btn-success btn-block btn-lg">Entrar</a></div>
+                <div class="col-xs-12 col-md-6"><a th:href="@{/user/perfil}" class="btn btn-success btn-block btn-lg">Entrar</a></div>
             </div><br/>
              <a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Esqueceu a senha?</a>
         </form>
@@ -83,6 +83,25 @@
     </div>
   </div>
 </div>
+<!-- ---------Modal Error----------------------------- -->
+<div class="modal fade" id="mensagemError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    	<span th:text="mensagemErro">
+    	</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 <div th:replace="conteudo-padrao/footer :: footer"></div>
@@ -100,5 +119,8 @@
   <script type="text/javascript">
     $("#celular").mask("(00) 0.0000-0000");
     </script>
+<script type="text/javascript" th:if="mensagemError != null">
+	$.("#mensagemError").click();
+</script>
 </body>
 </html>
