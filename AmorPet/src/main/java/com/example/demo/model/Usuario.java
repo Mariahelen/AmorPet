@@ -46,11 +46,9 @@ public class Usuario {
 	private String telefone;
 
 	@Past(message = "A data tem que ser válida")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "YYYY-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_nasc")
 	private Date dataNascimento;
-	@NotEmpty
 	@Column(length = 15)
 	private String role;
 	@Column(columnDefinition = "tinyint(1) default 1")
