@@ -11,14 +11,14 @@
 
 <!--Página de Cadastro CSS-->
   
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/cadastro.css">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
         
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
 
  
 
@@ -29,7 +29,7 @@
 
 <br/><br/><br/><br/>
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" style="background-image: url(img/animais/thumb-1920-536216.jpg);"><br/><br/><br/><br/>
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/thumb-1920-536216.jpg});|"><br/><br/><br/><br/>
 
    
         <div class="container">
@@ -122,9 +122,9 @@
 
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
 
-  <script src="js/cadastro.js"></script>
+  <script th:src="@{/js/cadastro.js}"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
 
   <script type="text/javascript">
     $("#celular").mask("(00) 0.0000-0000");

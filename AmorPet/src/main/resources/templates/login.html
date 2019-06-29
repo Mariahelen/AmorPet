@@ -12,13 +12,13 @@
 <!--Página de Cadastro CSS-->
   
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/cadastro.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
         
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
  
 
@@ -29,7 +29,7 @@
 
 <br/><br/><br/><br/>
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" style="background-image: url(assets/images/cat-and-dog.jpg);"><br/><br/><br/><br/>
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/assets/images/cat-and-dog.jpg});|"><br/><br/><br/><br/>
 
    
         <div class="container">
@@ -37,7 +37,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <form role="form">
-            <h2 class="tit-cadastro">Dados de Login:</h2>
+            <h2 class="tit-processo-1">Dados de Login:</h2>
             <hr class="colorgraph">
             <div class="form-group">
                 <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="4">

@@ -38,7 +38,7 @@ public class Usuario {
 	@Transient
 	private String confirmaSenha;
 
-	@Pattern(regexp = "[0-9]{2}[9]{1}[0-9]{8}", message = "O numero de telefone tem que ser valido")
+	@Pattern(regexp = "[0-9]{2}[9]{1}[0-9]{8}", message = "O número de telefone tem que ser valido")
 	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;
 
