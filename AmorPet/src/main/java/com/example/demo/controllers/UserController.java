@@ -63,6 +63,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("/cadastro");
 		if(br.hasErrors()) {
 			mv.addObject("usuario", usuario);
+			System.out.println(usuario.toString());
 			return mv;
 		}
 		try {

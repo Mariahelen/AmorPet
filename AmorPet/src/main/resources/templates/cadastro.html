@@ -36,14 +36,15 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form" th:action="@{/salvarCadastro}" th:object="${usuario}" method="post">
+        <form role="form" th:action="@{/user/salvarCadastro}" th:object="${usuario}" method="post">
             <h2 class="h4-title">CADASTRE-SE GRATUITAMENTE:</h2>
             <hr class="colorgraph">
+            <input type="hidden" th:field="*{id}" th:value="">
              <div class="form-group">
                 <input type="text" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo" th:field="*{nome}">
             </div>
             <div class="form-group">
-                <input type="text" name="display_name" id="celular" class="form-control input-lg " placeholder="Telefone (XX) X.XXXX-XXXX" pattern="[0-9]{2}-[0-9]{1}-[0-9]{4}-[0-9]{4}" th:field="*{telefone}">
+                <input type="text" name="display_name" id="celular" class="form-control input-lg " placeholder="Telefone (XX)X.XXXX-XXXX" pattern="\([0-9]{2}\)[0-9]{1}.[0-9]{4}-[0-9]{4}" th:field="*{telefone}">
             </div>
             <div class="form-group">
             	<label class="label-title">DATA DE NASCIMENTO:  </label>
@@ -78,8 +79,7 @@
             
             <hr class="colorgraph">
             <div class="row">
-                
-                <div class="col-xs-12 col-md-6"><a th:href="@{/salvarCadastro}" class="btn btn-primary btn-block btn-lg">Entrar</a></div>
+                <div class="col-xs-12 col-md-6"><a th:href="@{/login}" class="btn btn-primary btn-block btn-lg">Entrar</a></div>
                 <div class="col-xs-12 col-md-6"><input type="submit" value="Registrar" class="btn btn-success btn-block btn-lg"></div>
             </div>
             <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
@@ -127,7 +127,7 @@
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
 
   <script type="text/javascript">
-    $("#celular").mask("(00) 0.0000-0000");
+    $("#celular").mask("(00)0.0000-0000");
   </script>
 </body>
 </html>
