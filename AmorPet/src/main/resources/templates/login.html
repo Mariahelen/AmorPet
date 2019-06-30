@@ -11,7 +11,7 @@
 
 <!--Página de Cadastro CSS-->
   
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
@@ -32,75 +32,77 @@
 <section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/assets/images/cat-and-dog.jpg});|"><br/><br/><br/><br/>
 
    
-        <div class="container">
+<div class="container">
+	<div class="row">
+	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+	        <form role="form" th:action="@{/login}" th:object="${usuario}" method="post">
+	            <h2 class="tit-processo-1">Dados de Login:</h2>
+	            <hr class="colorgraph">
+	            <div th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></div>
+	            <div class="form-group">
+	                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="4">
+	            </div>
+	           
+	            <div class="form-group">
+	                <input type="password" th:field="*{hashSenha}" name="password" id="senha" class="form-control input-lg" placeholder="Senha" tabindex="4">
+	            </div>
+	      			      
+	            <hr class="colorgraph">
+	            <div class="row">
+	                <div class="col-xs-12 col-md-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="Entrar"></div>
+	            </div>
+	            <br>
+				<div class="row">
+	            	<div class="col-xs-12 col-md-12"><a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Esqueceu a senha?</a></div>
+	        		<div class="col-xs-12 col-md-12"><a th:href="@{/cadastro}" class="forgot-pass-answer new-passwd" type="submit">Não tem conta? Cadastre-se</a></div>
+	        	</div>
+	        </form>
+	    </div>
+	</div>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form">
-            <h2 class="tit-processo-1">Dados de Login:</h2>
-            <hr class="colorgraph">
-            <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="4">
-            </div>
-           
-                 <div class="form-group">
-                <input type="password" name="email" id="email" class="form-control input-lg" placeholder="Senha" tabindex="4">
-            </div>
-            
-            <hr class="colorgraph">
-            <div class="row">
-                <div class="col-xs-12 col-md-6"><a th:href="@{/cadastro}" type="submit" class="btn btn-primary btn-block btn-lg" tabindex="7">Cadastre-se</a></div>
-                <div class="col-xs-12 col-md-6"><a th:href="@{/user/perfil}" class="btn btn-success btn-block btn-lg">Entrar</a></div>
-            </div><br/>
-             <a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Esqueceu a senha?</a>
-        </form>
-    </div>
-</div>
-
-</div><br/><br/>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Insira seu email e enviaremos o passo a passo para a recuperação de senha.</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">E-mail:</label>
-            <input type="email" class="form-control" id="recipient-name">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-success">Enviar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ---------Modal Error----------------------------- -->
-<div class="modal fade" id="mensagemError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    	<span th:text="mensagemErro">
-    	</span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Insira seu email e enviaremos o passo a passo para a recuperação de senha.</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="col-form-label">E-mail:</label>
+	            <input type="email" class="form-control" id="recipient-name">
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+	        <button type="button" class="btn btn-success">Enviar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- ---------Modal Error----------------------------- -->
+	<div class="modal fade" id="mensagemError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	    	<span th:text="mensagemErro">
+	    	</span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 </section>
 
@@ -112,15 +114,12 @@
 
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
 
-  <script src="js/cadastro.js"></script>
+  <script th:src="@{/js/cadastro.js}"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
 
   <script type="text/javascript">
-    $("#celular").mask("(00) 0.0000-0000");
-    </script>
-<script type="text/javascript" th:if="mensagemError != null">
-	$.("#mensagemError").click();
-</script>
+	
+  </script>
 </body>
 </html>
