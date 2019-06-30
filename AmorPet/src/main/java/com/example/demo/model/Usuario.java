@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,16 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.demo.util.Utilidade;
 
 @Entity
 public class Usuario {
@@ -37,18 +37,18 @@ public class Usuario {
 	@NotEmpty(message = "Senha é necessário")
 	@Column(name = "hash_senha" ,length = 255, nullable = false)
 	private String hashSenha;
-	@NotEmpty(message = "Confirmar senha é necessário")
+	@NotEmpty(message = "Confirmação de senha é necessário")
 	@Transient
 	private String confirmaSenha;
 
-	@Pattern(regexp = "\\([0-9]{2}\\)[0-9]{1}\\.[0-9]{4}-[0-9]{4}", message = "O número de telefone tem que ser válido")
+	@Size(max = 11, message = "Telefone inválido, o padrão é (DD)9.xxxx-xxxx")
 	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;
 
 	@Past(message = "A data tem que ser válida")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_nasc")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	@Column(length = 15)
 	private String role;
 	@Column(columnDefinition = "tinyint(1) default 1")
@@ -101,14 +101,14 @@ public class Usuario {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		this.telefone = Utilidade.limparMascaraTelefone(telefone);
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -142,5 +142,5 @@ public class Usuario {
 				+ ", confirmaSenha=" + confirmaSenha + ", telefone=" + telefone + ", dataNascimento=" + dataNascimento
 				+ ", role=" + role + ", Ativo=" + Ativo + ", endereco=" + endereco + "]";
 	}
-	
+
 }

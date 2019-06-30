@@ -39,6 +39,7 @@
         <form role="form" th:action="@{/user/salvarCadastro}" th:object="${usuario}" method="post">
             <h2 class="h4-title">CADASTRE-SE GRATUITAMENTE:</h2>
             <hr class="colorgraph">
+            <span th:if="${mensagemError}" th:text="${mensagemError}" class="alert alert-danger"></span>
             <input type="hidden" th:field="*{id}">
              <div class="form-group">
                 <input type="text" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo" th:field="*{nome}">

@@ -19,12 +19,10 @@ public class UsuarioService {
 		if (this.usuarioDAO.findUsuarioByEmail(usuario.getEmail()) != null) {
 			throw new Exception("Já existe usuário com este e-mail: " + usuario.getEmail());
 
-		} else if (usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
-
+		} else if (!usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
 			throw new Exception("As senhas não coincidem!");
 		}
 //	    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-
 		usuarioDAO.save(usuario);
 	}
 
