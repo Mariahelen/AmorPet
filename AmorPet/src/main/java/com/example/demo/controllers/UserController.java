@@ -58,20 +58,4 @@ public class UserController {
 		return "redirect:/user/perfil";
 	}
 	
-	@PostMapping("/salvarCadastro")
-	public ModelAndView salvarCad(@Valid Usuario usuario, BindingResult br) {
-		ModelAndView mv = new ModelAndView("/cadastro");
-		if(br.hasErrors()) {
-			mv.addObject("usuario", usuario);
-			return mv;
-		}
-		try {
-			this.usuarioService.criarUsuario(usuario);
-		}catch(Exception e) {
-			mv.addObject("mensagemError", e.getMessage());
-			mv.addObject("usuario", usuario);
-		}
-		return mv;
-	}
-	
 }

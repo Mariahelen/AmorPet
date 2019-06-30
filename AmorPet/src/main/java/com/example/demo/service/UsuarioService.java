@@ -22,6 +22,11 @@ public class UsuarioService {
 		} else if (!usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
 			throw new Exception("As senhas não coincidem!");
 		}
+		
+		// USUARIO ESTARÁ ATIVO AUTOMATICAMENTE POR ENQUANTO
+		// REMOVER ESTAS LINHAS ASSIM QUE TIVER ENVIO DE EMAIL
+		usuario.setAtivo(true);
+		
 //	    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuarioDAO.save(usuario);
 	}

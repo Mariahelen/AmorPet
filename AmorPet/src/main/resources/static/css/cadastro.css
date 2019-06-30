@@ -17,12 +17,64 @@
 	text-align: center;
 	font-size: 20px;
 }
+.container form input, .container form a, .container button {
+	border-radius: 7px;
+}
+
+.container form input[type=date] {
+	padding-top: 0px;
+}
+.container form input:focus {
+	box-shadow: 0px 0px 4px 3px #403e3f;
+}
+
+/* para ficar um botão mais elegante */
+.btn-success {
+	background-color: #252525;
+	border-color: #252525 !important;
+}
+.btn-success:hover, .btn-success:focus {
+	transition: 0.3s;
+	border-color: #7ac673 !important;
+	background-color: #7ac673 !important;
+	box-shadow: 0px 0px 4px 0px #252525 !important;
+}
+.btn-info, .active {
+	background-color: #7ac673 !important;
+	border-color: #7ac673 !important;
+}
+
+/* estilização do badge */
+.badge {
+	background-color: #029595;
+	font-size: 17px;
+	padding: 7px;
+}
+.badge a {
+	margin-left: 3px;
+	font-size: 20px;
+	color: #f5f5f5;
+}
+.badge a:hover, .badge a:focus {
+	color: #7ac673;
+}
 
 .tit-processo-1{
-
     color: #7ac673;
     font-size: 16pt;
+}
 
+.text-danger {
+	font-style: italic;
+	color: #e00505;
+	font-size: 15px;
+	background-color: #ffc6d5;
+	width: 100%;
+	margin-bottom: 5px;
+	padding: 8px;
+	padding-left: 28px;
+	border-radius: 7px;
+	
 }
 
 .btn-terms{
@@ -33,11 +85,10 @@
 }
 
 .terms{
-
     color: #FFFFFF;
 }
 
-a.terms:hover{
+a.terms:hover, a.terms:focus {
 	
 	transition: 1s;
 	color: #7ac673;

@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -23,35 +25,37 @@ import com.example.demo.util.Utilidade;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank(message = "O campo precisa ser preenchido")
+	@NotBlank(message = "Nome é necessário")
 	@Column(length = 255, nullable = false)
 	private String nome;
 
-	@Email(message = "O campo precisa ser preenchido")
+	@NotEmpty(message = "Email é necessário")
 	@Column(length = 255, nullable = false)
 	private String email;
 
 	@NotEmpty(message = "Senha é necessário")
 	@Column(name = "hash_senha" ,length = 255, nullable = false)
 	private String hashSenha;
-	@NotEmpty(message = "Confirmação de senha é necessário")
+	@NotEmpty(message = "Confirmação é necessário")
 	@Transient
 	private String confirmaSenha;
 
-	@Size(max = 11, message = "Telefone inválido, o padrão é (DD)9.xxxx-xxxx")
+	@Size(max = 11, min = 11, message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
 	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;
 
-	@Past(message = "A data tem que ser válida")
+	@NotNull(message = "Data de Nascimento é necessária")
+	@Past(message = "Deve ser uma data de nascimento válida")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nasc")
-	private LocalDate dataNascimento;
+	private Date dataNascimento;
 	@Column(length = 15)
 	private String role;
-	@Column(columnDefinition = "tinyint(1) default 1")
+	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
 	private boolean Ativo;
 	@Embedded
 	private Endereco endereco;
@@ -104,11 +108,11 @@ public class Usuario {
 		this.telefone = Utilidade.limparMascaraTelefone(telefone);
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
