@@ -35,8 +35,10 @@ public class UserController {
 	public ModelAndView editarPerfil(@Valid Usuario usuario, 
 						BindingResult br, RedirectAttributes ra) {
 		if(br.hasErrors()) {
-			ra.addFlashAttribute("errors", br.getFieldErrors());
-			return new ModelAndView("/perfil");
+			ModelAndView mv = new ModelAndView("/perfil");
+			// syso para visualizar como o objeto esta sendo enviado
+			System.out.println(usuario.toString());
+			return mv;
 		}
 		try {
 			this.usuarioService.editarUsuario(usuario);

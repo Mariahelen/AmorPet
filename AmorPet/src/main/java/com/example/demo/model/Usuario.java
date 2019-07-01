@@ -56,7 +56,7 @@ public class Usuario {
 	@Column(length = 15)
 	private String role;
 	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
-	private boolean Ativo;
+	private boolean ativo;
 	@Embedded
 	private Endereco endereco;
 
@@ -125,11 +125,11 @@ public class Usuario {
 	}
 
 	public boolean isAtivo() {
-		return Ativo;
+		return ativo;
 	}
 
 	public void setAtivo(boolean ativo) {
-		Ativo = ativo;
+		this.ativo = ativo;
 	}
 
 	public Endereco getEndereco() {
@@ -144,7 +144,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", hashSenha=" + hashSenha
 				+ ", confirmaSenha=" + confirmaSenha + ", telefone=" + telefone + ", dataNascimento=" + dataNascimento
-				+ ", role=" + role + ", Ativo=" + Ativo + ", endereco=" + endereco + "]";
+				+ ", role=" + role + ", Ativo=" + ativo + ", endereco=" + endereco + "]";
 	}
 
 }

@@ -43,7 +43,7 @@
             <hr class="colorgraph">
             <input type="hidden" th:field="*{id}">
             <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
-             <div class="form-group">
+            <div class="form-group">
                 <input type="text" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo" th:field="*{nome}">
             </div>
             <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></div>

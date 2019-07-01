@@ -24,7 +24,6 @@
 				  	<a th:href="@{/user/perfil}" class="list-group-item list-group-item-info" id="btn-ver-perfil">
 				  		<span class="glyphicon glyphicon-user"></span><span class="linha-marca">Perfil</span>
 				  	</a>
-				  	<span th:if="${#fields.hasErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
 	                <a th:href="@{/user/perfil/editar}" class="list-group-item" id="btn-editar-perfil">
 						<span class="glyphicon glyphicon-edit"></span><span>Editar Perfil</span>
 				  	</a>
@@ -99,6 +98,8 @@
 	  				            <div class="row">
 	  				                <div class="col-sm-12">
 	  				                	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
+				                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+				                            <input type="hidden" th:field="*{id}">
 				                            <div class="row">
 		  										<div class="form-group">
 		  										<!-- form de NOME -->
