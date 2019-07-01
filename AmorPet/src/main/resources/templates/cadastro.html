@@ -37,7 +37,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <form role="form" th:action="@{/cadastro}" th:object="${usuario}" method="post">
-        	<span th:if="${mensagemSuccess}" th:text="${mensagemSuccess}"></span>
+        	<span th:if="${mensagemSuccess}" th:text="${mensagemSuccess}" class="tit-processo-1"></span>
         	<span th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></span>
             <h2 class="h4-title">CADASTRE-SE GRATUITAMENTE:</h2>
             <hr class="colorgraph">

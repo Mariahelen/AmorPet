@@ -21,12 +21,13 @@
 	    <div class="row">
 	    	<div class="col-sm-3">
 	   			<div class="list-group">
-				  	<button type="button" class="list-group-item list-group-item-info" id="ver-perfil">
-				  		<div class="glyphicon glyphicon-user"></div><span class="linha-marca">Perfil</span>
-				  	</button>
-	                <button type="button" class="list-group-item" id="editar-perfil">
-				  		<div class="glyphicon glyphicon-edit"></div><span>Editar Perfil</span>
-				  	</button>
+				  	<a th:href="@{/user/perfil}" class="list-group-item list-group-item-info" id="btn-ver-perfil">
+				  		<span class="glyphicon glyphicon-user"></span><span class="linha-marca">Perfil</span>
+				  	</a>
+				  	<span th:if="${#fields.hasErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+	                <a th:href="@{/user/perfil/editar}" class="list-group-item" id="btn-editar-perfil">
+						<span class="glyphicon glyphicon-edit"></span><span>Editar Perfil</span>
+				  	</a>
 	           	</div>
 	           	<!-- Botão para acionar modal -->
 				<button type="button" id="btn-desativar-conta" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo">Desativar Conta</button>
@@ -77,13 +78,13 @@
 		            			</div>
 			                	<div class="col-sm-6">
 			                    	<label for="username" class="col-4 col-form-label">Nome</label>
-			                    	<p>Aqui vai o nome do usuário</p>
+			                    	<p th:text="${usuario.nome}"></p>
 			                    	<label for="name" class="col-4 col-form-label">Email</label>
-			                    	<p>Aqui vai o email do usuário</p>
+			                    	<p th:text="${usuario.email}"></p>
 			                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
-			                    	<p>Aqui vai o telefone do usuário</p>
+			                    	<p th:text="${usuario.telefone}"></p>
 			                    	<label for="text" class="col-4 col-form-label">Endereço</label>
-			                    	<p>Aqui vai o endereço do usuário</p>
+			                    	<p ></p>
 			                    </div>
 		                	</div>
 		            </div>
@@ -97,29 +98,28 @@
 	  				            </div>
 	  				            <div class="row">
 	  				                <div class="col-sm-12">
-	  				                	<form action="" method="post">
-		                            		
+	  				                	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
 				                            <div class="row">
 		  										<div class="form-group">
 		  										<!-- form de NOME -->
 		  											<div class="col-sm-12">
 			  											<label for="nome" class="col-form-label">Nome</label>
 						                           		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+														<input type="text" th:field="*{nome}" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
 													</div>
 					                       		<!-- form de TELEFONE -->
 					  								<div class="col-sm-12">
 					  									<label for="telefone" class="col-form-label">Telefone</label>
 				                            			<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
-													</div>	
+														<input type="text" th:field="*{telefone}" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
+													</div>
 													<div class="col-sm-12">
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
 												</div>
 				  		                    </div>
-				  		                    
-				  		                    
+				  		                    </form>
+				  		                    <form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
 		                            		<!-- form de EMAIL -->
 				                            <div class="row">
 				  								<div class="form-group">
@@ -127,27 +127,27 @@
 					  									<label for="email" class="col-form-label">Seu Email</label>
 					                            		<span class="glyphicon glyphicon-pencil"></span>
 					                            		<span class="small" hidden>Não recebeu o Email?<a href="#">Reenviar</a></span>
-														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+														<input type="text" name="email" th:field="*{email}" class="form-control" aria-describedby="Email" readonly>
 													</div>
 													<div class="col-sm-12">
 					  									<label for="email" class="col-form-label">Novo Email</label>
 					                            		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" class="form-control" placeholder="Digite seu email" aria-describedby="Email">
+														<input type="text" name="novoEmail" class="form-control" placeholder="Digite novo seu email" aria-describedby="Email">
 													</div>
 													<div class="col-sm-12">	
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
 												</div>
 			                              	</div>
-			                              	
-			                              	
+			                              	</form>
+			                              	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
 	                            			<!-- form de SENHA -->
 	                            			<div class="row">
 					                            <div class="form-group">
 						                            <div class="col-sm-12">
 						                            	<label for="senha">Senha</label>
 	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha"type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
+														<input id="senha" type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
 													</div>
 													<div class="col-sm-12">
 														<label for="senha">Nova Senha</label>
@@ -164,8 +164,8 @@
 													</div>
 												</div>
 				                          	</div>
-	                            			
-	                            			
+				                          	</form>
+				                          	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
 	                           			 	<!-- form de ENDEREÇO -->
 			                            	<div class="row">
 					                            <label for="endereço" class="col-form-label">Endereço</label>
@@ -191,7 +191,7 @@
 														<label for="complemento" class="col-4 col-form-label">Complemento</label>
 														<input type="text" class="form-control" placeholder="Complemento" aria-describedby="Complemento">
 													</div>
-
+													
 													<div class="col-sm-12">
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
@@ -212,19 +212,21 @@
 <div th:replace="conteudo-padrao/footer :: footer"></div>
 
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
   
   <script type="text/javascript">
+  
+  	$("#celular").mask("(00)0.0000-0000");
   
   	$("#form-perfil").hide();
 	$("#btn-desativar-conta").hide();
   
   	// QUANDO O PERFIL FOR CLICADO
-    $("#ver-perfil").click(function() {
-    	// muda a url sem da refresh
-    	window.history.pushState(null, "Perfil", "/user/perfil");
+    $("#btn-ver-perfil").click(function() {
     	
-    	$(this).addClass('list-group-item-info').find('span').addClass('linha-marca');
-    	$("#editar-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
+    	$(this).addClass('list-group-item-info').find('span:last-child').addClass('linha-marca');
+    	$("#btn-editar-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
     	
     	$("#dados-perfil").fadeIn('slow');
         $("#form-perfil").hide();
@@ -232,12 +234,10 @@
     });
 
   	// QUANDO O EDITAR PERFIL FOR CLICADO
-    $("#editar-perfil").click(function() {
-    	// muda a url sem da refresh
-    	window.history.pushState(null, "Editar Perfil", "/user/perfil/editar");
+    $("#btn-editar-perfil").click(function() {
     	
-    	$(this).addClass('list-group-item-info').find('span').addClass('linha-marca');
-    	$("#ver-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
+    	$(this).addClass('list-group-item-info').find('span:last-child').addClass('linha-marca');
+    	$("#btn-ver-perfil").removeClass('list-group-item-info').find('span').removeClass('linha-marca');
     	
       	$("#form-perfil").fadeIn('slow');
       	$("#dados-perfil").hide();
@@ -255,18 +255,18 @@
   			if(event.key === "Backspace" || event.key === "Delete") {
 		  		if($(this).val().length === 0) {
 		  			$(this).parent().parent()
-		  			.find('button').removeClass('btn-success').addClass('btn-primary');
+		  			.find('button').removeClass('btn-success').addClass('btn-primary').prop('disabled', true);
 		  		}
 		  	}else {
-  				$(this).parent().parent()
-  					.find('button').removeClass('btn-primary').addClass('btn-success');
+		  		$(this).parent().parent()
+	  				.find('button').addClass('btn-success').removeClass('btn-primary').prop('disabled', false);
 		  	}
   	});
   	
   	/* Verifica se a url tem /editar */
 	let url = location.href;
   	if(url.indexOf("/editar") !== -1) {
-		$("#editar-perfil").click();
+		$("#btn-editar-perfil").click();
 	}
   	
   </script>

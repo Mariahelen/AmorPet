@@ -39,11 +39,11 @@
   		margin-top: 200px;
   		margin-left: 5px;
   	}
-  	.list-group-item div, .list-group-item span {
+  	.list-group a, .list-group-item span {
   		color: #555555;
   		margin-left: 20px;
-  		float: left;
   		font-size: 17px;
+  		text-decoration: none;
   	}
   	.linha-marca {
   		border-bottom:2px solid #7ac673;
@@ -52,9 +52,6 @@
   	/* FORM-PERFIL =====================*/
   	#form-perfil form {
   		width: 100%;
-  	}
-  	#form-perfil form .form-group .col-sm-10 {
-  		margin-right: -40px;
   	}
   	#form-perfil form input {
   		border-color: #c0c0c0;
@@ -74,7 +71,7 @@
   		box-shadow: 0px 0px 3px;
   	}
   	#form-perfil form .row:not(:last-child) {
-  		margin-bottom: 20px;
+  		margin-bottom: 35px;
   		border-bottom: 2px solid #1bb8f0;
   	}
   	#form-perfil form .row:last-child .form-group {
@@ -96,9 +93,13 @@
   		font-size: 15px;
   	}
   	
+  	/* deixar botões no padrão */
+  	.btn-success {
+  		background-color: #7ac673;
+  	}
   	.page-header {
   		margin-top: 15px;
-		border-bottom: none;
+		border-bottom: 1px solid;
 		color: #7ac673;
 		font-size: 20px;
   	}

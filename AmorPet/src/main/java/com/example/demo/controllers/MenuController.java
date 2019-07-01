@@ -76,9 +76,10 @@ public class MenuController {
 			return mv;
 		}
 		try {
+			ModelAndView mv = new ModelAndView("redirect:/cadastro");
 			this.usuarioService.criarUsuario(usuario);
 			ra.addFlashAttribute("mensagemSuccess", "Conta criada com sucesso!");
-			return cadastro(ra);
+			return mv;
 		}catch(Exception e) {
 			ModelAndView mv = new ModelAndView("/cadastro");
 			mv.addObject("mensagemError", e.getMessage());

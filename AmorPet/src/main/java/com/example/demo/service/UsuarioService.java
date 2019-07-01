@@ -17,7 +17,7 @@ public class UsuarioService {
 	public void criarUsuario(Usuario usuario) throws Exception {
 
 		if (this.usuarioDAO.findUsuarioByEmail(usuario.getEmail()) != null) {
-			throw new Exception("Já existe usuário com este e-mail: " + usuario.getEmail());
+			throw new Exception("Email já cadastrado");
 
 		} else if (!usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
 			throw new Exception("As senhas não coincidem!");
@@ -40,6 +40,10 @@ public class UsuarioService {
 			throw new LoginInvalido();
 		}
 		return usuario;
+	}
+	
+	public void editarUsuario(Usuario usuario) throws Exception {
+		this.usuarioDAO.save(usuario);
 	}
 
 }
