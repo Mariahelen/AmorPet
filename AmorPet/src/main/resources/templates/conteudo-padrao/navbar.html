@@ -26,7 +26,7 @@
 	              	</div>
 	              </li>
 	              <li class="nav-item"><a class="nav-link link" th:href="@{/quem-somos}">QUEM SOMOS?</a></li>
-	              <li th:replace="conteudo-padrao/navbar :: opcao-visitante"></li>
+	              <li th:replace="conteudo-padrao/navbar :: ${session.usuarioLogado} != null ? opcao-usuario : opcao-visitante"></li>
 	              <li class="nav-item nav-btn"><a class="nav-link btn btn-default btn-default-outline" th:href="@{/adotar}">QUERO ADOTAR</a></li>
 	            </ul>
 	        </div>
