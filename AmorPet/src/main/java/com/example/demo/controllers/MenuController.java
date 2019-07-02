@@ -96,5 +96,8 @@ public class MenuController {
 	public String descricaoAnimal() {
 		return "/descricao-animal";
 	}
-	
+	@GetMapping("/mapa")
+	public String mapa() {
+		return "/mapa";
+	}
 }
