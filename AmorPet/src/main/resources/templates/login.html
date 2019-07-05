@@ -40,21 +40,21 @@
 	            <hr class="colorgraph">
 	            <div th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></div>
 	            <div class="form-group">
-	                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="4">
+	                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="1">
 	            </div>
 	           
 	            <div class="form-group">
-	                <input type="password" th:field="*{hashSenha}" name="password" id="senha" class="form-control input-lg" placeholder="Senha" tabindex="4">
+	                <input type="password" th:field="*{hashSenha}" name="password" id="senha" class="form-control input-lg" placeholder="Senha" tabindex="2">
 	            </div>
 	      			      
 	            <hr class="colorgraph">
 	            <div class="row">
-	                <div class="col-xs-12 col-md-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="Entrar" tabindex="1"></div>
+	                <div class="col-xs-12 col-md-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="Entrar" tabindex="3"></div>
 	            </div>
 	            <br>
 				<div class="row">
-	            	<div class="col-xs-12 col-md-12"><a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Esqueceu a senha?</a></div>
-	        		<div class="col-xs-12 col-md-12"><a th:href="@{/cadastro}" class="forgot-pass-answer new-passwd" type="submit">Não tem conta? Cadastre-se</a></div>
+	            	<div class="col-xs-12 col-md-12"><a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" tabindex="4">Esqueceu a senha?</a></div>
+	        		<div class="col-xs-12 col-md-12"><a th:href="@{/cadastro}" class="forgot-pass-answer new-passwd" type="submit" tabindex="5">Não tem conta? Cadastre-se</a></div>
 	        	</div>
 	        </form>
 	    </div>
@@ -73,7 +73,7 @@
 	        <form>
 	          <div class="form-group">
 	            <label for="recipient-name" class="col-form-label">E-mail:</label>
-	            <input type="email" class="form-control" id="recipient-name">
+	            <input type="email" class="form-control" id="recipient-name" >
 	          </div>
 	        </form>
 	      </div>
