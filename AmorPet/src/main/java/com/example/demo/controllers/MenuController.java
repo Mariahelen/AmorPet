@@ -13,12 +13,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.exception.LoginInvalido;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.AnimalService;
 import com.example.demo.service.UsuarioService;
 
 @Controller
 public class MenuController {
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private AnimalService animalService;
 	
 	@GetMapping("/home")
 	public String index() {
@@ -40,9 +43,6 @@ public class MenuController {
 	@GetMapping("/login")
 	public ModelAndView login(RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/login");
-		if(ra.containsAttribute("mensagemError")) {
-			mv.addObject("mensagemSuccess", ra.getFlashAttributes().get("mensagemSuccess"));
-		}
 		mv.addObject("usuario", new Usuario());
 		return mv;
 	}
@@ -62,9 +62,6 @@ public class MenuController {
 	@GetMapping("/cadastro")
 	public ModelAndView cadastro(RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/cadastro");
-		if(ra.containsAttribute("mensagemSuccess")) {
-			mv.addObject("mensagemSuccess", ra.getFlashAttributes().get("mensagemSuccess"));
-		}
 		mv.addObject("usuario", new Usuario());
 		return mv;
 	}
@@ -91,7 +88,13 @@ public class MenuController {
 	
 	@GetMapping("/adotar")
 	public ModelAndView adotar() {
-		return new ModelAndView("/quero-adotar");
+		ModelAndView mv = new ModelAndView("/quero-adotar");
+		try {
+			mv.addObject("listaAnimais", this.animalService.listarAnimais());
+		} catch (Exception e) {
+			mv.addObject("errorListaAnimais", "Nenhum resultado encontrado");
+		}
+		return mv;
 	}
 	@GetMapping("/descricao-animal")
 	public String descricaoAnimal() {

@@ -97,7 +97,7 @@
   <div class="btn-group">
  <div class="btn-group demoPadder color" role="group" aria-label="Basic example">
  
-      <button type="button" class="btn btn-info" disabled="">Espécie:</button>
+      <button type="button" class="btn btn-info">Espécie:</button>
       <button type="button" class="btn btn-success">Todos</button>
       <button type="button" class="btn btn-success">Cães</button>
       <button type="button" class="btn btn-success">Gatos</button>
@@ -105,14 +105,14 @@
     
  <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
 
-      <button type="button" class="btn btn-info" disabled="">Porte:</button>
+      <button type="button" class="btn btn-info">Porte:</button>
       <button type="button" class="btn btn-success">P</button>
       <button type="button" class="btn btn-success">M</button>
       <button type="button" class="btn btn-success">G</button>
     </div>
     
  <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-info" disabled="">Sexo:</button>
+      <button type="button" class="btn btn-info">Sexo:</button>
       <button type="button" class="btn btn-success">Fêmea</button>
       <button type="button" class="btn btn-success">Gatos</button>
     </div>
@@ -120,13 +120,14 @@
 
   <div class="btn-group flex-wrap demoPadder" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-light">
-        <a th:href="@{/cadastrar-animal}">+</a></button>
+        <a th:href="@{/cadastro/animal}">+</a></button>
  </div>
    
           
         <br><br/>
 
         <!--AS IMAGENS DEVEM TER 2000 X 1334 PIXELS-->
+        <div th:if="@{errorListaAnimais}" th:text="@{errorListaAnimais}"></div>
       <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">

@@ -40,11 +40,11 @@
 	            <hr class="colorgraph">
 	            <div th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></div>
 	            <div class="form-group">
-	                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="1">
+	                <input type="email" th:field="*{contato.email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail" tabindex="1">
 	            </div>
 	           
 	            <div class="form-group">
-	                <input type="password" th:field="*{hashSenha}" name="password" id="senha" class="form-control input-lg" placeholder="Senha" tabindex="2">
+	                <input type="password" th:field="*{seguranca.hashSenha}" name="password" id="senha" class="form-control input-lg" placeholder="Senha" tabindex="2">
 	            </div>
 	      			      
 	            <hr class="colorgraph">
