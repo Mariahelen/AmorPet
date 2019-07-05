@@ -14,22 +14,28 @@ public class Endereco {
 	@NotBlank(message = "Logradouro é necessário")
 	@Column(length = 45)
 	private String logradouro;
+	
 	@Size(max = 4, message = "Tamanho máximo de 4 números")
 	@Column(name = "numero_casa" ,length = 4)
 	private int numero;
+	
 	@NotBlank(message = "Complemento é necessário")
 	@Column(length = 20)
 	private String complemento;
+	
 	@NotBlank(message = "Bairro é necessário")
 	@Column(length = 45)
 	private String bairro;
+	
 	@NotBlank(message = "Cidade é necessário")
 	@Column(length = 30)
 	private String cidade;
+	
 	@NotEmpty(message = "Estado é necessário")
 	@Enumerated(EnumType.STRING)
 	@Column(length = 2)
 	private Estado estado;
+	
 	@Size(max = 8, message = "CEP inválido")
 	@Column(length = 8)
 	private int cep;
