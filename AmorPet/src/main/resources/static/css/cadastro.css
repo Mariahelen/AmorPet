@@ -28,7 +28,7 @@
 	box-shadow: 0px 0px 4px 3px #403e3f;
 }
 
-/* para ficar um botão mais elegante */
+/* para ficar um botï¿½o mais elegante */
 .btn-success {
 	background-color: #252525;
 	border-color: #252525 !important;
@@ -48,7 +48,7 @@
 	border-color: #7ac673 !important;
 }
 
-/* estilização do badge */
+/* estilizaï¿½ï¿½o do badge */
 .badge {
 	background-color: #029595;
 	font-size: 17px;
@@ -64,8 +64,9 @@
 }
 
 .tit-processo-1{
-    color: #7ac673;
+    color: #ffffff;
     font-size: 16pt;
+    text-align: center;
 }
 
 .text-danger {
