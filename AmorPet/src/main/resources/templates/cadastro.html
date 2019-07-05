@@ -29,7 +29,7 @@
 
 <br/><br/><br/><br/>
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/thumb-1920-536216.jpg});|"><br/><br/><br/><br/>
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/animais/wallpaper-02.jpg});|"><br/><br/><br/><br/>
 
    
 <div class="container">
@@ -42,34 +42,34 @@
             <h2 class="h4-title">CADASTRE-SE GRATUITAMENTE:</h2>
             <hr class="colorgraph">
             <input type="hidden" th:field="*{id}">
-            <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+            <div th:if="${#fields.hasErrors('nome')}" th:errors="*{dadosPessoais.nome}" class="text-danger"></div>
             <div class="form-group">
-                <input type="text" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo" th:field="*{nome}">
+                <input type="text" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo" th:field="*{dadosPessoais.nome}">
             </div>
-            <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></div>
+            <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{contato.telefone}" class="text-danger"></div>
             <div class="form-group">
-                <input type="text" th:field="*{telefone}" name="display_name" id="celular" class="form-control input-lg " placeholder="Telefone (XX)X.XXXX-XXXX" pattern="\([0-9]{2}\)[0-9]{1}.[0-9]{4}-[0-9]{4}">
+                <input type="text" th:field="*{contato.telefone}" name="display_name" id="celular" class="form-control input-lg " placeholder="Telefone (XX)X.XXXX-XXXX" pattern="\([0-9]{2}\)[0-9]{1}.[0-9]{4}-[0-9]{4}">
             </div>
             <div class="form-group">
             	<label class="label-title">DATA DE NASCIMENTO:  </label>
-            	<div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" class="text-danger"></div>
-                <input type="date" th:field="*{dataNascimento}" name="display_name" class="form-control input-lg ">
+            	<div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dadosPessoais.dataNascimento}" class="text-danger"></div>
+                <input type="date" th:field="*{dadosPessoais.dataNascimento}" name="display_name" class="form-control input-lg ">
             </div>
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{contato.email}" class="text-danger"></div>
             <div class="form-group">
-                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail">
+                <input type="email" th:field="*{contato.email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail">
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                	<div th:if="${#fields.hasErrors('hashSenha')}" th:errors="*{hashSenha}" class="text-danger"></div>
+                	<div th:if="${#fields.hasErrors('hashSenha')}" th:errors="*{seguranca.hashSenha}" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="password" th:field="*{hashSenha}" name="password" id="password" class="form-control input-lg" placeholder="Senha">
+                        <input type="password" th:field="*{seguranca.hashSenha}" name="password" id="password" class="form-control input-lg" placeholder="Senha">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                	<div th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger"></div>
+                	<div th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{seguranca.confirmaSenha}" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="password" th:field="*{confirmaSenha}" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha">
+                        <input type="password" th:field="*{seguranca.confirmaSenha}" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha">
                     </div>
                 </div>
             </div>
