@@ -52,11 +52,8 @@
             </div>
             <div class="form-group">
             	<label class="label-title">DATA DE NASCIMENTO:  </label>
-<<<<<<< HEAD
             	<div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" class="text-danger"></div>
-=======
             	<div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dadosPessoais.dataNascimento}" class="text-danger"></div>
->>>>>>> branch 'master' of https://github.com/Mariahelen/AmorPet.git
                 <input type="date" th:field="*{dadosPessoais.dataNascimento}" name="display_name" class="form-control input-lg ">
             </div>
             <div th:if="${#fields.hasErrors('email')}" th:errors="*{contato.email}" class="text-danger"></div>
