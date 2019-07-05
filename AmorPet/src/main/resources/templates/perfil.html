@@ -77,11 +77,11 @@
 		            			</div>
 			                	<div class="col-sm-6">
 			                    	<label for="username" class="col-4 col-form-label">Nome</label>
-			                    	<p th:text="${usuario.nome}"></p>
+			                    	<p th:text="${usuario.dadosPessoais.nome}"></p>
 			                    	<label for="name" class="col-4 col-form-label">Email</label>
-			                    	<p th:text="${usuario.email}"></p>
+			                    	<p th:text="${usuario.contato.email}"></p>
 			                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
-			                    	<p th:text="${usuario.telefone}"></p>
+			                    	<p th:text="${usuario.contato.telefone}"></p>
 			                    	<label for="text" class="col-4 col-form-label">Endereço</label>
 			                    	<p ></p>
 			                    </div>
@@ -98,7 +98,7 @@
 	  				            <div class="row">
 	  				                <div class="col-sm-12">
 	  				                	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
-				                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+				                            <div th:if="${#fields.hasErrors('contato.email')}" th:errors="*{contato.email}" class="text-danger"></div>
 				                            <input type="hidden" th:field="*{id}">
 				                            <div class="row">
 		  										<div class="form-group">
@@ -106,13 +106,13 @@
 		  											<div class="col-sm-12">
 			  											<label for="nome" class="col-form-label">Nome</label>
 						                           		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" th:field="*{nome}" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+														<input type="text" th:field="*{dadosPessoais.nome}" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
 													</div>
 					                       		<!-- form de TELEFONE -->
 					  								<div class="col-sm-12">
 					  									<label for="telefone" class="col-form-label">Telefone</label>
 				                            			<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" th:field="*{telefone}" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
+														<input type="text" th:field="*{contato.telefone}" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
 													</div>
 													<div class="col-sm-12">
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
@@ -128,7 +128,7 @@
 					  									<label for="email" class="col-form-label">Seu Email</label>
 					                            		<span class="glyphicon glyphicon-pencil"></span>
 					                            		<span class="small" hidden>Não recebeu o Email?<a href="#">Reenviar</a></span>
-														<input type="text" name="email" th:field="*{email}" class="form-control" aria-describedby="Email" readonly>
+														<input type="text" name="email" th:field="*{contato.email}" class="form-control" aria-describedby="Email" readonly>
 													</div>
 													<div class="col-sm-12">
 					  									<label for="email" class="col-form-label">Novo Email</label>
@@ -141,7 +141,7 @@
 												</div>
 			                              	</div>
 			                              	</form>
-			                              	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
+			                              	<form th:action="@{/user/perfil/editar}" method="post">
 	                            			<!-- form de SENHA -->
 	                            			<div class="row">
 					                            <div class="form-group">

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
 //import javax.persistence.Temporal;
 //import javax.persistence.TemporalType;
 //import javax.persistence.Transient;
@@ -29,20 +30,21 @@ public class Usuario {
 	private Integer id;
 
 	@Embedded
+	@Valid
 	private DadosPessoais dadosPessoais;
-	
-	@Embedded
-	private Contato contato;
-	
 
 	@Embedded
-	private Endereco endereco;
-	
+	@Valid
+	private Contato contato;
+
 	@Embedded
+	@Valid
+	private Endereco endereco;
+
+	@Embedded
+	@Valid
 	private Seguranca seguranca;
 
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -50,7 +52,7 @@ public class Usuario {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public DadosPessoais getDadosPessoais() {
 		return dadosPessoais;
 	}
@@ -66,7 +68,7 @@ public class Usuario {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -82,8 +84,6 @@ public class Usuario {
 	public void setSeguranca(Seguranca seguranca) {
 		this.seguranca = seguranca;
 	}
-	
-	
 
 //	@NotBlank(message = "Nome é necessário")
 //	@Column(length = 255, nullable = false)
@@ -114,8 +114,6 @@ public class Usuario {
 //	private String role;
 //	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
 //	private boolean ativo;
-	
-	
 
 //	public String getNome() {
 //		return nome;
@@ -180,8 +178,6 @@ public class Usuario {
 //	public void setAtivo(boolean ativo) {
 //		this.ativo = ativo;
 //	}
-
-	
 
 //	@Override
 //	public String toString() {

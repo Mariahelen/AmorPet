@@ -5,6 +5,8 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.example.demo.util.Utilidade;
+
 @Embeddable
 public class Contato {
 	
@@ -29,7 +31,7 @@ public class Contato {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		this.telefone = Utilidade.limparMascaraTelefone(telefone);
 	}
 	
 }

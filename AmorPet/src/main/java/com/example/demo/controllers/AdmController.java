@@ -33,7 +33,7 @@ public class AdmController {
 	@GetMapping("/cadastro/animal")
 	public ModelAndView cadastroAnimal(RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/adm/cadanimal");
-		//mv.addObject("animal", new Animal());
+		mv.addObject("animal", new Animal());
 		return mv;
 	}
 	

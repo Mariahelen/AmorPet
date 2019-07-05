@@ -14,13 +14,11 @@ public class Autorizacao implements HandlerInterceptor {
 	private static final String[] RECURSOS_LIVRES = { "/home", "/termos", "/navegacao", "/quem-somos", "/login",
 			"/cadastro", "/adotar", "/descricao-animal" };
 
-	private static final String[] RECURSOS_LIVRES_ESTILIZACAO = { "/assets/", "/css/", "/css-quero-adotar/",
-			"/cssMapa/", "/img/", "/js/", "/js-quero-adotar/", "/jsMapa/", "/scss/" };
+	private static final String[] RECURSOS_LIVRES_ESTILIZACAO = { ".css", ".js", ".png", ".jpg" };
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println(" >>> INFO:: Interceptor antes da chamada <<< ");
 
 		if (!CONTROLAR_ACESSO) {
 			return true;
@@ -28,13 +26,13 @@ public class Autorizacao implements HandlerInterceptor {
 
 		// Para acessar qualquer pagina dessa aplicação, o usuário precisa estar
 		// autenticado
-		for (String estilizacao : RECURSOS_LIVRES_ESTILIZACAO) {
-			if (request.getRequestURL().toString().contains(estilizacao)) {
+		for (String recurso : RECURSOS_LIVRES) {
+			if (request.getRequestURL().toString().endsWith(recurso)) {
 				return true;
 			}
 		}
-		for (String recurso : RECURSOS_LIVRES) {
-			if (request.getRequestURL().toString().endsWith(recurso)) {
+		for(String estilos : RECURSOS_LIVRES_ESTILIZACAO) {
+			if(request.getRequestURL().toString().endsWith(estilos)) {
 				return true;
 			}
 		}
