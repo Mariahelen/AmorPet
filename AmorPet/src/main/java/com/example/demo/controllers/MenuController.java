@@ -77,6 +77,7 @@ public class MenuController {
 		}
 		try {
 			ModelAndView mv = new ModelAndView("redirect:/cadastro");
+			usuario.setRole("ROLE_USER");
 			this.usuarioService.criarUsuario(usuario);
 			ra.addFlashAttribute("mensagemSuccess", "Conta criada com sucesso!");
 			return mv;

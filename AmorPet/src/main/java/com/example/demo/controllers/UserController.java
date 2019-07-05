@@ -59,4 +59,10 @@ public class UserController {
 		return new ModelAndView("/user/form-etapa-2");
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home";
+	}
+	
 }

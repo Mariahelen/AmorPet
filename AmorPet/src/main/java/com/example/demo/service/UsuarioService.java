@@ -33,10 +33,7 @@ public class UsuarioService {
 
 	public Usuario efetuarLogin(String email, String senha) throws LoginInvalido {
 		Usuario usuario = this.usuarioDAO.efetuarLogin(email, senha);
-		if (usuario == null) {
-			throw new LoginInvalido();
-		}
-		if (!usuario.isAtivo()) {
+		if (usuario == null || !usuario.isAtivo()) {
 			throw new LoginInvalido();
 		}
 		return usuario;

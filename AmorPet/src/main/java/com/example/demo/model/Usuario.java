@@ -53,7 +53,7 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nasc")
 	private Date dataNascimento;
-	@Column(length = 15)
+	@Column(length = 15, nullable = false)
 	private String role;
 	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
 	private boolean ativo;
