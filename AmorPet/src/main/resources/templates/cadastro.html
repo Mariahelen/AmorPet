@@ -63,13 +63,13 @@
                 <div class="col-xs-12 col-sm-6 col-md-6">
                 	<div th:if="${#fields.hasErrors('hashSenha')}" th:errors="*{hashSenha}" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="password" th:field="*{segunranca.hashSenha}" name="password" id="password" class="form-control input-lg" placeholder="Senha">
+                        <input type="password" th:field="*{seguranca.hashSenha}" name="password" id="password" class="form-control input-lg" placeholder="Senha">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                 	<div th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="password" th:field="*{segunranca.confirmaSenha}" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha">
+                        <input type="password" th:field="*{seguranca.confirmaSenha}" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha">
                     </div>
                 </div>
             </div>
