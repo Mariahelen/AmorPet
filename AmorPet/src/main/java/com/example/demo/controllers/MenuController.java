@@ -50,7 +50,7 @@ public class MenuController {
 	public String efetuarLogin(Usuario usuario, RedirectAttributes ra, HttpSession session) {
 		Usuario usuarioLogado;
 		try {
-			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getEmail(), usuario.getHashSenha());
+			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getContato().getEmail(), usuario.getSeguranca().getHashSenha());
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} catch (LoginInvalido e) {
 			ra.addFlashAttribute("mensagemError", e.getMessage());
@@ -77,7 +77,7 @@ public class MenuController {
 		}
 		try {
 			ModelAndView mv = new ModelAndView("redirect:/cadastro");
-			usuario.setRole("ROLE_USER");
+			usuario.getSeguranca().setRole("ROLE_USER");
 			this.usuarioService.criarUsuario(usuario);
 			ra.addFlashAttribute("mensagemSuccess", "Conta criada com sucesso!");
 			return mv;
