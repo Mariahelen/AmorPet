@@ -16,6 +16,10 @@ public class Autorizacao implements HandlerInterceptor {
 
 	private static final String[] RECURSOS_LIVRES_ESTILIZACAO = { ".css", ".js", ".png", ".jpg" };
 
+	private static final String RECURSOS_USUARIOS_NORMAL = "/user/";
+
+	private static final String RECURSOS_USUARIOS_ADM = "/adm/";
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -31,20 +35,29 @@ public class Autorizacao implements HandlerInterceptor {
 				return true;
 			}
 		}
-		for(String estilos : RECURSOS_LIVRES_ESTILIZACAO) {
-			if(request.getRequestURL().toString().endsWith(estilos)) {
+		for (String estilos : RECURSOS_LIVRES_ESTILIZACAO) {
+			if (request.getRequestURL().toString().endsWith(estilos)) {
 				return true;
 			}
 		}
 
-//		Class<?> classe = request.getSession().getAttribute("usuarioLogado").getClass();
-//		boolean isRoleUser = classe.getField("role").toString().endsWith("USER");
-
-		if (request.getSession().getAttribute("usuarioLogado") == null) {
+		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
+		
+		if(request.getSession().getAttribute("usuarioLogado") == null) {
 			request.getRequestDispatcher("/login").forward(request, response);
 			return false;
 		} else {
-			return true;
+			if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)
+					&& usuario.getSeguranca().getRole().endsWith("USER")) {
+				
+				return true;
+			}else if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)
+					&& usuario.getSeguranca().getRole().endsWith("ADMIN")) {
+				
+				return true;
+			}
+			request.getRequestDispatcher("/login").forward(request, response);
+			return false;
 		}
 
 	}
