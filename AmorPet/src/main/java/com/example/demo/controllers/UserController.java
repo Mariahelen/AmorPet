@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+//import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.model.Usuario;
+import com.example.demo.model.DadosPessoais;
+//import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 
 @Controller
@@ -31,8 +33,34 @@ public class UserController {
 		mv.addObject("usuario", session.getAttribute("usuarioLogado"));
 		return mv;
 	}
+	
 	@PostMapping("/perfil/editar")
-	public ModelAndView editarPerfil(@Valid Usuario usuario, 
+	public String alterarDadosPessoais(@Valid DadosPessoais dp, BindingResult br, RedirectAttributes ra) {
+		
+		if(br.hasErrors()) {
+			
+			return "/perfil";
+			
+		}
+		
+		try {
+			
+			this.usuarioService.salvar(dp);
+			ra.addFlashAttribute("sucesso", "Alteração Feita com Sucesso!");
+			
+			
+		} catch (Exception e) {
+			
+			ra.addFlashAttribute("error", "Não foi possível alterar");
+		}
+		
+		return "redirect:/user/perfil/editar";
+	}
+	
+	
+	
+	/*@PostMapping("/perfil/editar")
+	public String editarPerfil(@Valid Usuario usuario, 
 						BindingResult br, RedirectAttributes ra) {
 		if(br.hasErrors()) {
 			ModelAndView mv = new ModelAndView("/perfil");
@@ -47,7 +75,8 @@ public class UserController {
 			ra.addFlashAttribute("errors", e.getMessage());
 		}
 		return new ModelAndView("redirect:/user/perfil/editar");
-	}
+	}*/
+	
 	
 	@GetMapping("/quero-adotar/parte-1")
 	public ModelAndView exibirFormUm() {
