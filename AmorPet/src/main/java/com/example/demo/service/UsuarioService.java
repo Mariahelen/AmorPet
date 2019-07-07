@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.model.DadosPessoais;
 import com.example.demo.model.Usuario;
 
 
@@ -14,7 +17,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-
+	@Autowired
+	private HttpServletRequest request;
+	
 	public void criarUsuario(Usuario usuario) throws Exception {
 
 		if (this.usuarioDAO.findByContatoByEmail(usuario.getContato().getEmail()) != null) {
@@ -44,5 +49,18 @@ public class UsuarioService {
 		this.usuarioDAO.save(usuario);
 	}
 
+	
+	public void salvar(DadosPessoais dp) throws Exception {
+		
+		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
+		
+		if(usuario == null) {
+			
+			throw new Exception();
+		}
+		
+		usuario.setDadosPessoais(dp);
+		this.usuarioDAO.save(usuario);
+	}
 	
 }
