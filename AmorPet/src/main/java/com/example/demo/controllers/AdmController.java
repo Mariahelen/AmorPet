@@ -38,18 +38,19 @@ public class AdmController {
 	}
 	
 	@PostMapping("/cadastro/animal")
-	public ModelAndView cadastroAnimal(@Valid Animal animal, BindingResult br, RedirectAttributes ra) {
+	public String cadastroAnimal(@Valid Animal animal, BindingResult br, RedirectAttributes ra) {
 		if(br.hasErrors()) {
-			return new ModelAndView("/adm/cadanimal");
+			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
+			return "redirect:/adm/cadastro/animal";
 		}
-		ModelAndView mv = new ModelAndView("redirect:/adm/cadastro/animal");
+		
 		try {
 			this.animalService.criarAnimal(animal);
 			ra.addFlashAttribute("success", "Animal cadastrado com sucesso!");
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 		}
-		return mv;
+		return "redirect:/adm/cadastro/animal";
 	}
 	
 }

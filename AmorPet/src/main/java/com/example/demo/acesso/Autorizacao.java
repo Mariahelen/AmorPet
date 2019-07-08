@@ -52,6 +52,7 @@ public class Autorizacao implements HandlerInterceptor {
 				
 				return true;
 			}else if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)
+					|| request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)
 					&& usuario.getSeguranca().getRole().endsWith("ADMIN")) {
 				
 				return true;

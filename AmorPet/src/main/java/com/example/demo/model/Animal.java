@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
@@ -50,11 +51,10 @@ public class Animal {
 	@Size(max=500)
 	private String historiaAnimal;
 	
-	@Column(length=255, nullable=false)
+	@Column(length=255)
 	@Size(max=255)
 	private String caminhoFoto;
 	
-	@Column(length=1, nullable=false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataRegistro;
 	
@@ -68,8 +68,7 @@ public class Animal {
 	@Size(max=1)
 	private String tipoAnimal;
 	
-	@Column(nullable = false)
-	@Size(max=50)
+	@Transient
 	private MultipartFile file;
 	
 

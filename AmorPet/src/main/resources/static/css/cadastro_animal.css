@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+form label {
+	color: #4682B4;
+	font-size: 20px;
+}
+
+h3 {
+	color: #4682B4;
+	font-size: 30px;
+}
+
+form input, form select{
+	border-radius: 50px !important;
+}
+
+.sexoanimal{
+	color: #4682B4;
+	font-size: 15px;
+}
+.porteanimal{
+	font-size: 15px;
+}
+
+
