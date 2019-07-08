@@ -32,12 +32,12 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
+                        <input type="text" th:field="*{nome}" name="first_name" id="first_name" class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <select class="form-control" id="exampleFormControlSelect1"> 
+                      <select class="form-control" th:field="*{tipoAnimal}" id="exampleFormControlSelect1"> 
                         <option>Qual o animal?</option>
                             <option>Cão</option>
                             <option>Gato</option>
@@ -46,22 +46,22 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" name="display_name" class="form-control input-lg " placeholder="Idade do Animalzinho" tabindex="3">
+                <input type="text" th:field="*{dataNascimento}" name="display_name" class="form-control input-lg " placeholder="Idade do Animalzinho" tabindex="3">
             </div>
             <div class="form-group">
-                <input type="radio" name="sexo" class="form-check-input">&nbsp; Macho<br/>
-                <input type="radio" name="sexo" class="form-check-input">&nbsp; Fêmea<br/>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input">&nbsp; Macho<br/>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input">&nbsp; Fêmea<br/>
             </div>
             <div class="row">
                     <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descrição do animal"></textarea>
+                        <textarea class="form-control" th:field="*{historiaAnimal}" id="exampleFormControlTextarea1" rows="3" placeholder="Historia do animal"></textarea>
                     </div>
                 </div>
                  <div class="form-group">
-                            <label for="filebutton" class="cols-sm-2 control-label">Foto do animalzinho:</label>
+                            <label for="filebutton" th:field="*{caminhoFoto}" class="cols-sm-2 control-label">Foto do animalzinho:</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
-                                    <input id="filebutton" name="filebutton" class="input-file" type="file" />
+                                    <input id="filebutton" th:field="*{file}" name="filebutton" class="input-file" type="file" />
                                 </div>
                             </div>
                         </div>
