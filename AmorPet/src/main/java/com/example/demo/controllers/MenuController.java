@@ -69,8 +69,7 @@ public class MenuController {
 	public ModelAndView salvarCad(@Valid Usuario usuario, BindingResult br, RedirectAttributes ra) {
 		
 		if(br.hasErrors()) {
-			ModelAndView mv = new ModelAndView("/cadastro");
-			return mv;
+			return new ModelAndView("/cadastro");
 		}
 		try {
 			ModelAndView mv = new ModelAndView("redirect:/cadastro");

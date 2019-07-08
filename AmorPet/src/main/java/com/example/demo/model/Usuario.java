@@ -85,6 +85,8 @@ public class Usuario {
 		this.seguranca = seguranca;
 	}
 
+	
+
 //	@NotBlank(message = "Nome é necessário")
 //	@Column(length = 255, nullable = false)
 //	private String nome;
@@ -179,11 +181,5 @@ public class Usuario {
 //		this.ativo = ativo;
 //	}
 
-//	@Override
-//	public String toString() {
-//		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", hashSenha=" + hashSenha
-//				+ ", confirmaSenha=" + confirmaSenha + ", telefone=" + telefone + ", dataNascimento=" + dataNascimento
-//				+ ", role=" + role + ", Ativo=" + ativo + ", endereco=" + endereco + "]";
-//	}
 
 }

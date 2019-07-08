@@ -13,7 +13,7 @@ public class Seguranca {
 	@Column(name = "hash_senha" ,length = 255, nullable = false)
 	private String hashSenha;
 	
-	@NotEmpty(message = "Confirmação é necessário")
+	//@NotEmpty(message = "Confirmação é necessário")
 	@Transient
 	private String confirmaSenha;
 	
@@ -54,5 +54,6 @@ public class Seguranca {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
+
 	
 }

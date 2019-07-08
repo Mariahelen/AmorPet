@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.DadosPessoais;
-//import com.example.demo.model.Usuario;
+import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 
 @Controller
@@ -27,10 +27,10 @@ public class UserController {
 	@GetMapping({"/perfil", "/perfil/editar"})
 	public ModelAndView exibirPerfil(HttpSession session, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/perfil");
-		if(ra.containsAttribute("errors")) {
-			mv.addObject("errors", ra.getFlashAttributes().get("errors"));
-		}
-		mv.addObject("usuario", session.getAttribute("usuarioLogado"));
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		mv.addObject("dadosPessoais", usuario.getDadosPessoais());
+		mv.addObject("contato", usuario.getContato());
+		mv.addObject("endereco", usuario.getEndereco());
 		return mv;
 	}
 	
@@ -38,16 +38,14 @@ public class UserController {
 	public String alterarDadosPessoais(@Valid DadosPessoais dp, BindingResult br, RedirectAttributes ra) {
 		
 		if(br.hasErrors()) {
-			
-			return "/perfil";
-			
+			ra.addFlashAttribute("error", "Não foi possível alterar");
+			return "redirect:/user/perfil/editar";
 		}
 		
 		try {
 			
 			this.usuarioService.salvar(dp);
 			ra.addFlashAttribute("sucesso", "Alteração Feita com Sucesso!");
-			
 			
 		} catch (Exception e) {
 			
