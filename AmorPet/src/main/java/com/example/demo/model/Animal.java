@@ -13,9 +13,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Animal {
@@ -32,7 +34,7 @@ public class Animal {
 	private String nome;
 	
 	@NotNull(message = "Data de Nascimento do é necessária")
-	@Past(message = "Deve ser uma data de nascimento válida")
+	@PastOrPresent(message = "Deve ser uma data de nascimento válida")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nasc")
@@ -53,6 +55,7 @@ public class Animal {
 	private String caminhoFoto;
 	
 	@Column(length=1, nullable=false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataRegistro;
 	
 	@NotNull(message = "O porte do animal é necessário")
@@ -64,6 +67,19 @@ public class Animal {
 	@Column(length=1, nullable=false)
 	@Size(max=1)
 	private String tipoAnimal;
+	
+	@Column(nullable = false)
+	@Size(max=50)
+	private MultipartFile file;
+	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public Integer getId_animal() {
 		return id_animal;
