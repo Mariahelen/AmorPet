@@ -76,7 +76,8 @@
                             <label for="filebutton" th:field="*{caminhoFoto}" class="cols-sm-2 control-label">Foto do animalzinho:</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
-                                    <input id="filebutton" th:field="*{file}" name="filebutton" class="input-file" type="file" />
+                                	<img id="preview-img" width="200">
+                                    <input th:field="*{file}" name="filebutton" id="file-chooser" class="input-file" type="file" />
                                 </div>
                             </div>
                         </div>
@@ -99,6 +100,18 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
-
+<script type="text/javascript">
+	const $ = document.querySelector.bind(document);
+	
+	const previewImg = $('#preview-img');
+	const fileChooser = $('#file-chooser');
+	
+	fileChooser.onchange = e => {
+	    const fileToUpload = e.target.files.item(0);
+	    const reader = new FileReader();
+	    reader.onload = e => previewImg.src = e.target.result;
+	    reader.readAsDataURL(fileToUpload);
+	};
+</script>
 </body>
 </html>

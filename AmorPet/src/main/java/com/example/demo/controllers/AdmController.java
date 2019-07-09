@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +48,25 @@ public class AdmController {
 		}
 		
 		try {
+			String path = "C:\\Users\\Rodrigo\\Downloads\\douglas_pdfs" + "\\ProjetosdeProgramacao\\Projetos-STS-2"
+					+ "\\AmorPet\\src\\main\\resources\\static\\img\\" + animal.getFile().getOriginalFilename();
+			File dest = new File(path);
+			animal.getFile().transferTo(dest);
+			animal.setCaminhoFoto("/img/"+animal.getFile().getOriginalFilename());
+			
 			this.animalService.criarAnimal(animal);
+			
+			String caminho = "/img/" + animal.getFile().getOriginalFilename();
+			ra.addFlashAttribute("foto", caminho);
+			
 			ra.addFlashAttribute("success", "Animal cadastrado com sucesso!");
+		}catch (IllegalStateException | IOException e) {
+			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
+			System.out.println(e.getMessage());
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 		}
+		
 		return "redirect:/adm/cadastro/animal";
 	}
 	
