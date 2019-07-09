@@ -23,6 +23,14 @@ public class UsuarioService {
 	@Autowired
 	private HttpSession session;
 	
+	public Usuario save(Usuario usuario) {
+		return this.usuarioDAO.save(usuario);
+	}
+	
+	public Usuario usuarioDaSessao() {
+		return (Usuario) session.getAttribute("usuarioLogado");
+	}
+	
 	public void criarUsuario(Usuario usuario) throws Exception {
 
 		if (this.usuarioDAO.findByContatoByEmail(usuario.getContato().getEmail()) != null) {
@@ -37,7 +45,7 @@ public class UsuarioService {
 		usuario.getSeguranca().setAtivo(true);
 		
 //	    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		usuarioDAO.save(usuario);
+		this.save(usuario);
 	}
 
 	public Usuario efetuarLogin(String email, String senha) throws LoginInvalido {
@@ -51,7 +59,7 @@ public class UsuarioService {
 	
 	public void salvarDadosPessoais(DadosPessoais dp) throws Exception {
 		
-		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
+		Usuario usuario =  this.usuarioDaSessao();
 		
 		if(usuario == null) {
 			
@@ -59,29 +67,33 @@ public class UsuarioService {
 		}
 		
 		usuario.setDadosPessoais(dp);
-		this.usuarioDAO.save(usuario);
+		this.save(usuario);
 	}
 	
 	//ALTERAR TELEFONE
-public void salvarTelefone(String telefone) throws Exception {
+public void salvarTelefone(String telefone) throws LoginInvalido, Exception {
 		
-		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
+		Usuario usuarioDaSessao =  this.usuarioDaSessao();
 		telefone = Utilidade.limparMascaraTelefone(telefone);
 		
-		if(usuario == null) {
+		Usuario usuarioDoBanco = this.usuarioDAO.findByTelefoneAndId(telefone, usuarioDaSessao.getId());
+		
+		if(usuarioDaSessao == null) {
+			throw new LoginInvalido();
+		}
+		if(usuarioDoBanco == null) {
 			
 			throw new Exception();
 		}
 		
-		usuario.getContato().setTelefone(telefone);
-		this.usuarioDAO.save(usuario);
+		usuarioDaSessao.getContato().setTelefone(telefone);
+		this.save(usuarioDaSessao);
 	}
 	
 	// SALVAR CONTATO EDITADO 
 		public void salvarContato(Contato c) throws Exception {
 			
-		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
-		
+		Usuario usuario = this.usuarioDAO.findByContatoByEmail(c.getEmail());
 		if(usuario == null) {
 			throw new Exception();
 		}
@@ -92,8 +104,8 @@ public void salvarTelefone(String telefone) throws Exception {
 		}
 		
 		usuario.getContato().setEmail(c.getNovoEmail());
-		
-		this.usuarioDAO.save(usuario);
+		session.setAttribute("usuarioLogado", usuario);
+		this.save(usuario);
 
 	}
 		

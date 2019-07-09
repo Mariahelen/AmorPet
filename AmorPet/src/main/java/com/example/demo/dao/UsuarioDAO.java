@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.example.demo.model.Contato;
 import com.example.demo.model.Usuario;
 
 
@@ -15,7 +16,8 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	@Query("select u from Usuario u where u.contato.email = :email and u.seguranca.hashSenha = :hashSenha")
 	Usuario efetuarLogin(String email, String hashSenha);
 
-
+	//@Query("select u from Usuario u where u.contato.telefone = :telefone")
+	Usuario findByTelefoneAndId(String telefone, Integer id);
 	
 	
 }
