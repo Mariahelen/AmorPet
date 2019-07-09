@@ -10,9 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.Contato;
 import com.example.demo.model.DadosPessoais;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
@@ -34,7 +36,8 @@ public class UserController {
 		return mv;
 	}
 	
-	@PostMapping("/perfil/editar")
+	// ALTERAR DADOS PESSOAIS
+	@PostMapping("/perfil/editar/dadosPessoais")
 	public String alterarDadosPessoais(@Valid DadosPessoais dp, BindingResult br, RedirectAttributes ra) {
 		
 		if(br.hasErrors()) {
@@ -44,7 +47,46 @@ public class UserController {
 		
 		try {
 			
-			this.usuarioService.salvar(dp);
+			this.usuarioService.salvarDadosPessoais(dp);
+			ra.addFlashAttribute("sucesso", "Alteração Feita com Sucesso!");
+			
+		} catch (Exception e) {
+			
+			ra.addFlashAttribute("error", "Não foi possível alterar");
+		}
+		
+		return "redirect:/user/perfil/editar";
+	}
+	
+	// ALTERAR TELEFONE
+		@PostMapping("/perfil/editar/telefone")
+		public String alterarTelefone(@RequestParam String telefone, RedirectAttributes ra) {
+			
+			
+			try {
+				
+				this.usuarioService.salvarTelefone(telefone);
+				ra.addFlashAttribute("sucesso", "Alteração Feita com Sucesso!");
+				
+			} catch (Exception e) {
+				
+				ra.addFlashAttribute("error", "Não foi possível alterar");
+			}
+			
+			return "redirect:/user/perfil/editar";
+		}
+	
+	//ALTERAR CONTATO
+	@PostMapping("/perfil/editar/contato")
+	public String alterarContato(@Valid Contato c, BindingResult br, RedirectAttributes ra) {
+		
+		if(br.hasErrors()) {
+			ra.addFlashAttribute("error", "Não foi possível alterar");
+			return "redirect:/user/perfil/editar";
+		}
+		
+		try {
+			this.usuarioService.salvarContato(c);
 			ra.addFlashAttribute("sucesso", "Alteração Feita com Sucesso!");
 			
 		} catch (Exception e) {

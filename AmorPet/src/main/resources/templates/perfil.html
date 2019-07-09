@@ -97,8 +97,8 @@
 	  				            </div>
 	  				            <div class="row">
 	  				                <div class="col-sm-12">
-	  				                	<form th:action="@{/user/perfil/editar}" th:object="${dadosPessoais}" method="post">
-				                            <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+	  				                	<form th:action="@{/user/perfil/editar/dadosPessoais}" th:object="${dadosPessoais}" method="post">
+				                           <!-- div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div -->
 				                            <div th:if="${error}" th:text="${error}" class="text-danger"></div>
 				                            <div th:if="${sucesso}" th:text="${sucesso}"></div>
 				                            <div class="row">
@@ -115,19 +115,14 @@
 						                           		<span class="glyphicon glyphicon-pencil"></span>
 														<input type="date" th:field="*{dataNascimento}" class="form-control" aria-describedby="data de nascimento">
 													</div>
-					                       		<!-- form de TELEFONE -->
-					  								<!-- <div class="col-sm-12">
-					  									<label for="telefone" class="col-form-label">Telefone</label>
-				                            			<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" th:field="*{contato.telefone}" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
-													</div> -->
 													<div class="col-sm-12">
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
 													</div>
 												</div>
 				  		                    </div>
+				  		                    
 				  		                    </form>
-				  		                    <form th:action="@{/user/perfil/editar}" th:object="${contato}" method="post">
+				  		                    <form th:action="@{/user/perfil/editar/contato}" th:object="${contato}" method="post">
 		                            		<!-- form de EMAIL -->
 				                            <div class="row">
 				  								<div class="form-group">
@@ -140,7 +135,7 @@
 													<div class="col-sm-12">
 					  									<label for="email" class="col-form-label">Novo Email</label>
 					                            		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" name="novoEmail" class="form-control" placeholder="Digite novo seu email" aria-describedby="Email">
+														<input type="text" name="novoEmail" th:field="*{novoEmail}" class="form-control" placeholder="Digite novo seu email" aria-describedby="Email">
 													</div>
 													<div class="col-sm-12">	
 														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
@@ -148,6 +143,21 @@
 												</div>
 			                              	</div>
 			                              	</form>
+			                              <form th:action="@{/user/perfil/editar/telefone}" method="post">
+				                            <div class="row">
+				  								<div class="form-group">
+					  								 <div class="col-sm-12">
+					  									<label for="telefone" class="col-form-label">Telefone:</label>
+				                            			<span class="glyphicon glyphicon-pencil"></span>
+														<input type="text" th:value="*{contato.telefone}" name="telefone" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
+													</div> 
+													<div class="col-sm-12">	
+														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+													</div>
+												</div>
+			                              	</div>
+			                              	</form>
+
 			                              	<form th:action="@{/user/perfil/editar}" method="post">
 	                            			<!-- form de SENHA -->
 	                            			<div class="row">

@@ -14,6 +14,9 @@ public class Contato {
 	@Column(length = 255, nullable = false)
 	private String email;
 	
+	@Column(length = 255)
+	private String novoEmail;
+	
 	@Size(max = 11, min = 11, message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
 	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;
@@ -33,5 +36,14 @@ public class Contato {
 	public void setTelefone(String telefone) {
 		this.telefone = Utilidade.limparMascaraTelefone(telefone);
 	}
+
+	public String getNovoEmail() {
+		return novoEmail;
+	}
+
+	public void setNovoEmail(String novoEmail) {
+		this.novoEmail = novoEmail;
+	}
+	
 	
 }

@@ -1,14 +1,17 @@
 package com.example.demo.service;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.model.Contato;
 import com.example.demo.model.DadosPessoais;
+//import com.example.demo.model.Seguranca;
 import com.example.demo.model.Usuario;
+import com.example.demo.util.Utilidade;
 
 
 @Service
@@ -18,7 +21,7 @@ public class UsuarioService {
 	private UsuarioDAO usuarioDAO;
 	
 	@Autowired
-	private HttpServletRequest request;
+	private HttpSession session;
 	
 	public void criarUsuario(Usuario usuario) throws Exception {
 
@@ -45,14 +48,10 @@ public class UsuarioService {
 		return usuario;
 	}
 	
-	public void editarUsuario(Usuario usuario) throws Exception {
-		this.usuarioDAO.save(usuario);
-	}
-
 	
-	public void salvar(DadosPessoais dp) throws Exception {
+	public void salvarDadosPessoais(DadosPessoais dp) throws Exception {
 		
-		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
+		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
 		
 		if(usuario == null) {
 			
@@ -63,4 +62,61 @@ public class UsuarioService {
 		this.usuarioDAO.save(usuario);
 	}
 	
+	//ALTERAR TELEFONE
+public void salvarTelefone(String telefone) throws Exception {
+		
+		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
+		telefone = Utilidade.limparMascaraTelefone(telefone);
+		
+		if(usuario == null) {
+			
+			throw new Exception();
+		}
+		
+		usuario.getContato().setTelefone(telefone);
+		this.usuarioDAO.save(usuario);
+	}
+	
+	// SALVAR CONTATO EDITADO 
+		public void salvarContato(Contato c) throws Exception {
+			
+		Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
+		
+		if(usuario == null) {
+			throw new Exception();
+		}
+		
+		if(this.usuarioDAO.findByContatoByEmail(c.getNovoEmail()) != null) {
+			
+			throw new Exception();
+		}
+		
+		usuario.getContato().setEmail(c.getNovoEmail());
+		
+		this.usuarioDAO.save(usuario);
+
+	}
+		
+		// SALVAR CONTATO EDITADO 
+//				public void salvarSenha(Seguranca s) throws Exception {
+//					
+//				Usuario usuario =  (Usuario) session.getAttribute("usuarioLogado");
+//				
+//				if(usuario == null) {
+//					throw new Exception();
+//				}
+//				
+//				if(this.usuarioDAO.findBySegurancaByHashSenha(s.getHashSenha()) != null) {
+//					
+//					throw new Exception();
+//				}
+//				
+//				usuario.getContato().setEmail(c.getNovoEmail());
+//				
+//				this.usuarioDAO.save(usuario);
+//
+//			}
+//		
+		
+		
 }

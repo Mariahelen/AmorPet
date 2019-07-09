@@ -12,7 +12,8 @@ public class Autorizacao implements HandlerInterceptor {
 	private static final boolean CONTROLAR_ACESSO = true;
 
 	private static final String[] RECURSOS_LIVRES = { "/home", "/termos", "/navegacao", "/quem-somos", "/login",
-			"/cadastro", "/adotar", "/descricao-animal" };
+			"/cadastro", "/adotar", "/descricao-animal",
+			"https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese" };
 
 	private static final String[] RECURSOS_LIVRES_ESTILIZACAO = { ".css", ".js", ".png", ".jpg" };
 
