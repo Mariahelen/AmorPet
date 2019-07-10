@@ -30,13 +30,14 @@
 <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <br/><br/>
-        <div th:if="${success}" th:text="${success}" class="tit-processo-1"></div>
-        <div th:if="${error}" th:text="${error}" class="text-danger"></div>
+        
         <form role="form" th:action="@{/adm/cadastro/animal}" th:object="${animal}" enctype="multipart/form-data" method="post">
            <div class="main-login main-center">
                 <h3>Cadastrar novo animal</h3><br></div>
             <hr class="colorgraph">
             <div class="row">
+            	<div th:if="${sucesso}" th:text="${success}" class="tit-processo-1"></div>
+        		<div th:if="${error}" th:text="${error}" class="text-danger"></div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
                     <label>Nome do Animal</label>

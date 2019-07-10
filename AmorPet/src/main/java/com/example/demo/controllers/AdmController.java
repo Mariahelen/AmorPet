@@ -58,8 +58,8 @@ public class AdmController {
 			
 			String caminho = "/img/" + animal.getFile().getOriginalFilename();
 			ra.addFlashAttribute("foto", caminho);
+			ra.addFlashAttribute("sucesso", "Animal cadastrado com sucesso!");
 			
-			ra.addFlashAttribute("success", "Animal cadastrado com sucesso!");
 		}catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			System.out.println(e.getMessage());
