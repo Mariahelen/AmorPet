@@ -38,7 +38,6 @@ public class Usuario {
 	private Contato contato;
 
 	@Embedded
-	@Valid
 	private Endereco endereco;
 
 	@Embedded
@@ -85,7 +84,12 @@ public class Usuario {
 		this.seguranca = seguranca;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", dadosPessoais=" + dadosPessoais + ", contato=" + contato + ", endereco="
+				+ endereco + ", seguranca=" + seguranca + "]";
+	}
+
 
 //	@NotBlank(message = "Nome é necessário")
 //	@Column(length = 255, nullable = false)

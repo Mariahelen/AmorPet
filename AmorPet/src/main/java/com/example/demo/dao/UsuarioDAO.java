@@ -16,8 +16,8 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	@Query("select u from Usuario u where u.contato.email = :email and u.seguranca.hashSenha = :hashSenha")
 	Usuario efetuarLogin(String email, String hashSenha);
 
-	//@Query("select u from Usuario u where u.contato.telefone = :telefone")
-	Usuario findByTelefoneAndId(String telefone, Integer id);
+	@Query("select u from Usuario u where u.id = :id and u.contato.telefone = :telefone")
+	Usuario findByIdAndContatoByTelefone(Integer id, String telefone);
 	
 	
 }

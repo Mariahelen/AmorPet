@@ -44,5 +44,11 @@ public class DadosPessoais {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+	@Override
+	public String toString() {
+		return "DadosPessoais [nome=" + nome + ", dataNascimento=" + dataNascimento + "]";
+	}
+	
 	
 }

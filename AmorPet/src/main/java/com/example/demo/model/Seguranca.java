@@ -55,5 +55,10 @@ public class Seguranca {
 		this.ativo = ativo;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Seguranca [hashSenha=" + hashSenha + ", confirmaSenha=" + confirmaSenha + ", role=" + role + ", ativo="
+				+ ativo + "]";
+	}
+
 }

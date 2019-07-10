@@ -44,6 +44,10 @@ public class Contato {
 	public void setNovoEmail(String novoEmail) {
 		this.novoEmail = novoEmail;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Contato [email=" + email + ", novoEmail=" + novoEmail + ", telefone=" + telefone + "]";
+	}
 	
 }
