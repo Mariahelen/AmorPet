@@ -1,26 +1,25 @@
 package com.example.demo.model;
 
-//import java.util.Date;
+import java.util.Date;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.Valid;
-//import javax.persistence.Temporal;
-//import javax.persistence.TemporalType;
-//import javax.persistence.Transient;
-//import javax.validation.constraints.NotBlank;
-//import javax.validation.constraints.NotEmpty;
-//import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Past;
-//import javax.validation.constraints.Size;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
-//import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
-//import com.example.demo.util.Utilidade;
+import com.example.demo.util.Utilidade;
 
 @Entity
 public class Usuario {
@@ -29,20 +28,37 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Embedded
-	@Valid
-	private DadosPessoais dadosPessoais;
+	@NotBlank(message = "Nome é necessário")
+	@Column(length = 255, nullable = false)
+	private String nome;
 
-	@Embedded
-	@Valid
-	private Contato contato;
+	@NotEmpty(message = "Email é necessário")
+	@Column(length = 255, nullable = false)
+	private String email;
 
+	@NotEmpty(message = "Senha é necessário")
+	@Column(name = "hash_senha", length = 255, nullable = false)
+	private String hashSenha;
+	@NotEmpty(message = "Confirmação é necessário")
+	@Transient
+	private String confirmaSenha;
+
+	@Size(max = 11, min = 11, message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
+	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
+	private String telefone;
+
+	@NotNull(message = "Data de Nascimento é necessária")
+	@Past(message = "Deve ser uma data de nascimento válida")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nasc")
+	private Date dataNascimento;
+	@Column(length = 15, nullable = false)
+	private String role;
+	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
+	private boolean ativo;
 	@Embedded
 	private Endereco endereco;
-
-	@Embedded
-	@Valid
-	private Seguranca seguranca;
 
 	public Integer getId() {
 		return id;
@@ -52,20 +68,68 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public DadosPessoais getDadosPessoais() {
-		return dadosPessoais;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDadosPessoais(DadosPessoais dadosPessoais) {
-		this.dadosPessoais = dadosPessoais;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Contato getContato() {
-		return contato;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setContato(Contato contato) {
-		this.contato = contato;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getHashSenha() {
+		return hashSenha;
+	}
+
+	public void setHashSenha(String hashSenha) {
+		this.hashSenha = hashSenha;
+	}
+
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = Utilidade.limparMascaraTelefone(telefone);
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Endereco getEndereco() {
@@ -75,115 +139,5 @@ public class Usuario {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	public Seguranca getSeguranca() {
-		return seguranca;
-	}
-
-	public void setSeguranca(Seguranca seguranca) {
-		this.seguranca = seguranca;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", dadosPessoais=" + dadosPessoais + ", contato=" + contato + ", endereco="
-				+ endereco + ", seguranca=" + seguranca + "]";
-	}
-
-
-//	@NotBlank(message = "Nome é necessário")
-//	@Column(length = 255, nullable = false)
-//	private String nome;
-
-//	@NotEmpty(message = "Email é necessário")
-//	@Column(length = 255, nullable = false)
-//	private String email;
-
-//	@NotEmpty(message = "Senha é necessário")
-//	@Column(name = "hash_senha" ,length = 255, nullable = false)
-//	private String hashSenha;
-//	@NotEmpty(message = "Confirmação é necessário")
-//	@Transient
-//	private String confirmaSenha;
-
-//	@Size(max = 11, min = 11, message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
-//	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
-//	private String telefone;
-
-//	@NotNull(message = "Data de Nascimento é necessária")
-//	@Past(message = "Deve ser uma data de nascimento válida")
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-//	@Temporal(TemporalType.DATE)
-//	@Column(name = "data_nasc")
-//	private Date dataNascimento;
-//	@Column(length = 15, nullable = false)
-//	private String role;
-//	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
-//	private boolean ativo;
-
-//	public String getNome() {
-//		return nome;
-//	}
-//
-//	public void setNome(String nome) {
-//		this.nome = nome;
-//	}
-
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-
-//	public String getHashSenha() {
-//		return hashSenha;
-//	}
-//
-//	public void setHashSenha(String hashSenha) {
-//		this.hashSenha = hashSenha;
-//	}
-//
-//	public String getConfirmaSenha() {
-//		return confirmaSenha;
-//	}
-//
-//	public void setConfirmaSenha(String confirmaSenha) {
-//		this.confirmaSenha = confirmaSenha;
-//	}
-
-//	public String getTelefone() {
-//		return telefone;
-//	}
-//
-//	public void setTelefone(String telefone) {
-//		this.telefone = Utilidade.limparMascaraTelefone(telefone);
-//	}
-
-//	public Date getDataNascimento() {
-//		return dataNascimento;
-//	}
-//
-//	public void setDataNascimento(Date dataNascimento) {
-//		this.dataNascimento = dataNascimento;
-//	}
-
-//	public String getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(String role) {
-//		this.role = role;
-//	}
-//
-//	public boolean isAtivo() {
-//		return ativo;
-//	}
-//
-//	public void setAtivo(boolean ativo) {
-//		this.ativo = ativo;
-//	}
-
 
 }

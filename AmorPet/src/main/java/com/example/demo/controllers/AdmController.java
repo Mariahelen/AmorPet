@@ -48,8 +48,7 @@ public class AdmController {
 		}
 		
 		try {
-			String path = "C:\\Users\\Rodrigo\\Downloads\\douglas_pdfs" + "\\ProjetosdeProgramacao\\Projetos-STS-2"
-					+ "\\AmorPet\\src\\main\\resources\\static\\img\\" + animal.getFile().getOriginalFilename();
+			String path = "\\AmorPet\\src\\main\\resources\\static\\img\\" + animal.getFile().getOriginalFilename();
 			File dest = new File(path);
 			animal.getFile().transferTo(dest);
 			animal.setCaminhoFoto("/img/"+animal.getFile().getOriginalFilename());

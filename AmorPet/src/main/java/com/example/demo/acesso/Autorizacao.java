@@ -49,12 +49,12 @@ public class Autorizacao implements HandlerInterceptor {
 			return false;
 		} else {
 			if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)
-					&& usuario.getSeguranca().getRole().endsWith("USER")) {
+					&& usuario.getRole().endsWith("USER")) {
 				
 				return true;
 			}else if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)
 					| request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)
-					&& usuario.getSeguranca().getRole().endsWith("ADMIN")) {
+					&& usuario.getRole().endsWith("ADMIN")) {
 				
 				return true;
 			}
