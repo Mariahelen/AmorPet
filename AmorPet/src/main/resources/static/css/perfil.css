@@ -59,6 +59,10 @@
   		margin-bottom: 20px;
   		margin-left: -15px;
   	}
+  	#form-perfil form input[type='date'] {
+  		padding: 5px !important;
+  		padding-left: 15px !important;
+  	}
   	#form-perfil form input:hover {
   		background-color: #f2f4f3;
   		transition: 1s;
@@ -71,8 +75,7 @@
   		box-shadow: 0px 0px 3px;
   	}
   	#form-perfil form .row:not(:last-child) {
-  		margin-bottom: 35px;
-  		border-bottom: 2px solid #1bb8f0;
+  		margin-bottom: 5px;
   	}
   	#form-perfil form .row:last-child .form-group {
   		padding-top: 10px;

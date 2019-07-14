@@ -40,10 +40,10 @@ public class UserController {
 		}
 		try {
 			Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
-			Usuario usuarioDoBanco = this.usuarioService.findById(usuarioSessao.getId());
-			usuarioDoBanco = this.usuarioService.editarPerfil(usuario);
-			this.usuarioService.save(usuarioDoBanco);
-			session.setAttribute("usuarioLogado", usuarioDoBanco);
+			usuario.setId(usuarioSessao.getId());
+			usuario = this.usuarioService.editarPerfil(usuario);
+			this.usuarioService.save(usuario);
+			session.setAttribute("usuarioLogado", usuario);
 			ra.addFlashAttribute("sucesso", "Alteração realizada com sucesso");
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -32,14 +33,15 @@ public class Usuario {
 	@Column(length = 255, nullable = false)
 	private String nome;
 
+	@Email(message = "Email inválido")
 	@NotEmpty(message = "Email é necessário")
 	@Column(length = 255, nullable = false)
 	private String email;
 
-	@NotEmpty(message = "Senha é necessário")
+	@NotBlank(message = "Senha é necessário")
 	@Column(name = "hash_senha", length = 255, nullable = false)
 	private String hashSenha;
-	@NotEmpty(message = "Confirmação é necessário")
+	@NotBlank(message = "Confirmação é necessário")
 	@Transient
 	private String confirmaSenha;
 

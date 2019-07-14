@@ -26,7 +26,7 @@
 	              	</div>
 	              </li>
 	              <li class="nav-item"><a class="nav-link link" th:href="@{/quem-somos}">QUEM SOMOS?</a></li>
-	              <li th:replace="conteudo-padrao/navbar :: (${session.usuarioLogado} != null) ? opcao-usuario : opcao-visitante"></li>
+	              <li th:replace="conteudo-padrao/navbar :: (${session.usuarioLogado} != null) ? (${session.usuarioLogado.role} == 'ROLE_ADMIN'? opcao-adm : opcao-usuario) : opcao-visitante"></li>
 	              <li class="nav-item nav-btn"><a class="nav-link btn btn-default btn-default-outline" th:href="@{/adotar}">QUERO ADOTAR</a></li>
 	            </ul>
 	        </div>
@@ -45,7 +45,7 @@
 	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">MINHA CONTA</a>
 	<div class="dropdown-menu">
 		<a class="dropdown-item" th:href="@{/adm/candidatos}">CANDIDATOS</a>
-		<a class="dropdown-item" th:href="@{/adm/adotar-adm}">ANIMAIS</a>
+		<a class="dropdown-item" th:href="@{/adm/cadastro/animal}">ANIMAIS</a>
 		<a class="dropdown-item" th:href="@{/adm/perfil}">ADMINISTRADOR</a>
 		<a class="dropdown-item" th:href="@{/adm/logout}">SAIR</a>
 	</div>

@@ -57,13 +57,20 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public Usuario editarPerfil(Usuario usuarioForm) {
-		Usuario usuarioDoBanco = this.findByEmail(usuarioForm.getEmail());
-		usuarioDoBanco.setNome(usuarioForm.getNome());
-		usuarioDoBanco.setDataNascimento(usuarioForm.getDataNascimento());
-		usuarioDoBanco.setTelefone(usuarioForm.getTelefone());
-		usuarioDoBanco.setEndereco(usuarioForm.getEndereco());
-		return usuarioDoBanco;
+	public Usuario editarPerfil(Usuario usuarioForm) throws Exception {
+		Usuario usuarioParaSalvar = this.findById(usuarioForm.getId());
+		usuarioParaSalvar.setNome(usuarioForm.getNome());
+		usuarioParaSalvar.setDataNascimento(usuarioForm.getDataNascimento());
+		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
+		usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+		
+		if(usuarioForm.getHashSenha().equals(usuarioForm.getConfirmaSenha())) {
+			usuarioParaSalvar.setHashSenha(usuarioForm.getHashSenha());
+			usuarioParaSalvar.setConfirmaSenha(usuarioForm.getConfirmaSenha());
+		}else {
+			throw new Exception("Não foi possível alterar");
+		}
+		return usuarioParaSalvar;
 	}
 
 }

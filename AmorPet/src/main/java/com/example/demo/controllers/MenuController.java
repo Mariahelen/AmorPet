@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,18 +42,20 @@ public class MenuController {
 	}
 	
 	@GetMapping("/login")
-	public ModelAndView login(RedirectAttributes ra) {
+	public ModelAndView login(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/login");
-		mv.addObject("usuario", new Usuario());
+		mv.addObject("email", session.getAttribute("email"));
 		return mv;
 	}
 	@PostMapping("/login")
-	public String efetuarLogin(Usuario usuario, RedirectAttributes ra, HttpSession session) {
+	public String efetuarLogin(@RequestParam(required = true) String email, @RequestParam(required = true) String senha,
+			RedirectAttributes ra, HttpSession session) {
 		Usuario usuarioLogado;
 		try {
-			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getEmail(), usuario.getHashSenha());
+			usuarioLogado = this.usuarioService.efetuarLogin(email, senha);
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} catch (LoginInvalido e) {
+			session.setAttribute("email", email);
 			ra.addFlashAttribute("mensagemError", e.getMessage());
 			return "redirect:/login";
 		}
@@ -60,7 +63,7 @@ public class MenuController {
 	}
 	
 	@GetMapping("/cadastro")
-	public ModelAndView cadastro(RedirectAttributes ra) {
+	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("/cadastro");
 		mv.addObject("usuario", new Usuario());
 		return mv;

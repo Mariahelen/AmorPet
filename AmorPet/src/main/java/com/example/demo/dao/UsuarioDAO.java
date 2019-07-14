@@ -8,7 +8,7 @@ import com.example.demo.model.Usuario;
 
 public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	
-	@Query("select u from Usuario u where u.contato.email = :email")
+	@Query("select u from Usuario u where u.email = :email")
 	Usuario findByEmail(String email);
 	
 	// CONSULTA SE OS DADOS DO USUÁRIO CONSTAM NO BD PARA FAZER LOGIN

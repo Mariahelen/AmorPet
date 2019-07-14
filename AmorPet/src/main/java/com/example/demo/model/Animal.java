@@ -56,7 +56,7 @@ public class Animal {
 	private String caminhoFoto;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dataRegistro;
+	private LocalDate dataRegistro;
 	
 	@NotNull(message = "O porte do animal é necessário")
 	@Column(length=1, nullable=false)
@@ -136,11 +136,11 @@ public class Animal {
 		this.caminhoFoto = caminhoFoto;
 	}
 
-	public Date getDataRegistro() {
+	public LocalDate getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(Date dataRegistro) {
+	public void setDataRegistro(LocalDate dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
 

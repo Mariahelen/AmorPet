@@ -45,9 +45,9 @@
 						        <form>
 						          <div class="form-group">
 						         	 <label for="recipient-name" class="col-form-label">Senha</label>
-						          		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Senha" tabindex="5">
+						          		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Senha" tabindex="5" minlength="8">
 						            <label for="recipient-name" class="col-form-label">Confirmar senhar</label>
-						           	 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" tabindex="6">
+						           	 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" tabindex="6" minlength="8">
 						          </div>
 						        </form>
 					      	</div>
@@ -118,7 +118,7 @@
 												</div>
 				  		                    </div>
 		                            		<!-- form de EMAIL -->
-				                            <div class="row">
+				                            <div class="row" hidden>
 				  								<div class="form-group">
 					  								<div class="col-sm-12">
 														<input type="hidden" name="email" th:field="*{email}" class="form-control" aria-describedby="Email">
@@ -140,20 +140,17 @@
 						                            <div class="col-sm-12">
 						                            	<label for="senha">Senha</label>
 	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha" type="password" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
+														<input id="senha" type="password" th:field="*{hashSenha}" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
 													</div>
-													<div class="col-sm-12">
+													<!-- <div class="col-sm-12">
 														<label for="senha">Nova Senha</label>
 	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" minlength="8">
-													</div>
+														<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" >
+													</div> -->
 													<div class="col-sm-12">
 														<label for="senha">Confirme a Senha</label>
 	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha"type="password" name="confirme-senha" placeholder="Confirme a senha" class="form-control" required="required" minlength="8">
-													</div>
-													<div class="col-sm-12">
-														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+														<input id="senha" type="password" th:field="*{confirmaSenha}" name="confirme-senha" placeholder="Confirme a senha" class="form-control" required="required" minlegth="8">
 													</div>
 												</div>
 				                          	</div>
