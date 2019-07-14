@@ -19,6 +19,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.util.Utilidade;
 
@@ -55,6 +56,10 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nasc")
 	private Date dataNascimento;
+	@Column(length = 50)
+	private String caminhoFoto;
+	@Transient
+	private MultipartFile file;
 	@Column(length = 15, nullable = false)
 	private String role;
 	@Column(columnDefinition = "tinyint(1) default 0", nullable = false)
@@ -116,6 +121,22 @@ public class Usuario {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public String getCaminhoFoto() {
+		return caminhoFoto;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public void setCaminhoFoto(String caminhoFoto) {
+		this.caminhoFoto = caminhoFoto;
 	}
 
 	public String getRole() {

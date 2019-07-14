@@ -68,12 +68,15 @@
 		            <div class="row">
 		                	<div class="row">
 		                		<div class="col-sm-6">
-		            				<img th:src="@{/img/thanos.jpg}">
-		            				<div class='input-wrapper'>
-										<input id='foto-usuario' type='file'/>
-										<label for='foto-usuario'><span class="glyphicon glyphicon-open"></span> Adicionar foto</label>
-										<span id='nome-arquivo'></span>
-									</div>
+		            				<img th:src="${usuario.caminhoFoto}!=null ? ${usuario.caminhoFoto} : @{/img/thanos.jpg}" id="preview-img">
+		            				<form role="form" enctype="multipart/form-data" th:action="@{/user/perfil}" method="post">
+			            				<div class='input-wrapper'>
+											<input id="foto-usuario" type="file"/>
+											<label for="foto-usuario"><span class="glyphicon glyphicon-open"></span> Adicionar foto</label>
+											<input type="submit" class="btn btn-success" value="Salvar">
+											<span id="nome-arquivo"></span>
+										</div>
+									</form>
 		            			</div>
 			                	<div class="col-sm-6">
 			                    	<label for="username" class="col-4 col-form-label">Nome</label>
@@ -258,6 +261,17 @@
 		$("#btn-editar-perfil").click();
 	}
   	
+	/* const $ = document.querySelector.bind(document);
+	
+	const previewImg = $('#preview-img');
+	const fileChooser = $('#foto-usuario');
+	
+	fileChooser.onchange = e => {
+	    const fileToUpload = e.target.files.item(0);
+	    const reader = new FileReader();
+	    reader.onload = e => previewImg.src = e.target.result;
+	    reader.readAsDataURL(fileToUpload);
+	}; */
   </script>
 </body>
 </html>

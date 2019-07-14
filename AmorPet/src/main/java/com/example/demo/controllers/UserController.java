@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import java.io.File;
+import java.io.IOException;
+
 //import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -10,11 +13,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
+import com.example.demo.util.Utilidade;
 
 @Controller
 @RequestMapping("/user")
@@ -31,10 +37,37 @@ public class UserController {
 		return mv;
 	}
 
-	@PostMapping("/perfil/editar")
-	public String editarPerfil(@Valid Usuario usuario, BindingResult br, RedirectAttributes ra,
+	@PostMapping("/perfil")
+	public String editarFoto(@RequestParam MultipartFile file, RedirectAttributes ra,
 			HttpSession session) {
-		if(br.hasErrors()) {
+		if (!file.isEmpty()) {
+			if (file.getOriginalFilename().endsWith(".pgn") || file.getOriginalFilename().endsWith(".jpg")
+					|| file.getOriginalFilename().endsWith(".jpeg")) {
+
+				String path = Utilidade.caminhoParaImagem(file.getOriginalFilename());
+				File destino = new File(path);
+				Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+				try {
+					usuario.getFile().transferTo(destino);
+					usuario.setCaminhoFoto("/img/" + file.getOriginalFilename());
+					this.usuarioService.editarPerfil(usuario);
+				} catch (IllegalStateException | IOException e) {
+					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
+					System.out.println(e.getMessage());
+				} catch (Exception e) {
+					ra.addFlashAttribute("errorSalvarFoto", e.getMessage());
+				}
+			} else {
+				ra.addFlashAttribute("errorSalvarFoto",
+						"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
+			}
+		}
+		return "redirect:/user/perfil";
+	}
+
+	@PostMapping("/perfil/editar")
+	public String editarPerfil(@Valid Usuario usuario, BindingResult br, RedirectAttributes ra, HttpSession session) {
+		if (br.hasErrors()) {
 			ra.addFlashAttribute("listaErrors", br.getAllErrors());
 			return "redirect:/user/perfil/editar";
 		}
@@ -45,7 +78,7 @@ public class UserController {
 			this.usuarioService.save(usuario);
 			session.setAttribute("usuarioLogado", usuario);
 			ra.addFlashAttribute("sucesso", "Alteração realizada com sucesso");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 		}
 		return "redirect:/user/perfil/editar";

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
+import com.example.demo.util.Utilidade;
 
 @Controller
 @RequestMapping("/adm")
@@ -33,48 +34,45 @@ public class AdmController {
 		mv.addObject("usuario", usuario);
 		return mv;
 	}
-	
+
 	@GetMapping("/candidatos")
 	public ModelAndView exibirCandidatos() {
 		return new ModelAndView("adm/candidatos");
 	}
-	
+
 	@GetMapping("/cadastro/animal")
 	public ModelAndView cadastroAnimal() {
 		ModelAndView mv = new ModelAndView("/adm/cadanimal");
 		mv.addObject("animal", new Animal());
 		return mv;
 	}
-	
+
 	@PostMapping("/cadastro/animal")
 	public String cadastroAnimal(@Valid Animal animal, BindingResult br, RedirectAttributes ra) {
-		if(br.hasErrors()) {
+		if (br.hasErrors()) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			return "redirect:/adm/cadastro/animal";
 		}
-		
 		try {
-			String path = "\\AmorPet\\src\\main\\resources\\static\\img\\" + animal.getFile().getOriginalFilename();
-			File dest = new File(path);
-			animal.getFile().transferTo(dest);
-			animal.setCaminhoFoto("/img/"+animal.getFile().getOriginalFilename());
+			String path = Utilidade.caminhoParaImagem(animal.getFile().getOriginalFilename());
+			File destino = new File(path);
+			animal.getFile().transferTo(destino);
+			animal.setCaminhoFoto("/img/" + animal.getFile().getOriginalFilename());
 			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
-			
-			String caminho = "/img/" + animal.getFile().getOriginalFilename();
-			ra.addFlashAttribute("foto", caminho);
+
 			ra.addFlashAttribute("sucesso", "Animal cadastrado com sucesso!");
-			
-		}catch (IllegalStateException | IOException e) {
+
+		} catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			System.out.println(e.getMessage());
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 		}
-		
+
 		return "redirect:/adm/cadastro/animal";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout() {
 		return "redirect:/user/logout";

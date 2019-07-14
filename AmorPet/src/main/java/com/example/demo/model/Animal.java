@@ -70,15 +70,6 @@ public class Animal {
 	
 	@Transient
 	private MultipartFile file;
-	
-
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
 
 	public Integer getId_animal() {
 		return id_animal;
@@ -159,6 +150,13 @@ public class Animal {
 	public void setTipoAnimal(String tipoAnimal) {
 		this.tipoAnimal = tipoAnimal;
 	}
-	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	
 }
