@@ -2,7 +2,7 @@ package com.example.demo.util;
 
 import java.io.File;
 
-public class Utilidade {
+public class Util {
 
 	public static String limparMascaraTelefone(String telefone) {
 		return telefone.replaceAll("[\\(\\)\\.\\-]", "");

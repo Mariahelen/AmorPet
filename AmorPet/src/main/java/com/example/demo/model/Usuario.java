@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.example.demo.util.Utilidade;
+import com.example.demo.util.Util;
 
 @Entity
 public class Usuario {
@@ -109,7 +109,7 @@ public class Usuario {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = Utilidade.limparMascaraTelefone(telefone);
+		this.telefone = Util.limparMascaraTelefone(telefone);
 	}
 
 	public Date getDataNascimento() {

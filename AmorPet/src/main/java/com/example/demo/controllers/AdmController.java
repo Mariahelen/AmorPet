@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
-import com.example.demo.util.Utilidade;
+import com.example.demo.util.Util;
 
 @Controller
 @RequestMapping("/adm")
@@ -54,7 +54,7 @@ public class AdmController {
 			return "redirect:/adm/cadastro/animal";
 		}
 		try {
-			String path = Utilidade.caminhoParaImagem(animal.getFile().getOriginalFilename());
+			String path = Util.caminhoParaImagem(animal.getFile().getOriginalFilename());
 			File destino = new File(path);
 			animal.getFile().transferTo(destino);
 			animal.setCaminhoFoto("/img/animais/" + animal.getFile().getOriginalFilename());

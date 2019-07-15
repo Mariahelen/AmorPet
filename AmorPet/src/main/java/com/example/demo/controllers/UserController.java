@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
-import com.example.demo.util.Utilidade;
+import com.example.demo.util.Util;
 
 @Controller
 @RequestMapping("/user")
@@ -43,7 +43,7 @@ public class UserController {
 			if (file.getOriginalFilename().endsWith(".pgn") || file.getOriginalFilename().endsWith(".jpg")
 					|| file.getOriginalFilename().endsWith(".jpeg")) {
 
-				String path = Utilidade.caminhoParaImagem(file.getOriginalFilename());
+				String path = Util.caminhoParaImagem(file.getOriginalFilename());
 				File destino = new File(path);
 				Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
 				try {
