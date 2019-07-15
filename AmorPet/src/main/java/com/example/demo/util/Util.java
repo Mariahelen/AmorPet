@@ -9,9 +9,10 @@ public class Util {
 	}
 
 	public static String caminhoParaImagem(String nomeFoto) {
-		File caminhoRaiz = new File("");
-		String caminhoCompleto = caminhoRaiz.getAbsolutePath()
-				+ "/src/main/resources/static/img/usuarios/" + nomeFoto;
+		String caminhoCompleto = new File("").getAbsolutePath()
+				+ "/src/main/resources/static/img/usuarios/";
+		new File(caminhoCompleto).mkdirs();
+		caminhoCompleto += nomeFoto;
 		return caminhoCompleto;
 	}
 }

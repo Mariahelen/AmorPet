@@ -40,13 +40,13 @@ public class UserController {
 	@PostMapping("/perfil")
 	public String editarFoto(@RequestParam MultipartFile file, RedirectAttributes ra, HttpSession session) {
 		if (!file.isEmpty()) {
-			if (file.getOriginalFilename().endsWith(".pgn") || file.getOriginalFilename().endsWith(".jpg")
+			if (file.getOriginalFilename().endsWith(".png") || file.getOriginalFilename().endsWith(".jpg")
 					|| file.getOriginalFilename().endsWith(".jpeg")) {
-
-				String path = Util.caminhoParaImagem(file.getOriginalFilename());
-				File destino = new File(path);
-				Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
+				
 				try {
+					String path = Util.caminhoParaImagem(file.getOriginalFilename());
+					File destino = new File(path);
+					Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
 					// pra evitar a exception do metodo editarPerfil
 					usuarioSessao.setConfirmaSenha(usuarioSessao.getHashSenha());
 					Usuario usuario = this.usuarioService.editarPerfil(usuarioSessao);
@@ -55,12 +55,18 @@ public class UserController {
 					this.usuarioService.save(usuario);
 					file.transferTo(destino);
 					session.setAttribute("usuarioLogado", usuario);
+					// pra sincronizar com o refresh do sts
+					Thread.sleep(5000);
+				
 				} catch (IllegalStateException | IOException e) {
 					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
 					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 				}
+			}else {
+				ra.addFlashAttribute("errorSalvarFoto",
+						"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 			}
 		} else {
 			ra.addFlashAttribute("errorSalvarFoto",
