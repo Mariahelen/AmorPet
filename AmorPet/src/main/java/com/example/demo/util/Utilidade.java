@@ -11,7 +11,7 @@ public class Utilidade {
 	public static String caminhoParaImagem(String nomeFoto) {
 		File caminhoRaiz = new File("");
 		String caminhoCompleto = caminhoRaiz.getAbsolutePath()
-				+ "/src/main/resources/img/" + nomeFoto;
+				+ "/src/main/resources/static/img/usuarios/" + nomeFoto;
 		return caminhoCompleto;
 	}
 }

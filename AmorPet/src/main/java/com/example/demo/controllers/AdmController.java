@@ -57,7 +57,7 @@ public class AdmController {
 			String path = Utilidade.caminhoParaImagem(animal.getFile().getOriginalFilename());
 			File destino = new File(path);
 			animal.getFile().transferTo(destino);
-			animal.setCaminhoFoto("/img/" + animal.getFile().getOriginalFilename());
+			animal.setCaminhoFoto("/img/animais/" + animal.getFile().getOriginalFilename());
 			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
 

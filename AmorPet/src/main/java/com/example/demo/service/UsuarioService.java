@@ -63,14 +63,13 @@ public class UsuarioService {
 		usuarioParaSalvar.setDataNascimento(usuarioForm.getDataNascimento());
 		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
 		usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
-		
 		if(usuarioForm.getHashSenha().equals(usuarioForm.getConfirmaSenha())) {
 			usuarioParaSalvar.setHashSenha(usuarioForm.getHashSenha());
 			usuarioParaSalvar.setConfirmaSenha(usuarioForm.getConfirmaSenha());
 		}else {
-			throw new Exception("Não foi possível alterar");
+			throw new Exception("Não foi possivel alterar");
 		}
 		return usuarioParaSalvar;
 	}
-
+	
 }

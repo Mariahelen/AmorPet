@@ -68,13 +68,13 @@
 		            <div class="row">
 		                	<div class="row">
 		                		<div class="col-sm-6">
-		            				<img th:src="${usuario.caminhoFoto}!=null ? ${usuario.caminhoFoto} : @{/img/thanos.jpg}" id="preview-img">
+		            				<img th:src="${usuario.caminhoFoto} != null ? ${usuario.caminhoFoto} : @{/img/thanos.jpg}" id="preview-img">
 		            				<form role="form" enctype="multipart/form-data" th:action="@{/user/perfil}" method="post">
 			            				<div class='input-wrapper'>
-											<input id="foto-usuario" type="file"/>
+											<input id="foto-usuario" type="file" name="file"/>
 											<label for="foto-usuario"><span class="glyphicon glyphicon-open"></span> Adicionar foto</label>
 											<input type="submit" class="btn btn-success" value="Salvar">
-											<span id="nome-arquivo"></span>
+											<span th:if="${errorSalvarFoto}" th:text="${errorSalvarFoto}"></span>
 										</div>
 									</form>
 		            			</div>
@@ -261,7 +261,9 @@
 		$("#btn-editar-perfil").click();
 	}
   	
-	/* const $ = document.querySelector.bind(document);
+  </script>
+  <script type="text/javascript">
+  	const $ = document.querySelector.bind(document);
 	
 	const previewImg = $('#preview-img');
 	const fileChooser = $('#foto-usuario');
@@ -271,7 +273,7 @@
 	    const reader = new FileReader();
 	    reader.onload = e => previewImg.src = e.target.result;
 	    reader.readAsDataURL(fileToUpload);
-	}; */
+	};
   </script>
 </body>
 </html>

@@ -38,29 +38,33 @@ public class UserController {
 	}
 
 	@PostMapping("/perfil")
-	public String editarFoto(@RequestParam MultipartFile file, RedirectAttributes ra,
-			HttpSession session) {
+	public String editarFoto(@RequestParam MultipartFile file, RedirectAttributes ra, HttpSession session) {
 		if (!file.isEmpty()) {
 			if (file.getOriginalFilename().endsWith(".pgn") || file.getOriginalFilename().endsWith(".jpg")
 					|| file.getOriginalFilename().endsWith(".jpeg")) {
 
 				String path = Utilidade.caminhoParaImagem(file.getOriginalFilename());
 				File destino = new File(path);
-				Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+				Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
 				try {
-					usuario.getFile().transferTo(destino);
-					usuario.setCaminhoFoto("/img/" + file.getOriginalFilename());
-					this.usuarioService.editarPerfil(usuario);
+					// pra evitar a exception do metodo editarPerfil
+					usuarioSessao.setConfirmaSenha(usuarioSessao.getHashSenha());
+					Usuario usuario = this.usuarioService.editarPerfil(usuarioSessao);
+					// usar uma criptografia para nao haver conflitos no nome da foto
+					usuario.setCaminhoFoto("/img/usuarios/" + file.getOriginalFilename());
+					this.usuarioService.save(usuario);
+					file.transferTo(destino);
+					session.setAttribute("usuarioLogado", usuario);
 				} catch (IllegalStateException | IOException e) {
 					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
-					ra.addFlashAttribute("errorSalvarFoto", e.getMessage());
+					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 				}
-			} else {
-				ra.addFlashAttribute("errorSalvarFoto",
-						"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 			}
+		} else {
+			ra.addFlashAttribute("errorSalvarFoto",
+					"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 		}
 		return "redirect:/user/perfil";
 	}
