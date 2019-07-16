@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class UserController {
 		if (!file.isEmpty()) {
 			if (file.getOriginalFilename().endsWith(".png") || file.getOriginalFilename().endsWith(".jpg")
 					|| file.getOriginalFilename().endsWith(".jpeg")) {
-				
+
 				try {
 					String path = Util.caminhoParaImagem(file.getOriginalFilename());
 					File destino = new File(path);
@@ -57,14 +58,14 @@ public class UserController {
 					session.setAttribute("usuarioLogado", usuario);
 					// pra sincronizar com o refresh do sts
 					Thread.sleep(5000);
-				
+
 				} catch (IllegalStateException | IOException e) {
 					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
 					ra.addFlashAttribute("errorSalvarFoto", "Não foi possível adicionar a foto, tente novamente");
 				}
-			}else {
+			} else {
 				ra.addFlashAttribute("errorSalvarFoto",
 						"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 			}
@@ -108,6 +109,22 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home";
+	}
+
+	@PostMapping("/desativarConta")
+	public String desativar(@RequestParam String hashSenha, @RequestParam String confirmaSenha, RedirectAttributes ra,
+			HttpSession session) {
+		if (!hashSenha.equals(confirmaSenha)) {
+			ra.addFlashAttribute("As senhas não coincidem");
+			return "redirect:/user/perfil/editar";
+		} else {
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			usuario.setAtivo(false);
+			this.usuarioService.save(usuario);
+			session.setAttribute("usuarioLogado", usuario);
+		}
+		
+		return "redirect:/user/logout";
 	}
 
 }
