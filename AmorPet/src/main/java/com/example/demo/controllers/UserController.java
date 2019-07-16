@@ -45,7 +45,7 @@ public class UserController {
 					|| file.getOriginalFilename().endsWith(".jpeg")) {
 
 				try {
-					String path = Util.caminhoParaImagem(file.getOriginalFilename());
+					String path = Util.caminhoParaImagemUsuario(file.getOriginalFilename());
 					File destino = new File(path);
 					Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioLogado");
 					// pra evitar a exception do metodo editarPerfil

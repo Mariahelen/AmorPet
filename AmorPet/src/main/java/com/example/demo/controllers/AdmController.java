@@ -54,7 +54,7 @@ public class AdmController {
 			return "redirect:/adm/cadastro/animal";
 		}
 		try {
-			String path = Util.caminhoParaImagem(animal.getFile().getOriginalFilename());
+			String path = Util.caminhoParaImagemAnimal(animal.getFile().getOriginalFilename());
 			File destino = new File(path);
 			animal.getFile().transferTo(destino);
 			animal.setCaminhoFoto("/img/animais/" + animal.getFile().getOriginalFilename());

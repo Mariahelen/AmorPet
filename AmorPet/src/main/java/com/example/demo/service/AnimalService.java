@@ -14,11 +14,13 @@ import com.example.demo.model.Animal;
 public class AnimalService {
 	@Autowired
 	private AnimalDAO animalRep;
-	
+
 	public List<Animal> listarAnimais() throws Exception {
-		return Optional
-				.ofNullable(this.animalRep.findAll(Sort.by("nome")))
-				.orElseThrow(Exception::new);
+		List<Animal> animais = this.animalRep.findAll(Sort.by("nome"));
+		if (animais.isEmpty()) {
+			throw new Exception();
+		}
+		return animais;
 	}
 
 	public void criarAnimal(Animal animal) {
