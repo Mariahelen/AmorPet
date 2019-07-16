@@ -3,147 +3,185 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 
-	<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
-	  
-  <title>Perfil</title>
-  
-  <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/perfil.css}" media="all">
-  
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<title>Perfil</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/perfil.css}"
+	media="all">
+
 </head>
 <body>
-<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
 
-<br><br><br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-<section>
-	<div class="container" id="container">
-	    <div class="row">
-	    	<div class="col-sm-3">
-	   			<div class="list-group">
-				  	<a th:href="@{/user/perfil}" class="list-group-item list-group-item-info" id="btn-ver-perfil">
-				  		<span class="glyphicon glyphicon-user"></span><span class="linha-marca">Perfil</span>
-				  	</a>
-	                <a th:href="@{/user/perfil/editar}" class="list-group-item" id="btn-editar-perfil">
-						<span class="glyphicon glyphicon-edit"></span><span>Editar Perfil</span>
-				  	</a>
-	           	</div>
-	           	<!-- Botão para acionar modal -->
-				<button type="button" id="btn-desativar-conta" class="btn btn-danger" data-toggle="modal" data-target="#modalExemplo">Desativar Conta</button>
-					
-				<!-- Modal -->
-				<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-					    	<div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">Confirmar de Desativação</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-					     	</div>
-					      	<div class="modal-body">
-						        <form>
-						          <div class="form-group">
-						         	 <label for="recipient-name" class="col-form-label">Senha</label>
-						          		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Senha" tabindex="5" minlength="8">
-						            <label for="recipient-name" class="col-form-label">Confirmar senhar</label>
-						           	 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" tabindex="6" minlength="8">
-						          </div>
-						        </form>
-					      	</div>
-					      	<div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-						        <button type="button" class="btn btn-danger">Salvar mudanças</button>
-					      	</div>
-					    </div>
+	<section>
+		<div class="container" id="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="list-group">
+						<a th:href="@{/user/perfil}"
+							class="list-group-item list-group-item-info" id="btn-ver-perfil">
+							<span class="glyphicon glyphicon-user"></span><span
+							class="linha-marca">Perfil</span>
+						</a> <a th:href="@{/user/perfil/editar}" class="list-group-item"
+							id="btn-editar-perfil"> <span
+							class="glyphicon glyphicon-edit"></span><span>Editar
+								Perfil</span>
+						</a>
+					</div>
+					<!-- Botão para acionar modal -->
+					<button type="button" id="btn-desativar-conta"
+						class="btn btn-danger" data-toggle="modal"
+						data-target="#modalExemplo">Desativar Conta</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="modalExemplo" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Confirmar
+										de Desativação</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Fechar">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form method="post" th:action="@{/user/desativarConta}">
+										<div class="form-group">
+											<label for="recipient-name" class="col-form-label">Senha</label>
+											<input type="password" name="hashSenha" id="password"
+												class="form-control input-lg" placeholder="Senha"
+												tabindex="5" minlength="8"> <label
+												for="recipient-name" class="col-form-label">Confirmar
+												senhar</label> <input type="password" name="confirmaSenha"
+												id="password_confirmation" class="form-control input-lg"
+												placeholder="Confirmar Senha" tabindex="6" minlength="8">
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Fechar</button>
+											<button type="submit" class="btn btn-danger">Desativar
+												Conta</button>
+										</div>
+									</form>
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
-	        </div>
-	        <div class="col-sm-9">
-	        	<!-- INICIO DADOS DO PERFIL -->
-	        	<div class="col-sm-10" id="dados-perfil">
-		            <div class="row">
-				        <h4 class="page-header">Perfil</h4>
-		            </div>
-		            <div class="row">
-		                	<div class="row">
-		                		<div class="col-sm-6">
-		            				<img th:src="${usuario.caminhoFoto} != null ? ${usuario.caminhoFoto} : @{/img/thanos.jpg}" id="preview-img">
-		            				<form role="form" enctype="multipart/form-data" th:action="@{/user/perfil}" method="post">
-			            				<div class='input-wrapper'>
-											<input id="foto-usuario" type="file" name="file"/>
-											<label for="foto-usuario"><span class="glyphicon glyphicon-open"></span> Adicionar foto</label>
-											<input type="submit" class="btn btn-success" value="Salvar">
+				<div class="col-sm-9">
+					<!-- INICIO DADOS DO PERFIL -->
+					<div class="col-sm-10" id="dados-perfil">
+						<div class="row">
+							<h4 class="page-header">Perfil</h4>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="col-sm-6">
+									<img
+										th:src="${usuario.caminhoFoto} != null ? ${usuario.caminhoFoto} : @{/img/thanos.jpg}"
+										id="preview-img">
+									<form role="form" enctype="multipart/form-data"
+										th:action="@{/user/perfil}" method="post">
+										<div class='input-wrapper'>
+											<input id="foto-usuario" type="file" name="file" /> <label
+												for="foto-usuario"><span
+												class="glyphicon glyphicon-open"></span> Adicionar foto</label> <input
+												type="submit" class="btn btn-success" value="Salvar">
 											<span th:if="${errorSalvarFoto}" th:text="${errorSalvarFoto}"></span>
 										</div>
 									</form>
-		            			</div>
-			                	<div class="col-sm-6">
-			                    	<label for="username" class="col-4 col-form-label">Nome</label>
-			                    	<p th:text="${usuario.nome}"></p>
-			                    	<label for="name" class="col-4 col-form-label">Email</label>
-			                    	<p th:text="${usuario.email}"></p>
-			                    	<label for="lastname" class="col-4 col-form-label">Telefone</label>
-			                    	<p th:text="${usuario.telefone}"></p>
-			                    	<label for="text" class="col-4 col-form-label">Endereço</label>
-			                    	<p ></p>
-			                    </div>
-		                	</div>
-		            </div>
-	       		</div>
-	       		<!-- INICIO FORM ALTERAR PERFIL -->
-	       		<div class="col-sm-12" id="form-perfil">
-	       			<div class="row">
-		       			<div class="col-sm-10">
-	  				            <div class="row">
-	  				                <h4 class="page-header">Editar Perfil</h4>
-	  				            </div>
-	  				            <div class="row">
-	  				                <div class="col-sm-12">
-	  				                	<form th:action="@{/user/perfil/editar}" th:object="${usuario}" method="post">
-				                           	<div th:if="${listaErrors}" th:each="err : ${listaErrors}" th:text="${err.getDefaultMessage()}" class="text-danger"></div>
-				                            <div th:if="${error}" th:text="${error}" class="text-danger"></div>
-				                            <div th:if="${sucesso}" th:text="${sucesso}"></div>
-				                            <div class="row">
-		  										<div class="form-group">
-		  										<!-- form de NOME -->
-		  											<div class="col-sm-12">
-			  											<label for="nome" class="col-form-label">Nome</label>
-						                           		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" th:field="*{nome}" class="form-control" placeholder="Digite seu nome" aria-describedby="Nome">
+								</div>
+								<div class="col-sm-6">
+									<label for="username" class="col-4 col-form-label">Nome</label>
+									<p th:text="${usuario.nome}"></p>
+									<label for="name" class="col-4 col-form-label">Email</label>
+									<p th:text="${usuario.email}"></p>
+									<label for="lastname" class="col-4 col-form-label">Telefone</label>
+									<p th:text="${usuario.telefone}"></p>
+									<label for="text" class="col-4 col-form-label">Endereço</label>
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- INICIO FORM ALTERAR PERFIL -->
+					<div class="col-sm-12" id="form-perfil">
+						<div class="row">
+							<div class="col-sm-10">
+								<div class="row">
+									<h4 class="page-header">Editar Perfil</h4>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<form th:action="@{/user/perfil/editar}"
+											th:object="${usuario}" method="post">
+											<div th:if="${listaErrors}" th:each="err : ${listaErrors}"
+												th:text="${err.getDefaultMessage()}" class="text-danger"></div>
+											<div th:if="${error}" th:text="${error}" class="text-danger"></div>
+											<div th:if="${sucesso}" th:text="${sucesso}"></div>
+											<div class="row">
+												<div class="form-group">
+													<!-- form de NOME -->
+													<div class="col-sm-12">
+														<label for="nome" class="col-form-label">Nome</label> <span
+															class="glyphicon glyphicon-pencil"></span> <input
+															type="text" th:field="*{nome}" class="form-control"
+															placeholder="Digite seu nome" aria-describedby="Nome">
 													</div>
 													<!--  form de data de nascimento -->
 													<div class="col-sm-12">
-			  											<label for="nome" class="col-form-label">Data de Nascimento</label>
-						                           		<span class="glyphicon glyphicon-pencil"></span>
-														<input type="date" th:field="*{dataNascimento}" class="form-control" aria-describedby="data de nascimento">
+														<label for="nome" class="col-form-label">Data de
+															Nascimento</label> <span class="glyphicon glyphicon-pencil"></span>
+														<input type="date" th:field="*{dataNascimento}"
+															class="form-control"
+															aria-describedby="data de nascimento">
 													</div>
 												</div>
-				  		                    </div>
-		                            		<!-- form de EMAIL -->
-				                            <div class="row" hidden>
-				  								<div class="form-group">
-					  								<div class="col-sm-12">
-														<input type="hidden" name="email" th:field="*{email}" class="form-control" aria-describedby="Email">
+											</div>
+											<!-- form de EMAIL -->
+											<div class="row" hidden>
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input type="hidden" name="email" th:field="*{email}"
+															class="form-control" aria-describedby="Email">
 													</div>
 												</div>
-			                              	</div>
-				                            <div class="row">
-				  								<div class="form-group">
-					  								 <div class="col-sm-12">
-					  									<label for="telefone" class="col-form-label">Telefone:</label>
-				                            			<span class="glyphicon glyphicon-pencil"></span>
-														<input type="text" th:value="*{telefone}" name="telefone" id="celular" class="form-control" placeholder="Digite seu telefone" aria-describedby="Telefone">
-													</div> 
+											</div>
+											<div class="row">
+												<div class="form-group">
+													<div class="col-sm-12">
+														<label for="telefone" class="col-form-label">Telefone:</label>
+														<span class="glyphicon glyphicon-pencil"></span> <input
+															type="text" th:value="*{telefone}" name="telefone"
+															id="celular" class="form-control"
+															placeholder="Digite seu telefone"
+															aria-describedby="Telefone">
+													</div>
 												</div>
-			                              	</div>
-	                            			<!-- form de SENHA -->
-	                            			<div class="row">
-					                            <div class="form-group">
-						                            <div class="col-sm-12">
-						                            	<label for="senha">Senha</label>
-	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha" type="password" th:field="*{hashSenha}" name="antiga-senha" placeholder="Senha antiga" class="form-control" required="required" minlength="8">
+											</div>
+											<!-- form de SENHA -->
+											<div class="row">
+												<div class="form-group">
+													<div class="col-sm-12">
+														<label for="senha">Senha</label> <span
+															class="glyphicon glyphicon-pencil"></span> <input
+															id="senha" type="password" th:field="*{hashSenha}"
+															name="antiga-senha" placeholder="Senha antiga"
+															class="form-control" required="required" minlength="8">
 													</div>
 													<!-- <div class="col-sm-12">
 														<label for="senha">Nova Senha</label>
@@ -151,62 +189,76 @@
 														<input id="senha"type="password" name="nova-senha" placeholder="Nova senha" class="form-control" required="required" >
 													</div> -->
 													<div class="col-sm-12">
-														<label for="senha">Confirme a Senha</label>
-	                            						<span class="glyphicon glyphicon-pencil"></span>
-														<input id="senha" type="password" th:field="*{confirmaSenha}" name="confirme-senha" placeholder="Confirme a senha" class="form-control" required="required" minlegth="8">
+														<label for="senha">Confirme a Senha</label> <span
+															class="glyphicon glyphicon-pencil"></span> <input
+															id="senha" type="password" th:field="*{confirmaSenha}"
+															name="confirme-senha" placeholder="Confirme a senha"
+															class="form-control" required="required" minlegth="8">
 													</div>
 												</div>
-				                          	</div>
-	                           			 	<!-- form de ENDEREÇO -->
-			                            	<div class="row">
-					                            <label for="endereço" class="col-form-label">Endereço</label>
+											</div>
+											<!-- form de ENDEREÇO -->
+											<div class="row">
+												<label for="endereço" class="col-form-label">Endereço</label>
 												<span class="glyphicon glyphicon-pencil"></span>
 												<div class="form-group">
-													
-					  								<div class="col-sm-12">
-					  									<label for="bairro" class="col-4 col-form-label">Bairro</label>
-														<input type="text" class="form-control" placeholder="Digite seu bairro" aria-describedby="Bairro">
+
+													<div class="col-sm-12">
+														<label for="bairro" class="col-4 col-form-label">Bairro</label>
+														<input type="text" class="form-control"
+															placeholder="Digite seu bairro" aria-describedby="Bairro">
 													</div>
-													
+
 													<div class="col-sm-12">
 														<label for="rua" class="col-4 col-form-label">Rua</label>
-														<input type="text" class="form-control" placeholder="Digite sua rua" aria-describedby="Rua">
+														<input type="text" class="form-control"
+															placeholder="Digite sua rua" aria-describedby="Rua">
 													</div>
-													
+
 													<div class="col-sm-6">
-														<label for="numero da casa" class="col-4 col-form-label">Nº da Casa</label>
-														<input type="text" class="form-control" placeholder="Digite Numero da casa" aria-describedby="Numero da casa">
+														<label for="numero da casa" class="col-4 col-form-label">Nº
+															da Casa</label> <input type="text" class="form-control"
+															placeholder="Digite Numero da casa"
+															aria-describedby="Numero da casa">
 													</div>
-													
+
 													<div class="col-sm-6">
 														<label for="complemento" class="col-4 col-form-label">Complemento</label>
-														<input type="text" class="form-control" placeholder="Complemento" aria-describedby="Complemento">
+														<input type="text" class="form-control"
+															placeholder="Complemento" aria-describedby="Complemento">
 													</div>
-													
+
 													<div class="col-sm-12">
-														<button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+														<button class="btn btn-primary btn-lg">
+															<span class="glyphicon glyphicon-ok"></span> Salvar
+														</button>
 													</div>
 												</div>
-			                              	</div>
-			                            </form>
-	  				            	</div>
-	  				        	</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<br/><br/><br/><br/><br/>
+	</section>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 
-<div th:replace="conteudo-padrao/footer :: footer"></div>
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
 
-<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
 
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
-  
-  <script type="text/javascript">
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
+
+	<script type="text/javascript">
   
   	$("#celular").mask("(00)0.0000-0000");
   
@@ -262,7 +314,7 @@
 	}
   	
   </script>
-  <script type="text/javascript">
+	<script type="text/javascript">
   	const $ = document.querySelector.bind(document);
 	
 	const previewImg = $('#preview-img');
