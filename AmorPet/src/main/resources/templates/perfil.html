@@ -205,26 +205,26 @@
 
 													<div class="col-sm-12">
 														<label for="bairro" class="col-4 col-form-label">Bairro</label>
-														<input type="text" class="form-control"
+														<input type="text" th:field="*{endereco.bairro}" class="form-control"
 															placeholder="Digite seu bairro" aria-describedby="Bairro">
 													</div>
 
 													<div class="col-sm-12">
 														<label for="rua" class="col-4 col-form-label">Rua</label>
-														<input type="text" class="form-control"
+														<input type="text" th:field="*{endereco.logradouro}" class="form-control"
 															placeholder="Digite sua rua" aria-describedby="Rua">
 													</div>
 
 													<div class="col-sm-6">
 														<label for="numero da casa" class="col-4 col-form-label">Nº
-															da Casa</label> <input type="text" class="form-control"
+															da Casa</label> <input type="text" th:field="*{endereco.numero}" class="form-control"
 															placeholder="Digite Numero da casa"
 															aria-describedby="Numero da casa">
 													</div>
 
 													<div class="col-sm-6">
 														<label for="complemento" class="col-4 col-form-label">Complemento</label>
-														<input type="text" class="form-control"
+														<input type="text" th:fiel="*{endereco.complemento}" class="form-control"
 															placeholder="Complemento" aria-describedby="Complemento">
 													</div>
 
