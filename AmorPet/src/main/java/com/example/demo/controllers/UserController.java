@@ -2,15 +2,15 @@ package com.example.demo.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,9 +76,10 @@ public class UserController {
 	}
 
 	@PostMapping("/perfil/editar")
-	public String editarPerfil(@Valid Usuario usuario, BindingResult br, RedirectAttributes ra, HttpSession session) {
-		if (br.hasErrors()) {
-			ra.addFlashAttribute("listaErrors", br.getAllErrors());
+	public String editarPerfil(@ModelAttribute Usuario usuario, RedirectAttributes ra, HttpSession session) {
+		List<String> errors = Util.validaUsuario(usuario);
+		if(errors != null) {
+			ra.addFlashAttribute("listaErrors", errors);
 			return "redirect:/user/perfil/editar";
 		}
 		try {
@@ -89,7 +90,7 @@ public class UserController {
 			session.setAttribute("usuarioLogado", usuario);
 			ra.addFlashAttribute("sucesso", "Alteração realizada com sucesso");
 		} catch (Exception e) {
-			ra.addFlashAttribute("error", e.getMessage());
+			ra.addFlashAttribute("error", "Não foi possível alterar");
 		}
 		return "redirect:/user/perfil/editar";
 	}

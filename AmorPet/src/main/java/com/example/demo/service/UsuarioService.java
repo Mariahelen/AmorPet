@@ -19,11 +19,11 @@ public class UsuarioService {
 	public Usuario save(Usuario usuario) {
 		return this.usuarioDAO.save(usuario);
 	}
-	
+
 	public Usuario findById(Integer id) throws Exception {
 		return this.usuarioDAO.findById(id).orElseThrow(Exception::new);
 	}
-	
+
 	public Usuario findByEmail(String email) {
 		Usuario usuarioBanco = this.usuarioDAO.findByEmail(email);
 		if (usuarioBanco != null) {
@@ -61,15 +61,12 @@ public class UsuarioService {
 		Usuario usuarioParaSalvar = this.findById(usuarioForm.getId());
 		usuarioParaSalvar.setNome(usuarioForm.getNome());
 		usuarioParaSalvar.setDataNascimento(usuarioForm.getDataNascimento());
+		usuarioParaSalvar.setEmail(usuarioParaSalvar.getEmail());
 		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
 		usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
-		if(usuarioForm.getHashSenha().equals(usuarioForm.getConfirmaSenha())) {
-			usuarioParaSalvar.setHashSenha(usuarioForm.getHashSenha());
-			usuarioParaSalvar.setConfirmaSenha(usuarioForm.getConfirmaSenha());
-		}else {
-			throw new Exception("Não foi possivel alterar");
-		}
+		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());
+		usuarioParaSalvar.setConfirmaSenha(usuarioParaSalvar.getHashSenha());
 		return usuarioParaSalvar;
 	}
-	
+
 }
