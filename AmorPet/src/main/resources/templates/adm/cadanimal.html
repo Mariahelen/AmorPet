@@ -13,7 +13,7 @@
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
     
      <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
-    <title>Novo Animal</title>
+    <title>Cadastro Animal</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 <!--Página de Cadastro CSS-->
@@ -25,9 +25,9 @@
 
 
 
-<div class="container">
+<div class="container bg-cat">
 
-<div class="row">
+<div class="row" >
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         <br/><br/>
         
@@ -48,7 +48,7 @@
                     <div class="form-group">
                     <label>Qual tipo do Animal?</label>
                       <select class="form-control" th:field="*{tipoAnimal}" id="exampleFormControlSelect1"> 
-                            <option th:value="C">Cão</option>
+                            <option th:value="C">Cachorro</option>
                             <option th:value="G">Gato</option>
                       </select>
                     </div>
@@ -60,14 +60,14 @@
             </div>
             <div class="form-group">
             <label>Sexo</label><br>
-                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" th:value="M">&nbsp;<label class="sexoanimal">Macho</label>
-                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" th:value="M">&nbsp;<label class="sexoanimal">Fêmea</label><br/>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="macho" th:value="M">&nbsp;<label for="macho" class="sexoanimal">Macho</label><br>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="femea" th:value="M">&nbsp;<label for="femea" class="sexoanimal">Fêmea</label><br/>
             </div>
             <div class="form-group">
             <label>Porte do Animal</label><br>
-                <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" th:value="P">&nbsp;<label class="porteanimal">Pequeno</label>
-                <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" th:value="M">&nbsp;<label class="porteanimal">Médio</label>
-                 <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" th:value="G">&nbsp;<label class="porteanimal">Grande</label>
+              <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="pequeno" th:value="P">&nbsp;<label for="pequeno" class="porteanimal">Pequeno</label><br>
+                <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="medio" th:value="M">&nbsp;<label for="medio" class="porteanimal">Médio</label><br>
+                 <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="grande" th:value="G">&nbsp;<label for="grande" class="porteanimal">Grande</label>
             </div>
                     <div class="form-group">
                     <label>História do Animal</label>
@@ -84,7 +84,7 @@
                         </div>
             
             <hr class="colorgraph">
-            <div class="row">
+            <div class="row" style="margin-bottom: 13px; ">
                 <div class="col-xs-12 col-md-6"><input type="reset" value="Limpar" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
                 <div class="col-xs-12 col-md-6"><input type="submit" value="Cadastrar" class="btn btn-success btn-block btn-lg"></div>
             </div>

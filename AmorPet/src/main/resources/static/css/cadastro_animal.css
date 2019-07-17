@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
 form label {
-	color: #4682B4;
+	color: #fff;
 	font-size: 20px;
 }
 
 h3 {
-	color: #4682B4;
+	color: #fff;
 	font-size: 30px;
+	text-align: center;
 }
 
 form input, form select{
@@ -15,11 +16,26 @@ form input, form select{
 }
 
 .sexoanimal{
-	color: #4682B4;
+	color: #FFD700;
 	font-size: 15px;
 }
 .porteanimal{
 	font-size: 15px;
+	color: #FFD700;
 }
+.bg-cat{
+	background-image: url(/img/gatoo.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:100%;
+	margin-bottom: -40px;
+}
+
+input[type="file"]{
+	color: #fff;
+}
+
+
+
 
 
