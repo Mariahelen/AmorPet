@@ -23,7 +23,8 @@ form input, form select{
 	font-size: 15px;
 	color: #FFD700;
 }
-.bg-cat{
+.bg-cat
+{
 	background-image: url(/img/gatoo.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
