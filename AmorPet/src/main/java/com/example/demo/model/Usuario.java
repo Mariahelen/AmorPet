@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -45,6 +46,7 @@ public class Usuario {
 	@Transient
 	private String confirmaSenha;
 
+	@Pattern(regexp = "[0-9] {11}", message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
 	@Size(max = 11, min = 11, message = "Telefone inválido, o padrão é (xx)x.xxxx-xxxx")
 	@Column(length = 11, nullable = false, columnDefinition = "char(11)")
 	private String telefone;

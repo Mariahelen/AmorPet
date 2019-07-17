@@ -57,12 +57,13 @@ public class AdmController {
 			String path = Util.caminhoParaImagemAnimal(animal.getFile().getOriginalFilename());
 			File destino = new File(path);
 			animal.getFile().transferTo(destino);
+			// pra da o tempo de criar as pastas e mover os arquivos
+			Thread.sleep(5000);
 			animal.setCaminhoFoto("/img/animais/" + animal.getFile().getOriginalFilename());
 			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
-
 			ra.addFlashAttribute("sucesso", "Animal cadastrado com sucesso!");
-
+			
 		} catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			System.out.println(e.getMessage());

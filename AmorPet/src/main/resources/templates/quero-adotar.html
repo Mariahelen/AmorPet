@@ -56,7 +56,7 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="css-quero-adotar/quero-adotar.css">
+	th:href="@{/css-quero-adotar/quero-adotar.css}">
 </head>
 <body>
 	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
@@ -108,8 +108,7 @@
 
 					<div class="btn-group flex-wrap demoPadder" role="group"
 						aria-label="Basic example">
-						<a th:href="@{/adm/cadastro/animal}"><button type="button"
-								class="btn btn-light">+</button></a>
+						<a th:href="@{#}" class="btn btn-light" id="btn-add-animal" title="Adicionar novo animal"><span class="glyphicon glyphicon-plus"></span></a>
 					</div>
 
 
