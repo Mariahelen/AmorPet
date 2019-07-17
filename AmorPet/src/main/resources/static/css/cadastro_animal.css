@@ -25,6 +25,7 @@ form input, form select{
 }
 .bg-cat
 {
+	
 	background-image: url(/img/gatoo.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
