@@ -78,7 +78,7 @@ public class UserController {
 	@PostMapping("/perfil/editar")
 	public String editarPerfil(@ModelAttribute Usuario usuario, RedirectAttributes ra, HttpSession session) {
 		List<String> errors = Util.validaUsuario(usuario);
-		if(errors != null) {
+		if (errors != null) {
 			ra.addFlashAttribute("listaErrors", errors);
 			return "redirect:/user/perfil/editar";
 		}
@@ -114,17 +114,19 @@ public class UserController {
 	@PostMapping("/desativarConta")
 	public String desativar(@RequestParam String hashSenha, @RequestParam String confirmaSenha, RedirectAttributes ra,
 			HttpSession session) {
-		if (!hashSenha.equals(confirmaSenha)) {
-			ra.addFlashAttribute("As senhas não coincidem");
+		if (!hashSenha.equals(confirmaSenha) || hashSenha.isEmpty() || confirmaSenha.isEmpty()) {
+			ra.addFlashAttribute("messagemError", "As senhas não coincidem");
 			return "redirect:/user/perfil/editar";
 		} else {
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 			usuario.setAtivo(false);
 			this.usuarioService.save(usuario);
 			session.setAttribute("usuarioLogado", usuario);
+			ra.addFlashAttribute("messagemSucesso", "Conta desativada com sucesso");
 		}
-		
+
 		return "redirect:/user/logout";
 	}
+	
 
 }

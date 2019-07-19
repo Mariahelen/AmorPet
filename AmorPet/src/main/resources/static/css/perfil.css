@@ -1,136 +1,155 @@
 @charset "UTF-8";
 
-	/* CONTAINER ===========================*/
-  	#container {
-  		padding-bottom: 20px;
-  		padding-top: 20px;
-  		margin-bottom: -40px;
-  	}
-  	#container button {
-  		border-radius: 10px 10px 10px 10px;
-  	}
-  	#container button:hover {
-  		
-  	}
-  	#container .list-group-item:hover {
-  		background-color: lightblue;
-  	}
-  	#container .list-group button {
-  		width: 100%;
-  		border-radius: 2px;
-  	}
-  	#container label {
-  		font-size: 17px;
-  		font-family: sans-serif;
-  	}
+/* CONTAINER ===========================*/
+#container {
+	padding-bottom: 20px;
+	padding-top: 20px;
+	margin-bottom: -40px;
+}
 
-	/* DADOS-PERFIL ========================*/  	
-  	#dados-perfil img {
-  		height: 200px;
-  		width: 200px;
-  		border-radius: 50%;
-  	}
-  	#dados-perfil label, #dados-perfil p {
-  		margin-left: 2px;
-  	}
-  	
-  	/* LATERAL DO PERFIL ==================*/
-  	#btn-desativar-conta {
-  		margin-top: 200px;
-  		margin-left: 5px;
-  	}
-  	.list-group a, .list-group-item span {
-  		color: #555555;
-  		margin-left: 20px;
-  		font-size: 17px;
-  		text-decoration: none;
-  	}
-  	.linha-marca {
-  		border-bottom:2px solid #7ac673;
-  	}
-  	
-  	/* FORM-PERFIL =====================*/
-  	#form-perfil form {
-  		width: 100%;
-  	}
-  	#form-perfil form input {
-  		border-color: #c0c0c0;
-  		border-radius: 50px;
-  		margin-bottom: 20px;
-  		margin-left: -15px;
-  	}
-  	#form-perfil form input[type='date'] {
-  		padding: 5px !important;
-  		padding-left: 15px !important;
-  	}
-  	#form-perfil form input:hover {
-  		background-color: #f2f4f3;
-  		transition: 1s;
-  		box-shadow: 0px 0px 6px;
-  	}
-  	#form-perfil form input:focus {
-  		border-color: #158112;
-  		background-color: #ffffff;
-  		transition: 0.5s;
-  		box-shadow: 0px 0px 3px;
-  	}
-  	#form-perfil form .row:not(:last-child) {
-  		margin-bottom: 5px;
-  	}
-  	#form-perfil form .row:last-child .form-group {
-  		padding-top: 10px;
-  	}
-  	#form-perfil form .row:last-child .form-group label {
-  		font-style: italic;
-  		font-size: 14px;
-  		color: #48554f;
-  	}
-  	#form-perfil form .form-group button {
-  		border-radius: 45px;
-  		border: none;
-  		float: right;
-  		margin-right: 10px;
-  		margin-bottom: 20px;
-  	}
-  	#form-perfil form label {
-  		font-size: 15px;
-  	}
-  	
-  	/* deixar botões no padrão */
-  	.btn-success {
-  		background-color: #7ac673;
-  	}
-  	.page-header {
-  		margin-top: 15px;
-		border-bottom: 1px solid;
-		color: #7ac673;
-		font-size: 20px;
-  	}
-  	
-  	/* botão de add foto */
-  	input[type=file] {
-  		display: none;
-  	}
-  	
-	.input-wrapper label {
-	  background-color: #3498db;
-	  border-radius: 5px;
-	  color: #fff;
-	  padding: 5px 20px;
-	  margin-top: 5px;
-	  margin-left: 5px;
-	}
+#container button {
+	border-radius: 10px 10px 10px 10px;
+}
+
+#container button:hover {
 	
-	.input-wrapper label:hover {
-	  background-color: #2980b9;
-	}
-  	
-  	/* RESPONSIVIDADE PARA TELAS ATE 990px ======================*/
-  	@media screen and (max-width: 990px) {
-  		
-  	}
-  	/* RESPONSIVIDADE PARA TELAS ATE 770px */
-  	@media screen and (max-width: 770px) {
-  		
-  	}
-  	
+}
+
+#container .list-group-item:hover {
+	background-color: lightblue;
+}
+
+#container .list-group button {
+	width: 100%;
+	border-radius: 2px;
+}
+
+#container label {
+	font-size: 17px;
+	font-family: sans-serif;
+}
+
+/* DADOS-PERFIL ========================*/
+#dados-perfil img {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+}
+
+#dados-perfil label, #dados-perfil p {
+	margin-left: 2px;
+}
+
+/* LATERAL DO PERFIL ==================*/
+#btn-desativar-conta {
+	margin-top: 200px;
+	margin-left: 5px;
+}
+
+.list-group a, .list-group-item span {
+	color: #555555;
+	margin-left: 20px;
+	font-size: 17px;
+	text-decoration: none;
+}
+
+.linha-marca {
+	border-bottom: 2px solid #7ac673;
+}
+
+/* FORM-PERFIL =====================*/
+#form-perfil form {
+	width: 100%;
+}
+
+#form-perfil form input {
+	border-color: #c0c0c0;
+	border-radius: 50px;
+	margin-bottom: 20px;
+	margin-left: -15px;
+}
+
+#form-perfil form input[type='date'] {
+	padding: 5px !important;
+	padding-left: 15px !important;
+}
+
+#form-perfil form input:hover {
+	background-color: #f2f4f3;
+	transition: 1s;
+	box-shadow: 0px 0px 6px;
+}
+
+#form-perfil form input:focus {
+	border-color: #158112;
+	background-color: #ffffff;
+	transition: 0.5s;
+	box-shadow: 0px 0px 3px;
+}
+
+#form-perfil form .row:not (:last-child ) {
+	margin-bottom: 5px;
+}
+
+#form-perfil form .row:last-child .form-group {
+	padding-top: 10px;
+}
+
+#form-perfil form .row:last-child .form-group label {
+	font-style: italic;
+	font-size: 14px;
+	color: #48554f;
+}
+
+#form-perfil form .form-group button {
+	border-radius: 45px;
+	border: none;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+#form-perfil form label {
+	font-size: 15px;
+}
+
+/* deixar botões no padrão */
+.btn-success {
+	background-color: #7ac673;
+}
+
+.page-header {
+	margin-top: 15px;
+	border-bottom: 1px solid;
+	color: #7ac673;
+	font-size: 20px;
+}
+
+/* botão de add foto */
+input[type=file] {
+	display: none;
+}
+
+.input-wrapper label {
+	background-color: #3498db;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px 20px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.input-wrapper label:hover {
+	background-color: #2980b9;
+}
+
+/* RESPONSIVIDADE PARA TELAS ATE 990px ======================*/
+@media screen and (max-width: 990px) {
+}
+/* RESPONSIVIDADE PARA TELAS ATE 770px */
+@media screen and (max-width: 770px) {
+}
+
+.desativar {
+	font-size: 20px;
+}

@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -77,5 +78,28 @@ public class AdmController {
 	@GetMapping("/logout")
 	public String logout() {
 		return "redirect:/user/logout";
+	}
+	
+	@PostMapping("/remover/animal")
+	public String removerAnimal(@RequestParam String senhaAdm, @RequestParam Integer idAnimal,
+			RedirectAttributes ra, HttpSession session) {
+		
+		System.out.println(senhaAdm);
+		System.out.println(idAnimal);
+		if(senhaAdm.trim().isEmpty() || idAnimal == null) {
+			ra.addFlashAttribute("error", "Não foi possível remover");
+			System.out.println("Entrou no if");
+			return "redirect:/adotar";
+		}
+//		
+//		try {
+//			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+//			this.animalService.removerAnimal(usuario.getId(), senhaAdm, idAnimal);
+//			ra.addFlashAttribute("sucesso", "Sucesso ao remover");
+//		} catch (Exception e) {
+//			ra.addFlashAttribute("error", e.getMessage());
+//		}
+		return "redirect:/adotar";
+		
 	}
 }
