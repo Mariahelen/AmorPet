@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,6 +18,14 @@ public class AnimalService {
 	
 	@Autowired
 	private UsuarioDAO usuarioRep;
+	
+	public Animal findById(Integer id) throws Exception {
+		Optional<Animal> animal = this.animalRep.findById(id);
+		if(animal.isPresent()) {
+			return animal.get();
+		}
+		throw new Exception("Animal não encontrado");
+	}
 
 	public List<Animal> listarAnimais() throws Exception {
 		List<Animal> animais = this.animalRep.findAll(Sort.by("nome"));

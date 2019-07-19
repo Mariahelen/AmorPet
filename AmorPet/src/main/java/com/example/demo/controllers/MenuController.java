@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -98,9 +99,16 @@ public class MenuController {
 		}
 		return mv;
 	}
-	@GetMapping("/descricao-animal")
-	public String descricaoAnimal() {
-		return "/descricao-animal";
+	@GetMapping("/descricao-animal/{id}")
+	public ModelAndView descricaoAnimal(@PathVariable Integer id) {
+		
+		ModelAndView mv = new ModelAndView("/descricao-animal");
+		try {
+			mv.addObject("animal", this.animalService.findById(id));
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
+		return mv;
 	}
 	@GetMapping("/mapa")
 	public String mapa() {

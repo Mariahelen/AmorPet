@@ -75,9 +75,19 @@ public class AdmController {
 		return "redirect:/adm/cadastro/animal";
 	}
 
-	@GetMapping("/logout")
-	public String logout() {
-		return "redirect:/user/logout";
+	@PostMapping("/editar/animal")
+	public String editarAnimal(@Valid Animal animal, BindingResult br, RedirectAttributes ra) {
+		if(br.hasErrors()) {
+			ra.addFlashAttribute("errorEditar", br.getAllErrors());
+			return "redirect:/descricao-animal/"+animal.getId_animal();
+		}
+		try {
+			this.animalService.criarAnimal(animal);
+			ra.addFlashAttribute("sucessoEditar", "Editar feito com sucesso");
+		}catch(Exception e) {
+			ra.addFlashAttribute("errorEditar", e.getMessage());
+		}
+		return "redirect:/descricao-animal/"+animal.getId_animal();
 	}
 	
 	@PostMapping("/remover/animal")
@@ -101,5 +111,10 @@ public class AdmController {
 //		}
 		return "redirect:/adotar";
 		
+	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		return "redirect:/user/logout";
 	}
 }

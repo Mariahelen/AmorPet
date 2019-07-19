@@ -32,7 +32,7 @@ public class Autorizacao implements HandlerInterceptor {
 		// Para acessar qualquer pagina dessa aplicação, o usuário precisa estar
 		// autenticado
 		for (String recurso : RECURSOS_LIVRES) {
-			if (request.getRequestURL().toString().endsWith(recurso)) {
+			if (request.getRequestURL().toString().contains(recurso)) {
 				return true;
 			}
 		}
