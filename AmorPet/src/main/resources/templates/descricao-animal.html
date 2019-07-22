@@ -34,7 +34,7 @@ form a, input[type=submit] {
 				style="padding-top: 30px; padding-bottom: 45px;">
 				<div class="" th:if="${error}" th:text="${error}"></div>
 				<div class="alert alert-danger" th:if="${errorEditar}" th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
-				<div class="alert alert-success" th:if="${sucessoEditar}"></div>
+				<div class="alert alert-success" th:if="${sucessoEditar}" th:text="${sucessoEditar}"></div>
 				<div th:if="${animal}">
 					<div class="col-sm-6">
 						<div>
@@ -78,7 +78,12 @@ form a, input[type=submit] {
 										<label><h3>Sexo:</h3></label> M <input type="radio"
 											th:field="*{sexoAnimal}" name="sexo" value="M"> F <input
 											type="radio" th:field="*{sexoAnimal}" name="sexo" value="F"><br>
+											<label>Porte do Animal: </label>
+											<input type="text" th:field="*{porteAnimal}">
+											<label>Tipo do Animal: </label>
+											<input type="text" th:field="*{tipoAnimal}">
 										<label>Descrição: </label><br>
+										<input type="hidden" th:field="*{caminhoFoto}" >
 										<textarea th:field="*{historiaAnimal}" rows="5" cols="70"></textarea>
 										<input class="btn btn-success" type="submit" name="Alterar"
 											value="Salvar"> <a class="btn btn-danger">Cancelar</a>

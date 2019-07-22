@@ -47,4 +47,13 @@ public class AnimalService {
 		}
 		
 	}
+	
+	public void editarAnimal(Animal animal) {
+		Animal animalBanco = animalRep.getOne(animal.getId_animal());
+		animalBanco.setDataNascimento(animal.getDataNascimento());
+		animalBanco.setHistoriaAnimal(animal.getHistoriaAnimal());
+		animalBanco.setNome(animal.getNome());
+		animalBanco.setSexoAnimal(animal.getSexoAnimal());
+		this.animalRep.save(animalBanco);
+	}
 }
