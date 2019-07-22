@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,25 +91,21 @@ public class AdmController {
 		return "redirect:/descricao-animal/"+animal.getId_animal();
 	}
 	
-	@PostMapping("/remover/animal")
-	public String removerAnimal(@RequestParam String senhaAdm, @RequestParam Integer idAnimal,
+	@PostMapping("/remover/animal/{idAnimal}")
+	public String removerAnimal(@RequestParam String senhaAdm, @PathVariable Integer idAnimal,
 			RedirectAttributes ra, HttpSession session) {
 		
-		System.out.println(senhaAdm);
-		System.out.println(idAnimal);
 		if(senhaAdm.trim().isEmpty() || idAnimal == null) {
 			ra.addFlashAttribute("error", "Não foi possível remover");
-			System.out.println("Entrou no if");
 			return "redirect:/adotar";
 		}
-//		
-//		try {
-//			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-//			this.animalService.removerAnimal(usuario.getId(), senhaAdm, idAnimal);
-//			ra.addFlashAttribute("sucesso", "Sucesso ao remover");
-//		} catch (Exception e) {
-//			ra.addFlashAttribute("error", e.getMessage());
-//		}
+		try {
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			this.animalService.removerAnimal(usuario.getId(), senhaAdm, idAnimal);
+			ra.addFlashAttribute("sucesso", "Sucesso ao remover");
+		} catch (Exception e) {
+			ra.addFlashAttribute("error", e.getMessage());
+		}
 		return "redirect:/adotar";
 		
 	}

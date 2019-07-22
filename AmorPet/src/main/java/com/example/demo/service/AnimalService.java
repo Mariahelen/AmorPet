@@ -39,8 +39,10 @@ public class AnimalService {
 		this.animalRep.save(animal);
 	}
 	
-	public void removerAnimal(Integer id, String senhaAdm, Integer idAnimal) throws Exception {
-		if(this.usuarioRep.existsByIdAndByHashSenha(id, senhaAdm)) {
+	public void removerAnimal(Integer idAdm, String senhaAdm, Integer idAnimal) throws Exception {
+		
+		if(this.usuarioRep.existsByIdAndByHashSenha(idAdm, senhaAdm)) {
+			
 			this.animalRep.deleteById(idAnimal);
 		}else {
 			throw new Exception("Não foi possivel remover");
