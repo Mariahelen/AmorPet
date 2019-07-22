@@ -18,7 +18,7 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	@Query("select u from Usuario u where u.id = :id and u.telefone = :telefone")
 	Usuario findByIdAndTelefone(Integer id, String telefone);
 	
-	@Query("select count(u) from Usuario u where u.id = :id and u.hashSenha = :hashSenha")
-	boolean existsByIdAndByHashSenha(Integer id, String hashSenha);
+	@Query("select count(u)>0 from Usuario u where u.id = :idAdm and u.hashSenha = :hashSenha")
+	boolean existsByIdAndByHashSenha(Integer idAdm, String hashSenha);
 	
 }
