@@ -41,8 +41,8 @@ public class Animal {
 	private LocalDate dataNascimento;
 	
 	@NotNull(message = "O sexo do animal é necessário")
-	@Column(length=1, nullable=false)
-	@Size(max=1)
+	@Column(length=5, nullable=false)
+	@Size(max=5)
 	private String sexoAnimal;
 	
 	@NotNull(message = "A história do animal é necessário")
@@ -58,13 +58,13 @@ public class Animal {
 	private LocalDate dataRegistro;
 	
 	@NotNull(message = "O porte do animal é necessário")
-	@Column(length=1, nullable=false)
-	@Size(max=1)
+	@Column(length=10, nullable=false)
+	@Size(max=10)
 	private String porteAnimal;
 	
 	@NotNull(message = "O tipo do animal é necessário")
-	@Column(length=1, nullable=false)
-	@Size(max=1)
+	@Column(length=10, nullable=false)
+	@Size(max=10)
 	private String tipoAnimal;
 	
 	@Transient

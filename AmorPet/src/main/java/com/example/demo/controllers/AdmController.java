@@ -84,7 +84,7 @@ public class AdmController {
 		}
 		try {
 			this.animalService.criarAnimal(animal);
-			ra.addFlashAttribute("sucessoEditar", "Editar feito com sucesso");
+			ra.addFlashAttribute("sucessoEditar", "Editado com sucesso");
 		}catch(Exception e) {
 			ra.addFlashAttribute("errorEditar", e.getMessage());
 		}

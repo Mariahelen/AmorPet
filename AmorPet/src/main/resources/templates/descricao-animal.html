@@ -2,25 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css-quero-adotar/descricaoAnimal.css}">
 <link th:replace="conteudo-padrao/estilos :: estilos-padrao">
 
 <title>Home</title>
-
-<style>
-button, a {
-	float: right;
-	border-radius: 10% !important;
-}
-
-form a, input[type=submit] {
-	border-radius: 10% !important;
-}
-</style>
-
 </head>
 <body>
 	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
-
 	<br>
 	<br>
 	<br>
@@ -29,16 +18,56 @@ form a, input[type=submit] {
 	<br>
 	<br>
 	<section>
+		<!-- MODAL DE REMOVER ANIMAL -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="remocao">Remoção do Animal</h4>
+					</div>
+					<div class="modal-body">
+						<form id="form-remove-animal" action="|/adm/remover/animal/|"
+							method="post" role="form">
+							<div class="form-group">
+								<label for="recipient-name" class="control-label">Senha:</label>
+								<input type="password" name="senhaAdm" class="form-control"
+									id="senha">
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="control-label">Motivo
+									da remoção</label>
+								<textarea name="motivo" class="form-control" id="message-text"></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-danger">Remover</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- FIM MODAL DE REMOVER ANIMAL -->
 		<div class="mbr-section__container container">
 			<div class="mbr-contacts mbr-contacts--wysiwyg row"
 				style="padding-top: 30px; padding-bottom: 45px;">
 				<div class="" th:if="${error}" th:text="${error}"></div>
-				<div class="alert alert-danger" th:if="${errorEditar}" th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
-				<div class="alert alert-success" th:if="${sucessoEditar}" th:text="${sucessoEditar}"></div>
+				<div class="alert alert-danger" th:if="${errorEditar}"
+					th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
+				<div class="alert alert-success" th:if="${sucessoEditar}"
+					th:text="${sucessoEditar}"></div>
+
 				<div th:if="${animal}">
+
+
 					<div class="col-sm-6">
 						<div>
-							<img th:src="${animal.caminhoFoto}"
+							<img th:src="${animal.caminhoFoto}" id="imgAnimal"
 								class="mbr-contacts__img mbr-contacts__img--left">
 						</div>
 					</div>
@@ -46,61 +75,109 @@ form a, input[type=submit] {
 						<div class="row">
 							<div id="detalhes-animal">
 								<div class="row">
-									<div class="col-sm-12">
-										<button id="editar-animal" class="btn btn-success">Editar</button>
-										<h2>Nome: <span th:text="${animal.nome}"></span></h2>
+									<div class="col-sm-6">
+										<h2>
+											Nome: 
+										</h2>
+										<p th:text="${animal.nome}"></p>
+									</div>
+										<div class="col-sm-6">
+										<h3>
+											Tipo: 
+										</h3>
+										<p th:text="${animal.tipoAnimal}"></p>
 									</div>
 								</div>
 								<div class="row">
+								
 									<div class="col-sm-6">
-										<h3>Idade: <span th:text="${idadeAnimal}"></span></h3>
+										<h3>
+										Sexo: 
+										</h3>
+										<p th:text="${animal.sexoAnimal}"></p>
 									</div>
-									<div class="col-sm-3">
-										<h3>Sexo: <span th:text="${animal.sexoAnimal}=='M' ? 'Macho' : 'Fêmea' "></span></h3>
-									</div>
+									<div class="col-sm-6">
+									<h3>
+										Porte: 
+									</h3>
+									<p th:text="${animal.porteAnimal}"></p>
 								</div>
+								<div class="col-sm-6">
+									<h3>
+									Idade: 
+									</h3>
+									<p th:text="${idadeAnimal}"></p>
+								</div>
+								</div>
+								
 								<div class="row">
 									<div class="col-sm-12">
 										<h3>Descrição</h3>
 										<p th:text="${animal.historiaAnimal}"></p>
 									</div>
-									<a class="btn btn-info" th:href="@{/quero-adotar/parte-1}">ADOTAR</a>
+									<div>
+									<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+											 id="btn-remove-animal" type="button"
+											th:value="${animal.id_animal}" class="btn btn-primary"
+											data-toggle="modal" data-target="#exampleModal">Remover</button>
+									
+									<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+									 id="editar-animal" class="btn btn-success">Editar</button>
+										
+											
+										<a th:unless="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+											class="btn btn-info" th:href="@{/quero-adotar/parte-1}">ADOTAR</a>
+									</div>
 								</div>
-							</div>
-							<div class="row" id="form-editar">
+						</div>
+						<div class="row" id="form-editar">
 								<div class="col-sm-12">
 									<form th:object="${animal}" th:action="@{/adm/editar/animal}"
 										method="post">
-										<input type="hidden" th:field="*{id_animal}">
-										<label><h1>Nome:</h1></label> <input type="text"
-											th:field="*{nome}" name="nome"><br> <label><h3>Idade:
-											</h3></label> <input type="date" th:field="*{dataNascimento}" name="dataNascimento">
-										<label><h3>Sexo:</h3></label> M <input type="radio"
-											th:field="*{sexoAnimal}" name="sexo" value="M"> F <input
-											type="radio" th:field="*{sexoAnimal}" name="sexo" value="F"><br>
-											<label>Porte do Animal: </label>
-											<input type="text" th:field="*{porteAnimal}">
-											<label>Tipo do Animal: </label>
-											<input type="text" th:field="*{tipoAnimal}">
-										<label>Descrição: </label><br>
-										<input type="hidden" th:field="*{caminhoFoto}" >
+										<input type="hidden" th:field="*{id_animal}"> 
+										<label><h3>Nome:</h3></label>
+										<input type="text" th:field="*{nome}" name="nome"><br>
+
+										<label><h3>Idade:</h3></label> <input type="date"
+											th:field="*{dataNascimento}" name="dataNascimento"><br> 
+											
+										<label><h3>Sexo:</h3></label>
+										<input type="radio" th:field="*{sexoAnimal}" name="sexo"
+											value="Macho" id="macho"> <label for="macho">Macho</label>
+										<input type="radio" th:field="*{sexoAnimal}" name="sexo"
+											value="Femea" id="femea"> <label for="femea">Fêmea</label><br>
+
+										<label><h3>Porte do Animal:</h3></label> <input type="radio"
+											th:field="*{porteAnimal}" value="Medio" id="medio"> <label
+											for="medio">Médio</label> <input type="radio"
+											th:field="*{porteAnimal}" value="Grande" id="grande">
+										<label for="grande">Grande</label> <input type="radio"
+											th:field="*{porteAnimal}" value="Pequeno" id="pequeno">
+										<label for="pequeno">Pequeno</label> <label><h3>Tipo
+												do Animal:</h3></label> <input type="radio" th:field="*{tipoAnimal}"
+											value="Cachorro" id="cachorro"> <label for="cachorro">Cachorro</label>
+										<input type="radio" th:field="*{tipoAnimal}" value="Gato"
+											id="gato"> <label for="gato">Gato</label><br> 
+											<label><h3>Descrição:</h3>
+										</label><br> <input type="hidden" th:field="*{caminhoFoto}">
 										<textarea th:field="*{historiaAnimal}" rows="5" cols="70"></textarea>
+
 										<input class="btn btn-success" type="submit" name="Alterar"
 											value="Salvar"> <a class="btn btn-danger">Cancelar</a>
 									</form>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 
 	<div th:replace="conteudo-padrao/footer :: footer"></div>
 
 	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
-
+	<script th:src="@{/js-quero-adotar/quero-adotar.js}"></script>
 	<script type="text/javascript">
 		$("#form-editar").hide();
 		$("#editar-animal").click(function() {
@@ -110,6 +187,24 @@ form a, input[type=submit] {
 		$("#form-editar").find('a').click(function() {
 			$("#form-editar").hide();
 			$("#detalhes-animal").fadeIn('slow');
+		});
+	</script>
+	<script th:inline="javascript">
+		$("#btn-remove-animal").click(
+				function() {
+					let valorBtn = $(this).val();
+					$("#form-remove-animal").attr("action",
+							"/adm/remover/animal/" + valorBtn);
+				});
+		$('#exampleModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var recipient = button.data('whatever') // Extract info from data-* attributes
+			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+			var modal = $(this)
+			modal.find('.modal-title').text('New message to ' + recipient)
+			modal.find('.modal-body input').val(recipient);
+
 		});
 	</script>
 

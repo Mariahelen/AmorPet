@@ -93,9 +93,9 @@
 							aria-label="Basic example">
 
 							<button type="button" class="btn btn-info">Porte:</button>
-							<button type="button" class="btn btn-success">P</button>
-							<button type="button" class="btn btn-success">M</button>
-							<button type="button" class="btn btn-success">G</button>
+							<button type="button" class="btn btn-success">Pequeno</button>
+							<button type="button" class="btn btn-success">Médio</button>
+							<button type="button" class="btn btn-success">Grande</button>
 						</div>
 
 						<div class="btn-group flex-wrap demoPadder" role="group"
@@ -108,7 +108,7 @@
 
 					<div class="btn-group flex-wrap demoPadder" role="group"
 						aria-label="Basic example">
-						<a th:href="@{#}" class="btn btn-light" id="btn-add-animal"
+						<a th:href="@{/adm/cadastro/animal}" class="btn btn-light" id="btn-add-animal"
 							title="Adicionar novo animal"><span
 							class="glyphicon glyphicon-plus"></span></a>
 					</div>
@@ -157,7 +157,7 @@
 					<div class="row" th:if="${listaAnimais}">
 						<div class="col-md-4" th:each="animal : ${listaAnimais}">
 							<div class="card mb-4 shadow-sm">
-								<img th:src="${animal.caminhoFoto}" width="350px" role="img"
+								<img th:src="${animal.caminhoFoto}" width="300px" height="200px" role="img"
 									aria-label="Placeholder: miniatura">
 								<div class="card-body">
 									<p>
@@ -180,6 +180,7 @@
 						<div th:if="${error}" th:text="${error}"></div>
 					</div>
 				</div>
+			</div>
 			</div>
 	</section>
 

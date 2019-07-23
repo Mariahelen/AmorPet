@@ -46,8 +46,8 @@
                     <div class="form-group">
                     <label>Qual tipo do Animal?</label>
                       <select class="form-control" th:field="*{tipoAnimal}" id="exampleFormControlSelect1"> 
-                            <option th:value="C">Cachorro</option>
-                            <option th:value="G">Gato</option>
+                            <option th:value="Cachorro">Cachorro</option>
+                            <option th:value="Gato">Gato</option>
                       </select>
                     </div>
                 </div>
@@ -58,14 +58,14 @@
             </div>
             <div class="form-group">
             <label>Sexo</label><br>
-                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="macho" th:value="M">&nbsp;<label for="macho" class="sexoanimal">Macho</label><br>
-                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="femea" th:value="M">&nbsp;<label for="femea" class="sexoanimal">Fêmea</label><br/>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="macho" th:value="Macho">&nbsp;<label for="macho" class="sexoanimal">Macho</label><br>
+                <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="femea" th:value="Femea">&nbsp;<label for="femea" class="sexoanimal">Fêmea</label><br/>
             </div>
             <div class="form-group">
             <label>Porte do Animal</label><br>
-              <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="pequeno" th:value="P">&nbsp;<label for="pequeno" class="porteanimal">Pequeno</label><br>
-                <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="medio" th:value="M">&nbsp;<label for="medio" class="porteanimal">Médio</label><br>
-                 <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="grande" th:value="G">&nbsp;<label for="grande" class="porteanimal">Grande</label>
+              <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="pequeno" th:value="Pequeno">&nbsp;<label for="pequeno" class="porteanimal">Pequeno</label><br>
+                <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="medio" th:value="Medio">&nbsp;<label for="medio" class="porteanimal">Médio</label><br>
+                 <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="grande" th:value="Grande">&nbsp;<label for="grande" class="porteanimal">Grande</label>
             </div>
                     <div class="form-group">
                     <label>História do Animal</label>
