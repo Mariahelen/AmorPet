@@ -1,6 +1,8 @@
 package com.example.demo.util;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +49,9 @@ public class Util {
 			return null;
 		}
 		return errors;
+	}
+	
+	public static int calcularIdade(final LocalDate aniversario) {
+	    return Period.between(aniversario, LocalDate.now()).getYears();
 	}
 }

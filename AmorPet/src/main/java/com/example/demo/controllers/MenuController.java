@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.model.Animal;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.service.UsuarioService;
+import com.example.demo.util.Util;
 
 @Controller
 public class MenuController {
@@ -104,7 +106,9 @@ public class MenuController {
 		
 		ModelAndView mv = new ModelAndView("/descricao-animal");
 		try {
-			mv.addObject("animal", this.animalService.findById(id));
+			Animal animal = this.animalService.findById(id);
+			mv.addObject("animal", animal);
+			mv.addObject("idadeAnimal", Util.calcularIdade(animal.getDataNascimento()));
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}
@@ -114,4 +118,6 @@ public class MenuController {
 	public String mapa() {
 		return "/mapa";
 	}
+	
+	
 }

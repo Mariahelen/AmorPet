@@ -48,15 +48,15 @@ form a, input[type=submit] {
 								<div class="row">
 									<div class="col-sm-12">
 										<button id="editar-animal" class="btn btn-success">Editar</button>
-										<h2 th:text="${animal.nome}"></h2>
+										<h2>Nome: <span th:text="${animal.nome}"></span></h2>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-3">
-										<h3 th:text="${animal.dataNascimento}"></h3>
+									<div class="col-sm-6">
+										<h3>Idade: <span th:text="${idadeAnimal}"></span></h3>
 									</div>
 									<div class="col-sm-3">
-										<h3 th:text="${animal.sexoAnimal}"></h3>
+										<h3>Sexo: <span th:text="${animal.sexoAnimal}=='M' ? 'Macho' : 'Fêmea' "></span></h3>
 									</div>
 								</div>
 								<div class="row">
