@@ -39,12 +39,23 @@ public class AnimalService {
 		this.animalRep.save(animal);
 	}
 	
-	public void removerAnimal(Integer id, String senhaAdm, Integer idAnimal) throws Exception {
-		if(this.usuarioRep.existsByIdAndByHashSenha(id, senhaAdm)) {
+	public void removerAnimal(Integer idAdm, String senhaAdm, Integer idAnimal) throws Exception {
+		
+		if(this.usuarioRep.existsByIdAndByHashSenha(idAdm, senhaAdm)) {
+			
 			this.animalRep.deleteById(idAnimal);
 		}else {
 			throw new Exception("Não foi possivel remover");
 		}
 		
+	}
+	
+	public void editarAnimal(Animal animal) {
+		Animal animalBanco = animalRep.getOne(animal.getId_animal());
+		animalBanco.setDataNascimento(animal.getDataNascimento());
+		animalBanco.setHistoriaAnimal(animal.getHistoriaAnimal());
+		animalBanco.setNome(animal.getNome());
+		animalBanco.setSexoAnimal(animal.getSexoAnimal());
+		this.animalRep.save(animalBanco);
 	}
 }

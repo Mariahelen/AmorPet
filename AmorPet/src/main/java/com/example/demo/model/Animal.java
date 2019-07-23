@@ -37,9 +37,8 @@ public class Animal {
 	@NotNull(message = "Data de Nascimento do é necessária")
 	@PastOrPresent(message = "Deve ser uma data de nascimento válida")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nasc")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@NotNull(message = "O sexo do animal é necessário")
 	@Column(length=1, nullable=false)
@@ -95,11 +94,11 @@ public class Animal {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

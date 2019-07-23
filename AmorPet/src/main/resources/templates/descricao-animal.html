@@ -34,7 +34,7 @@ form a, input[type=submit] {
 				style="padding-top: 30px; padding-bottom: 45px;">
 				<div class="" th:if="${error}" th:text="${error}"></div>
 				<div class="alert alert-danger" th:if="${errorEditar}" th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
-				<div class="alert alert-success" th:if="${sucessoEditar}"></div>
+				<div class="alert alert-success" th:if="${sucessoEditar}" th:text="${sucessoEditar}"></div>
 				<div th:if="${animal}">
 					<div class="col-sm-6">
 						<div>
@@ -48,15 +48,15 @@ form a, input[type=submit] {
 								<div class="row">
 									<div class="col-sm-12">
 										<button id="editar-animal" class="btn btn-success">Editar</button>
-										<h2 th:text="${animal.nome}"></h2>
+										<h2>Nome: <span th:text="${animal.nome}"></span></h2>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-3">
-										<h3 th:text="${animal.dataNascimento}"></h3>
+									<div class="col-sm-6">
+										<h3>Idade: <span th:text="${idadeAnimal}"></span></h3>
 									</div>
 									<div class="col-sm-3">
-										<h3 th:text="${animal.sexoAnimal}"></h3>
+										<h3>Sexo: <span th:text="${animal.sexoAnimal}=='M' ? 'Macho' : 'Fêmea' "></span></h3>
 									</div>
 								</div>
 								<div class="row">
@@ -78,7 +78,12 @@ form a, input[type=submit] {
 										<label><h3>Sexo:</h3></label> M <input type="radio"
 											th:field="*{sexoAnimal}" name="sexo" value="M"> F <input
 											type="radio" th:field="*{sexoAnimal}" name="sexo" value="F"><br>
+											<label>Porte do Animal: </label>
+											<input type="text" th:field="*{porteAnimal}">
+											<label>Tipo do Animal: </label>
+											<input type="text" th:field="*{tipoAnimal}">
 										<label>Descrição: </label><br>
+										<input type="hidden" th:field="*{caminhoFoto}" >
 										<textarea th:field="*{historiaAnimal}" rows="5" cols="70"></textarea>
 										<input class="btn btn-success" type="submit" name="Alterar"
 											value="Salvar"> <a class="btn btn-danger">Cancelar</a>
