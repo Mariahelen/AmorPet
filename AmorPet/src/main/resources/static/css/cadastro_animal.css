@@ -37,6 +37,13 @@ form input, form select{
 input[type="file"]{
 	color: #fff;
 }
+input[type="date"] {
+	padding: 0px;
+	padding-left: 20px;
+}
+input[type="radio"] {
+	size: 50px;
+}
 
 
 

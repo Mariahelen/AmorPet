@@ -116,17 +116,19 @@
 										<p th:text="${animal.historiaAnimal}"></p>
 									</div>
 									<div>
-									<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
-											 id="btn-remove-animal" type="button"
-											th:value="${animal.id_animal}" class="btn btn-primary"
-											data-toggle="modal" data-target="#exampleModal">Remover</button>
-									
-									<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
-									 id="editar-animal" class="btn btn-success">Editar</button>
-										
+										<div th:if="${session.usuarioLogado}">
+											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+													 id="btn-remove-animal" type="button"
+													th:value="${animal.id_animal}" class="btn btn-primary"
+													data-toggle="modal" data-target="#exampleModal">Remover</button>
 											
-										<a th:unless="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
-											class="btn btn-info" th:href="@{/quero-adotar/parte-1}">ADOTAR</a>
+											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+											 id="editar-animal" class="btn btn-success">Editar</button>
+										</div>
+										<div th:if="${session.usuarioLogado}">
+											<a th:unless="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+												class="btn btn-info" th:href="@{/quero-adotar/parte-1}">ADOTAR</a>
+										</div>
 									</div>
 								</div>
 						</div>

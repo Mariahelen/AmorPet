@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.example.demo.model.Usuario;
 
@@ -13,9 +14,7 @@ public class Autorizacao implements HandlerInterceptor {
 
 	private static final String[] RECURSOS_LIVRES = { "/home", "/termos", "/navegacao", "/quem-somos", "/login",
 			"/cadastro", "/adotar", "/descricao-animal",
-			"https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese" };
-
-	private static final String[] RECURSOS_LIVRES_ESTILIZACAO = { ".css", ".js", ".png", ".jpg", ".jpeg" };
+			"https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese"};
 
 	private static final String RECURSOS_USUARIOS_NORMAL = "/user/";
 
@@ -25,6 +24,10 @@ public class Autorizacao implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+		// libera tudo da pasta static
+		if(handler instanceof ResourceHttpRequestHandler) {
+			return true;
+		}
 		if (!CONTROLAR_ACESSO) {
 			return true;
 		}
@@ -32,15 +35,12 @@ public class Autorizacao implements HandlerInterceptor {
 		// Para acessar qualquer pagina dessa aplicação, o usuário precisa estar
 		// autenticado
 		for (String recurso : RECURSOS_LIVRES) {
-			if (request.getRequestURL().toString().contains(recurso)) {
+			if (request.getRequestURL().toString().contains(recurso)
+					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)) {
 				return true;
 			}
 		}
-		for (String estilos : RECURSOS_LIVRES_ESTILIZACAO) {
-			if (request.getRequestURL().toString().endsWith(estilos)) {
-				return true;
-			}
-		}
+		
 
 		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
 		
