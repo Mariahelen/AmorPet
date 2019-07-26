@@ -1,50 +1,58 @@
 @charset "UTF-8";
 
 form label {
-	color: #fff;
-	font-size: 20px;
+    color: #fff;
+    font-size: 20px;
 }
 
 h3 {
-	
-	color: #fff;
-	font-size: 30px;
-	text-align: center;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
 }
 
-form input, form select{
-	border-radius: 50px !important;
+form input, form select {
+    border-radius: 0px !important;
 }
 
-.sexoanimal{
-	color: #FFD700;
-	font-size: 15px;
-}
-.porteanimal{
-	font-size: 15px;
-	color: #FFD700;
-}
-.bg-cat
-{
-	
-	background-image: url(/img/gatoo.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	width:100%;
-	margin-bottom: -40px;
+.sexoanimal {
+    color: #FFD700;
+    font-size: 15px;
 }
 
-input[type="file"]{
-	color: #fff;
+.porteanimal {
+    font-size: 15px;
+    color: #FFD700;
 }
+
+.bg-cat {
+    background-image: url(/img/gatoo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    margin-bottom: -40px;
+}
+
+input[type="file"] {
+    color: #fff;
+}
+
 input[type="date"] {
-	padding: 0px;
-	padding-left: 20px;
-}
-input[type="radio"] {
-	size: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
 }
 
+.form-group input[type="radio"] {
+
+}
+.container .row form .row:last-child button:hover {
+
+}
+.container .row form .row:last-child button:hover .fa-heart {
+    transition: 0.5s;
+    color: #ff6031;
+}
 
 
 
