@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Mobirise v4.10.1, mobirise.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" th:href="@{/assets/images/amorpet-logo-1-128x128.png}" type="image/x-icon">
+    <meta name="description" content="">
+
+        <!--Cadastro CSS-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Quero Adotar - AmorPet</title>
+
+
+
+        <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese}">
+  		<link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+ 		<link rel="stylesheet" th:href="@{/assets/animate.css/animate.min.css}">
+ 		<link rel="stylesheet" th:href="@{/assets/mobirise/css/style.css}">
+  		<link rel="stylesheet" th:href="@{/assets/dropdown-menu/style.css}">
+ 		<link rel="stylesheet" th:href="@{/assets/mobirise/css/mbr-additional.css}" type="text/css">
+
+<!--Página de Cadastro CSS-->
+  
+    	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    	<link rel="stylesheet" th:href="@{/css/cadastro.css}">
+   		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+    	<link rel="stylesheet" th:href="@{/style.css}">
+    	<link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:insert="navbar/header :: header"></div>
+
+<br/><br/><br/><br/>
+
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/assets/images/doguinho.jpg});|">
+	<div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-left mbr-after-navbar">
+		 <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);"></div>
+		    <div class="mbr-box__container mbr-section__container container">
+<section>
+<div class="position">
+        <div class="container">
+<br/>
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <!-- INICIO DO FORM -->
+        <form role="form" th:action="@{/quero-adotar/parte-2}">
+            <h2 class="tit-processo-1">PROCESSO ADOTIVO - ETAPA 1</h2>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Último Nome" tabindex="2">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control input-lg " placeholder="Rua" tabindex="3">
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" placeholder="Número" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text"  class="form-control input-lg" placeholder="Complemento" tabindex="2">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+            	<label class="tit-processo-1">Em caso de ausência, quem será responsável pelo animal?</label>
+                <input type="text" class="form-control input-lg" placeholder="Insira o nome do responsável em caso de ausência" tabindex="4">
+            </div>
+            
+                    <div class="form-group">
+                    	<label class="tit-processo-1">Reside em casa ou apartamento?</label>
+                       <select class="form-control">
+                       		<option>Selecione uma opção</option>
+                       		<option>Casa</option>
+                       		<option>Apartamento</option>
+                       </select>
+                    </div>
+             	
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Enviar" class="btn btn-success btn-block btn-lg" tabindex="7"></div>
+                <div class="col-xs-12 col-md-6"><input type="reset" class="btn btn-primary btn-block btn-lg" value="Limpar"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+</div>
+</section>
+<br/><br/>
+</div>
+</div>
+</section>
+
+<div th:insert="footer/footer"></div>
+
+
+<!--Página de Cadastro CSS-->
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
+  <script th:src="@{/assets/web/assets/jquery/jquery.min.js}"></script>
+  <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/assets/smooth-scroll/smooth-scroll.js}"></script>
+  <script th:src="@{/assets/jarallax/jarallax.js}"></script>
+  <script th:src="@{/assets/mobirise/js/script.js}"></script>
+  <script th:src="@{/assets/dropdown-menu/script.js}"></script>
+
+  <script th:src="@{/js/cadastro.js}"></script>
+
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
+
+</body>
+</html>

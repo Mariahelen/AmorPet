@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <style type="text/css">
+    h3{
+      text-align: center;
+    }
+    img {
+    border-radius: 8px;
+    text-align: center;
+    }
+    p{
+      color: blue;
+    }
+    table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    font-size: 15px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 20px;
+}
+  </style>
+  
+  <link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+  <title>Historico De Seleção</title>
+
+</head>
+<body>
+<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>Histórico de Seleção</h3>
+<br>
+<!-------------------------CORRETO ACIMA------------------>
+<table>
+  <tr>
+    <th>Nome do Animal</th>
+    <th>Situação</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td style="color: blue;">Adotado</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td style="color: blue;">Não Adotado</td>
+  </tr>
+  <tr>
+    <td>Joe</td>
+    <td style="color: blue;">Não Adotado</td>
+  </tr>
+</table>
+<br>
+<h3>Seleção Atual</h3>
+<br>
+ <div class="form-group row">
+                <div class="col">
+                    <img src="img/animal4.jpg" height="250px;" width="250px";><br><br>
+                    <label  class="col-4 col-form-label">Nome:</label> Pietro<br>
+                    <label class="col-4 col-form-label">Sexo:</label> Macho<br>
+                    <label class="col-4 col-form-label">Idade:</label> 1Aninho<br>
+                </div>
+            </div>
+
+
+
+
+<!-------------------------------Correto-------------------------------------->
+<br>
+<br>
+
+<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+</body>
+</html>

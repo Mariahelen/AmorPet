@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="httP://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>NAVBAR</title>
+</head>
+<body>
+<th:block th:fragment="navbar">
+  	<section id="dropdown-menu-2btn-0" data-rv-view="0">
+	    <nav class="navbar navbar-dropdown navbar-fixed-top">
+	        <div class="container">
+	            <div class="navbar-brand">
+	                <a th:href="@{/home}" class="navbar-logo"><img th:src="@{/assets/images/amorpet-logo-1-128x128.png}" alt="Mobirise"></a>
+	                <a class="text-white" th:href="@{/home}">AmorPet</a>
+	            </div>
+	            <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+	                <div class="hamburger-icon"></div>
+	            </button>
+	            <ul class="nav-dropdown collapse pull-xs-right navbar-toggleable-sm nav navbar-nav" id="exCollapsingNavbar">
+	              <li class="nav-item"><a class="nav-link link" th:href="@{/home}">HOME</a></li>
+	              <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">COMO FUNCIONA?</a>
+	              	<div class="dropdown-menu">
+	              		<a th:href="@{/termos}" class="dropdown-item">TERMOS DE ADOÇÃO &nbsp; &nbsp;</a>
+	              		<a th:href="@{/navegacao}" class="dropdown-item">COMO NAVEGAR</a>
+	              	</div>
+	              </li>
+	              <li class="nav-item"><a class="nav-link link" th:href="@{/quem-somos}">QUEM SOMOS?</a></li>
+	              <li th:replace="conteudo-padrao/navbar :: (${session.usuarioLogado} != null) ? (${session.usuarioLogado.role} == 'ROLE_ADMIN'? opcao-adm : opcao-usuario) : opcao-visitante"></li>
+	              <li class="nav-item nav-btn"><a class="nav-link btn btn-default btn-default-outline" th:href="@{/adotar}">QUERO ADOTAR</a></li>
+	            </ul>
+	        </div>
+	    </nav>
+	</section>
+</th:block>
+<!--
+	================================================================================================================
+	NAV-FOOTER se refere ao caminho do arquivo /NAVBAR é o arquivo, os :: servem para indicar qual fragment usar
+	assim, bastar mudar nome de VISITANTE para USUARIO ou ADM que mudará as opcoes de dropdown
+	================================================================================================================
+-->
+
+<th:block th:fragment="opcao-adm">
+<li class="nav-item dropdown">
+	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">MINHA CONTA</a>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" th:href="@{/adm/candidatos}">CANDIDATOS</a>
+		<a class="dropdown-item" th:href="@{/adm/cadastro/animal}">ANIMAIS</a>
+		<a class="dropdown-item" th:href="@{/adm/perfil}">ADMINISTRADOR</a>
+		<a class="dropdown-item" th:href="@{/adm/logout}">SAIR</a>
+	</div>
+</li> 
+</th:block>
+
+<th:block th:fragment="opcao-usuario">
+<li class="nav-item dropdown">
+	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">MINHA CONTA</a>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" th:href="@{/user/perfil}">PERFIL</a>
+		<a class="dropdown-item" th:href="@{/user/historico}">HISTÓRICO DE SELEÇÃO</a>
+		<a class="dropdown-item" th:href="@{/user/ranking}">RANKING</a>
+		<a class="dropdown-item" th:href="@{/user/logout}">SAIR</a>
+	</div>
+</li> 
+</th:block>
+
+<th:block th:fragment="opcao-visitante">
+<li class="nav-item dropdown">
+	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">ENTRAR</a>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" th:href="@{/login}">ENTRAR&nbsp; &nbsp;</a>
+		<a class="dropdown-item" th:href="@{/cadastro}">CADASTRE-SE</a>
+	</div>
+</li> 
+</th:block>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="httP://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>SCRIPTS</title>
+
+</head>
+<body>
+
+<!-- SCRIPTS BASICOS QUE TODA PAGINA QUE USA NAVBAR/FOOTER TEM -->
+<th:block th:fragment="scripts-padrao">
+	<script th:src="@{/assets/web/assets/jquery/jquery.min.js}"></script>
+	<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/smooth-scroll/smooth-scroll.js}"></script>
+	<script th:src="@{/assets/jarallax/jarallax.js}"></script>
+	<script th:src="@{/assets/mobirise/js/script.js}"></script>
+	<script th:src="@{/assets/dropdown-menu/script.js}"></script>
+</th:block>
+</body>
+</html>
