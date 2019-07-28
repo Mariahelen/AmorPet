@@ -1,27 +1,11 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
+import com.example.demo.util.Util;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.example.demo.util.Util;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 public class Usuario {

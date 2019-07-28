@@ -1,126 +1,215 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link th:replace="conteudo-padrao/estilos :: estilos-padrao">
-    <!--Página de Cadastro CSS-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+<!--Página de Cadastro CSS-->
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
-    <!-- ---Cadastro Animal css -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro_animal.css}">
+<!-- ---Cadastro Animal css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/cadastro_animal.css}">
 
-    <!--Cadastro CSS-->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
+<!--Cadastro CSS-->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
 
-    <title>Cadastro Animal</title>
+<title>Cadastro Animal</title>
 </head>
 <body>
-<div th:replace="conteudo-padrao/navbar :: navbar"></div>
-<br><br><br><br>
-<div class="container bg-cat">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <br/><br/>
-            <form role="form" th:action="@{/adm/cadastro/animal}" th:object="${animal}" enctype="multipart/form-data"
-                  method="post">
-                <div class="main-login main-center">
-                    <h3>Cadastrar novo animal</h3><br></div>
-                <hr class="colorgraph">
-                <div class="row">
-                    <div th:if="${sucesso}" th:text="${success}"></div>
-                    <div th:if="${error}" th:text="${error}" class="text-danger"></div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <label>Nome do Animal</label>
-                            <input type="text" th:field="*{nome}" name="first_name" id="first_name"
-                                   class="form-control input-lg" placeholder="Primeiro Nome" tabindex="1">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <label>Qual tipo do Animal?</label>
-                            <select class="form-control" th:field="*{tipoAnimal}" id="exampleFormControlSelect1" tabindex="2">
-                                <option th:value="Cachorro"><i class="fas fa-dog"></i>&nbsp;Cachorro</option>
-                                <option th:value="Gato"><i class="fas fa-cat"></i>&nbsp;Gato</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Data de Nascimento</label>
-                    <input type="date" th:field="*{dataNascimento}" name="display_name" class="form-control input-lg "
-                           placeholder="Idade do Animalzinho" tabindex="3">
-                </div>
-                <div class="form-group">
-                    <label>Sexo</label>
-                    <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="macho"
-                           th:value="Macho" tabindex="4">&nbsp;<label for="macho" class="sexoanimal"><i class="fas fa-mars"></i>&nbsp;Macho</label>
-                    <input type="radio" th:field="*{sexoAnimal}" name="sexo" class="form-check-input" id="femea"
-                           th:value="Femea" tabindex="5">&nbsp;<label for="femea" class="sexoanimal"><i class="fas fa-venus"></i>&nbsp;Fêmea</label>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-paw"></i>Porte do Animal</label>
-                    <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="pequeno"
-                           th:value="Pequeno" tabindex="6">&nbsp;<label for="pequeno" class="porteanimal">Pequeno</label>
-                    <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="medio"
-                           th:value="Medio" tabindex="7">&nbsp;<label for="medio" class="porteanimal">Médio</label>
-                    <input type="radio" th:field="*{porteAnimal}" name="porte" class="form-check-input" id="grande"
-                           th:value="Grande" tabindex="8">&nbsp;<label for="grande" class="porteanimal">Grande</label>
-                </div>
-                <div class="form-group">
-                    <label>História do Animal</label>
-                    <textarea class="form-control" th:field="*{historiaAnimal}" id="exampleFormControlTextarea1"
-                              rows="3" placeholder="Historia do animal" tabindex="9"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="filebutton" th:field="*{caminhoFoto}" class="cols-sm-2 control-label">Foto do
-                        animalzinho:</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <img id="preview-img" width="200">
-                            <input th:field="*{file}" name="filebutton" id="file-chooser" class="input-file"
-                                   type="file" tabindex="10"/>
-                        </div>
-                    </div>
-                </div>
-                <hr class="colorgraph">
-                <div class="row" style="margin-bottom: 13px;">
-                    <div class="col-xs-12 col-md-6 d-flex">
-                        <button type="submit" class="btn btn-success btn-block btn-lg" tabindex="11"><i class="fas fa-heart"></i>&nbsp;Adicionar</button>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <button type="reset"class="btn btn-primary btn-block btn-lg" tabindex="12">Limpar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<br/><br/>
+
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container bg-animal">
+		<div class="row">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<br />
+				<br />
+				<form role="form" th:action="@{/adm/cadastro/animal}"
+					th:object="${animal}" enctype="multipart/form-data" method="post">
+					<div class="main-login main-center">
+						<h3>Cadastrar novo animal</h3>
+						<br>
+					</div>
+					<hr class="colorgraph">
+					<div class="row">
+						<div th:if="${sucesso}" th:text="${success}"></div>
+						<div th:if="${error}" th:text="${error}" class="text-danger"></div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<label>Nome do Animal</label> <input type="text"
+									th:field="*{nome}" name="first_name" id="first_name"
+									class="form-control input-lg" placeholder="Primeiro Nome"
+									tabindex="1">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<label>Qual tipo do Animal?</label> <select class="form-control"
+									th:field="*{tipoAnimal}" id="exampleFormControlSelect1"
+									tabindex="2">
+									<option th:value="Cachorro">Cachorro</option>
+									<option th:value="Gato">Gato</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Data de Nascimento</label> <input type="date"
+							th:field="*{dataNascimento}" name="display_name"
+							class="form-control input-lg " placeholder="Idade do Animalzinho"
+							tabindex="3">
+					</div>
+					<div class="form-group">
+						<label>Sexo</label>
+							<input type="radio" th:field="*{sexoAnimal}"
+							name="sexo" class="form-check-input" id="macho" th:value="Macho"
+							tabindex="4">&nbsp;<label for="macho" class="sexoanimal">Macho</label> <input type="radio"
+							th:field="*{sexoAnimal}" name="sexo" class="form-check-input"
+							id="femea" th:value="Femea" tabindex="5">&nbsp;<label
+							for="femea" class="sexoanimal">Fêmea</label>
+					</div>
+					<div class="form-group">
+						<label>Porte do Animal</label> <input
+							type="radio" th:field="*{porteAnimal}" name="porte"
+							class="form-check-input" id="pequeno" th:value="Pequeno" tabindex="6">&nbsp;<label for="pequeno"
+							class="porteanimal">Pequeno</label> <input type="radio"
+							th:field="*{porteAnimal}" name="porte" class="form-check-input"
+							id="medio" th:value="Medio" tabindex="7">&nbsp;<label
+							for="medio" class="porteanimal">Médio</label> <input type="radio"
+							th:field="*{porteAnimal}" name="porte" class="form-check-input"
+							id="grande" th:value="Grande" tabindex="8">&nbsp;<label
+							for="grande" class="porteanimal">Grande</label>
+					</div>
+					<div class="form-group">
+						<label>História do Animal</label>
+						<textarea class="form-control" th:field="*{historiaAnimal}"
+							id="exampleFormControlTextarea1" rows="3"
+							placeholder="Historia do animal" tabindex="9"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="filebutton" th:field="*{caminhoFoto}"
+							class="cols-sm-2 control-label">Foto do animalzinho:</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<img id="preview-img">
+								<div><label for="file-chooser">Adicionar Foto</label></div>
+								<input
+									th:field="*{file}" name="filebutton" id="file-chooser"
+									class="input-file" type="file" tabindex="10"/>
+									
+							</div>
+						</div>
+					</div>
+					<hr class="colorgraph">
+					<div class="row" style="margin-bottom: 13px;">
+						<div class="col-xs-12 col-md-6 d-flex">
+							<button type="submit" class="btn btn-success btn-block btn-lg"
+								tabindex="11">
+								<i class="fas fa-heart"></i>&nbsp;Adicionar
+							</button>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<button type="reset" class="btn btn-primary btn-block btn-lg"
+								tabindex="12">Limpar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
 
 <div th:replace="conteudo-padrao/footer :: footer"></div>
 
-<!--Página de Cadastro CSS-->
-<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
-
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
 <script type="text/javascript">
-    const $ = document.querySelector.bind(document);
+	$(function() {
+		$("input[type='radio']").hide();
+		verificarRadioSelecionado();
+		selecionarInputRadio();
+		selecionarLabel();
+		verificarTipoAnimal();
+		selecionarTipoAnimal();
+	});
 
-    const previewImg = $('#preview-img');
-    const fileChooser = $('#file-chooser');
+	/* verifica se tem um radio ja selecionado */
+	function verificarRadioSelecionado() {
+		$(".container .row form .form-group input[type='radio']").each(function() {
+			if($(this).prop('checked')) {
+				$(this).click();
+			}
+		});
+	}
+	
+	/* ao clicar em um input radio */
+	function selecionarInputRadio() {
+		$(".container .row form .form-group input[type='radio']").click(function() {
+			let nomeId = $(this).attr('id');
+			let labelAlvo = "label[for='"+nomeId+"']";
+			$(this).parent().find(labelAlvo).click();
+		});
+	}
 
-    fileChooser.onchange = e =>
-    {
-        const fileToUpload = e.target.files.item(0);
-        const reader = new FileReader();
-        reader.onload = e =>
-        previewImg.src = e.target.result;
-        reader.readAsDataURL(fileToUpload);
-    };
+	/* ao clicar em um label que aponta pra um input tipo radio */
+	function selecionarLabel() {
+		$(".container .row form .form-group label").click(function() {
+			let nomeClasseLabel = $(this).attr('class');
+			if(nomeClasseLabel === 'sexoanimal' || nomeClasseLabel === 'porteanimal') {
+				$(this).addClass('elemento-selecionado')
+					.siblings('label')
+					.removeClass('elemento-selecionado');
+			}
+		});
+	}
+
+	/* verifica o tipo do animal no carregamento da pagina */
+	function verificarTipoAnimal() {
+		let tipoSelecionado = $('.container .row form .form-group select').val();
+		mudarFundo(tipoSelecionado);
+	}
+
+	/* ao selecionar o tipo do animal */
+	function selecionarTipoAnimal() {
+		$('.container .row form .form-group select').change(function() {
+			tipoSelecionado = $(this).val();
+			mudarFundo(tipoSelecionado);
+		});
+	}
+
+	/* muda foto de fundo */
+	function mudarFundo(tipoAnimal) {
+		if(tipoAnimal === 'Cachorro') {
+			$('.bg-animal')
+				.css({"background-image":"url('/img/doog.jpg')"});
+		}else {
+			$('.bg-animal')
+				.css({"background-image":"url('/img/gatoo.jpg')"});
+		}
+	}
+
+	/* mostra foto que foi escolhida */
+	function enviar_imagem(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#preview-img').attr('src', e.target.result);
+				$("#preview-img").addClass('img-change');
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#file-chooser").change(function(){
+		enviar_imagem(this);
+	});
+	
 </script>
 </body>
 </html>
