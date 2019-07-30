@@ -73,6 +73,7 @@
     color: #ffffff;
     font-size: 16pt;
     text-align: center;
+    text-shadow: 0.2em 0.2em 0.2em black;
 }
 
 .text-danger {
@@ -124,12 +125,39 @@ a.terms:hover, a.terms:focus {
     text-decoration: none;
 }
 
+.new-pass-2{
+	
+	color:#FFFFFF;
+	font-size: 13pt;
+	text-align: justify;
+	text-shadow: 0.2em 0.2em 0.2em black;
+	font-weigth: bolder;
+	margin-top: -3px;
+}
+
 a.new-passwd:hover, a.new-passwd:focus {
     transition: 0.5s;
     color: #f5f5f5;
     text-decoration: underline #b2b2b2;
     font-size: 19px;
 }
+
+
+a#terms.new-passwd{
+	
+	color: #ffffff;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+a#terms.new-passwd:hover, a#terms.new-passwd:focus{
+	
+	transition: 0.5s;
+	color: #f5f5f5;
+	text-decoration: underline #b2b2b2;
+	font-size: 17px;
+}
+
 
 #ver-perfil, #editar-nome, #editar-tel, #editar-senha, #editar-email, #editar-end {
 

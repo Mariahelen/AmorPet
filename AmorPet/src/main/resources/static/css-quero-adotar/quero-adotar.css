@@ -41,7 +41,7 @@ a:link {
 
 #btn-add-animal {
 	margin-left: 10px;
-	background-color: #5eadf7;
+	background-color: #7ac673;
 	border-radius: 50%;
 	padding: 10px;
 }
@@ -68,6 +68,8 @@ a:link {
 
 .remocao {
 	font-size: 20px;
+	font-family: 'Merriweather', Serif;
+	text-align: center;
 }
 
 .modal-footer button {
@@ -84,3 +86,126 @@ a:link {
 	background-color: #ee4840 !important;
 	border-color: #ee4840;
 }
+
+
+/* CSS (RONNY)*/
+
+h3.filtro-title{
+	
+	color: #ffffff;
+	font-size: 12pt;
+	letter-spaccing: normal !important;
+	font-family: 'Merriweather', serif;
+	text-align: center;
+}
+
+.filtro-title{
+	
+
+	font-size: 12pt;
+	letter-spaccing: normal !important;
+	font-family: 'Merriweather', serif;
+}
+
+.back-title{
+	
+	background-color: #7ac673 !important;
+}
+
+.border-div{
+	
+	border-color: #7ac673 !important;
+	border-top-color: #7ac673;
+	
+}
+
+.color-button{
+	
+	color: #ffffff !important;
+	margin-left: 3px;
+}
+
+.button-position{
+	
+	float: right;
+	margin-right: 40px !important;
+	margin-top: -40px !important;
+}
+
+
+.btn-style{
+	
+	background-color: #7ac673 !important;
+	font-family: 'Merriweather', Serif;
+	border-radius: 10px;
+}
+
+.btn-style:hover{
+	
+	border-color: #136711;
+	transition: 0.5s;
+	background-color: #136711 !important;
+}
+
+.btn-style-rm{
+	
+	background-color: #f74141 !important;
+	font-family: 'Merriweather', Serif;
+	color: #ffffff;
+	border-radius: 10px;
+}
+
+.btn-style-rm:hover{
+	
+	border-color: #a40000;
+	transition: 0.5s;
+	background-color: #a40000 !important;
+	
+}
+
+.nome-animal{
+	
+	
+	font-family: 'Merriweather', Serif;
+	font-size: 14pt;
+	font-weigth: bolder;
+	margin-left: 20px;
+	
+}
+
+
+.labels-name{
+	font-size: 15px;
+	font-family: 'Merriweather', Serif;
+	text-align: center;
+	font-weigth: 900;
+	
+}
+
+.btn-cancel{
+	
+	background-color: #204a87!important;
+	font-family: 'Merriweather', Serif;
+	color: #ffffff;
+}
+
+.btn-cancel:hover{
+	
+	border-color: #003666;
+	transition: 0.5s;
+	background-color: #003666!important;
+	
+}
+
+/*.card-border{
+	
+	border: 1px solid #7ac673;
+	padding: 8px;
+	padding-top: 25px;
+}
+*/
+
+
+
+
+

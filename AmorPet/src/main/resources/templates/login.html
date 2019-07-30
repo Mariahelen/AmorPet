@@ -29,14 +29,14 @@
 
 <br/><br/><br/><br/>
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/animais/wallpaper-dog.jpg});|"><br/><br/><br/><br/>
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/wallpaper-02.jpg});|"><br/><br/><br/><br/>
 
    
 <div class="container">
 	<div class="row">
 	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 	        <form role="form" th:action="@{/login}" method="post">
-	            <h2 class="tit-processo-1">DADOS DE LOGIN:</h2>
+	            <h2 class="tit-processo-1">INSIRA OS DADOS PARA REALIZAR LOGIN:</h2>
 	            <hr class="colorgraph">
 	            <div th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></div>
 	            <div class="form-group">
@@ -49,12 +49,12 @@
 	      			      
 	            <hr class="colorgraph">
 	            <div class="row">
-	                <div class="col-xs-12 col-md-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="Entrar" tabindex="3"></div>
+	                <div class="col-xs-12 col-md-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="ENTRAR" tabindex="3"></div>
 	            </div>
 	            <br>
 				<div class="row">
 	            	<div class="col-xs-12 col-md-12"><a href="#" class="forgot-pass-answer new-passwd" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" tabindex="4">Esqueceu a senha?</a></div>
-	        		<div class="col-xs-12 col-md-12"><a th:href="@{/cadastro}" class="forgot-pass-answer new-passwd" type="submit" tabindex="5">Não tem conta? Cadastre-se</a></div>
+	        		<div class="col-xs-12 col-md-12"><a th:href="@{/cadastro}" class="forgot-pass-answer new-passwd" type="submit" tabindex="5">Não possui conta? Cadastre-se</a></div>
 	        	</div>
 	        </form>
 	    </div>
