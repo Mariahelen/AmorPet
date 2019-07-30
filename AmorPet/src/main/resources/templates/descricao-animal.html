@@ -18,6 +18,7 @@
 	<br>
 	<br>
 	<section>
+	
 		<!-- MODAL DE REMOVER ANIMAL -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
@@ -52,7 +53,11 @@
 				</div>
 			</div>
 		</div>
-		<!-- FIM MODAL DE REMOVER ANIMAL -->
+			<div>
+				<a th:href="@{/adotar}">
+    		 <button id="voltar" class="btn btn-success">Voltar</button>
+				</a>
+				</div>
 		<div class="mbr-section__container container">
 			<div class="mbr-contacts mbr-contacts--wysiwyg row"
 				style="padding-top: 30px; padding-bottom: 45px;">
@@ -63,8 +68,6 @@
 					th:text="${sucessoEditar}"></div>
 
 				<div th:if="${animal}">
-
-
 					<div class="col-sm-6">
 						<div>
 							<img th:src="${animal.caminhoFoto}" id="imgAnimal"
@@ -82,37 +85,37 @@
 										<p th:text="${animal.nome}"></p>
 									</div>
 										<div class="col-sm-6">
-										<h3>
+										<h2>
 											Tipo: 
-										</h3>
+										</h2>
 										<p th:text="${animal.tipoAnimal}"></p>
 									</div>
 								</div>
 								<div class="row">
 								
 									<div class="col-sm-6">
-										<h3>
+										<h2>
 										Sexo: 
-										</h3>
+										</h2>
 										<p th:text="${animal.sexoAnimal}"></p>
 									</div>
 									<div class="col-sm-6">
-									<h3>
+									<h2>
 										Porte: 
-									</h3>
+									</h2>
 									<p th:text="${animal.porteAnimal}"></p>
 								</div>
 								<div class="col-sm-6">
-									<h3>
+									<h2>
 									Idade: 
-									</h3>
+									</h2>
 									<p th:text="${idadeAnimal}"></p>
 								</div>
 								</div>
 								
 								<div class="row">
 									<div class="col-sm-12">
-										<h3>Descrição</h3>
+										<h2>Descrição</h2>
 										<p th:text="${animal.historiaAnimal}"></p>
 									</div>
 									<div>
@@ -137,30 +140,30 @@
 									<form th:object="${animal}" th:action="@{/adm/editar/animal}"
 										method="post">
 										<input type="hidden" th:field="*{id_animal}"> 
-										<label><h3>Nome:</h3></label>
+										<label><h2>Nome:</h2></label>
 										<input type="text" th:field="*{nome}" name="nome"><br>
 
-										<label><h3>Idade:</h3></label> <input type="date"
+										<label><h2>Idade:</h2></label> <input type="date"
 											th:field="*{dataNascimento}" name="dataNascimento"><br> 
 											
-										<label><h3>Sexo:</h3></label>
+										<label><h2>Sexo:</h2></label>
 										<input type="radio" th:field="*{sexoAnimal}" name="sexo"
 											value="Macho" id="macho"> <label for="macho">Macho</label>
 										<input type="radio" th:field="*{sexoAnimal}" name="sexo"
 											value="Femea" id="femea"> <label for="femea">Fêmea</label><br>
 
-										<label><h3>Porte do Animal:</h3></label> <input type="radio"
+										<label><h2>Porte do Animal:</h2></label> <input type="radio"
 											th:field="*{porteAnimal}" value="Medio" id="medio"> <label
 											for="medio">Médio</label> <input type="radio"
 											th:field="*{porteAnimal}" value="Grande" id="grande">
 										<label for="grande">Grande</label> <input type="radio"
 											th:field="*{porteAnimal}" value="Pequeno" id="pequeno">
-										<label for="pequeno">Pequeno</label> <label><h3>Tipo
-												do Animal:</h3></label> <input type="radio" th:field="*{tipoAnimal}"
+										<label for="pequeno">Pequeno</label> <label><h2>Tipo
+												do Animal:</h2></label> <input type="radio" th:field="*{tipoAnimal}"
 											value="Cachorro" id="cachorro"> <label for="cachorro">Cachorro</label>
 										<input type="radio" th:field="*{tipoAnimal}" value="Gato"
 											id="gato"> <label for="gato">Gato</label><br> 
-											<label><h3>Descrição:</h3>
+											<label><h2>Descrição:</h2>
 										</label><br> <input type="hidden" th:field="*{caminhoFoto}">
 										<textarea th:field="*{historiaAnimal}" rows="5" cols="70"></textarea>
 
@@ -186,7 +189,7 @@
 			$("#detalhes-animal").hide();
 			$("#form-editar").fadeIn('slow');
 		});
-		$("#form-editar").find('a').click(function() {
+		$("#form-editar a").click(function() {
 			$("#form-editar").hide();
 			$("#detalhes-animal").fadeIn('slow');
 		});
