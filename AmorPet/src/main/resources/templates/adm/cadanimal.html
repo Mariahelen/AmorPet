@@ -172,26 +172,42 @@
 	/* verifica o tipo do animal no carregamento da pagina */
 	function verificarTipoAnimal() {
 		let tipoSelecionado = $('.container .row form .form-group select').val();
-		mudarFundo(tipoSelecionado);
+		mudarClasseFundo(tipoSelecionado);
 	}
 
 	/* ao selecionar o tipo do animal */
 	function selecionarTipoAnimal() {
 		$('.container .row form .form-group select').change(function() {
-			tipoSelecionado = $(this).val();
-			mudarFundo(tipoSelecionado);
+			let tipoSelecionado = $(this).val();
+			$(".bg-animal").stop().animate({
+				opacity: "-=0.3"
+			}, {
+				duration: 600,
+				easing: "linear",
+				done: function() {
+					// executa quando a animacao for bem sucedida
+					mudarClasseFundo(tipoSelecionado);
+				},
+				complete: function() {
+					// executa quando animacao completar
+					$(".bg-animal").stop().animate({
+						opacity: "+=0.3"
+					}, 600, "linear");
+				}
+			});
 		});
 	}
 
-	/* muda foto de fundo */
-	function mudarFundo(tipoAnimal) {
+	/* muda a classe de imagem de fundo */
+	function mudarClasseFundo(tipoAnimal) {
 		if(tipoAnimal === 'Cachorro') {
-			$('.bg-animal')
-				.css({"background-image":"url('/img/doog.jpg')"});
+			$('.bg-animal').addClass('bg-dog')
+				.removeClass('bg-cat');
 		}else {
-			$('.bg-animal')
-				.css({"background-image":"url('/img/gatoo.jpg')"});
+			$('.bg-animal').addClass('bg-cat')
+				.addClass('bg-dog');
 		}
+		
 	}
 
 	/* mostra foto que foi escolhida */

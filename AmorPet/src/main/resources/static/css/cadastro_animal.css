@@ -7,6 +7,9 @@ form label {
 .btn-success {
     border: none !important;
 }
+.btn-primary {
+	border: none !important;
+}
 h3 {
     color: #fff !important;
     font-size: 30px;
@@ -42,13 +45,17 @@ form textarea {
     font-size: 20px;
 }
 .bg-animal {
-    background-image: url('@{/img/doog.jpg}');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     margin-bottom: -40px;
 }
-
+.bg-dog {
+	background-image: url(/img/doog.jpg);
+}
+.bg-cat {
+	background-image: url(/img/gatoo.jpg);
+}
 input[type="file"] {
     color: #fff;
     display: none !important;
