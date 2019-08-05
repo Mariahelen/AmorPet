@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+<!--Página de Cadastro CSS-->
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+
+<!--Cadastro CSS-->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" th:href="@{/css-quero-adotar/nice-select.css}">
+
+<link rel="stylesheet" th:href="@{/css-quero-adotar/pergunta.css}">
+<title>Cadastro Pergunta</title>
+</head>
+<body>
+
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<main>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<br /> <br />
+				<form id="form-pergunta" role="form"
+					th:action="@{/adm/cadastro/pergunta}" th:object="${pergunta}"
+					method="post">
+					<div class="main-login main-center">
+						<h3>Cadastrar nova pergunta</h3>
+						<br>
+					</div>
+					<hr class="colorgraph">
+
+					<input type="hidden" th:field="*{idPergunta}" name="id">
+					<div class="form-group">
+						<label for="pergunta">Escreva a pergunta</label>
+						<textarea th:field="*{descricaoPergunta}" name="descricaoPergunta"
+							rows="3" cols="10" id="pergunta" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-9">
+								<h3>Prioridade</h3>
+							</div>
+							<div class="col-sm-3">
+								<select th:field="*{pontuacao}">
+									<option th:value="''" data-display="Selecione">Selecione</option>
+									<option th:each="pontuacao : ${pontuacoes}"
+										th:value="${pontuacao.pontos}"
+										th:text="${pontuacao.toString()}"></option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<p class="info-prioridade">
+							A prioridade define o impacto no processo seletivo.<br> A
+							ordem de exibição das perguntas é na prioridade, da menor para a
+							maior.
+						</p>
+					</div>
+
+					<hr class="colorgraph">
+					<div class="row" style="margin-bottom: 13px;">
+						<div class="col-xs-12 col-md-6 d-flex">
+							<button type="submit" class="btn btn-success btn-block btn-lg"
+								tabindex="11">Adicionar</button>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<button type="reset" class="btn btn-primary btn-block btn-lg"
+								tabindex="12">Limpar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</main>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+	<!-- PLUGIN DE SELEC DO NICE-SELECT  -->
+	<script th:src="@{/js-quero-adotar/jquery.nice-select.min.js}"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('select').niceSelect();
+		});
+	</script>
+</body>
+</html>

@@ -1,11 +1,30 @@
 package com.example.demo.model;
 
-import com.example.demo.util.Util;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.Date;
+import com.example.demo.util.Util;
 
 @Entity
 public class Usuario {
@@ -48,6 +67,9 @@ public class Usuario {
 	private boolean ativo;
 	@Embedded
 	private Endereco endereco;
+	@OneToMany(mappedBy = "usuario")
+	@Cascade(CascadeType.ALL)
+	private List<Animal> animais;
 
 	public Integer getId() {
 		return id;
@@ -137,12 +159,20 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", hashSenha=" + hashSenha
 				+ ", confirmaSenha=" + confirmaSenha + ", telefone=" + telefone + ", dataNascimento=" + dataNascimento
-				+ ", caminhoFoto=" + caminhoFoto + ", role=" + role + ", ativo=" + ativo
-				+ ", endereco=" + endereco + "]";
+				+ ", caminhoFoto=" + caminhoFoto + ", role=" + role + ", ativo=" + ativo + ", endereco=" + endereco
+				+ "]";
 	}
 
 }

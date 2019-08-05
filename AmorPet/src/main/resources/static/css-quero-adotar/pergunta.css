@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+.modal .btn {
+	border-radius: 5px !important;
+}
+
+.container form .form-group, .modal {
+	margin-top: 20px;
+}
+
+.container form .form-group label, .modal label {
+	font-size: 18px;
+}
+
+.container form .form-group hr, .modal hr {
+	border: 1px solid #2098fb !important;
+}
+
+.container form .form-group .nice-select {
+	margin-top: 13px !important;
+}
+
+.container form .form-group tr td {
+	max-width: 15ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus
+	{
+	background-color: #9bd597;
+}
+
+.container form .form-group .info-prioridade, .modal .info-prioridade {
+	text-aling: justify;
+	font-size: 15px;
+	font-style: italic;
+	background-color: #32a2fc;
+	border-radius: 7px;
+	padding: 15px;
+	opacity: 0.9;
+}
+
+.container form .form-group .subpergunta {
+	font-size: 17px;
+	cursor: pointer;
+}
+
+.container form .form-group .subpergunta:hover {
+	transition: 0.5s;
+	color: #367731;
+}
+
+.fa-plus-circle {
+	font-size: 25px;
+	margin-left: 3px;
+}
+
+.fa-plus-circle:hover {
+	transition: 0.5s;
+	transform: scale(1.2);
+}
+
+.container form button {
+	margin-bottom: 20px;
+}

@@ -1,22 +1,25 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,47 +29,52 @@ public class Animal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_animal;
-	
+
 	@OneToOne
+	private Usuario usuarioAdm;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
 	private Usuario usuario;
 	
 	@NotBlank(message = "Nome do animal é necessário")
 	@Column(length = 255, nullable = false)
 	private String nome;
-	
+
 	@NotNull(message = "Data de Nascimento do é necessária")
 	@PastOrPresent(message = "Deve ser uma data de nascimento válida")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_nasc")
 	private LocalDate dataNascimento;
-	
+
 	@NotNull(message = "O sexo do animal é necessário")
-	@Column(length=5, nullable=false)
-	@Size(max=5)
+	@Column(length = 5, nullable = false)
+	@Size(max = 5)
 	private String sexoAnimal;
-	
+
 	@NotNull(message = "A história do animal é necessário")
-	@Column(length=500, nullable=false)
-	@Size(max=500)
+	@Column(length = 500, nullable = false)
+	@Size(max = 500)
 	private String historiaAnimal;
-	
-	@Column(length=255)
-	@Size(max=255)
+
+	@Column(length = 255)
+	@Size(max = 255)
 	private String caminhoFoto;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataRegistro;
-	
+
 	@NotNull(message = "O porte do animal é necessário")
-	@Column(length=10, nullable=false)
-	@Size(max=10)
+	@Column(length = 10, nullable = false)
+	@Size(max = 10)
 	private String porteAnimal;
-	
+
 	@NotNull(message = "O tipo do animal é necessário")
-	@Column(length=10, nullable=false)
-	@Size(max=10)
+	@Column(length = 10, nullable = false)
+	@Size(max = 10)
 	private String tipoAnimal;
-	
+
 	@Transient
 	private MultipartFile file;
 
@@ -76,6 +84,14 @@ public class Animal {
 
 	public void setId_animal(Integer id_animal) {
 		this.id_animal = id_animal;
+	}
+
+	public Usuario getUsuarioAdm() {
+		return usuarioAdm;
+	}
+
+	public void setUsuarioAdm(Usuario usuarioAdm) {
+		this.usuarioAdm = usuarioAdm;
 	}
 
 	public Usuario getUsuario() {
@@ -157,5 +173,5 @@ public class Animal {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	
+
 }

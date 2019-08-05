@@ -8,17 +8,21 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Animal;
+import com.example.demo.model.Pergunta;
+import com.example.demo.model.Pontuacao;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.util.Util;
@@ -108,6 +112,18 @@ public class AdmController {
 		}
 		return "redirect:/adotar";
 		
+	}
+	
+	@GetMapping("/cadastro/pergunta")
+	public ModelAndView cadastroPergunta() {
+		ModelAndView mv = new ModelAndView("/adm/cadpergunta");
+		mv.addObject("pergunta", new Pergunta());
+		mv.addObject("pontuacoes", Pontuacao.values());
+		return mv;
+	}
+	@PostMapping(path = "/cadastro/pergunta", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String cadastroPergunta(@RequestBody Pergunta pergunta) {
+		return "Chegou";
 	}
 	
 	@GetMapping("/logout")
