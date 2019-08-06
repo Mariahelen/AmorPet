@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#editar-animal, #btn-remove-animal, #voltar{
+#editar-animal, #btn-remove-animal{
 	border-radius: 10px;
 	float: right;
 }
@@ -18,19 +18,20 @@ form a, input[type=submit] {
 	border-radius: 10% !important;
 }
 
-#detalhes-animal .row h2, #form-editar form h2{
+#detalhes-animal .row h3, #detalhes-animal .row h2, #form-editar form h3{
 	color: #6C98FB;
-	font-family: roboto, arial;
-	
 }
 
 #detalhes-animal .row p{
 	font-size: 20px;
 }
 
-input{
-	border-radius: 10px;
+body{
+	background-color: #FFF8FA !important;
 }
 
+input[type=radio]{
+	size: 
+}
 
 
