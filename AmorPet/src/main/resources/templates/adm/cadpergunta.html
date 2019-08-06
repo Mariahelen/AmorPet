@@ -36,13 +36,35 @@
 						<br>
 					</div>
 					<hr class="colorgraph">
-
+					<div class="alert alert-success" th:if="${sucesso}" th:text="${sucesso}"></div>
+					<div class="alert alert-danger" th:if="${listError}" th:each="err : ${listError}"
+						th:text="${err.getDefaultMessage()}"></div>
+					<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+					
 					<input type="hidden" th:field="*{idPergunta}" name="id">
 					<div class="form-group">
 						<label for="pergunta">Escreva a pergunta</label>
 						<textarea th:field="*{descricaoPergunta}" name="descricaoPergunta"
 							rows="3" cols="10" id="pergunta" class="form-control"></textarea>
 					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-9">
+								<h3>Residencia</h3>
+							</div>
+							<div class="col-sm-3">
+								<select th:field="*{residencia}">
+									<option th:value="''" data-display="Selecione">Selecione</option>
+									<option th:each="residencia : ${listaResidencias}"
+										th:value="${residencia.idResidencia}"
+										th:text="${residencia.tipoResidencia.toString()}"></option>
+								</select>
+							</div>
+						</div>
+						<hr>
+					</div>
+					
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-9">
@@ -64,7 +86,7 @@
 							maior.
 						</p>
 					</div>
-
+					
 					<hr class="colorgraph">
 					<div class="row" style="margin-bottom: 13px;">
 						<div class="col-xs-12 col-md-6 d-flex">

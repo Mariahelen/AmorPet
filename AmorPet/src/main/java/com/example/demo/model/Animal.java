@@ -31,6 +31,7 @@ public class Animal {
 	private Integer id_animal;
 
 	@OneToOne
+	@JoinColumn(name = "id_administrador")
 	private Usuario usuarioAdm;
 	@ManyToOne
 	@JoinColumn(name = "id_usuario", insertable = true, updatable = true)

@@ -29,8 +29,10 @@ public class Processo {
 	private Character resposta;
 	@Column(length = 1, columnDefinition = "CHAR(1)")
 	private Character confirmacao;
+	@Column(length = 3)
 	private Integer pontuacao;
 	@OneToOne
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	@ManyToOne
 	@JoinColumn(name = "id_selecao", insertable = true, updatable = true)
@@ -39,6 +41,7 @@ public class Processo {
 	private Selecao selecao;
 	@OneToOne
 	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "id_avaliacao")
 	private Avaliacao avaliacao;
 	@ManyToMany
 	@JoinTable(name = "processo_has_pergunta", joinColumns = @JoinColumn(name = "id_processo"), inverseJoinColumns = @JoinColumn(name = "id_pergunta"))

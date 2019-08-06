@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ public class Endereco {
 
 	@OneToOne
 	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "id_residencia")
 	private Residencia residencia;
 
 	@NotBlank(message = "Logradouro é necessário")

@@ -127,9 +127,8 @@
 											
 											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
 											 id="editar-animal" class="btn btn-success">Editar</button>
-										</div>
-										<div th:if="${session.usuarioLogado}">
-											<a th:unless="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+											 
+											<a th:if="${session.usuarioLogado.role} == 'ROLE_USER'"
 												class="btn btn-info" th:href="@{/quero-adotar/parte-1}">ADOTAR</a>
 										</div>
 									</div>
