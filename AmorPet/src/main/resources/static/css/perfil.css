@@ -42,8 +42,18 @@
 
 /* LATERAL DO PERFIL ==================*/
 #btn-desativar-conta {
-	margin-top: 200px;
-	margin-left: 5px;
+	margin-top: 10px;
+	margin-left: 45px;
+	text-transform: uppercase;
+	background-color: #b22222;
+	border: none;
+	color: #ffffff;
+}
+
+#btn-desativar-conta:hover{
+	
+	border: none;
+	
 }
 
 .list-group a, .list-group-item span {
@@ -152,4 +162,24 @@ input[type=file] {
 
 .desativar {
 	font-size: 20px;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: 'Roboto', sans-Serif;
 }
+
+.page-header{
+	
+	text-transform: uppercase;
+	font-faamily: 'Roboto', sans-Serif;
+	letter-spacing: 3px;	
+}
+
+.info label{
+	
+	text-transform: uppercase;
+	font-faamily: 'Roboto', sans-Serif;
+	color: #7ac673;
+	letter-spacing: 2px;
+	
+}
+

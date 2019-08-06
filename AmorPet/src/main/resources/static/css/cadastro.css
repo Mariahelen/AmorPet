@@ -56,17 +56,19 @@
 .badge {
     background-color: #029595;
     font-size: 17px;
-    padding: 7px;
+    padding: 10px;
 }
 
 .badge a {
     margin-left: 3px;
-    font-size: 20px;
+    font-size: 16px;
     color: #f5f5f5;
+    text-decoration: none;
 }
 
 .badge a:hover, .badge a:focus {
-    color: #7ac673;
+   
+   font-size: 17px;
 }
 
 .tit-processo-1 {
@@ -91,9 +93,17 @@
 
 .btn-terms {
 
-    border-color: #3CB371;
+	background-color: #7ac673;
+    border-color: #7ac673;
     color: #FFFFFF;
 
+}
+
+.btn-terms:hover, .btn-terms:focus{
+	
+	background-color: #69bf61;
+	 border-color: #69bf61;
+	transition: 1s;
 }
 
 .terms {
@@ -168,3 +178,83 @@ a#terms.new-passwd:hover, a#terms.new-passwd:focus{
 
     margin-top: 13.5%;
 }
+
+.btn-login{
+	
+	background-color: #7ac673;
+	color: #ffffff;
+}
+
+.btn-login:hover, .btn-login:focus{
+	
+	background-color: #69bf61;
+	transition: 0.5s;
+	
+	
+}
+
+
+.input-forgot-pass{
+	
+	border: 1px solid #000000;
+}
+
+.btn-close-pass{
+	
+	background-color: #C0C0C0;
+	text-transform: uppercase;
+	color: #000000;
+	font-family: 'Roboto', sans-Serif;
+}
+
+.btn-close-pass:hover, .btn-close-pass:focus{
+	
+	background-color:#D3D3D3;
+	transition: 0.5s;
+	color: #000000;
+}
+
+.btn-submit-pass{
+	
+	background-color: #7ac673;
+	text-transform: uppercase;
+	color: #ffffff;
+	
+}
+
+.btn-submit-pass:hover, .btn-submit-pass:focus{
+	
+	background-color: #69bf61;
+	transition: 0.5s;
+	
+}
+
+.btn-close-modal{
+	
+	margin-top: -22px !important;
+	
+}
+
+.btn-submit-photo{
+	
+	background-color: #7ac673;
+	padding: 6px;
+	margin-top: -5px;
+	width: 30%;
+	text-transform: uppercase;
+	color: #ffffff;
+	
+}
+
+.btn-submit-photo:hover, .btn-submit-photo:focus{
+	
+	background-color: #69bf61;
+	transition: 0.5s;
+	
+}
+
+
+
+
+
+
