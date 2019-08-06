@@ -33,6 +33,7 @@
 }
 
 .container form .form-group .info-prioridade, .modal .info-prioridade {
+	margin-top: 15px !important;
 	text-aling: justify;
 	font-size: 15px;
 	font-style: italic;

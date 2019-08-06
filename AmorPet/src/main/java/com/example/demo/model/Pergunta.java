@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -24,8 +23,7 @@ public class Pergunta {
 	private Integer idPergunta;
 	
 	@NotBlank(message = "Descrição da pergunta é necessária")
-	@Size(max = 50, message = "A descrição deve ter no máximo 50 caracteres")
-	@Column(name = "descricao_pergunta", length = 50, nullable = false)
+	@Column(name = "descricao_pergunta", columnDefinition = "TEXT(500)", nullable = false)
 	private String descricaoPergunta;
 	
 	@NotNull(message = "Prioridade é necessária")

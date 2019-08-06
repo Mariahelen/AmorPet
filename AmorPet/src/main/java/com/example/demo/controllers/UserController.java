@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.Estado;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.ResidenciaService;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.util.Util;
 
@@ -28,6 +30,8 @@ public class UserController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private ResidenciaService residenciaService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -97,7 +101,10 @@ public class UserController {
 
 	@GetMapping("/quero-adotar/parte-1")
 	public ModelAndView exibirFormUm() {
-		return new ModelAndView("/user/form-etapa-1");
+		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
+		mv.addObject("estados", Estado.values());
+		mv.addObject("listaResidencias", this.residenciaService.listar());
+		return mv;
 	}
 
 	@GetMapping("/quero-adotar/parte-2")
