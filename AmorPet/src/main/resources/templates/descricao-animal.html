@@ -129,7 +129,7 @@
 											 id="editar-animal" class="btn btn-success">Editar</button>
 											 
 											<a th:if="${session.usuarioLogado.role} == 'ROLE_USER'"
-												class="btn btn-info" th:href="@{/user/quero-adotar/parte-1}">ADOTAR</a>
+												class="btn btn-info" th:href="|/user/quero-adotar/${animal.id_animal}|">ADOTAR</a>
 										</div>
 									</div>
 								</div>

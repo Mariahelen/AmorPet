@@ -50,8 +50,8 @@ public class Animal {
 	private LocalDate dataNascimento;
 
 	@NotNull(message = "O sexo do animal é necessário")
-	@Column(length = 5, nullable = false)
-	@Size(max = 5)
+	@Column(length = 10, nullable = false)
+	@Size(max = 10)
 	private String sexoAnimal;
 
 	@NotNull(message = "A história do animal é necessário")

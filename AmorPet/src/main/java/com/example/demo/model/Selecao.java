@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -32,6 +33,8 @@ public class Selecao {
 	@OneToMany(mappedBy = "selecao")
 	@Cascade(CascadeType.ALL)
 	private List<Processo> processos;
+	@NotNull
+	private Boolean aberta;
 
 	public Integer getIdSelecao() {
 		return idSelecao;
@@ -63,6 +66,14 @@ public class Selecao {
 
 	public void setProcessos(List<Processo> processos) {
 		this.processos = processos;
+	}
+
+	public Boolean getAberta() {
+		return aberta;
+	}
+
+	public void setAberta(Boolean aberta) {
+		this.aberta = aberta;
 	}
 
 }

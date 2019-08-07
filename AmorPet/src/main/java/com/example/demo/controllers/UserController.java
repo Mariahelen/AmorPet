@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.Animal;
 import com.example.demo.model.Estado;
+import com.example.demo.model.Processo;
+import com.example.demo.model.Selecao;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.AnimalService;
 import com.example.demo.service.ResidenciaService;
+import com.example.demo.service.SelecaoService;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.util.Util;
 
@@ -32,6 +38,10 @@ public class UserController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private ResidenciaService residenciaService;
+	@Autowired
+	private SelecaoService selecaoService;
+	@Autowired
+	private AnimalService animalService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -99,16 +109,43 @@ public class UserController {
 		return "redirect:/user/perfil/editar";
 	}
 
-	@GetMapping("/quero-adotar/parte-1")
-	public ModelAndView exibirFormUm() {
+	@GetMapping("/quero-adotar/{idAnimal}")
+	public String iniciarSelecaoAnimal(@PathVariable("idAnimal") Integer id, RedirectAttributes ra, HttpSession session) {
+
+		// verificar se o animal tem dono
+		// caso nao, ent inserir uma nova selecao no bd passando o animal
+		try {
+			Animal animalDaSelecao = this.animalService.findById(id);
+			if(!this.animalService.verificarDono(animalDaSelecao)) {
+				
+				// ligar o processo deste usuario a selecao
+				Processo processo = new Processo();
+				processo.setUsuario((Usuario) session.getAttribute("usuarioLogado"));
+				
+				Selecao selecao = this.selecaoService.findBySelecaoAberta(id);
+				this.selecaoService.iniciarSelecao(selecao, processo, animalDaSelecao);
+				
+				return "redirect:/user/quero-adotar/"+id+"/etapa/1";
+			}
+			ra.addFlashAttribute("error", "Animal já adotado");
+		} catch (Exception e) {
+			ra.addFlashAttribute("error", e.getMessage());
+		}
+		return "redirect:/descricao-animal/"+id;
+		
+	}
+	
+	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
+	public ModelAndView exibirEtapaUm(@PathVariable("idAnimal") Integer id) {
+		
 		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
 		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
 
-	@GetMapping("/quero-adotar/parte-2")
-	public ModelAndView exibirFormDois() {
+	@GetMapping("/quero-adotar/{id_animal}/etapa/2")
+	public ModelAndView exibirEtapaDois() {
 		return new ModelAndView("/user/form-etapa-2");
 	}
 

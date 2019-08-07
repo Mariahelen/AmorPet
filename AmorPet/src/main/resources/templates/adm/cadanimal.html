@@ -38,8 +38,8 @@
 					</div>
 					<hr class="colorgraph">
 					<div class="row">
-						<div th:if="${sucesso}" th:text="${success}"></div>
-						<div th:if="${error}" th:text="${error}" class="text-danger"></div>
+						<div th:if="${sucesso}" th:text="${sucesso}" class="alert alert-success"></div>
+						<div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
 								<label>Nome do Animal</label> <input type="text"

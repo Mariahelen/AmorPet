@@ -58,4 +58,11 @@ public class AnimalService {
 		animalBanco.setSexoAnimal(animal.getSexoAnimal());
 		this.animalRep.save(animalBanco);
 	}
+	
+	public boolean verificarDono(Animal animal) {
+		if(animal.getUsuario() != null) {
+			return true;
+		}
+		return false;
+	}
 }

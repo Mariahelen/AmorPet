@@ -64,21 +64,22 @@ public class AdmController {
 			return "redirect:/adm/cadastro/animal";
 		}
 		try {
-			String path = Util.caminhoParaImagemAnimal(animal.getFile().getOriginalFilename());
+			String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
 			File destino = new File(path);
 			animal.getFile().transferTo(destino);
-			// pra da o tempo de criar as pastas e mover os arquivos
-			Thread.sleep(5000);
-			animal.setCaminhoFoto("/img/animais/" + animal.getFile().getOriginalFilename());
+			animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
 			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
 			ra.addFlashAttribute("sucesso", "Animal cadastrado com sucesso!");
+			// pra da o tempo de criar as pastas e mover os arquivos
+			Thread.sleep(5000);
 
 		} catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
+			System.out.println(e.getMessage());
 		}
 
 		return "redirect:/adm/cadastro/animal";

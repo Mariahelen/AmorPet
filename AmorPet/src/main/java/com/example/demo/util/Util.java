@@ -21,11 +21,24 @@ public class Util {
 		return caminhoCompleto;
 	}
 
-	public static String caminhoParaImagemAnimal(String nomeFoto) {
-		String caminhoCompleto = new File("").getAbsolutePath() + "/src/main/resources/static/img/animais/";
+	public static String pegarCaminhoCompletoParaImagemAnimal(String nomeFoto, String tipoAnimal) throws Exception {
+		String caminhoCompleto = new File("").getAbsolutePath() + "/src/main/resources/static/";
+		caminhoCompleto += pegarCaminhoImagemAnimal(tipoAnimal);
 		new File(caminhoCompleto).mkdirs();
 		caminhoCompleto += nomeFoto;
 		return caminhoCompleto;
+	}
+	
+	public static String pegarCaminhoImagemAnimal(String tipoAnimal) throws Exception {
+		String caminhoImagem;
+		if(tipoAnimal.equalsIgnoreCase("Cachorro")) {
+			caminhoImagem = "img/animais/dogs/";
+		} else if(tipoAnimal.equalsIgnoreCase("Gato")) {
+			caminhoImagem = "img/animais/cats/";
+		}else {
+			throw new Exception("Não foi possível cadastrar");
+		}
+		return caminhoImagem;
 	}
 
 	public static List<String> validaUsuario(Usuario usuario) {
