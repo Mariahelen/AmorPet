@@ -19,10 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.model.Animal;
 import com.example.demo.model.Estado;
-import com.example.demo.model.Processo;
-import com.example.demo.model.Selecao;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.service.ResidenciaService;
@@ -109,30 +106,46 @@ public class UserController {
 		return "redirect:/user/perfil/editar";
 	}
 
+//	@GetMapping("/quero-adotar/{idAnimal}")
+//	public String iniciarSelecaoAnimal(@PathVariable("idAnimal") Integer id, RedirectAttributes ra, HttpSession session) {
+//
+//		// verificar se o animal tem dono
+//		// caso nao, ent inserir uma nova selecao no bd passando o animal
+//		try {
+//			Animal animalDaSelecao = this.animalService.findById(id);
+//			if(!this.animalService.verificarDono(animalDaSelecao)) {
+//				
+//				// ligar o processo deste usuario a selecao
+//				Processo processo = new Processo();
+//				processo.setUsuario((Usuario) session.getAttribute("usuarioLogado"));
+//				
+//				Selecao selecao = this.selecaoService.findBySelecaoAberta(id);
+//				this.selecaoService.iniciarSelecao(selecao, processo, animalDaSelecao);
+//				
+//				return "redirect:/user/quero-adotar/"+id+"/etapa/1";
+//			}
+//			ra.addFlashAttribute("error", "Animal já adotado");
+//		} catch (Exception e) {
+//			ra.addFlashAttribute("error", e.getMessage());
+//		}
+//		return "redirect:/descricao-animal/"+id;
+//		
+//	}
+	
 	@GetMapping("/quero-adotar/{idAnimal}")
-	public String iniciarSelecaoAnimal(@PathVariable("idAnimal") Integer id, RedirectAttributes ra, HttpSession session) {
-
-		// verificar se o animal tem dono
-		// caso nao, ent inserir uma nova selecao no bd passando o animal
+	public String iniciarSelecaoAnimal(@PathVariable Integer idAnimal, HttpSession session) {
 		try {
-			Animal animalDaSelecao = this.animalService.findById(id);
-			if(!this.animalService.verificarDono(animalDaSelecao)) {
-				
-				// ligar o processo deste usuario a selecao
-				Processo processo = new Processo();
-				processo.setUsuario((Usuario) session.getAttribute("usuarioLogado"));
-				
-				Selecao selecao = this.selecaoService.findBySelecaoAberta(id);
-				this.selecaoService.iniciarSelecao(selecao, processo, animalDaSelecao);
-				
-				return "redirect:/user/quero-adotar/"+id+"/etapa/1";
-			}
-			ra.addFlashAttribute("error", "Animal já adotado");
-		} catch (Exception e) {
-			ra.addFlashAttribute("error", e.getMessage());
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			
+			// verifica se existe uma selecao aberta pra este animal
+			// verifica se este usuario já está nesta selecao
+			this.selecaoService.selecaoAnimal(idAnimal, usuario);
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
-		return "redirect:/descricao-animal/"+id;
 		
+		return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/1";
 	}
 	
 	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
