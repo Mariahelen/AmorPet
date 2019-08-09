@@ -36,7 +36,8 @@ public class Autorizacao implements HandlerInterceptor {
 		// autenticado
 		for (String recurso : RECURSOS_LIVRES) {
 			if (request.getRequestURL().toString().contains(recurso)
-					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)) {
+					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)
+					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)) {
 				return true;
 			}
 		}

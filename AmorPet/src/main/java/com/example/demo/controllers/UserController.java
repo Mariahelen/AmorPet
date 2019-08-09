@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.dao.PerguntaDAO;
 import com.example.demo.model.Estado;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.ResidenciaService;
@@ -36,6 +38,8 @@ public class UserController {
 	private ResidenciaService residenciaService;
 	@Autowired
 	private SelecaoService selecaoService;
+	@Autowired
+	private PerguntaDAO perguntaService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -128,6 +132,7 @@ public class UserController {
 	public ModelAndView exibirFormEndereco(@PathVariable("idAnimal") Integer id) {
 
 		ModelAndView mv = new ModelAndView("/user/form-endereco");
+		mv.addObject("idAnimal", id);
 		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
@@ -136,7 +141,9 @@ public class UserController {
 	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
 	public ModelAndView exibirEtapaUm(@PathVariable("idAnimal") Integer id) {
 		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
-
+		// pegas as pergunta no bd ordenadas por pontuacao
+		mv.addObject("listaPerguntas", this.perguntaService.findAll(Sort.by("pontuacao")));
+		
 		return mv;
 	}
 

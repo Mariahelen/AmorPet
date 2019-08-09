@@ -31,7 +31,7 @@
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<br /> <br />
 				<!-- INICIO DO FORM -->
-				<form role="form" th:action="@{/quero-adotar/parte-2}">
+				<form role="form" th:action="@{|/quero-adotar/${idAnimal}/cadastro/endereco|}" method="post">
 					<h2 class="tit-processo-1">PROCESSO ADOTIVO - CADASTRO DE ENDEREÇO</h2>
 					<hr class="colorgraph">
 
@@ -90,7 +90,9 @@
 										data-display="Reside em casa ou
 									apartamento?">Reside
 										em casa ou apartamento?</option>
-									<option th:each="residencia : ${listaResidencias}" th:value="${residencia}"
+									<option th:each="residencia : ${listaResidencias}"
+										th:unless="${residencia.tipoResidencia} == 'Todos'"
+										th:value="${residencia}"
 										th:text="${residencia.tipoResidencia}"></option>
 								</select>
 							</div>
