@@ -33,12 +33,12 @@ public class Processo {
 	private Integer pontuacao;
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	private Usuario idUsuario;
 	@ManyToOne
 	@JoinColumn(name = "id_selecao", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.ALL)
-	private Selecao selecao;
+	private Selecao idSelecao;
 	@OneToOne
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "id_avaliacao")
@@ -81,19 +81,19 @@ public class Processo {
 	}
 
 	public Usuario getUsuario() {
-		return usuario;
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public Selecao getSelecao() {
-		return selecao;
+		return idSelecao;
 	}
 
-	public void setSelecao(Selecao selecao) {
-		this.selecao = selecao;
+	public void setSelecao(Selecao idSelecao) {
+		this.idSelecao = idSelecao;
 	}
 
 	public Avaliacao getAvaliacao() {

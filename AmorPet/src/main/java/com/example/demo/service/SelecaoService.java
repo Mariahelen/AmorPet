@@ -37,58 +37,55 @@ public class SelecaoService {
 		return null;
 	}
 
-	public Selecao findBySelecaoAberta(Integer idAnimal) {
+	/* CRIA UMA SELECAO OU USA A EXISTENTE */
+	public void selecaoAnimal(Integer idAnimal, Usuario usuario) throws Exception {
+
+		Selecao selecao = this.findBySelecao(idAnimal);
+		Processo processo = new Processo();
+
+		// caso a seleção exista no bd
+		if (selecao.getIdSelecao() != null) {
+			
+			for (Processo p : selecao.getProcessos()) {
+				// se o usuario já estiver no processo da selecao
+				if(p.getUsuario().getId().equals(usuario.getId())) {
+					processo = p;
+					return;
+				}
+			}
+		}
+		// criar um processo caso o usuario não estiver
+		processo.setUsuario(usuario);
+		processo.setSelecao(selecao);
+		selecao.getProcessos().add(processo);
+
+		this.processoRep.save(processo);
+		this.selecaoRep.save(selecao);
+	}
+
+	/* VERIFICAR SE EXISTE UMA SELECAO ABERTA OU CRIA UMA NOVA */
+	public Selecao findBySelecao(Integer idAnimal) throws Exception {
 		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(idAnimal);
 		if (selecao.isPresent()) {
+			// verifica se a selecao está aberta
 			if (selecao.get().getAberta()) {
 				return selecao.get();
 			}
 		}
-		Selecao novaSelecao = new Selecao();
-		novaSelecao.setProcessos(new ArrayList<Processo>());
+		// cria uma nova selecao caso não tenha selecao aberta
+		Animal animal = this.animalRep.findById(idAnimal).orElseThrow(Exception::new);
+		Selecao novaSelecao = this.novaSelecao(animal);
 		return novaSelecao;
 	}
 
-//	public void iniciarSelecao(Selecao selecao, Processo processo, Animal animal) {
-//		selecao.getProcessos().add(processo);
-//		selecao.setAnimal(animal);
-//		selecao.setAberta(true);
-//		if(selecao.getDataRegistro() == null) {
-//			selecao.setDataRegistro(LocalDate.now());
-//		}
-//		this.selecaoRep.save(selecao);
-//	}
-
-	public void selecaoAnimal(Integer idAnimal, Usuario usuario) throws Exception {
-
-		Selecao selecao = this.findBySelecaoAberta(idAnimal);
-		// ARRUMAR DPS
-		Optional<Animal> animal = this.animalRep.findById(idAnimal);
-		if(!animal.isPresent()) {
-			throw new Exception("Animal não cadastrado");
-		}
-		
-		Processo processo = new Processo();
-		Optional<Processo> processoExistente = this.processoRep.findByUsuario(usuario.getId());
-
-		// verifica se existe um processo deste usuario
-		if (processoExistente.isPresent()) {
-			processo = processoExistente.get();
-		} else {
-			processo.setUsuario(usuario);
-			processo.setSelecao(selecao);
-		}
-
-		// verifica se existe esse processo na selecao
-		if (!selecao.getProcessos().contains(processo)) {
-			selecao.getProcessos().add(processo);
-		}
-		if (selecao.getDataRegistro() == null) {
-			selecao.setDataRegistro(LocalDate.now());
-		}
-		// ARRUMAR DPS
-		selecao.setAnimal(animal.get());
+	/* CRIA UMA NOVA SELECAO */
+	public Selecao novaSelecao(Animal animal) {
+		Selecao selecao = new Selecao();
+		selecao.setAnimal(animal);
+		selecao.setDataRegistro(LocalDate.now());
+		selecao.setProcessos(new ArrayList<Processo>());
 		selecao.setAberta(true);
-		this.selecaoRep.save(selecao);
+		return selecao;
 	}
+
 }

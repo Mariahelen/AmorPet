@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<!--Cadastro CSS-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quero Adotar - AmorPet</title>
+
+<!--Página de Cadastro CSS-->
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/cadastro.css}">
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/style.css}">
+
+<!-- CSS DO FORMULARIO DAS ETAPAS -->
+<link rel="stylesheet" th:href="@{/css-quero-adotar/nice-select.css}">
+<link rel="stylesheet" th:href="@{/css-quero-adotar/form-etapa.css}">
+</head>
+<body class="bg">
+
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+
+	<main>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<br /> <br />
+				<!-- INICIO DO FORM -->
+				<form role="form" th:action="@{/quero-adotar/parte-2}">
+					<h2 class="tit-processo-1">PROCESSO ADOTIVO - CADASTRO DE ENDEREÇO</h2>
+					<hr class="colorgraph">
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg"
+									placeholder="Complemento" tabindex="1">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="number" class="form-control input-lg"
+									placeholder="Número" tabindex="2">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg "
+									placeholder="Logradouro" tabindex="3">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg"
+									placeholder="Bairro" tabindex="4">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg "
+									placeholder="Cidade" tabindex="5">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg "
+									placeholder="CEP" tabindex="7">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<select class="wide">
+									<option th:value="''" data-display="Selecione Estado">Selecione
+										Estado</option>
+									<option th:each="estado : ${estados}" th:value="${estado}"
+										th:text="${estado.toString()}"></option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="form-group">
+								<select class="wide">
+									<option th:value="''"
+										data-display="Reside em casa ou
+									apartamento?">Reside
+										em casa ou apartamento?</option>
+									<option th:each="residencia : ${listaResidencias}" th:value="${residencia}"
+										th:text="${residencia.tipoResidencia}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<hr class="colorgraph">
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<input type="submit" value="Enviar"
+								class="btn btn-success btn-block btn-lg" tabindex="7">
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<input type="reset" class="btn btn-primary btn-block btn-lg"
+								value="Limpar">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	</main>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+
+	<!--Página de Cadastro CSS-->
+	<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+	<script th:src="@{/js/cadastro.js}"></script>
+
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
+	<!-- PLUGIN DE SELEC DO NICE-SELECT  -->
+	<script th:src="@{/js-quero-adotar/jquery.nice-select.min.js}"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('select').niceSelect();
+		});
+	</script>
+</body>
+</html>

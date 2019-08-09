@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.model.Endereco;
 import com.example.demo.model.Usuario;
 
 @Service
@@ -67,6 +68,21 @@ public class UsuarioService {
 		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());
 		usuarioParaSalvar.setConfirmaSenha(usuarioParaSalvar.getHashSenha());
 		return usuarioParaSalvar;
+	}
+
+	public boolean verificarEndereco(Endereco endereco) {
+		if (endereco.getBairro() == null
+				|| endereco.getCep() == 0
+				|| endereco.getCidade() == null
+				|| endereco.getComplemento() == null
+				|| endereco.getEstado() == null
+				|| endereco.getLogradouro() == null
+				|| endereco.getResidencia() == null) {
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

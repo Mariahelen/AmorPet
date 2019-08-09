@@ -29,8 +29,8 @@ public class Selecao {
 	@OneToOne
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "id_animal")
-	private Animal animal;
-	@OneToMany(mappedBy = "selecao")
+	private Animal idAnimal;
+	@OneToMany(mappedBy = "idSelecao")
 	@Cascade(CascadeType.ALL)
 	private List<Processo> processos;
 	@NotNull
@@ -53,11 +53,11 @@ public class Selecao {
 	}
 
 	public Animal getAnimal() {
-		return animal;
+		return idAnimal;
 	}
 
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
+	public void setAnimal(Animal idAnimal) {
+		this.idAnimal = idAnimal;
 	}
 
 	public List<Processo> getProcessos() {

@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Estado;
 import com.example.demo.model.Usuario;
-import com.example.demo.service.AnimalService;
 import com.example.demo.service.ResidenciaService;
 import com.example.demo.service.SelecaoService;
 import com.example.demo.service.UsuarioService;
@@ -37,8 +36,6 @@ public class UserController {
 	private ResidenciaService residenciaService;
 	@Autowired
 	private SelecaoService selecaoService;
-	@Autowired
-	private AnimalService animalService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -106,60 +103,48 @@ public class UserController {
 		return "redirect:/user/perfil/editar";
 	}
 
-//	@GetMapping("/quero-adotar/{idAnimal}")
-//	public String iniciarSelecaoAnimal(@PathVariable("idAnimal") Integer id, RedirectAttributes ra, HttpSession session) {
-//
-//		// verificar se o animal tem dono
-//		// caso nao, ent inserir uma nova selecao no bd passando o animal
-//		try {
-//			Animal animalDaSelecao = this.animalService.findById(id);
-//			if(!this.animalService.verificarDono(animalDaSelecao)) {
-//				
-//				// ligar o processo deste usuario a selecao
-//				Processo processo = new Processo();
-//				processo.setUsuario((Usuario) session.getAttribute("usuarioLogado"));
-//				
-//				Selecao selecao = this.selecaoService.findBySelecaoAberta(id);
-//				this.selecaoService.iniciarSelecao(selecao, processo, animalDaSelecao);
-//				
-//				return "redirect:/user/quero-adotar/"+id+"/etapa/1";
-//			}
-//			ra.addFlashAttribute("error", "Animal já adotado");
-//		} catch (Exception e) {
-//			ra.addFlashAttribute("error", e.getMessage());
-//		}
-//		return "redirect:/descricao-animal/"+id;
-//		
-//	}
-	
 	@GetMapping("/quero-adotar/{idAnimal}")
-	public String iniciarSelecaoAnimal(@PathVariable Integer idAnimal, HttpSession session) {
+	public String iniciarSelecaoAnimal(@PathVariable Integer idAnimal, RedirectAttributes ra, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			
+
 			// verifica se existe uma selecao aberta pra este animal
 			// verifica se este usuario já está nesta selecao
 			this.selecaoService.selecaoAnimal(idAnimal, usuario);
-			
-		}catch(Exception e) {
+
+			if (this.usuarioService.verificarEndereco(usuario.getEndereco())) {
+
+				return "redirect:/user/quero-adotar/" + idAnimal + "/cadastro/endereco";
+			}
+		} catch (Exception e) {
+			ra.addFlashAttribute("error", "Animal não existe");
 			System.out.println(e.getMessage());
 		}
-		
-		return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/1";
+
+		return "redirect:/user/quero-adotar/" + idAnimal + "/etapa/1";
 	}
-	
-	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
-	public ModelAndView exibirEtapaUm(@PathVariable("idAnimal") Integer id) {
-		
-		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
+
+	@GetMapping("/quero-adotar/{idAnimal}/cadastro/endereco")
+	public ModelAndView exibirFormEndereco(@PathVariable("idAnimal") Integer id) {
+
+		ModelAndView mv = new ModelAndView("/user/form-endereco");
 		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
 
+	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
+	public ModelAndView exibirEtapaUm(@PathVariable("idAnimal") Integer id) {
+		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
+
+		return mv;
+	}
+
 	@GetMapping("/quero-adotar/{id_animal}/etapa/2")
 	public ModelAndView exibirEtapaDois() {
-		return new ModelAndView("/user/form-etapa-2");
+		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
+
+		return mv;
 	}
 
 	@GetMapping("/logout")
@@ -184,6 +169,5 @@ public class UserController {
 
 		return "redirect:/user/logout";
 	}
-	
 
 }

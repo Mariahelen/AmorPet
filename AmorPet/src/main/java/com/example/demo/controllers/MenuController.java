@@ -31,11 +31,11 @@ public class MenuController {
 	public String index() {
 		return "/index";
 	}
-	@GetMapping("/termos")
+	@GetMapping("/como-funciona/termos")
 	public String termos() {
 		return "/termos";
 	}
-	@GetMapping("/navegacao")
+	@GetMapping("/como-funciona/navegacao")
 	public String navegacao() {
 		return "navegacao";
 	}
