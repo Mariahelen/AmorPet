@@ -5,6 +5,6 @@ marcadorPagina(urlPath);
 
 function marcadorPagina(urlPath) {
 	urlPath = urlPath.substr(1);
-	$("#" + url).addClass('marcador-pagina').siblings('li').removeClass(
+	$("#" + urlPath).addClass('marcador-pagina').siblings('li').removeClass(
 			'marcador-pagina');
 }

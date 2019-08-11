@@ -89,7 +89,7 @@ public class AdmController {
 	public String editarAnimal(@Valid Animal animal, BindingResult br, RedirectAttributes ra) {
 		if (br.hasErrors()) {
 			ra.addFlashAttribute("errorEditar", br.getAllErrors());
-			return "redirect:/descricao-animal/" + animal.getId_animal();
+			return "redirect:/descricao-animal/" + animal.getIdAnimal();
 		}
 		try {
 			this.animalService.criarAnimal(animal);
@@ -97,7 +97,7 @@ public class AdmController {
 		} catch (Exception e) {
 			ra.addFlashAttribute("errorEditar", e.getMessage());
 		}
-		return "redirect:/descricao-animal/" + animal.getId_animal();
+		return "redirect:/descricao-animal/" + animal.getIdAnimal();
 	}
 
 	@PostMapping("/remover/animal/{idAnimal}")

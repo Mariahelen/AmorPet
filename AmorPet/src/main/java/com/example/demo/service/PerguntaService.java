@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.PerguntaDAO;
@@ -14,7 +15,7 @@ public class PerguntaService {
 	private PerguntaDAO perguntaRep;
 	
 	public List<Pergunta> listar() {
-		return this.perguntaRep.findAll();
+		return this.perguntaRep.findAll(Sort.by("pontuacao"));
 	}
 	
 	public void save(Pergunta pergunta) {

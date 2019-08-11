@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,29 +9,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Processo {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_processo")
 	private Integer idProcesso;
-	@Column(length = 1, columnDefinition = "CHAR(1)")
-	private Character resposta;
-	@Column(length = 1, columnDefinition = "CHAR(1)")
-	private Character confirmacao;
-	@Column(length = 3)
-	private Integer pontuacao;
+	@Column(length = 3, columnDefinition = "INT(3)")
+	private Integer pontuacaoFinal;
+	@DateTimeFormat(pattern = "yy-MM-dd")
+	@Column(name = "data_registro", nullable = false)
+	private LocalDate dataRegistro;
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario idUsuario;
@@ -43,10 +42,9 @@ public class Processo {
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "id_avaliacao")
 	private Avaliacao avaliacao;
-	@ManyToMany
-	@JoinTable(name = "processo_has_pergunta", joinColumns = @JoinColumn(name = "id_processo"), inverseJoinColumns = @JoinColumn(name = "id_pergunta"))
-	@Column(name = "id_pergunta")
-	private List<Pergunta> perguntas;
+	@OneToMany(mappedBy = "idProcesso")
+	@Cascade(CascadeType.ALL)
+	private List<Resposta> respostas;
 
 	public Integer getIdProcesso() {
 		return idProcesso;
@@ -56,43 +54,35 @@ public class Processo {
 		this.idProcesso = idProcesso;
 	}
 
-	public Character getResposta() {
-		return resposta;
+	public Integer getPontuacaoFinal() {
+		return pontuacaoFinal;
 	}
 
-	public void setResposta(Character resposta) {
-		this.resposta = resposta;
+	public void setPontuacaoFinal(Integer pontuacaoFinal) {
+		this.pontuacaoFinal = pontuacaoFinal;
 	}
 
-	public Character getConfirmacao() {
-		return confirmacao;
+	public LocalDate getDataRegistro() {
+		return dataRegistro;
 	}
 
-	public void setConfirmacao(Character confirmacao) {
-		this.confirmacao = confirmacao;
+	public void setDataRegistro(LocalDate dataRegistro) {
+		this.dataRegistro = dataRegistro;
 	}
 
-	public Integer getPontuacao() {
-		return pontuacao;
-	}
-
-	public void setPontuacao(Integer pontuacao) {
-		this.pontuacao = pontuacao;
-	}
-
-	public Usuario getUsuario() {
+	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setUsuario(Usuario idUsuario) {
+	public void setIdUsuario(Usuario idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
-	public Selecao getSelecao() {
+	public Selecao getIdSelecao() {
 		return idSelecao;
 	}
 
-	public void setSelecao(Selecao idSelecao) {
+	public void setIdSelecao(Selecao idSelecao) {
 		this.idSelecao = idSelecao;
 	}
 
@@ -104,12 +94,12 @@ public class Processo {
 		this.avaliacao = avaliacao;
 	}
 
-	public List<Pergunta> getPerguntas() {
-		return perguntas;
+	public List<Resposta> getRespostas() {
+		return respostas;
 	}
 
-	public void setPerguntas(List<Pergunta> perguntas) {
-		this.perguntas = perguntas;
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
 	}
 
 }

@@ -6,24 +6,32 @@ import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.dao.PerguntaDAO;
+import com.example.demo.model.Endereco;
 import com.example.demo.model.Estado;
+import com.example.demo.model.Processo;
+import com.example.demo.model.Residencia;
+import com.example.demo.model.Resposta;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.PerguntaService;
+import com.example.demo.service.ProcessoService;
 import com.example.demo.service.ResidenciaService;
+import com.example.demo.service.RespostaService;
 import com.example.demo.service.SelecaoService;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.util.Util;
@@ -39,7 +47,11 @@ public class UserController {
 	@Autowired
 	private SelecaoService selecaoService;
 	@Autowired
-	private PerguntaDAO perguntaService;
+	private PerguntaService perguntaService;
+	@Autowired
+	private ProcessoService processoService;
+	@Autowired
+	private RespostaService respostaService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -109,46 +121,89 @@ public class UserController {
 
 	@GetMapping("/quero-adotar/{idAnimal}")
 	public String iniciarSelecaoAnimal(@PathVariable Integer idAnimal, RedirectAttributes ra, HttpSession session) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Processo processo = this.processoService.criarProcesso(usuario);
 		try {
-			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-
 			// verifica se existe uma selecao aberta pra este animal
-			// verifica se este usuario já está nesta selecao
-			this.selecaoService.selecaoAnimal(idAnimal, usuario);
-
-			if (this.usuarioService.verificarEndereco(usuario.getEndereco())) {
-
-				return "redirect:/user/quero-adotar/" + idAnimal + "/cadastro/endereco";
-			}
+			// verifica se este processo já está nesta selecao
+			this.selecaoService.selecaoAnimal(idAnimal, processo);
 		} catch (Exception e) {
 			ra.addFlashAttribute("error", "Animal não existe");
 			System.out.println(e.getMessage());
 		}
-
+		
+		if (this.usuarioService.verificarEndereco(usuario.getEndereco())) {
+			return "redirect:/user/quero-adotar/" + idAnimal + "/cadastro/endereco";
+		}
 		return "redirect:/user/quero-adotar/" + idAnimal + "/etapa/1";
 	}
 
 	@GetMapping("/quero-adotar/{idAnimal}/cadastro/endereco")
-	public ModelAndView exibirFormEndereco(@PathVariable("idAnimal") Integer id) {
-
+	public ModelAndView exibirFormEndereco(@PathVariable Integer idAnimal, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/user/form-endereco");
-		mv.addObject("idAnimal", id);
+		// pega o usuario da sessao
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		mv.addObject("endereco", usuario.getEndereco());
+		mv.addObject("idAnimal", idAnimal);
 		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
-
-	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
-	public ModelAndView exibirEtapaUm(@PathVariable("idAnimal") Integer id) {
-		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
-		// pegas as pergunta no bd ordenadas por pontuacao
-		mv.addObject("listaPerguntas", this.perguntaService.findAll(Sort.by("pontuacao")));
-		
-		return mv;
+	
+	@PostMapping("/quero-adotar/{idAnimal}/cadastro/endereco")
+	public ModelAndView salvarFormEndereco(@Valid Endereco endereco, BindingResult br, @PathVariable Integer idAnimal, HttpSession session) {
+		if(br.hasErrors()) {
+			ModelAndView mv = new ModelAndView("/user/form-endereco");
+			mv.addObject("idAnimal", idAnimal);
+			mv.addObject("estados", Estado.values());
+			mv.addObject("listaResidencias", this.residenciaService.listar());
+			return mv;
+		}
+		try {
+			Residencia residencia = this.residenciaService.obterResidenciasDisponiveis(endereco.getResidencia().getIdResidencia());
+			endereco.setResidencia(residencia);
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			usuario.setEndereco(endereco);
+			this.usuarioService.save(usuario);
+		}catch(Exception e) {
+			ModelAndView mv = new ModelAndView("/user/form-endereco");
+			mv.addObject("idAnimal", idAnimal);
+			mv.addObject("estados", Estado.values());
+			mv.addObject("listaResidencias", this.residenciaService.listar());
+			mv.addObject("error", "Erro ao realizar o cadastro, tente novamente");
+			return mv;
+		}
+		return new ModelAndView("redirect:/user/quero-adotar/"+idAnimal+"/etapa/1");
 	}
 
-	@GetMapping("/quero-adotar/{id_animal}/etapa/2")
-	public ModelAndView exibirEtapaDois() {
+	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
+	public ModelAndView exibirEtapaUm(@PathVariable Integer idAnimal) {
+		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
+		mv.addObject("idAnimal", idAnimal);
+		// respostas relacionadas com as perguntas
+		List<Resposta> respostas = 
+				this.respostaService.criarListaRespostas(this.perguntaService.listar());
+		mv.addObject("listaRespostas", respostas);
+		return mv;
+	}
+	
+	@PostMapping("/quero-adotar/{idAnimal}/etapa/1")
+	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra, @PathVariable Integer idAnimal, HttpSession session) {
+		try {
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario);
+			this.processoService.salvarRespostasAndProcesso(usuario, respostas);
+		}catch(Exception e) {
+			ra.addFlashAttribute("error", "Erro ao enviar, tente novamente");
+			System.out.println(e.getMessage());
+			return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/1";
+		}
+		return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/2";
+	}
+
+	@GetMapping("/quero-adotar/{idAnimal}/etapa/2")
+	public ModelAndView exibirEtapaDois(@PathVariable Integer idAnimal) {
 		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
 
 		return mv;

@@ -56,10 +56,13 @@ public class MenuController {
 		Usuario usuarioLogado;
 		try {
 			usuarioLogado = this.usuarioService.efetuarLogin(email, senha);
+			session.setAttribute("email", email);
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} catch (LoginInvalido e) {
-			session.setAttribute("email", email);
 			ra.addFlashAttribute("mensagemError", e.getMessage());
+			return "redirect:/login";
+		} catch(Exception e) {
+			ra.addFlashAttribute("mensagemError", "Erro ao entrar, tente novamente.");
 			return "redirect:/login";
 		}
 		return "redirect:/user/perfil";
@@ -85,7 +88,7 @@ public class MenuController {
 			return mv;
 		}catch(Exception e) {
 			ModelAndView mv = new ModelAndView("/cadastro");
-			mv.addObject("mensagemError", e.getMessage());
+			mv.addObject("mensagemError", "Erro ao realizar o cadastro, tente novamente.");
 			mv.addObject("usuario", usuario);
 			return mv;
 		}

@@ -51,7 +51,7 @@ public class AnimalService {
 	}
 	
 	public void editarAnimal(Animal animal) {
-		Animal animalBanco = animalRep.getOne(animal.getId_animal());
+		Animal animalBanco = animalRep.getOne(animal.getIdAnimal());
 		animalBanco.setDataNascimento(animal.getDataNascimento());
 		animalBanco.setHistoriaAnimal(animal.getHistoriaAnimal());
 		animalBanco.setNome(animal.getNome());

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -9,6 +12,7 @@ import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.exception.LoginInvalido;
 import com.example.demo.model.Endereco;
 import com.example.demo.model.Usuario;
+import com.example.demo.util.Util;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -41,17 +45,16 @@ public class UsuarioService {
 		} else if (!usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
 			throw new Exception("As senhas não coincidem!");
 		}
-
+		usuario.setHashSenha(Util.criptografarSenha(usuario.getHashSenha()));
 		// USUARIO ESTARÁ ATIVO AUTOMATICAMENTE POR ENQUANTO
 		// REMOVER ESTAS LINHAS ASSIM QUE TIVER ENVIO DE EMAIL
 		usuario.setAtivo(true);
 
-//	    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		this.save(usuario);
 	}
 
-	public Usuario efetuarLogin(String email, String senha) throws LoginInvalido {
-		Usuario usuario = this.usuarioDAO.efetuarLogin(email, senha);
+	public Usuario efetuarLogin(String email, String senha) throws LoginInvalido, NoSuchAlgorithmException, UnsupportedEncodingException {
+		Usuario usuario = this.usuarioDAO.efetuarLogin(email, Util.criptografarSenha(senha));
 		if (usuario == null || !usuario.isAtivo()) {
 			throw new LoginInvalido();
 		}
@@ -71,13 +74,14 @@ public class UsuarioService {
 	}
 
 	public boolean verificarEndereco(Endereco endereco) {
-		if (endereco.getBairro() == null
-				|| endereco.getCep() == 0
-				|| endereco.getCidade() == null
-				|| endereco.getComplemento() == null
+		if (endereco.getBairro().trim().isEmpty()
+				|| endereco.getCep() == null
+				|| endereco.getCidade().trim().isEmpty()
+				|| endereco.getComplemento().trim().isEmpty()
 				|| endereco.getEstado() == null
-				|| endereco.getLogradouro() == null
-				|| endereco.getResidencia() == null) {
+				|| endereco.getLogradouro().trim().isEmpty()
+				|| endereco.getResidencia() == null
+				|| endereco.getNumero() == null) {
 			
 			return true;
 		}

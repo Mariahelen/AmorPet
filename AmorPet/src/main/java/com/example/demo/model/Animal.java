@@ -28,7 +28,7 @@ public class Animal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_animal;
+	private Integer idAnimal;
 
 	@OneToOne
 	@JoinColumn(name = "id_administrador")
@@ -79,12 +79,12 @@ public class Animal {
 	@Transient
 	private MultipartFile file;
 
-	public Integer getId_animal() {
-		return id_animal;
+	public Integer getIdAnimal() {
+		return idAnimal;
 	}
 
-	public void setId_animal(Integer id_animal) {
-		this.id_animal = id_animal;
+	public void setIdAnimal(Integer idAnimal) {
+		this.idAnimal = idAnimal;
 	}
 
 	public Usuario getUsuarioAdm() {

@@ -12,5 +12,5 @@ import com.example.demo.model.Processo;
 public interface ProcessoDAO extends JpaRepository<Processo, Integer> {
 
 	@Query("select p from Processo p where id_usuario = :idUsuario")
-	Optional<Processo> findByUsuario(Integer idUsuario);
+	Optional<Processo> findByIdUsuario(Integer idUsuario);
 }

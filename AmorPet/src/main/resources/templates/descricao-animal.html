@@ -122,14 +122,14 @@
 										<div th:if="${session.usuarioLogado}">
 											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
 													 id="btn-remove-animal" type="button"
-													th:value="${animal.id_animal}" class="btn btn-primary"
+													th:value="${animal.idAnimal}" class="btn btn-primary"
 													data-toggle="modal" data-target="#exampleModal">Remover</button>
 											
 											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
 											 id="editar-animal" class="btn btn-success">Editar</button>
 											 
 											<a th:if="${session.usuarioLogado.role} == 'ROLE_USER'"
-												class="btn btn-info" th:href="|/user/quero-adotar/${animal.id_animal}|">ADOTAR</a>
+												class="btn btn-info" th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
 										</div>
 									</div>
 								</div>
@@ -138,7 +138,7 @@
 								<div class="col-sm-12">
 									<form th:object="${animal}" th:action="@{/adm/editar/animal}"
 										method="post">
-										<input type="hidden" th:field="*{id_animal}"> 
+										<input type="hidden" th:field="*{idAnimal}"> 
 										<label><h2>Nome:</h2></label>
 										<input type="text" th:field="*{nome}" name="nome"><br>
 

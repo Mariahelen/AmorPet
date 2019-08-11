@@ -6,9 +6,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -16,6 +16,7 @@ import org.hibernate.annotations.CascadeType;
 @Embeddable
 public class Endereco {
 
+	@NotNull(message = "Residencia é necessário")
 	@OneToOne
 	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "id_residencia")
@@ -25,9 +26,9 @@ public class Endereco {
 	@Column(length = 45)
 	private String logradouro;
 
-	@Size(max = 4, message = "Tamanho máximo de 4 números")
-	@Column(name = "numero_casa", length = 4)
-	private int numero;
+	@Digits(integer = 4, fraction = 0, message = "O número deve ter no máximo 4 digitos")
+	@Column(name = "numero_casa", length = 4, columnDefinition = "INT(4)")
+	private Integer numero;
 
 	@NotBlank(message = "Complemento é necessário")
 	@Column(length = 20)
@@ -41,14 +42,14 @@ public class Endereco {
 	@Column(length = 30)
 	private String cidade;
 
-	@NotEmpty(message = "Estado é necessário")
+	@NotNull(message = "Estado é necessário")
 	@Enumerated(EnumType.STRING)
 	@Column(length = 2)
 	private Estado estado;
 
-	@Size(max = 8, message = "CEP inválido")
-	@Column(length = 8)
-	private int cep;
+	@Digits(integer = 8, fraction = 0, message = "O CEP deve ter no máximo 8 digitos")
+	@Column(length = 8, columnDefinition = "INT(8)")
+	private Integer cep;
 
 	public Residencia getResidencia() {
 		return residencia;
@@ -66,11 +67,11 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -106,11 +107,11 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	public int getCep() {
+	public Integer getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(Integer cep) {
 		this.cep = cep;
 	}
 

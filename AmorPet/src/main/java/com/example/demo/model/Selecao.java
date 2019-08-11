@@ -52,11 +52,11 @@ public class Selecao {
 		this.dataRegistro = dataRegistro;
 	}
 
-	public Animal getAnimal() {
+	public Animal getIdAnimal() {
 		return idAnimal;
 	}
 
-	public void setAnimal(Animal idAnimal) {
+	public void setIdAnimal(Animal idAnimal) {
 		this.idAnimal = idAnimal;
 	}
 

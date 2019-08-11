@@ -9,12 +9,7 @@
 <title>Quero Adotar - AmorPet</title>
 
 <!--Página de Cadastro CSS-->
-
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/css/cadastro.css}">
-<link rel="stylesheet"
-	th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
-<link rel="stylesheet" th:href="@{/style.css}">
 
 <!-- CSS DO FORMULARIO DAS ETAPAS -->
 <link rel="stylesheet" th:href="@{/css-quero-adotar/nice-select.css}">
@@ -31,50 +26,59 @@
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<br /> <br />
 				<!-- INICIO DO FORM -->
-				<form role="form" th:action="@{|/quero-adotar/${idAnimal}/cadastro/endereco|}" method="post">
+				<form role="form" th:action="@{|/user/quero-adotar/${idAnimal}/cadastro/endereco|}"
+					th:object="${endereco}" method="post">
 					<h2 class="tit-processo-1">PROCESSO ADOTIVO - CADASTRO DE ENDEREÇO</h2>
 					<hr class="colorgraph">
 
+					<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="text" class="form-control input-lg"
+								<input type="text" th:field="*{complemento}" class="form-control input-lg"
 									placeholder="Complemento" tabindex="1">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="number" class="form-control input-lg"
+								<input type="number" th:field="*{numero}" class="form-control input-lg"
 									placeholder="Número" tabindex="2">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="text" class="form-control input-lg "
+								<input type="text" th:field="*{logradouro}" class="form-control input-lg "
 									placeholder="Logradouro" tabindex="3">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="text" class="form-control input-lg"
+								<input type="text" th:field="*{bairro}" class="form-control input-lg"
 									placeholder="Bairro" tabindex="4">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="text" class="form-control input-lg "
+								<input type="text" th:field="*{cidade}" class="form-control input-lg "
 									placeholder="Cidade" tabindex="5">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="text-danger"></div>
 							<div class="form-group">
-								<input type="text" class="form-control input-lg "
+								<input type="text" th:field="*{cep}" class="form-control input-lg "
 									placeholder="CEP" tabindex="7">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="text-danger"></div>
 							<div class="form-group">
-								<select class="wide">
+								<select class="wide" th:field="*{estado}" tabindex="8">
 									<option th:value="''" data-display="Selecione Estado">Selecione
 										Estado</option>
 									<option th:each="estado : ${estados}" th:value="${estado}"
@@ -84,15 +88,16 @@
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div th:if="${#fields.hasErrors('residencia')}" th:errors="*{residencia}" class="text-danger"></div>
 							<div class="form-group">
-								<select class="wide">
+								<select class="wide" th:field="*{residencia.idResidencia}" tabindex="9">
 									<option th:value="''"
 										data-display="Reside em casa ou
 									apartamento?">Reside
 										em casa ou apartamento?</option>
 									<option th:each="residencia : ${listaResidencias}"
 										th:unless="${residencia.tipoResidencia} == 'Todos'"
-										th:value="${residencia}"
+										th:value="${residencia.idResidencia}"
 										th:text="${residencia.tipoResidencia}"></option>
 								</select>
 							</div>
@@ -103,11 +108,11 @@
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<input type="submit" value="Enviar"
-								class="btn btn-success btn-block btn-lg" tabindex="7">
+								class="btn btn-success btn-block btn-lg" tabindex="10">
 						</div>
 						<div class="col-xs-12 col-md-6">
 							<input type="reset" class="btn btn-primary btn-block btn-lg"
-								value="Limpar">
+								value="Limpar" tabindex="11">
 						</div>
 					</div>
 				</form>

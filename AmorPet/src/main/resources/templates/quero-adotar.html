@@ -57,8 +57,10 @@
 
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css-quero-adotar/quero-adotar.css}">
-	
-	<link th:href="@{https://fonts.googleapis.com/css?family=Merriweather&display=swap}" rel="stylesheet">
+
+<link
+	th:href="@{https://fonts.googleapis.com/css?family=Merriweather&display=swap}"
+	rel="stylesheet">
 </head>
 <body>
 	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
@@ -73,8 +75,8 @@
 	<br>
 	<!-------------------------CORRETO ACIMA------------------>
 	<section class="container">
-	
-<!--  	<div class="filtro-title">
+
+		<!--  	<div class="filtro-title">
 	<div class="container-fluid border-div">
     <div class="row">
 		<div class="col-xs-6 col-sm-3">
@@ -177,84 +179,85 @@
 </div>
 
 -->
-					<div class="btn-group flex-wrap demoPadder button-position" role="group"
-						aria-label="Basic example">
-						<a th:href="@{/adm/cadastro/animal}" class="btn btn-light" id="btn-add-animal"
-							title="Adicionar novo animal"><span
-							class="glyphicon glyphicon-plus color-button"></span></a>
+		<div th:if="${session.usuarioLogado} != null ? ${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+			class="btn-group flex-wrap demoPadder button-position"
+			role="group" aria-label="Basic example">
+			<a th:href="@{/adm/cadastro/animal}" class="btn btn-light"
+				id="btn-add-animal" title="Adicionar novo animal"><span
+				class="glyphicon glyphicon-plus color-button"></span></a>
+		</div>
+
+
+		<br> <br />
+		<!-- MODAL DE REMOVER ANIMAL -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="remocao">Remoção do Animal</h4>
 					</div>
+					<div class="modal-body">
+						<form id="form-remove-animal" action="|/adm/remover/animal/|"
+							method="post" role="form">
+							<div class="form-group">
+								<label for="recipient-name" class="control-label labels-name">Senha:</label>
+								<input type="password" name="senhaAdm" class="form-control"
+									id="senha">
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="control-label labels-name">Motivo
+									da remoção:</label>
+								<textarea name="motivo" class="form-control" id="message-text"></textarea>
+							</div>
+							<div class="modal-footer">
+
+								<button type="submit" class="btn btn-style-rm">Remover</button>
+
+								<button type="button" class="btn btn-cancel"
+									data-dismiss="modal">Cancelar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- FIM MODAL DE REMOVER ANIMAL -->
 
 
-					<br> <br />
-					<!-- MODAL DE REMOVER ANIMAL -->
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						role="dialog">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h4 class="remocao">Remoção do Animal</h4>
+		<!--AS IMAGENS DEVEM TER 2000 X 1334 PIXELS-->
+		<div class="card">
+			<div th:if="${errorListaAnimais}" th:text="${errorListaAnimais}"></div>
+			<div class="row card-position" th:if="${listaAnimais}">
+				<div class="col-md-4 " th:each="animal : ${listaAnimais}">
+					<div class="card mb-4 shadow-sm card-border">
+						<img th:src="${animal.caminhoFoto}" width="320px" height="200px"
+							role="img" aria-label="Placeholder: miniatura" class="img">
+						<div class="card-body">
+							<p>
+							<h4 class="nome-animal" th:text="${animal.nome}"></h4>
+							</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<a class="btn btn-success btn-style"
+										th:href="|/descricao-animal/${animal.idAnimal}|" role="button">Mais
+										Informações</a>
 								</div>
-								<div class="modal-body">
-									<form id="form-remove-animal" action="|/adm/remover/animal/|" method="post"
-										role="form">
-										<div class="form-group">
-											<label for="recipient-name" class="control-label labels-name">Senha:</label>
-											<input type="password" name="senhaAdm" class="form-control"
-												id="senha">
-										</div>
-										<div class="form-group">
-											<label for="message-text" class="control-label labels-name">Motivo
-												da remoção:</label>
-											<textarea name="motivo" class="form-control"
-												id="message-text"></textarea>
-										</div>
-										<div class="modal-footer">
-											
-											<button type="submit" class="btn btn-style-rm">Remover</button>
-											
-											<button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
-										</div>
-									</form>
-								</div>
+								<button th:if="${session.usuarioLogado} != null ? ${session.usuarioLogado.role} == 'ROLE_ADMIN'"
+									id="btn-remove-animal" type="button"
+									th:value="${animal.idAnimal}" class="btn btn-style-rm"
+									data-toggle="modal" data-target="#exampleModal">Remover</button>
 							</div>
 						</div>
 					</div>
-					<!-- FIM MODAL DE REMOVER ANIMAL -->
-					
-					
-					<!--AS IMAGENS DEVEM TER 2000 X 1334 PIXELS-->
-					<div class="card">
-					<div th:if="${errorListaAnimais}" th:text="${errorListaAnimais}"></div>
-					<div class="row card-position" th:if="${listaAnimais}">
-						<div class="col-md-4 " th:each="animal : ${listaAnimais}">
-							<div class="card mb-4 shadow-sm card-border">
-								<img th:src="${animal.caminhoFoto}" width="320px" height="200px" role="img"
-									aria-label="Placeholder: miniatura" class="img">
-								<div class="card-body">
-									<p>
-									<h4 class="nome-animal" th:text="${animal.nome}"></h4>
-									</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<a class="btn btn-success btn-style"
-												th:href="|/descricao-animal/${animal.id_animal}|"
-												role="button">Mais Informações</a>
-										</div>
-										<button id="btn-remove-animal" type="button" th:value="${animal.id_animal}" class="btn btn-style-rm"
-											data-toggle="modal" data-target="#exampleModal">Remover</button>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div th:if="${sucesso}" th:text="${sucesso}"></div>
-						<div th:if="${error}" th:text="${error}"></div>
-					</div>
-					</div>
+				</div>
+				<div th:if="${sucesso}" th:text="${sucesso}"></div>
+				<div th:if="${error}" th:text="${error}"></div>
+			</div>
+		</div>
 	</section>
 
 	<!-------------------------------Correto-------------------------------------->
@@ -267,10 +270,12 @@
 
 	<script th:src="@{/js-quero-adotar/quero-adotar.js}"></script>
 	<script th:inline="javascript">
-		$("#btn-remove-animal").click(function() {
-			let valorBtn = $(this).val();
-			$("#form-remove-animal").attr("action", "/adm/remover/animal/"+valorBtn);
-		});
+		$("#btn-remove-animal").click(
+				function() {
+					let valorBtn = $(this).val();
+					$("#form-remove-animal").attr("action",
+							"/adm/remover/animal/" + valorBtn);
+				});
 		$('#exampleModal').on('show.bs.modal', function(event) {
 			var button = $(event.relatedTarget) // Button that triggered the modal
 			var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -279,10 +284,8 @@
 			var modal = $(this)
 			modal.find('.modal-title').text('New message to ' + recipient)
 			modal.find('.modal-body input').val(recipient);
-			
-			
+
 		});
-		
 	</script>
 
 </body>
