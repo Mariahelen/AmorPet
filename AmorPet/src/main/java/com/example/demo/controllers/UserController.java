@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -178,21 +180,24 @@ public class UserController {
 	}
 
 	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
-	public ModelAndView exibirEtapaUm(@PathVariable Integer idAnimal) {
+	public ModelAndView exibirEtapaUm(@PathVariable Integer idAnimal, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		mv.addObject("idAnimal", idAnimal);
 		// respostas relacionadas com as perguntas
 		List<Resposta> respostas = 
-				this.respostaService.criarListaRespostas(this.perguntaService.listar());
+				this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario);
 		mv.addObject("listaRespostas", respostas);
 		return mv;
 	}
 	
 	@PostMapping("/quero-adotar/{idAnimal}/etapa/1")
+	@ResponseStatus(HttpStatus.CREATED)
 	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra, @PathVariable Integer idAnimal, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario);
+			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario);
 			this.processoService.salvarRespostasAndProcesso(usuario, respostas);
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", "Erro ao enviar, tente novamente");

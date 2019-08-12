@@ -74,14 +74,22 @@ public class UsuarioService {
 	}
 
 	public boolean verificarEndereco(Endereco endereco) {
-		if (endereco.getBairro().trim().isEmpty()
+		if (endereco.getBairro() == null
 				|| endereco.getCep() == null
-				|| endereco.getCidade().trim().isEmpty()
-				|| endereco.getComplemento().trim().isEmpty()
+				|| endereco.getCidade() == null
+				|| endereco.getComplemento() == null
 				|| endereco.getEstado() == null
-				|| endereco.getLogradouro().trim().isEmpty()
+				|| endereco.getLogradouro() == null
 				|| endereco.getResidencia() == null
 				|| endereco.getNumero() == null) {
+			
+			return true;
+		}
+		if(endereco.getBairro().trim().isEmpty()
+				|| endereco.getCidade().trim().isEmpty()
+				|| endereco.getComplemento().trim().isEmpty()
+				|| endereco.getLogradouro().trim().isEmpty()
+				|| endereco.getResidencia().getTipoResidencia().trim().isEmpty()) {
 			
 			return true;
 		}

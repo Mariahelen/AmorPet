@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.RespostaDAO;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Resposta;
+import com.example.demo.model.Usuario;
 
 @Service
 public class RespostaService {
@@ -25,8 +26,13 @@ public class RespostaService {
 	 * Recebe uma lista da classe Pergunta
 	 * @return Retorna uma lista de respostas relacionadas com as perguntas e com tamanho definido na quantidade de perguntas.
 	 */
-	public List<Resposta> criarListaRespostas(List<Pergunta> listaPerguntas) {
-		List<Resposta> respostas = new ArrayList<>(listaPerguntas.size());
+	public List<Resposta> criarListaRespostas(List<Pergunta> listaPerguntas, Usuario usuario) {
+		
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario);
+		if(!respostas.isEmpty()) {
+			return respostas;
+		}
+		respostas = new ArrayList<>(listaPerguntas.size());
 		// relaciona cada pergunta a uma resposta
 		for (Pergunta pergunta : listaPerguntas) {
 			respostas.add(new Resposta());
@@ -37,8 +43,20 @@ public class RespostaService {
 		return respostas;
 	}
 	
-	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario) {
-		List<Resposta> respostas = new ArrayList<>(respostasUsuario.length);
+	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario, Usuario usuario) {
+		
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario);
+		
+		if(!respostas.isEmpty()) {
+			int i = 0;
+			for (Resposta resposta : respostas) {
+				resposta.setRespostaPergunta(respostasUsuario[i].getRespostaPergunta());
+				i++;
+			}
+			return respostas;
+		}
+		
+		respostas = new ArrayList<>(respostasUsuario.length);
 		for (Resposta resposta : respostasUsuario) {
 			respostas.add(resposta);
 		}

@@ -31,6 +31,7 @@
 				<hr class="colorgraph">
 
 				<div th:if="${listaRespostas}">
+					<div id="msg-success" class="alert alert-success"></div>
 					<form id="form-respostas" role="form"
 						th:action="@{|/user/quero-adotar/${idAnimal}/etapa/1|}"
 						method="post">
@@ -104,6 +105,7 @@
 		}
 		
 		let respostas = [];
+		$("#msg-success").hide();
 		
 		$(function() {
 			$('select').niceSelect();
@@ -144,11 +146,11 @@
 					data: respostasJson,
 					contentType : 'application/json; charset=utf-8',
 					dataType : 'json'
-				}).done(function(data) {
-					console.log("return");
-					location.href = data;
+				}).complete(function() {
+					if(respostas.length > 0) {
+						$("#msg-success").html("Salvos com sucesso").fadeIn("slow").delay(1000).fadeOut('slow');
+					}
 				});
-				
 			});
 		}
 		

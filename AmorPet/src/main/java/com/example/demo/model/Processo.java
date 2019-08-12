@@ -28,7 +28,7 @@ public class Processo {
 	@Column(length = 3, columnDefinition = "INT(3)")
 	private Integer pontuacaoFinal;
 	@DateTimeFormat(pattern = "yy-MM-dd")
-	@Column(name = "data_registro", nullable = false)
+	@Column(name = "data_registro")
 	private LocalDate dataRegistro;
 	@OneToOne
 	@JoinColumn(name = "id_usuario")

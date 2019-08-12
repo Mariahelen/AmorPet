@@ -41,18 +41,26 @@ public class ProcessoService {
 		// todas as perguntas do bd
 		List<Pergunta> perguntas = this.perguntaRep.findAll();
 
-		Pergunta pergunta;
+		Pergunta pergunta = null;
 		// pega o processo do usuario
 		Processo processo = this.processoRep.findByIdUsuario(usuario.getId()).get();
 		
 		for (Resposta resposta : respostas) {
-			
+			for(Pergunta p : perguntas) {
+				if(p.getIdPergunta().equals(resposta.getIdPergunta().getIdPergunta())) {
+					pergunta = p;
+					break;
+				}
+			}
+			if(pergunta == null) {
+				throw new Exception("Pergunta não encontrada");
+			}
 			// fazer um for para iterar nas perguntas e ver se ela existe
 			
 			// lanca uma execao caso sejam diferentes
-			if(!this.compararTipoResidencia(pergunta, usuario)) {
-				throw new Exception("Tipo da residencia da pergunta diferente da que o usuário possui");
-			}
+//			if(!this.compararTipoResidencia(pergunta, usuario)) {
+//				throw new Exception("Tipo da residencia da pergunta diferente da que o usuário possui");
+//			}
 			
 			// relaciona a resposta com a pergunta
 			resposta.setIdPergunta(pergunta);
