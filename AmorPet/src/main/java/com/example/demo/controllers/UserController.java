@@ -187,7 +187,7 @@ public class UserController {
 		mv.addObject("idAnimal", idAnimal);
 		// respostas relacionadas com as perguntas
 		List<Resposta> respostas =
-				this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario);
+				this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario, idAnimal);
 		mv.addObject("listaRespostas", respostas);
 		return mv;
 	}
@@ -197,7 +197,7 @@ public class UserController {
 	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra, @PathVariable Integer idAnimal, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario);
+			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario, idAnimal);
 			this.processoService.salvarRespostasAndProcesso(usuario, respostas);
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", "Erro ao enviar, tente novamente");

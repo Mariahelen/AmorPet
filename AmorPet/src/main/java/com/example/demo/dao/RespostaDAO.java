@@ -12,6 +12,8 @@ import com.example.demo.model.Usuario;
 @Repository
 public interface RespostaDAO extends JpaRepository<Resposta, Integer> {
 
-	@Query("select r from Resposta r where r.idProcesso = (select p from Processo p where p.idUsuario = :idUsuario)")
-	List<Resposta> findByRespostas(Usuario idUsuario);
+	@Query("select r from Resposta r where r.idProcesso = (select p from Processo p where p.idUsuario = :idUsuario"
+			+ " AND p.idSelecao.idSelecao = (select s.idSelecao from Selecao s"
+			+ " where s.idAnimal.idAnimal = :idAnimal AND s.aberta = true))")
+	List<Resposta> findByRespostas(Usuario idUsuario, Integer idAnimal);
 }

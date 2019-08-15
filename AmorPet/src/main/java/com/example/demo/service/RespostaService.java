@@ -28,9 +28,9 @@ public class RespostaService {
 	 * @return Retorna uma lista de respostas relacionadas com as perguntas e com tamanho definido na quantidade de perguntas.
 	 * @throws Exception  Caso tipo de residencia seja diferente da do usuário
 	 */
-	public List<Resposta> criarListaRespostas(List<Pergunta> listaPerguntas, Usuario usuario) {
+	public List<Resposta> criarListaRespostas(List<Pergunta> listaPerguntas, Usuario usuario, Integer idAnimal) {
 		
-		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario);
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario, idAnimal);
 		if(!respostas.isEmpty()) {
 			return respostas;
 		}
@@ -49,9 +49,9 @@ public class RespostaService {
 		return respostas;
 	}
 	
-	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario, Usuario usuario) {
+	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario, Usuario usuario, Integer idAnimal) {
 		
-		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario);
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario, idAnimal);
 		
 		if(!respostas.isEmpty()) {
 			int i = 0;
