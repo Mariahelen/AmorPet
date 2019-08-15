@@ -101,10 +101,7 @@ public class Util {
 		if(pergunta.getResidencia().getTipoResidencia().equalsIgnoreCase("Todos")) {
 			return true;
 		}
-		if(pergunta.getResidencia().getTipoResidencia()
-				.equalsIgnoreCase(usuario.getEndereco().getResidencia().getTipoResidencia())) {
-			return true;
-		}
-		return false;
+		return pergunta.getResidencia().getTipoResidencia()
+				.equalsIgnoreCase(usuario.getEndereco().getResidencia().getTipoResidencia());
 	}
 }
