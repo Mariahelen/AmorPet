@@ -18,7 +18,7 @@ public class Endereco {
 
 	@NotNull(message = "Residencia é necessário")
 	@OneToOne
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "id_residencia")
 	private Residencia residencia;
 

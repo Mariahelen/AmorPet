@@ -186,7 +186,7 @@ public class UserController {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		mv.addObject("idAnimal", idAnimal);
 		// respostas relacionadas com as perguntas
-		List<Resposta> respostas = 
+		List<Resposta> respostas =
 				this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario);
 		mv.addObject("listaRespostas", respostas);
 		return mv;

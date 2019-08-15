@@ -36,7 +36,7 @@ public class Animal {
 	@ManyToOne
 	@JoinColumn(name = "id_usuario", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario usuario;
 	
 	@NotBlank(message = "Nome do animal é necessário")

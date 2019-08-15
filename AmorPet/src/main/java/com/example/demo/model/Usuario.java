@@ -68,7 +68,7 @@ public class Usuario {
 	@Embedded
 	private Endereco endereco;
 	@OneToMany(mappedBy = "usuario")
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<Animal> animais;
 
 	public Integer getId() {

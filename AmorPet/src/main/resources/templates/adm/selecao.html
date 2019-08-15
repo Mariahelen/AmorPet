@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+#customers {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+	background-color: #ddd;
+}
+
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
+
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<title>Candidatos</title>
+
+</head>
+<body>
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-------------------------CORRETO ACIMA------------------>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="conteudo">
+				<a th:href="@{/adm/selecoes}"><i class="fas fa-arrow-left"></i> Voltar</a>
+				<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+				<div class="row">
+				<div class="col">
+					<img th:src="${selecao.idAnimal.caminhoFoto}" title="Foto do animal da seleção">
+				</div>
+				<table id="customers">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nome do Participante</th>
+							<th>Pontuação</th>
+							<th>Data de Entrada</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="processo : ${selecao.processos}">
+							<td th:text="${processo.idProcesso}"></td>
+							<td th:text="${processo.idUsuario.nome}"></td>
+							<td th:text="${processo.pontuacaoFinal}"></td>
+							<td th:text="${processo.dataRegistro}"></td>
+							<td>
+								<form
+									th:action="@{|/adm/selecoes/${selecao.IdSelecao}/processos/${processo.idProcesso}|}"
+									th:method="delete">
+									<input name="_method" type="hidden" th:value="delete" />
+									<input type="hidden" name="idSelecao" th:value="${selecao.idSelecao}">
+									<input type="hidden" name="idSelecao" th:value="${processo.idProcesso}">
+									<input type="submit" class="btn btn-danger" value="Remover">
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+
+	<!-------------------------------Correto-------------------------------------->
+	<br>
+	<br>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+</body>
+</html>

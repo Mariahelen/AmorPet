@@ -9,6 +9,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.model.Pergunta;
 import com.example.demo.model.Usuario;
 
 public class Util {
@@ -88,5 +89,22 @@ public class Util {
 	
 	public static int calcularIdade(final LocalDate aniversario) {
 	    return Period.between(aniversario, LocalDate.now()).getYears();
+	}
+	
+	/**
+	 * Compara se o tipo da residencia da pergunta é igual ao do usuário
+	 * @param pergunta
+	 * @param usuario
+	 * @return true para tipos de residencias iguais ou todos, false para diferentes
+	 */
+	public static boolean compararTipoResidencia(Pergunta pergunta, Usuario usuario) {
+		if(pergunta.getResidencia().getTipoResidencia().equalsIgnoreCase("Todos")) {
+			return true;
+		}
+		if(pergunta.getResidencia().getTipoResidencia()
+				.equalsIgnoreCase(usuario.getEndereco().getResidencia().getTipoResidencia())) {
+			return true;
+		}
+		return false;
 	}
 }

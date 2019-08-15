@@ -34,7 +34,7 @@ public class Pergunta {
 	private LocalDate dataRegistro;
 	
 	@OneToOne
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "id_residencia")
 	private Residencia residencia;
 	

@@ -27,7 +27,7 @@ public class Selecao {
 	@Column(name = "data_registro", nullable = false)
 	private LocalDate dataRegistro;
 	@OneToOne
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "id_animal")
 	private Animal idAnimal;
 	@OneToMany(mappedBy = "idSelecao")

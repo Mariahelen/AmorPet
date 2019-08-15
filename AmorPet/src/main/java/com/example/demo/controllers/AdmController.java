@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,9 @@ import com.example.demo.model.Pontuacao;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.service.PerguntaService;
+import com.example.demo.service.ProcessoService;
 import com.example.demo.service.ResidenciaService;
+import com.example.demo.service.SelecaoService;
 import com.example.demo.util.Util;
 
 @Controller
@@ -36,6 +39,10 @@ public class AdmController {
 	private PerguntaService perguntaService;
 	@Autowired
 	private ResidenciaService residenciaService;
+	@Autowired
+	private SelecaoService selecaoService;
+	@Autowired
+	private ProcessoService processoService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -145,7 +152,32 @@ public class AdmController {
 		}
 		return "redirect:/adm/cadastro/pergunta";
 	}
-
+	
+	@GetMapping("/selecoes")
+	public ModelAndView exibirListaSelecao() {
+		ModelAndView mv = new ModelAndView("/adm/lista-selecoes");
+		mv.addObject("listaSelecoes", this.selecaoService.lista());
+		return mv;
+	}
+	
+	@GetMapping("/selecoes/{idSelecao}/processos")
+	public ModelAndView exibirSelecao(@PathVariable Integer idSelecao) {
+		ModelAndView mv = new ModelAndView("/adm/selecao");
+		mv.addObject("selecao", this.selecaoService.findById(idSelecao));
+		return mv;
+	}
+	
+	@DeleteMapping("/selecoes/{idSelecao}/processos/{idProcesso}")
+	public String removerProcesso(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso, RedirectAttributes ra) {
+		try {
+			this.processoService.removerProcesso(idSelecao, idProcesso);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			ra.addFlashAttribute("error", "Não foi possível remover");
+		}
+		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+	}
+	
 	@GetMapping("/logout")
 	public String logout() {
 		return "redirect:/user/logout";
