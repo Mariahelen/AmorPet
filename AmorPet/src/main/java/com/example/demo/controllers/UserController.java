@@ -24,12 +24,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.Animal;
 import com.example.demo.model.Endereco;
 import com.example.demo.model.Estado;
 import com.example.demo.model.Processo;
 import com.example.demo.model.Residencia;
 import com.example.demo.model.Resposta;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.AnimalService;
 import com.example.demo.service.PerguntaService;
 import com.example.demo.service.ProcessoService;
 import com.example.demo.service.ResidenciaService;
@@ -54,7 +56,9 @@ public class UserController {
 	private ProcessoService processoService;
 	@Autowired
 	private RespostaService respostaService;
-
+	@Autowired
+	private AnimalService animalService;
+	
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/perfil");
@@ -197,8 +201,9 @@ public class UserController {
 	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra, @PathVariable Integer idAnimal, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario, idAnimal);
-			this.processoService.salvarRespostasAndProcesso(usuario, respostas);
+			Animal animal = this.animalService.findById(idAnimal);
+			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario, animal);
+			this.processoService.salvarRespostasAndProcesso(usuario, animal, respostas);
 		}catch(Exception e) {
 			ra.addFlashAttribute("error", "Erro ao enviar, tente novamente");
 			System.out.println(e.getMessage());

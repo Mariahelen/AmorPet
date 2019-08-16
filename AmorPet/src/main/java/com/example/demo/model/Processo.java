@@ -36,7 +36,7 @@ public class Processo {
 	@ManyToOne
 	@JoinColumn(name = "id_selecao", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.MERGE)
 	private Selecao idSelecao;
 	@OneToOne
 	@Cascade(CascadeType.ALL)

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Pontuacao;
+import com.example.demo.model.Selecao;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.service.PerguntaService;
@@ -163,7 +164,12 @@ public class AdmController {
 	@GetMapping("/selecoes/{idSelecao}/processos")
 	public ModelAndView exibirSelecao(@PathVariable Integer idSelecao) {
 		ModelAndView mv = new ModelAndView("/adm/selecao");
-		mv.addObject("selecao", this.selecaoService.findById(idSelecao));
+		try {
+			mv.addObject("selecao", this.selecaoService.findById(idSelecao));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			mv.setViewName("redirec:/adm/selecoes");
+		}
 		return mv;
 	}
 	
@@ -172,11 +178,28 @@ public class AdmController {
 		try {
 			this.processoService.removerProcesso(idSelecao, idProcesso);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
-			ra.addFlashAttribute("error", "Não foi possível remover");
+//			System.out.println(e.getMessage());
+			return "redirect:/adm/selecoes";
 		}
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
 	}
+	
+	
+	@GetMapping("/selecoes/{idSelecao}/processos/{idProcesso}/respostas")
+	public ModelAndView processo2(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso) {
+		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
+		try{
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			mv.addObject("idSelecao", idSelecao);
+			mv.addObject("idProcesso", idProcesso);
+			mv.addObject("listaRespostas", this.selecaoService.buscaResposta(selecao, idProcesso));
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return new ModelAndView("redirect:/adm/selecoes/"+idSelecao+"/processos");
+		}
+		return mv;
+	}
+	
 	
 	@GetMapping("/logout")
 	public String logout() {

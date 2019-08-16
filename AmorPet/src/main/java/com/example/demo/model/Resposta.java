@@ -28,10 +28,10 @@ public class Resposta {
 	@ManyToOne
 	@JoinColumn(name = "id_processo", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Processo idProcesso;
 	@OneToOne
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "id_pergunta")
 	private Pergunta idPergunta;
 

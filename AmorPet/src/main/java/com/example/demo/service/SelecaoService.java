@@ -13,6 +13,7 @@ import com.example.demo.dao.ProcessoDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Processo;
+import com.example.demo.model.Resposta;
 import com.example.demo.model.Selecao;
 
 @Service
@@ -28,12 +29,12 @@ public class SelecaoService {
 		return this.selecaoRep.findAll();
 	}
 
-	public Selecao findById(Integer id) {
+	public Selecao findById(Integer id) throws Exception {
 		Optional<Selecao> selecao = this.selecaoRep.findById(id);
 		if (selecao.isPresent()) {
 			return selecao.get();
 		}
-		return null;
+		throw new Exception("Seleção não encontrada");
 	}
 
 	/* CRIA UMA SELECAO OU USA A EXISTENTE */
@@ -54,10 +55,13 @@ public class SelecaoService {
 				}
 			}
 		}
-		processo.setIdSelecao(selecao);
-		selecao.getProcessos().add(processo);
+		this.selecaoRep.save(selecao);
+		selecao = this.findBySelecao(animal);
 		
+		processo.setIdSelecao(selecao);
 		this.processoRep.save(processo);
+		
+		selecao.getProcessos().add(processo);
 		this.selecaoRep.save(selecao);
 	}
 
@@ -85,4 +89,14 @@ public class SelecaoService {
 		return selecao;
 	}
 
+	public List<Resposta> buscaResposta(Selecao selecao, Integer idProcesso) throws Exception {
+		Optional<Processo> processo = this.processoRep.findById(idProcesso);
+
+		if(processo.isPresent()) {
+			if(selecao.getProcessos().contains(processo.get())) {
+				return processo.get().getRespostas();
+			}
+		}
+		throw new Exception("Não existe");
+	}
 }

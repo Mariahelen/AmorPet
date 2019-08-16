@@ -12,6 +12,7 @@ import com.example.demo.dao.PerguntaDAO;
 import com.example.demo.dao.ProcessoDAO;
 import com.example.demo.dao.RespostaDAO;
 import com.example.demo.dao.SelecaoDAO;
+import com.example.demo.model.Animal;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Processo;
 import com.example.demo.model.Resposta;
@@ -36,7 +37,6 @@ public class ProcessoService {
 
 	public void remove(Processo processo) {
 		this.processoRep.delete(processo);
-		;
 	}
 
 	public Processo findById(Integer id) throws Exception {
@@ -55,15 +55,15 @@ public class ProcessoService {
 		return processo;
 	}
 
-	public void salvarRespostasAndProcesso(Usuario usuario, List<Resposta> respostas) throws Exception {
+	public void salvarRespostasAndProcesso(Usuario usuario, Animal animal, List<Resposta> respostas) throws Exception {
 
 		// todas as perguntas do bd
 		List<Pergunta> perguntas = this.perguntaRep.findAll();
 
 		Pergunta pergunta = null;
 		// pega o processo do usuario
-		Processo processo = this.processoRep.findByIdUsuario(usuario.getId()).get();
-
+		Processo processo = this.processoRep.findByProcessoByUsuarioByAnimal(usuario, animal).get();
+		
 		int pontuacaoTotal = 0;
 		for (Resposta resposta : respostas) {
 			for (Pergunta p : perguntas) {
@@ -106,10 +106,15 @@ public class ProcessoService {
 		}
 		Processo processo = this.findById(idProcesso);
 		if(selecao.get().getProcessos().contains(processo)) {
-			this.remove(processo);
+			processo.setIdSelecao(null);
+			processo.setIdUsuario(null);
+			selecao.get().getProcessos().remove(selecao.get().getProcessos().indexOf(processo));
+			this.processoRep.delete(processo);
 		}
+		
 		if(selecao.get().getProcessos().isEmpty()) {
 			this.selecaoRep.delete(selecao.get());
+			throw new Exception("Seleção vazia");
 		}
 	}
 

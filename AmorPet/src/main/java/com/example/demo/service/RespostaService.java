@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.RespostaDAO;
+import com.example.demo.model.Animal;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Resposta;
 import com.example.demo.model.Usuario;
@@ -49,9 +50,9 @@ public class RespostaService {
 		return respostas;
 	}
 	
-	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario, Usuario usuario, Integer idAnimal) {
+	public List<Resposta> criarListaRespostasUsuario(Resposta[] respostasUsuario, Usuario usuario, Animal animal) {
 		
-		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario, idAnimal);
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario, animal.getIdAnimal());
 		
 		if(!respostas.isEmpty()) {
 			int i = 0;

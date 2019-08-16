@@ -76,13 +76,17 @@
 							<td th:text="${processo.pontuacaoFinal}"></td>
 							<td th:text="${processo.dataRegistro}"></td>
 							<td>
-								<form
-									th:action="@{|/adm/selecoes/${selecao.IdSelecao}/processos/${processo.idProcesso}|}"
+								
+								<form class="form-inline"
+									th:action="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}|}"
 									th:method="delete">
 									<input name="_method" type="hidden" th:value="delete" />
-									<input type="hidden" name="idSelecao" th:value="${selecao.idSelecao}">
-									<input type="hidden" name="idSelecao" th:value="${processo.idProcesso}">
-									<input type="submit" class="btn btn-danger" value="Remover">
+									<div class="form-group">
+										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/respostas|}" class="btn btn-info">
+											Ver Respostas
+										</a>
+										<button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+									</div>
 								</form>
 							</td>
 						</tr>
