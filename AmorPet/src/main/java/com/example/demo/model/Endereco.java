@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -26,12 +27,12 @@ public class Endereco {
 	@Column(length = 45)
 	private String logradouro;
 
-	@Digits(integer = 4, fraction = 0, message = "O número deve ter no máximo 4 digitos")
+	@Size(max = 4, min = 0)
 	@Column(name = "numero_casa", length = 4, columnDefinition = "INT(4)")
-	private Integer numero;
+	private String numero;
 
 	@NotBlank(message = "Complemento é necessário")
-	@Column(length = 20)
+	@Column(length = 60)
 	private String complemento;
 
 	@NotBlank(message = "Bairro é necessário")
@@ -67,11 +68,11 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
