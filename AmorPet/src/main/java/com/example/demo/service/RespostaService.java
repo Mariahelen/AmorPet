@@ -70,4 +70,23 @@ public class RespostaService {
 		return respostas;
 	}
 
+	public List<Resposta> criarListaConfirmacoesUsuario(Resposta[] respostasUsuario, Usuario usuario, Animal animal) {
+		
+		List<Resposta> respostas = this.respostaRep.findByRespostas(usuario, animal.getIdAnimal());
+		
+		if(!respostas.isEmpty()) {
+			int i = 0;
+			for (Resposta resposta : respostas) {
+				resposta.setConfirmacaoPergunta(respostasUsuario[i].getConfirmacaoPergunta());
+				i++;
+			}
+			return respostas;
+		}
+		
+		respostas = new ArrayList<>(respostasUsuario.length);
+		for (Resposta resposta : respostasUsuario) {
+			respostas.add(resposta);
+		}
+		return respostas;
+	}
 }

@@ -30,6 +30,15 @@ public class ProcessoService {
 	private RespostaDAO respostaRep;
 	@Autowired
 	private SelecaoDAO selecaoRep;
+	
+	public List<Processo> lista() {
+		return processoRep.findAll();
+	}
+	
+	public Selecao listarProcessos(Selecao selecao) {
+		selecao.setProcessos(this.processoRep.findAllBySelecao(selecao));
+		return selecao;
+	}
 
 	public void save(Processo processo) {
 		this.processoRep.save(processo);
@@ -62,8 +71,8 @@ public class ProcessoService {
 
 		Pergunta pergunta = null;
 		// pega o processo do usuario
-		Processo processo = this.processoRep.findByProcessoByUsuarioByAnimal(usuario, animal).get();
-		
+		Processo processo = this.processoRep.findByUsuarioByAnimal(usuario, animal).get();
+
 		int pontuacaoTotal = 0;
 		for (Resposta resposta : respostas) {
 			for (Pergunta p : perguntas) {
@@ -85,9 +94,22 @@ public class ProcessoService {
 			// relaciona a resposta com a pergunta
 			resposta.setIdPergunta(pergunta);
 
-			// copia a pontuacao
+			// salva a pontuacao
 			resposta.setPontuacaoPergunta(pergunta.getPontuacao());
-			pontuacaoTotal += pergunta.getPontuacao();
+			// verifica se existe a confirmacao da pergunta
+			if (resposta.getConfirmacaoPergunta() != null && resposta.getConfirmacaoPergunta().equals('N')) {
+				pontuacaoTotal -= pergunta.getPontuacao();
+			} else {
+				// verifica se a pergunta foi respondida
+				if (resposta.getRespostaPergunta() != null) {
+					// seta a pontuacao com base na resposta
+					if (resposta.getRespostaPergunta().equals('S')) {
+						pontuacaoTotal += pergunta.getPontuacao();
+					} else if (resposta.getRespostaPergunta().equals('N')) {
+						pontuacaoTotal -= pergunta.getPontuacao();
+					}
+				}
+			}
 
 			// relaciona a resposta a ao processo
 			resposta.setIdProcesso(processo);
@@ -101,18 +123,18 @@ public class ProcessoService {
 
 	public void removerProcesso(Integer idSelecao, Integer idProcesso) throws Exception {
 		Optional<Selecao> selecao = this.selecaoRep.findById(idSelecao);
-		if(!selecao.isPresent()) {
+		if (!selecao.isPresent()) {
 			throw new Exception("Seleção não existe");
 		}
 		Processo processo = this.findById(idProcesso);
-		if(selecao.get().getProcessos().contains(processo)) {
+		if (selecao.get().getProcessos().contains(processo)) {
 			processo.setIdSelecao(null);
 			processo.setIdUsuario(null);
 			selecao.get().getProcessos().remove(selecao.get().getProcessos().indexOf(processo));
 			this.processoRep.delete(processo);
 		}
-		
-		if(selecao.get().getProcessos().isEmpty()) {
+
+		if (selecao.get().getProcessos().isEmpty()) {
 			this.selecaoRep.delete(selecao.get());
 			throw new Exception("Seleção vazia");
 		}

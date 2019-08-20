@@ -61,12 +61,12 @@ insert into pergunta
 values
 (default, now(), 'Em caso de ausência, há alguém que pode cuidar do animal?', 10, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
 (default, now(), 'Já tem ou teve algum animal?', 5, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'possui telas protetoras?', 15, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1),
-(default, now(), 'concorda que o pet possa adoecer, assim ele precisará de consultas veterinárias e isto terá um custo financeiro?', 15, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'concorda em nos devolver o gatinho se por qualquer motivo não puder continuar com ele?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'concorda em não repassar o pet a ninguém sem nos consultar?', 5, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'concorda que sua casa seja vistoriada para averiguação das respostas?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'concorda em assinar um contrato de adoção no ato da entrega, responsabilizando pelos cuidados com o animal e sua segurança?', 10, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'tem muro altos?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
-(default, now(), 'tem portão vedados, que impeça alguma fuga?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
-(default, now(), 'condomínio permite animais?', 20, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1);
+(default, now(), 'Seu apartamento possui telas protetoras?', 15, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1),
+(default, now(), 'Concorda que o pet possa adoecer, assim ele precisará de consultas veterinárias e isto terá um custo financeiro?', 15, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Concorda em nos devolver o gatinho se por qualquer motivo não puder continuar com ele?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Concorda em não repassar o pet a ninguém sem nos consultar?', 5, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Concorda que sua casa seja vistoriada para averiguação das respostas?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Concorda em assinar um contrato de adoção no ato da entrega, responsabilizando pelos cuidados com o animal e sua segurança?', 10, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Sua casa tem muro altos?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
+(default, now(), 'Sua casa tem portão vedados, que impeça alguma fuga?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
+(default, now(), 'Condomínio permite animais?', 20, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1);

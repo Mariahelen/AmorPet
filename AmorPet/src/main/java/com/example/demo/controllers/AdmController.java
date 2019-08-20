@@ -3,31 +3,38 @@ package com.example.demo.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Animal;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Pontuacao;
+import com.example.demo.model.Processo;
+import com.example.demo.model.Resposta;
 import com.example.demo.model.Selecao;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
 import com.example.demo.service.PerguntaService;
 import com.example.demo.service.ProcessoService;
 import com.example.demo.service.ResidenciaService;
+import com.example.demo.service.RespostaService;
 import com.example.demo.service.SelecaoService;
 import com.example.demo.util.Util;
 
@@ -44,6 +51,8 @@ public class AdmController {
 	private SelecaoService selecaoService;
 	@Autowired
 	private ProcessoService processoService;
+	@Autowired
+	private RespostaService respostaService;
 
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
@@ -165,7 +174,9 @@ public class AdmController {
 	public ModelAndView exibirSelecao(@PathVariable Integer idSelecao) {
 		ModelAndView mv = new ModelAndView("/adm/selecao");
 		try {
-			mv.addObject("selecao", this.selecaoService.findById(idSelecao));
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			selecao = this.processoService.listarProcessos(selecao);
+			mv.addObject("selecao", selecao);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			mv.setViewName("redirec:/adm/selecoes");
@@ -200,6 +211,21 @@ public class AdmController {
 		return mv;
 	}
 	
+	@PostMapping("/selecoes/{idSelecao}/processos/{idProcesso}/respostas")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String salvarProcesso2(@RequestBody Resposta[] respostas, @PathVariable Integer idSelecao,
+			@PathVariable Integer idProcesso) {
+		
+		try {
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			Processo processo = this.processoService.findById(idProcesso);
+			List<Resposta> listaRespostas = this.respostaService.criarListaConfirmacoesUsuario(respostas, processo.getIdUsuario(), selecao.getIdAnimal());
+			this.processoService.salvarRespostasAndProcesso(processo.getIdUsuario(), selecao.getIdAnimal(), listaRespostas);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/adm/selecoes/"+idSelecao+"/processos/"+idProcesso+"/respostas";
+	}
 	
 	@GetMapping("/logout")
 	public String logout() {

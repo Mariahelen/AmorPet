@@ -35,39 +35,60 @@
 					<form id="form-respostas" role="form"
 						th:action="@{|/user/quero-adotar/${idAnimal}/etapa/1|}"
 						method="post">
-						<div class="row bg-form">
-							<div class="col-xs-12 col-sm-12 col-md-12"  th:each="resposta, status : ${listaRespostas}">
-								<input type="hidden" th:id="|id-pergunta-${status.index}|" th:value="${resposta.idPergunta.idPergunta}">
-								<div class="form-inline">
-									<div class="col-md-9"
-										th:text="${resposta.idPergunta.descricaoPergunta}"></div>
-									<label>
-										<input type="radio" th:value="S"
-											th:name="|resposta-${status.index}|"
-											class="form-control input-lg" tabindex="1"> Concordo
-									</label>
-									<label>
-										<input type="radio" th:value="N"
-											th:name="|resposta-${status.index}|"
-											class="form-control input-lg" tabindex="2"> Discordo
-									</label>
-								</div>
-							</div>
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr class="success">
+										<th>Descrição da pergunta</th>
+										<th>Sim</th>
+										<th>Não</th>
+									</tr>
+								</thead>
+								<tbody id="info-respostas">
+									<tr class="active" th:if="${listaRespostas}"
+										th:each="resposta, status : ${listaRespostas}">
+										<td th:text="${resposta.idPergunta.descricaoPergunta}"></td>
+										<td class="hidden">
+											<input type="hidden"
+												th:value="${resposta.idPergunta.idPergunta}">
+										</td>
+										<td>
+											<span
+												class="button-checkbox">
+												<button type="button" class="btn btn-success btn-terms"
+													data-color="success"></button>
+												<input type="checkbox"
+													th:name="|respostas-${status.index}|" class="hidden" value="S"
+													th:tabindex="${status.index}">
+											</span>
+										</td>
+										<td>
+											<span
+												class="button-checkbox">
+												<button type="button" class="btn btn-success btn-terms"
+													data-color="success"></button>
+												<input type="checkbox"
+													th:name="|respostas-${status.index}|" class="hidden" value="N"
+													th:tabindex="${status.index}">
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 						<hr class="colorgraph">
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<input type="submit" id="enviar-respostas" value="Enviar"
-									class="btn btn-success btn-block btn-lg" tabindex="7">
+									class="btn btn-success btn-block btn-lg">
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<input type="reset" class="btn btn-primary btn-block btn-lg"
+								<input type="reset" id="limpar-respostas" class="btn btn-primary btn-block btn-lg"
 									value="Limpar">
 							</div>
 						</div>
 					</form>
 				</div>
-				
 			</div>
 		</div>
 
@@ -87,8 +108,6 @@
 
 	<script
 		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
-	<!-- PLUGIN DE SELEC DO NICE-SELECT  -->
-	<script th:src="@{/js-quero-adotar/jquery.nice-select.min.js}"></script>
 	<script type="text/javascript">
 	
 		class Resposta {
@@ -108,16 +127,28 @@
 		$("#msg-success").hide();
 		
 		$(function() {
-			$('select').niceSelect();
 			pegarRespostas();
+			limparRespostas();			
 			enviarRespostas();
 		});
 		
 		function pegarRespostas() {
-			$("#form-respostas input[type='radio']").click(function() {
+			$("#info-respostas button").click(function() {
+
+				let pergunta = $(this).parent().parent().parent().find('input[type="hidden"]').val();
+				let checkbox = $(this).parent().find('input[type="checkbox"]');
 				
-				let pergunta = $(this).parent().parent().parent().find("input[type='hidden']").val();
-				let resposta = $(this).val();
+				if(checkbox.is(':checked')) {
+					$(this).parent().parent().parent().removeClass('active').addClass('checkbox-marcado');
+					let outroCheck = checkbox.parent().parent().siblings().find('input[type="checkbox"]');
+					if(outroCheck.is(':checked')) {
+						outroCheck.click();
+					}
+				}else {
+					$(this).parent().parent().parent().addClass('active').removeClass('checkbox-marcado');
+				}
+				
+				let resposta = checkbox.val()
 				
 				let p = new Pergunta(pergunta);
 				
@@ -130,6 +161,16 @@
 					}
 				}
 				respostas.push(r);
+			});
+		}
+		
+		function limparRespostas() {
+			$("#limpar-respostas").click(function() {
+				$("#info-respostas tr").each(function() {
+					respostas = [];
+					$(this).find('input[type="checkbox"]:checked').click();
+					$(this).addClass('active').removeClass('checkbox-marcado');
+				});
 			});
 		}
 		
@@ -147,6 +188,9 @@
 					contentType : 'application/json; charset=utf-8',
 					dataType : 'json'
 				}).complete(function() {
+					$("html").animate({
+						scrollTop: 0
+					});
 					if(respostas.length > 0) {
 						$("#msg-success").html("Salvos com sucesso").fadeIn("slow").delay(1000).fadeOut('slow');
 					}

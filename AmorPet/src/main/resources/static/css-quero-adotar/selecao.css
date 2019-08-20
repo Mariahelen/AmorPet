@@ -1,0 +1,22 @@
+@charset "utf8";
+
+.container .btn {
+	border-radius: 10px;
+}
+#btn-voltar {
+	display: inline;
+}
+#title-pag {
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+	padding: 7px;
+}
+tbody tr:nth-child(1){
+	background-color: #ddd;	
+}
+tbody tr:nth-child(2){
+	background-color: #ccc;
+}
+tbody tr:nth-child(3) {
+	background-color: #aaa;
+}

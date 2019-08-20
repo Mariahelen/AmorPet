@@ -22,7 +22,6 @@ main {
 .container .text-style, .container label {
 	font-style: italic;
 	color: #1d1d1d;
-    font-size: 16pt;
 }
 
 .container input[type="radio"] {
@@ -32,4 +31,30 @@ main {
 }
 .container label {
 	margin-bottom: -10px;
+}
+.container .btn-terms {
+	padding: 2px 5px 2px 7px;
+}
+.container table {
+	opacity: 0.9;
+}
+.container table td {
+	text-transform: uppercase;
+}
+.container .btn-success {
+	background-color: #7ac673;
+}
+.container table td:not(:first-child) {
+	text-align: center;
+}
+.container table thead .success th {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 13px;
+}
+.container table thead .success th {
+	background-color: #7ac673;
+}
+.checkbox-marcado {
+	background-color: rgba(255,219,194,1) !important;
 }
