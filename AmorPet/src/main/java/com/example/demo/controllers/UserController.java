@@ -159,8 +159,12 @@ public class UserController {
 	
 	@PostMapping("/quero-adotar/{idAnimal}/cadastro/endereco")
 	public ModelAndView salvarFormEndereco(@Valid Endereco endereco, BindingResult br, @PathVariable Integer idAnimal, HttpSession session) {
+		
+		ModelAndView mv = new ModelAndView("/user/form-endereco");
+		if(endereco.getResidencia().getIdResidencia() == null) {
+			mv.addObject("erroResidencia", "Residencia é necessário");
+		}
 		if(br.hasErrors()) {
-			ModelAndView mv = new ModelAndView("/user/form-endereco");
 			mv.addObject("idAnimal", idAnimal);
 			mv.addObject("estados", Estado.values());
 			mv.addObject("listaResidencias", this.residenciaService.listar());
@@ -173,11 +177,12 @@ public class UserController {
 			usuario.setEndereco(endereco);
 			this.usuarioService.save(usuario);
 		}catch(Exception e) {
-			ModelAndView mv = new ModelAndView("/user/form-endereco");
+			mv.setViewName("/user/form-endereco");
 			mv.addObject("idAnimal", idAnimal);
 			mv.addObject("estados", Estado.values());
 			mv.addObject("listaResidencias", this.residenciaService.listar());
 			mv.addObject("error", "Erro ao realizar o cadastro, tente novamente");
+			System.out.println(e.getMessage());
 			return mv;
 		}
 		return new ModelAndView("redirect:/user/quero-adotar/"+idAnimal+"/etapa/1");

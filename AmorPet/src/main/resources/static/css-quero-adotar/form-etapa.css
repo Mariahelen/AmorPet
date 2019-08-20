@@ -13,6 +13,10 @@ main {
 	height: 100%;
     padding-bottom: 7px;
     padding-top: 7px;
+	margin-bottom: 10px;
+}
+.btn-success {
+	background-color: #7ac673;
 }
 .container .bg-form {
 	background-color: #bebfc0;
