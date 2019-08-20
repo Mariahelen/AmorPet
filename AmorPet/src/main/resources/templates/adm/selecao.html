@@ -15,14 +15,6 @@
 	padding: 8px;
 }
 
-#customers tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-#customers tr:hover {
-	background-color: #ddd;
-}
-
 #customers th {
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -75,7 +67,8 @@
 							</thead>
 							<tbody>
 								<tr th:each="processo : ${selecao.processos}">
-									<td th:if="${processo.respostas.get(0).confirmacaoPergunta} != null" title="Participante Visitado"><i class="far fa-check-circle"></i></td>
+									<td th:if="${processo.avaliacao} == null" title="Participante não visitado"><i class="fas fa-exclamation-triangle"></i></td>
+									<td th:unless="${processo.avaliacao} == null" title="Participante visitado"><i class="far fa-check-circle"></i></td>
 									<td title="Nome do Participante"><i class="fas fa-user-alt"></i> <span th:text="${processo.idUsuario.nome}"></span></td>
 									<td title="Pontuação"><i class="far fa-star"></i> <span th:text="${processo.pontuacaoFinal}"></span></td>
 									<td title="Data de Entrada"><i class="far fa-calendar-alt"></i> <span

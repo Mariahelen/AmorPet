@@ -43,11 +43,11 @@
 
 <th:block th:fragment="opcao-adm">
 <li class="nav-item dropdown">
-	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">MINHA CONTA</a>
+	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false"><span th:text="${session.usuarioLogado.nome.toUpperCase()}"></span></a>
 	<div class="dropdown-menu">
+		<a class="dropdown-item" th:href="@{/user/perfil}">PERFIL</a>
 		<a class="dropdown-item" th:href="@{/adm/selecoes}">SELEÇÕES</a>
 		<a class="dropdown-item" th:href="@{/adm/cadastro/animal}">ANIMAIS</a>
-		<a class="dropdown-item" th:href="@{/user/perfil}">ADMINISTRADOR</a>
 		<a class="dropdown-item" th:href="@{/adm/logout}">SAIR</a>
 	</div>
 </li> 
@@ -55,7 +55,7 @@
 
 <th:block th:fragment="opcao-usuario">
 <li class="nav-item dropdown">
-	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">MINHA CONTA</a>
+	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false"><span th:text="${session.usuarioLogado.nome.toUpperCase()}"></span></a>
 	<div class="dropdown-menu">
 		<a class="dropdown-item" th:href="@{/user/perfil}">PERFIL</a>
 		<a class="dropdown-item" th:href="@{/user/historico}">HISTÓRICO DE SELEÇÃO</a>

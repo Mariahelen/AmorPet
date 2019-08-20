@@ -90,6 +90,7 @@ public class MenuController {
 			ModelAndView mv = new ModelAndView("/cadastro");
 			mv.addObject("mensagemError", "Erro ao realizar o cadastro, tente novamente.");
 			mv.addObject("usuario", usuario);
+			System.out.println(e.getMessage());
 			return mv;
 		}
 	}
@@ -112,6 +113,7 @@ public class MenuController {
 			Animal animal = this.animalService.findById(id);
 			mv.addObject("animal", animal);
 			mv.addObject("idadeAnimal", Util.calcularIdade(animal.getDataNascimento()));
+			mv.addObject("disponivel", this.animalService.verificarSeDisponivel(animal));
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}

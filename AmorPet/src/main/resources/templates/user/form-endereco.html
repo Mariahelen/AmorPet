@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<div th:if="${#fields.hasErrors('numero')}"
 									th:errors="*{numero}" class="text-danger"></div>
-								<input type="text" th:field="*{numero}"
+								<input type="text" th:field="*{numero}" maxlength="4"
 									class="form-control input-lg" placeholder="Número" tabindex="2">
 							</div>
 						</div>

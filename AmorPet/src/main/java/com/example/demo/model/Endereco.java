@@ -27,7 +27,7 @@ public class Endereco {
 	@Column(length = 45)
 	private String logradouro;
 
-	@Size(max = 4, min = 0)
+	@Size(max = 4, min = 0, message = "Tamanho máximo é 4 digitos")
 	@Column(name = "numero_casa", length = 4, columnDefinition = "INT(4)")
 	private String numero;
 

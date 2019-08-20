@@ -8,14 +8,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.AnimalDAO;
+import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.model.Animal;
+import com.example.demo.model.Selecao;
 
 @Service
 public class AnimalService {
 	@Autowired
 	private AnimalDAO animalRep;
-	
+	@Autowired
+	private SelecaoDAO selecaoRep;
 	@Autowired
 	private UsuarioDAO usuarioRep;
 	
@@ -64,5 +67,15 @@ public class AnimalService {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean verificarSeDisponivel(Animal animal) {
+		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(animal.getIdAnimal());
+		if(selecao.isPresent()) {
+			if(selecao.get().getProcessos().size() >= 10) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

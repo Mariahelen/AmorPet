@@ -128,8 +128,9 @@
 											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
 											 id="editar-animal" class="btn btn-success">Editar</button>
 											 
-											<a th:if="${session.usuarioLogado.role} == 'ROLE_USER'"
-												class="btn btn-info" th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+											<div th:if="${session.usuarioLogado.role} == 'ROLE_USER' and ${disponivel}">
+												<a class="btn btn-info" th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+											</div>
 										</div>
 									</div>
 								</div>
