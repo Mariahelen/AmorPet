@@ -22,62 +22,73 @@
 	<main>
 	<div class="container">
 		<div class="row">
-			<div
-				class="col-xs-12 col-sm-12 col-md-8 col-sm-offset-2">
+			<div class="col-xs-12 col-sm-12 col-md-8 col-sm-offset-2">
 				<br /> <br />
 				<!-- INICIO DO FORM -->
-				<form role="form" th:action="@{|/user/quero-adotar/${idAnimal}/cadastro/endereco|}"
+				<form role="form"
+					th:action="@{|/user/quero-adotar/${idAnimal}/cadastro/endereco|}"
 					th:object="${endereco}" method="post">
-					<h2 class="tit-processo-1">PROCESSO ADOTIVO - CADASTRO DE ENDEREÇO</h2>
+					<h2 class="tit-processo-1">PROCESSO ADOTIVO - CADASTRO DE
+						ENDEREÇO</h2>
 					<hr class="colorgraph">
 
 					<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}" class="text-danger"></div>
-								<input type="text" th:field="*{complemento}" class="form-control input-lg"
-									placeholder="Complemento" maxlength="60" tabindex="1">
+								<div th:if="${#fields.hasErrors('logradouro')}"
+									th:errors="*{logradouro}" class="text-danger"></div>
+								<input type="text" th:field="*{logradouro}"
+									class="form-control input-lg " placeholder="Logradouro"
+									tabindex="1">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" class="text-danger"></div>
-								<input type="text" th:field="*{numero}" class="form-control input-lg"
-									placeholder="Número" tabindex="2">
+								<div th:if="${#fields.hasErrors('numero')}"
+									th:errors="*{numero}" class="text-danger"></div>
+								<input type="text" th:field="*{numero}"
+									class="form-control input-lg" placeholder="Número" tabindex="2">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" class="text-danger"></div>
-								<input type="text" th:field="*{logradouro}" class="form-control input-lg "
-									placeholder="Logradouro" tabindex="3">
+								<div th:if="${#fields.hasErrors('complemento')}"
+									th:errors="*{complemento}" class="text-danger"></div>
+								<input type="text" th:field="*{complemento}"
+									class="form-control input-lg" placeholder="Complemento"
+									maxlength="60" tabindex="3">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="text-danger"></div>
-								<input type="text" th:field="*{bairro}" class="form-control input-lg"
-									placeholder="Bairro" tabindex="4">
+								<div th:if="${#fields.hasErrors('bairro')}"
+									th:errors="*{bairro}" class="text-danger"></div>
+								<input type="text" th:field="*{bairro}"
+									class="form-control input-lg" placeholder="Bairro" tabindex="4">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="text-danger"></div>
-								<input type="text" th:field="*{cidade}" class="form-control input-lg "
-									placeholder="Cidade" tabindex="5">
+								<div th:if="${#fields.hasErrors('cidade')}"
+									th:errors="*{cidade}" class="text-danger"></div>
+								<input type="text" th:field="*{cidade}"
+									class="form-control input-lg " placeholder="Cidade"
+									tabindex="5">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="text-danger"></div>
-								<input type="text" th:field="*{cep}" class="form-control input-lg "
-									placeholder="CEP" tabindex="7">
+								<div th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"
+									class="text-danger"></div>
+								<input type="text" th:field="*{cep}" maxlength="8"
+									class="form-control input-lg " placeholder="CEP" tabindex="7">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="text-danger"></div>
+								<div th:if="${#fields.hasErrors('estado')}"
+									th:errors="*{estado}" class="text-danger"></div>
 								<select class="wide" th:field="*{estado}">
 									<option th:value="''" data-display="Selecione Estado">Selecione
 										Estado</option>
@@ -89,7 +100,8 @@
 
 						<div class="col-xs-12 col-sm-6 col-md-12">
 							<div class="form-group">
-								<div th:if="${erroResidencia}" th:text="${erroResidencia}" class="text-danger"></div>
+								<div th:if="${erroResidencia}" th:text="${erroResidencia}"
+									class="text-danger"></div>
 								<select class="wide" th:field="*{residencia.idResidencia}">
 									<option th:value="''"
 										data-display="Reside em casa ou

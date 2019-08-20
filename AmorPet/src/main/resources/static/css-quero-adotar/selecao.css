@@ -3,6 +3,11 @@
 .container .btn {
 	border-radius: 10px;
 }
+.container img {
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px 0px;
+	border: 1px solid white;
+}
 #btn-voltar {
 	display: inline;
 }
@@ -12,11 +17,26 @@
 	padding: 7px;
 }
 tbody tr:nth-child(1){
-	background-color: #ddd;	
+	background-color: #ffaed2;	
 }
 tbody tr:nth-child(2){
-	background-color: #ccc;
+	background-color: #71b9f4;
 }
 tbody tr:nth-child(3) {
-	background-color: #aaa;
+	background-color: #ccd87c;
+}
+#customers td, #customers a {
+	padding: 7px;
+}
+#customers button {
+	padding: 8px 13px;
+}
+.fa-arrow-left {
+	font-size: 15px;
+}
+.fa-check-circle {
+	font-size: 30px;
+}
+.fa-user-alt, .fa-star, .fa-calendar-alt, .fa-eye, .fa-trash-alt {
+	font-size: 18px;
 }
