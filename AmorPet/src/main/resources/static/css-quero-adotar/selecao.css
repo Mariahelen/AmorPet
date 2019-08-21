@@ -3,7 +3,7 @@
 .container .conteudo .btn {
 	border-radius: 10px;
 }
-.container img {
+.conteudo img {
 	border-radius: 20px;
 	box-shadow: 0px 0px 10px 0px;
 	border: 1px solid white;
@@ -16,29 +16,68 @@
 	border-bottom: 1px solid lightgray;
 	padding: 7px;
 }
-tr th, tr td {
+.container tr th, .container tr td {
 	text-align: center !important;
 }
-tbody tr:nth-child(1){
+.container th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+#table-selecao td {
+	padding-bottom: 0px;
+}
+#customers tbody tr:nth-child(1){
 	background-color: #5FD6B5;	
 }
-tbody tr:nth-child(2){
+#customers tbody tr:nth-child(2){
 	background-color: #89D6C2;
 }
-tbody tr:nth-child(3) {
+#customers tbody tr:nth-child(3) {
 	background-color: #ADD5C4;
 }
-tbody tr {
-	background-color: #c5c5c5;
+.container tbody tr {
+	background-color: #ccc;
 }
-#customers {
-	box-shadow: 0px 0px 7px 2px;
+.container table, #status-selecao {
+	box-shadow: 0px 0px 5px 1px;
 }
 #customers td, #customers a {
 	padding: 7px;
 }
 #customers button {
 	padding: 8px 13px;
+}
+#status-selecao {
+	border-radius: 7px;
+	padding: 10px;
+	margin-top: 20px;
+}
+#status-selecao hr {
+	border: 1px solid #7ac673;
+}
+#status-selecao p {
+	margin-left: 20px;
+	margin-top: 5px;
+}
+#status-selecao .badge {
+	background-color: #58bcd1;
+}
+#status-selecao .badge:last-child {
+	float: right;
+}
+#status-selecao {
+	padding: 15px;
+	border: 1px solid lightblue;
+}
+.etapa-concluida {
+	background-color: #7ac673;
+	border-radius: 50px;
+}
+.etapa-pendente {
+	border-radius: 50px;
 }
 .fa-arrow-left {
 	font-size: 15px;

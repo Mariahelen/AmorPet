@@ -33,6 +33,7 @@
 </style>
 
 <link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+<link rel="stylesheet" th:href="@{/css-quero-adotar/selecao.css}">
 
 <title>Candidatos</title>
 
@@ -53,36 +54,34 @@
 	<div class="container">
 		<div class="row">
 			<div class="conteudo">
-				<table id="customers">
+				<table class="table table-responsive table-bordered" id="table-selecao">
 					<thead>
 						<tr>
-							<th>Id</th>
-							<th>Nome do Animalzinho</th>
-							<th>Quantidade de processos</th>
+							<th>ID</th>
+							<th>Animalzinho</th>
+							<th>Processos</th>
 							<th>Situação</th>
-							<th>Ações</th>
+							<th>Seleção</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:if="${listaSelecoes}" th:each="selecao : ${listaSelecoes}">
-							<td th:text="${selecao.idSelecao}"></td>
-							<td th:text="${selecao.idAnimal.nome}"></td>
-							<td th:text="${selecao.processos.size()}"></td>
-							<td th:text="${selecao.aberta} ? 'Aberta' : 'Fechada'"></td>
-							<td><a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos|}">Visualizar</a></td>
+							<td th:text="${selecao.idSelecao}" title="Identificador"></td>
+							<td th:text="${selecao.idAnimal.nome}" title="nome do animalzinho"></td>
+							<td th:text="${selecao.processos.size()}" title="quantidade de processos"></td>
+							<td th:text="${selecao.situacao} == 1 ? |ETAPA ${selecao.situacao}| : 'Fechada'" title="etapa da seleção"></td>
+							<td><a class="btn btn-info btn-sm" th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos|}" title="Ver processos">Ver</a></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		
 	</div>
 	<br />
 	<br />
 
 	<!-------------------------------Correto-------------------------------------->
-	<br>
-	<br>
-
 	<div th:replace="conteudo-padrao/footer :: footer"></div>
 
 	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>

@@ -252,8 +252,13 @@ a#terms.new-passwd:hover, a#terms.new-passwd:focus{
 	transition: 0.5s;
 	
 }
-
-
+#termo {
+	text-align: justify;
+}
+input[type="date"] {
+	padding: 0px;
+	padding-left: 23px;
+}
 
 
 

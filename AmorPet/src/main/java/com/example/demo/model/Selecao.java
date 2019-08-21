@@ -34,7 +34,8 @@ public class Selecao {
 	@Cascade(CascadeType.ALL)
 	private List<Processo> processos;
 	@NotNull
-	private Boolean aberta;
+	@Column(columnDefinition = "INT(3) default 1", nullable = false)
+	private Integer situacao;
 
 	public Integer getIdSelecao() {
 		return idSelecao;
@@ -68,12 +69,12 @@ public class Selecao {
 		this.processos = processos;
 	}
 
-	public Boolean getAberta() {
-		return aberta;
+	public Integer getSituacao() {
+		return situacao;
 	}
 
-	public void setAberta(Boolean aberta) {
-		this.aberta = aberta;
+	public void setSituacao(Integer situacao) {
+		this.situacao = situacao;
 	}
 
 }

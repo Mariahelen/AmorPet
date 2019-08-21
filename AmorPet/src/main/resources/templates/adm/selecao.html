@@ -15,13 +15,6 @@
 	padding: 8px;
 }
 
-#customers th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #4CAF50;
-	color: white;
-}
 </style>
 
 <link th:replace="conteudo-padrao/estilos :: estilos-padrao">
@@ -51,7 +44,31 @@
 				<div class="row">
 					<h2 id="title-pag">LISTA DE PARTICIPANTES</h2>
 					<div class="col-sm-4">
-						<img th:src="${selecao.idAnimal.caminhoFoto}" width="350" height="350" th:title="|Foto do animalzinho ${selecao.idAnimal.nome}|">
+						<img th:src="${selecao.idAnimal.caminhoFoto}" alt="Imagem do animalzinho" width="335" height="350" th:title="|Foto do animalzinho ${selecao.idAnimal.nome}|">
+						<div class="col-sm-11" id="status-selecao">
+							<div th:class="${selecao.situacao} > 1 ? etapa-concluida">
+								<p th:if="${selecao.situacao} == 1"><span class="badge">1</span> ETAPA<span class="badge">Em andamento</span></p>
+								<p th:if="${selecao.situacao} > 1"><span class="badge">1</span> ETAPA <span class="badge">Concluído</span></p>
+							</div>
+							<hr>
+							<div th:class="${selecao.situacao} > 2 ? etapa-concluida : etapa-pendente">
+								<p th:if="${selecao.situacao} < 2"><span class="badge">2</span> ETAPA<span class="badge"><i class="fas fa-hourglass-half"></i></span></p>
+								<p th:if="${selecao.situacao} == 2"><span class="badge">2</span> ETAPA <span class="badge">Em andamento</span></p>
+								<p th:if="${selecao.situacao} > 2"><span class="badge">2</span> ETAPA <span class="badge">Concluido</span></p>
+							</div>
+							<hr>
+							<div th:class="${selecao.situacao} == 3 ? etapa-concluida : etapa-pendente">
+								<p th:if="${selecao.situacao} < 3"><span class="badge">3</span> ETAPA<span class="badge"><i class="fas fa-hourglass-half"></i></span></p>
+								<p th:if="${selecao.situacao} == 3"><span class="badge">3</span> ETAPA <span class="badge">Concluído</span></p>
+							</div>
+							<hr>
+							<div th:if="${selecao.situacao} < 3">
+								<a th:href="@{|/adm/iniciar/etapa/${selecao.situacao+1}|}" class="btn btn-info">Iniciar Próxima Etapa</a>
+							</div>
+							<div th:if="${selecao.situacao} == 3">
+								<a th:href="@{|/adm/iniciar/etapa/3|}" class="btn btn-info">Iniciar Próxima Etapa</a>
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-8">
 						<table id="customers" class="table-responsive">
@@ -61,7 +78,8 @@
 									<th>Nome do Participante</th>
 									<th>Pontuação</th>
 									<th>Data de Entrada</th>
-									<th>Respostas</th>
+									<th th:if="${selecao.situacao} == 1">Respostas</th>
+									<th th:if="${selecao.situacao} == 2">Avaliação</th>
 									<th>Excluir</th>
 								</tr>
 							</thead>
@@ -73,11 +91,18 @@
 									<td title="Pontuação"><i class="far fa-star"></i> <span th:text="${processo.pontuacaoFinal}"></span></td>
 									<td title="Data de Entrada"><i class="far fa-calendar-alt"></i> <span
 										th:text="${#temporals.format(processo.dataRegistro, 'dd-MM-yyyy')}"></span></td>
-									<td title="Ver Respostas">
+										
+									<td title="Ver Respostas" th:if="${selecao.situacao} == 1">
 										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/respostas|}" class="btn btn-info btn-sm">
 											<i class="fas fa-eye"></i> Ver
 										</a>
 									</td>
+									<td title="Ver Respostas" th:if="${selecao.situacao} == 2">
+										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/avaliacao|}" class="btn btn-info btn-sm">
+											<i class="fas fa-eye"></i> Ver
+										</a>
+									</td>
+									
 									<td title="Remover Participante">
 										<form class="form-inline"
 											th:action="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}|}"

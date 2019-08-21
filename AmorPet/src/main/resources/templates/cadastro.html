@@ -2,140 +2,201 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
-	
-        <!--RESPONSIVIDADE-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Cadastre-se</title>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<!--RESPONSIVIDADE-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cadastre-se</title>
 
 <!--Página de Cadastro CSS-->
-  
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
-    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/style.css}">
-        
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 
-    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/style.css}">
 
- 	<meta th:if="${mensagemSuccess}" http-equiv="refresh" content="1.5;url=/login" />
+
+<link rel="stylesheet"
+	th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
+
+<meta th:if="${mensagemSuccess}" http-equiv="refresh"
+	content="1.5;url=/login" />
 
 
 </head>
 <body>
-<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
 
-<br/><br/><br/><br/>
+	<br />
+	<br />
+	<br />
+	<br />
 
-<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" th:style="|background-image: url(@{/img/wallpaper-02.jpg});|"><br/><br/><br/><br/>
+	<section
+		class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"
+		th:style="|background-image: url(@{/img/wallpaper-02.jpg});|">
+		<br />
+		<br />
+		<br />
+		<br />
 
-   
-<div class="container">
 
-<div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form" th:action="@{/cadastro}" th:object="${usuario}" method="post">
-        	<span th:if="${mensagemSuccess}" th:text="${mensagemSuccess}" class="tit-processo-1"></span>
-        	<span th:if="${mensagemError}" th:text="${mensagemError}" class="text-danger"></span>
-            <h2 class="tit-processo-1">CADASTRE-SE GRATUITAMENTE:</h2>
-            <hr class="colorgraph">
-            <input type="hidden" th:field="*{id}">
-            <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
-            <div class="form-group">
-                <input type="text" th:field="*{nome}" name="display_name" id="nome" class="form-control input-lg " placeholder="Nome Completo">
-            </div>
-            <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></div>
-            <div class="form-group">
-                <input type="text" th:field="*{telefone}" name="display_name" id="celular" class="form-control input-lg " placeholder="Telefone (XX)X.XXXX-XXXX" pattern="\([0-9]{2}\)[0-9]{1}.[0-9]{4}-[0-9]{4}">
-            </div>
-            <div class="form-group">
-            	<label for="dt_nasc" class="label-title">DATA DE NASCIMENTO:  </label>
-            	<div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" class="text-danger"></div>
-                <input id="dt_nasc" type="date" th:field="*{dataNascimento}" name="display_name" class="form-control input-lg ">
-            </div>
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
-            <div class="form-group">
-                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Endereço de e-mail">
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                	<div th:if="${#fields.hasErrors('hashSenha')}" th:errors="*{hashSenha}" class="text-danger"></div>
-                    <div class="form-group">
-                        <input type="password" th:field="*{hashSenha}" name="password" id="password" class="form-control input-lg" placeholder="Senha" required="required" minlength="8">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                	<div th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger"></div>
-                    <div class="form-group">
-                        <input type="password" th:field="*{confirmaSenha}" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmar Senha" required="required" minlength="8">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-3">
-                    <span class="button-checkbox">
-                        <button type="button" id="termos-condicoes" class="btn btn-success btn-terms" data-color="info">Eu aceito</button>
-                        <input type="checkbox" name="t_and_c" id="t_an_dc" class="hidden" value="1">
-                    </span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-9">
-                     <h4 class="new-pass-2">Ao se registrar você concorda com os <a href="#" data-toggle="modal" data-target="#t_and_c_m" id="terms" class="terms new-passwd">Termos e Condições</a> de navegação no site, incluindo o uso de Cookies.</h4>
-                </div>
-            </div>
-            
-            <hr class="colorgraph">
-            <div class="row">
-            	<div class="col-xs-12 col-md-12"><input type="submit" value="Registrar" class="btn btn-success btn-block btn-lg"></div>
-            </div>
-            <br><br>
-            <div class="row">
-            	<div class="col-xs-12 col-md-12"><span class="badge">Já possui conta?<a th:href="@{/login}">Entrar</a></span></div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="t_and_c_m" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Termos e Condições</h4>
-            </div>
-            <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Eu aceito</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-</div><br/><br/>
-</section>
+		<div class="container">
 
-<div th:replace="conteudo-padrao/footer :: footer"></div>
+			<div class="row">
+				<div
+					class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+					<form role="form" th:action="@{/cadastro}" th:object="${usuario}"
+						method="post">
+						<span th:if="${mensagemSuccess}" th:text="${mensagemSuccess}"
+							class="tit-processo-1"></span> <span th:if="${mensagemError}"
+							th:text="${mensagemError}" class="text-danger"></span>
+						<h2 class="tit-processo-1">CADASTRE-SE GRATUITAMENTE:</h2>
+						<hr class="colorgraph">
+						<input type="hidden" th:field="*{id}">
+						<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+							class="text-danger"></div>
+						<div class="form-group">
+							<input type="text" th:field="*{nome}" name="display_name"
+								id="nome" class="form-control input-lg "
+								placeholder="Nome Completo" required>
+						</div>
+						<div th:if="${#fields.hasErrors('telefone')}"
+							th:errors="*{telefone}" class="text-danger"></div>
+						<div class="form-group">
+							<input type="text" th:field="*{telefone}" name="display_name"
+								id="celular" class="form-control input-lg "
+								placeholder="Telefone (XX)X.XXXX-XXXX"
+								pattern="\([0-9]{2}\)[0-9]{1}.[0-9]{4}-[0-9]{4}" required>
+						</div>
+						<div class="form-group">
+							<label for="dt_nasc" class="label-title">DATA DE
+								NASCIMENTO: </label>
+							<div th:if="${#fields.hasErrors('dataNascimento')}"
+								th:errors="*{dataNascimento}" class="text-danger"></div>
+							<input id="dt_nasc" type="date" th:field="*{dataNascimento}"
+								name="display_name" class="form-control input-lg" required>
+						</div>
+						<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							class="text-danger"></div>
+						<div class="form-group">
+							<input type="email" th:field="*{email}" name="email" id="email"
+								class="form-control input-lg" placeholder="Endereço de e-mail" required>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div th:if="${#fields.hasErrors('hashSenha')}"
+									th:errors="*{hashSenha}" class="text-danger"></div>
+								<div class="form-group">
+									<input type="password" th:field="*{hashSenha}" name="password"
+										id="password" class="form-control input-lg"
+										placeholder="Senha" required="required" minlength="8">
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div th:if="${#fields.hasErrors('confirmaSenha')}"
+									th:errors="*{confirmaSenha}" class="text-danger"></div>
+								<div class="form-group">
+									<input type="password" th:field="*{confirmaSenha}"
+										name="password_confirmation" id="password_confirmation"
+										class="form-control input-lg" placeholder="Confirmar Senha"
+										required="required" minlength="8">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-3">
+								<span class="button-checkbox">
+									<button type="button" id="termos-condicoes"
+										class="btn btn-success btn-terms" data-color="info">Eu
+										aceito</button> <input type="checkbox" name="t_and_c" id="t_an_dc"
+									class="hidden" value="1">
+								</span>
+							</div>
+							<div class="col-xs-8 col-sm-9 col-md-9">
+								<h4 class="new-pass-2">
+									Ao se registrar você concorda com os <a href="#"
+										data-toggle="modal" data-target="#t_and_c_m" id="terms"
+										class="terms new-passwd">Termos e Condições</a> de navegação
+									no site, incluindo o uso de Cookies.
+								</h4>
+							</div>
+						</div>
 
-<!--Página de Cadastro CSS-->
-<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+						<hr class="colorgraph">
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<input type="submit" value="Registrar"
+									class="btn btn-success btn-block btn-lg">
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="row">
+							<div class="col-xs-12 col-md-12">
+								<span class="badge">Já possui conta?<a
+									th:href="@{/login}">Entrar</a></span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="t_and_c_m" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">Termos e Condições</h4>
+						</div>
+						<div class="modal-body" id="termo">
+							<p>Quase todos os nossos animais chegam doentes, assustados,
+								sujos e com muito medo. Na rua, eles experimentam do pior: desde
+								a dor de serem abandonados por aquela pessoa em quem confiavam,
+								até maus-tratos e envenenamentos. Todo mundo já ouviu histórias
+								de alguém que maltratou um gatinho ou um cachorrinho quando era
+								criança ou mesmo quando adulto.</p>
+							<p>Em nossa opinião, lugar de gatos e cachorros é dentro de
+								casa, sendo bem cuidados e alimentados com todo amor e carinho.
+								Por isso, além de preencher o formulário de adoção, os
+								candidatos a adotantes devem estar de acordo com a vistoria que
+								será feita em sua casa antes da entrega do bichinho.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-success"
+								data-dismiss="modal">Eu aceito</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<br />
+		<br />
+	</section>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+	<!--Página de Cadastro CSS-->
+	<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
-<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
 
-  <script th:src="@{/js/cadastro.js}"></script>
+	<script th:src="@{/js/cadastro.js}"></script>
 
- <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
 
-  <script type="text/javascript">
-    $("#celular").mask("(00)0.0000-0000");
-  </script>
+	<script type="text/javascript">
+		$("#celular").mask("(00)0.0000-0000");
+	</script>
 </body>
 </html>

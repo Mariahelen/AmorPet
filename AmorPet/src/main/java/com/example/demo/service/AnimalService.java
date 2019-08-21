@@ -77,14 +77,13 @@ public class AnimalService {
 		}
 		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(animal.getIdAnimal());
 		if (selecao.isPresent()) {
-			if (selecao.get().getProcessos().size() >= 10) {
-				if (usuario == null) {
+			if (usuario == null) {
+				return true;
+			}
+			for (Processo p : selecao.get().getProcessos()) {
+				if (!p.getIdUsuario().getId().equals(usuario.getId())
+						&& selecao.get().getProcessos().size() >= 10) {
 					return false;
-				}
-				for (Processo p : selecao.get().getProcessos()) {
-					if (!p.getIdUsuario().getId().equals(usuario.getId())) {
-						return false;
-					}
 				}
 			}
 		}

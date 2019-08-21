@@ -70,7 +70,7 @@ public class SelecaoService {
 		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(animal.getIdAnimal());
 		if (selecao.isPresent()) {
 			// verifica se a selecao está aberta
-			if (selecao.get().getAberta()) {
+			if (selecao.get().getSituacao() == 1) {
 				return selecao.get();
 			}
 		}
@@ -85,7 +85,7 @@ public class SelecaoService {
 		selecao.setIdAnimal(animal);
 		selecao.setDataRegistro(LocalDate.now());
 		selecao.setProcessos(new ArrayList<Processo>());
-		selecao.setAberta(true);
+		selecao.setSituacao(1);
 		return selecao;
 	}
 
@@ -98,5 +98,25 @@ public class SelecaoService {
 			}
 		}
 		throw new Exception("Não existe");
+	}
+	
+	public void iniciarProximaEtapa(Integer idSelecao, Integer etapa) throws Exception {
+		Selecao selecao = this.findById(idSelecao);
+		selecao.setSituacao(etapa);
+		if(etapa == 3) {
+			this.finalizarSelecao(selecao);
+		}else {
+			this.selecaoRep.save(selecao);
+		}
+	}
+	
+	public void finalizarSelecao(Selecao selecao) {
+		for (Processo p : selecao.getProcessos()) {
+			if(p.getAvaliacao().getAvaliacaoDono() == null) {
+				continue;
+			}
+			p.setPontuacaoFinal(p.getAvaliacao().getAvaliacaoDono() + p.getAvaliacao().getAvaliacaoLar());
+			this.processoRep.save(p);
+		}
 	}
 }

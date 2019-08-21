@@ -19,7 +19,7 @@ public interface ProcessoDAO extends JpaRepository<Processo, Integer> {
 	Optional<Processo> findByIdUsuario(Integer idUsuario);
 	
 	@Query("select p from Processo p where p.idUsuario = :usuario and p.idSelecao = "
-			+ "(select s.idSelecao from Selecao s where s.idAnimal = :animal AND aberta = true)")
+			+ "(select s.idSelecao from Selecao s where s.idAnimal = :animal AND s.situacao = 1)")
 	Optional<Processo> findByUsuarioByAnimal(Usuario usuario, Animal animal);
 
 	@Query("select p from Processo p where p.idSelecao = :selecao order by p.pontuacaoFinal desc")
