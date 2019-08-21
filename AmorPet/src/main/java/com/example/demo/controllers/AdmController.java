@@ -241,4 +241,11 @@ public class AdmController {
 	public String logout() {
 		return "redirect:/user/logout";
 	}
+	
+	@GetMapping("/avaliacao")
+	public ModelAndView telaAvaliacao() {
+		
+		ModelAndView mv = new ModelAndView("/adm/avaliacao");
+		return mv;
+	}
 }

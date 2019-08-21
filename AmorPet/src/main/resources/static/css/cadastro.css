@@ -252,6 +252,7 @@ a#terms.new-passwd:hover, a#terms.new-passwd:focus{
 	transition: 0.5s;
 	
 }
+<<<<<<< HEAD
 #termo {
 	text-align: justify;
 }
@@ -259,6 +260,19 @@ input[type="date"] {
 	padding: 0px;
 	padding-left: 23px;
 }
+=======
+
+
+/* CSS PÁGINA DE AVALIAÇÃO*/
+
+.tit-processo-avaliacao {
+	
+    font-size: 16pt;
+    text-align: center;
+   
+}
+
+>>>>>>> refs/remotes/origin/master
 
 
 
