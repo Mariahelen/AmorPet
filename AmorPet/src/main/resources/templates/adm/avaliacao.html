@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+<!--Página de Cadastro CSS-->
+<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
+
+<!-- ---Cadastro Animal css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/cadastro_animal.css}">
+
+<!--Cadastro CSS-->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
+
+
+<link rel="stylesheet" th:href="@{/css-quero-adotar/form-etapa.css}">
+
+<title>AmorPet | Avaliação</title>
+</head>
+<body>
+<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h1 class="tit-processo-avaliacao">PROCESSO SELETIVO - 2º ETAPA: AVALIAÇÃO PRESENCIAL DO CANDIDATO</h1>
+<br/>
+<br/>
+<div class="container">
+<form id="form-respostas" role="form" method="post">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr class="success">
+										<th>Descrição da pergunta</th>
+										<th>Sim</th>
+										<th>Não</th>
+									</tr>
+								</thead>
+								<tbody id="info-respostas">
+									<tr class="active">
+										<td>O animal se comportou bem na residência?</td>
+										<td>
+											<span class="button-checkbox">
+												<button type="button" class="btn btn-success btn-terms"
+													data-color="success" title="Sim"></button>
+												<input type="checkbox"
+													 class="hidden" value="S">
+											</span>
+										</td>
+										<td>
+											<span class="button-checkbox">
+												<button type="button" class="btn btn-success btn-terms"
+													data-color="success" title="Não"></button>
+												<input type="checkbox"
+													 class="hidden" value="N">
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<hr class="colorgraph">
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<input type="submit" id="enviar-respostas" value="Enviar"
+									class="btn btn-success btn-block btn-lg">
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<input type="reset" id="limpar-respostas" class="btn btn-primary btn-block btn-lg"
+									value="Limpar">
+							</div>
+						</div>
+					</form>
+					</div>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+<div th:replace="conteudo-padrao/footer :: footer"></div>
+<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+<script th:src="@{/js/cadastro.js}"></script>
+
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
+	<script type="text/javascript">
+</body>
+</html>
