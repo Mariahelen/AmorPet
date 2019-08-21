@@ -87,8 +87,17 @@ public class Util {
 		return errors;
 	}
 	
-	public static int calcularIdade(final LocalDate aniversario) {
-	    return Period.between(aniversario, LocalDate.now()).getYears();
+	public static String formataIdade(final LocalDate aniversario) {
+		int idade = Period.between(aniversario, LocalDate.now()).getYears();
+	    if(idade >= 1) {
+	    	return idade + " Ano(s)";
+	    }
+	    int meses = Period.between(aniversario, LocalDate.now()).getMonths();
+	    if(meses == 1) {
+	    	return meses + " Mês";
+	    }else {
+	    	return meses + " Meses";
+	    }
 	}
 	
 	/**

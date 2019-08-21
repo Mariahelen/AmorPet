@@ -106,14 +106,15 @@ public class MenuController {
 		return mv;
 	}
 	@GetMapping("/descricao-animal/{id}")
-	public ModelAndView descricaoAnimal(@PathVariable Integer id) {
+	public ModelAndView descricaoAnimal(@PathVariable Integer id, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView("/descricao-animal");
 		try {
 			Animal animal = this.animalService.findById(id);
 			mv.addObject("animal", animal);
-			mv.addObject("idadeAnimal", Util.calcularIdade(animal.getDataNascimento()));
-			mv.addObject("disponivel", this.animalService.verificarSeDisponivel(animal));
+			mv.addObject("idadeAnimal", Util.formataIdade(animal.getDataNascimento()));
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			mv.addObject("disponivel", this.animalService.verificarSeDisponivel(animal, usuario));
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}

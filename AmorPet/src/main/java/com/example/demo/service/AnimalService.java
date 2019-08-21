@@ -11,7 +11,9 @@ import com.example.demo.dao.AnimalDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.model.Animal;
+import com.example.demo.model.Processo;
 import com.example.demo.model.Selecao;
+import com.example.demo.model.Usuario;
 
 @Service
 public class AnimalService {
@@ -21,17 +23,17 @@ public class AnimalService {
 	private SelecaoDAO selecaoRep;
 	@Autowired
 	private UsuarioDAO usuarioRep;
-	
+
 	public Animal findById(Integer id) throws Exception {
 		Optional<Animal> animal = this.animalRep.findById(id);
-		if(animal.isPresent()) {
+		if (animal.isPresent()) {
 			return animal.get();
 		}
 		throw new Exception("Animal não encontrado");
 	}
 
 	public List<Animal> listarAnimais() throws Exception {
-		List<Animal> animais = this.animalRep.findAll(Sort.by("nome"));
+		List<Animal> animais = this.animalRep.findAllByDisponiveis(Sort.by("nome"));
 		if (animais.isEmpty()) {
 			throw new Exception();
 		}
@@ -41,18 +43,18 @@ public class AnimalService {
 	public void criarAnimal(Animal animal) {
 		this.animalRep.save(animal);
 	}
-	
+
 	public void removerAnimal(Integer idAdm, String senhaAdm, Integer idAnimal) throws Exception {
-		
-		if(this.usuarioRep.existsByIdAndByHashSenha(idAdm, senhaAdm)) {
-			
+
+		if (this.usuarioRep.existsByIdAndByHashSenha(idAdm, senhaAdm)) {
+
 			this.animalRep.deleteById(idAnimal);
-		}else {
+		} else {
 			throw new Exception("Não foi possivel remover");
 		}
-		
+
 	}
-	
+
 	public void editarAnimal(Animal animal) {
 		Animal animalBanco = animalRep.getOne(animal.getIdAnimal());
 		animalBanco.setDataNascimento(animal.getDataNascimento());
@@ -61,19 +63,29 @@ public class AnimalService {
 		animalBanco.setSexoAnimal(animal.getSexoAnimal());
 		this.animalRep.save(animalBanco);
 	}
-	
+
 	public boolean verificarDono(Animal animal) {
-		if(animal.getUsuario() != null) {
+		if (animal.getUsuario() != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean verificarSeDisponivel(Animal animal) {
+
+	public boolean verificarSeDisponivel(Animal animal, Usuario usuario) {
+		if(animal.getUsuario() != null) {
+			return false;
+		}
 		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(animal.getIdAnimal());
-		if(selecao.isPresent()) {
-			if(selecao.get().getProcessos().size() >= 10) {
-				return false;
+		if (selecao.isPresent()) {
+			if (selecao.get().getProcessos().size() >= 10) {
+				if (usuario == null) {
+					return false;
+				}
+				for (Processo p : selecao.get().getProcessos()) {
+					if (!p.getIdUsuario().getId().equals(usuario.getId())) {
+						return false;
+					}
+				}
 			}
 		}
 		return true;

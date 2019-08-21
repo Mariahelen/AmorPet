@@ -15,8 +15,6 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
 	<section>
 	
 		<!-- MODAL DE REMOVER ANIMAL -->
@@ -53,11 +51,6 @@
 				</div>
 			</div>
 		</div>
-			<div>
-				<a th:href="@{/adotar}">
-    		 <button id="voltar" class="btn btn-success">Voltar</button>
-				</a>
-				</div>
 		<div class="mbr-section__container container">
 			<div class="mbr-contacts mbr-contacts--wysiwyg row"
 				style="padding-top: 30px; padding-bottom: 45px;">
@@ -66,8 +59,10 @@
 					th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
 				<div class="alert alert-success" th:if="${sucessoEditar}"
 					th:text="${sucessoEditar}"></div>
-
-				<div th:if="${animal}">
+					
+				<a class="btn btn-success btn-sm" id="voltar" th:href="@{/adotar}">Voltar</a>
+				
+				<div th:if="${animal}" class="col-sm-12">
 					<div class="col-sm-6">
 						<div>
 							<img th:src="${animal.caminhoFoto}" id="imgAnimal"
@@ -80,59 +75,74 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<h2>
-											Nome: 
+											Nome
 										</h2>
 										<p th:text="${animal.nome}"></p>
 									</div>
-										<div class="col-sm-6">
+									<div class="col-sm-6">
 										<h2>
-											Tipo: 
+											Tipo
 										</h2>
 										<p th:text="${animal.tipoAnimal}"></p>
 									</div>
 								</div>
+								<hr>
 								<div class="row">
-								
-									<div class="col-sm-6">
+									<div class="col-sm-4">
 										<h2>
-										Sexo: 
+										Idade
 										</h2>
-										<p th:text="${animal.sexoAnimal}"></p>
+										<p th:text="${idadeAnimal}"></p>
 									</div>
-									<div class="col-sm-6">
-									<h2>
-										Porte: 
-									</h2>
-									<p th:text="${animal.porteAnimal}"></p>
+									<div class="col-sm-4">
+										<h2>
+										Sexo
+										</h2>
+										<p th:text="${animal.sexoAnimal.equalsIgnoreCase('FEMEA')} ? 'Fêmea' : 'Macho'"></p>
+									</div>
+									<div class="col-sm-4">
+										<h2>
+											Porte
+										</h2>
+										<p th:text="${animal.porteAnimal}"></p>
+									</div>
 								</div>
-								<div class="col-sm-6">
-									<h2>
-									Idade: 
-									</h2>
-									<p th:text="${idadeAnimal}"></p>
-								</div>
-								</div>
-								
+								<hr>
 								<div class="row">
 									<div class="col-sm-12">
 										<h2>Descrição</h2>
 										<p th:text="${animal.historiaAnimal}"></p>
+										<hr>
 									</div>
-									<div>
+									<div class="col-sm-12" id="info-adotar">
 										<div th:if="${session.usuarioLogado}">
-											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
-													 id="btn-remove-animal" type="button"
+											<div th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'">
+												<button id="btn-remove-animal" type="button"
 													th:value="${animal.idAnimal}" class="btn btn-primary"
 													data-toggle="modal" data-target="#exampleModal">Remover</button>
-											
-											<button th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'"
-											 id="editar-animal" class="btn btn-success">Editar</button>
-											 
-											<div th:if="${session.usuarioLogado.role} == 'ROLE_USER' and ${disponivel}">
-												<a class="btn btn-info" th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+
+												<button id="editar-animal" class="btn btn-success">Editar</button>
+											</div>
+
+											<div th:if="${session.usuarioLogado.role} == 'ROLE_USER'">
+												<div th:if="${disponivel}"></div>
+												<a class="btn btn-info"
+													th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+											</div>
+											<div th:unless="${disponivel}">
+												<p>
+													Animalzinho indisponível, lamentamos muito, mas existem
+													outros animalzinhos que querem amor e carrinho <i
+														class="far fa-smile-beam"></i>
+												</p>
 											</div>
 										</div>
+										<div th:unless="${session.usuarioLogado} and ${disponivel}">
+											<a class="btn btn-info" th:href="@{/login}">ADOTAR</a>
+											<span class="badge">Ainda não tem conta?<a class="badge" th:href="@{/cadastro}"> Cadastre-se</a></span>
+										</div>
 									</div>
+								</div>
 								</div>
 						</div>
 						<div class="row" id="form-editar">
