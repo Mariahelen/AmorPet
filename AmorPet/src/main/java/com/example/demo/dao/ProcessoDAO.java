@@ -22,6 +22,10 @@ public interface ProcessoDAO extends JpaRepository<Processo, Integer> {
 			+ "(select s.idSelecao from Selecao s where s.idAnimal = :animal AND s.situacao = 1)")
 	Optional<Processo> findByUsuarioByAnimal(Usuario usuario, Animal animal);
 
-	@Query("select p from Processo p where p.idSelecao = :selecao order by p.pontuacaoFinal desc")
+	@Query("select p from Processo p where p.idSelecao = :selecao and p.idUsuario.ativo = true order by p.pontuacaoFinal desc")
 	List<Processo> findAllBySelecao(Selecao selecao);
+	
+	@Query("select p from Processo p where p.idSelecao = :idSelecao and p.pontuacaoFinal >= 150 and p.idUsuario.ativo = true"
+			+ " order by p.pontuacaoFinal, p.data_registro")
+	List<Processo> findByProcessosFinalistas(Selecao selecao);
 }

@@ -201,6 +201,7 @@ public class AdmController {
 		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
 		try{
 			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.verificarPosicaoProcesso(selecao, idProcesso);
 			mv.addObject("idSelecao", idSelecao);
 			mv.addObject("idProcesso", idProcesso);
 			mv.addObject("listaRespostas", this.selecaoService.buscaResposta(selecao, idProcesso));
@@ -227,7 +228,7 @@ public class AdmController {
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos/"+idProcesso+"/respostas";
 	}
 	
-	@GetMapping("/selecoes/{idSelecao}/iniciar/etapa/{etapa}")
+	@GetMapping("/selecoes/{idSelecao}/processos/iniciar/etapa/{etapa}")
 	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa) {
 		try {
 			this.selecaoService.iniciarProximaEtapa(idSelecao, etapa);
@@ -235,6 +236,17 @@ public class AdmController {
 			System.out.println(e.getMessage());
 		}
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+	}
+	
+	@GetMapping("/selecoes/{idSelecao}/processos/finalizar")
+	public String finalizarSelecao(@PathVariable Integer idSelecao) {
+		try {
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.finalizarSelecao(selecao);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/adm/selecoes"+idSelecao+"/processos";
 	}
 	
 	@GetMapping("/logout")

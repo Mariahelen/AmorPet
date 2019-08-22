@@ -70,7 +70,7 @@
 							<td th:text="${selecao.idAnimal.nome}" title="nome do animalzinho"></td>
 							<td th:text="${selecao.processos.size()}" title="quantidade de processos"></td>
 							<td th:text="${selecao.situacao} == 1 ? |ETAPA ${selecao.situacao}| : 'Fechada'" title="etapa da seleção"></td>
-							<td><a class="btn btn-info btn-sm" th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos|}" title="Ver processos">Ver</a></td>
+							<td><a class="btn btn-info btn-sm" th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos|}" title="Ver processos"><i class="fas fa-eye"></i> Ver</a></td>
 						</tr>
 					</tbody>
 				</table>
