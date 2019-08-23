@@ -59,9 +59,10 @@
 								<p th:if="${selecao.situacao} > 2"><span class="badge">2</span> ETAPA <span class="badge">Concluido</span></p>
 							</div>
 							<hr>
-							<div th:class="${selecao.situacao} == 3 ? etapa-concluida : etapa-pendente">
+							<div th:class="${selecao.situacao} > 3 ? etapa-concluida : etapa-pendente">
 								<p th:if="${selecao.situacao} < 3"><span class="badge">3</span> ETAPA<span class="badge"><i class="fas fa-hourglass-half"></i></span></p>
-								<p th:if="${selecao.situacao} == 3"><span class="badge">3</span> ETAPA <span class="badge">Concluído</span></p>
+								<p th:if="${selecao.situacao} == 3"><span class="badge">3</span> ETAPA <span class="badge">Em andamento</span></p>
+								<p th:if="${selecao.situacao} > 3"><span class="badge">3</span> ETAPA <span class="badge">Concluído</span></p>
 							</div>
 							<hr>
 							<div th:unless="${finalizar}">
