@@ -117,7 +117,7 @@
 											<i class="fas fa-eye"></i> Ver
 										</a>
 									</td>
-									<td title="Não elegível" th:if="${selecao.situacao} == 2 and ${status.index} >= 3">
+									<td title="Não elegível" th:if="${selecao.situacao} == 2 and ${processo.pontuacaoFinal} < 95">
 										Não elegível
 									</td>
 									

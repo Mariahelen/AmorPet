@@ -179,13 +179,9 @@ public class SelecaoService {
 		return false;
 	}
 
-<<<<<<< HEAD
-	public void finalizarSelecao(Selecao selecao) throws Exception {
-		if (selecao.getSituacao() != 4) {
-=======
+
 	public void concluirSelecao(Selecao selecao) throws Exception {
 		if (selecao.getSituacao() != 3) {
->>>>>>> branch 'master' of https://github.com/Mariahelen/AmorPet.git
 			throw new Exception("Seleção não está na etapa 3");
 		}
 		// soma os pontos da avaliacao
