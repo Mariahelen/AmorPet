@@ -92,15 +92,22 @@
 									<td title="Data de Entrada"><i class="far fa-calendar-alt"></i> <span
 										th:text="${#temporals.format(processo.dataRegistro, 'dd-MM-yyyy')}"></span></td>
 										
-									<td title="Ver Respostas" th:if="${selecao.situacao} == 1 and ${status.index} <= 5">
+									<td title="Ver Respostas" th:if="${selecao.situacao} == 1 and ${status.index} < 5">
 										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/respostas|}" class="btn btn-info btn-sm">
 											<i class="fas fa-eye"></i> Ver
 										</a>
 									</td>
-									<td title="Ver Avaliação" th:if="${selecao.situacao} == 2 and ${status.index} <= 3">
+									<td title="É necessária pontuação maior" th:if="${selecao.situacao} == 1 and ${status.index} >= 5">
+										Pontuação baixa
+									</td>
+									
+									<td title="Ver Avaliação" th:if="${selecao.situacao} == 2 and ${status.index} < 3 and ${processo.pontuacaoFinal} >= 150">
 										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/avaliacao|}" class="btn btn-info btn-sm">
 											<i class="fas fa-eye"></i> Ver
 										</a>
+									</td>
+									<td title="É necessária pontuação maior" th:if="${selecao.situacao} == 2 and ${processo.pontuacaoFinal} < 150">
+										Pontuação baixa
 									</td>
 									
 									<td title="Remover Participante">
@@ -131,6 +138,25 @@
 	<div th:replace="conteudo-padrao/footer :: footer"></div>
 
 	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+	<script th:if="${selecao.situacao} == 1">
+		let i = 0;
+		$("#customers tbody tr").each(function() {
+			i++;
+			if(i <= 5) {
+				$(this).addClass("participantes-etapa");
+			}
+		});
+	</script>
+	<script th:if="${selecao.situacao} == 2">
+		let i = 0;
+		$("#customers tbody tr").each(function() {
+			i++;
+			if(i <= 3) {
+				$(this).addClass("participantes-etapa");
+			}
+		});
+	</script>
 
 </body>
 </html>

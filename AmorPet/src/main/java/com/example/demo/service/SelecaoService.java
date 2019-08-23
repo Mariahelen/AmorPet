@@ -86,28 +86,27 @@ public class SelecaoService {
 		selecao.setSituacao(1);
 		return selecao;
 	}
-	
+
 	public void verificarPosicaoProcesso(Selecao selecao, Integer idProcesso) throws Exception {
 		Optional<Processo> processo = this.processoRep.findById(idProcesso);
-		if(processo.isPresent()) {
-			int i = 0;
-			for (Processo p : selecao.getProcessos()) {
-				if(i > 5) {
-					throw new Exception("Processo não têm uma colocação mínina");
-				}
-				if(p.getIdProcesso().equals(processo.get().getIdProcesso())) {
-					break;
-				}
-				i++;
+		List<Processo> processos = this.processoRep.findAllBySelecao(selecao);
+		int i = 0;
+		for (Processo p : processos) {
+			if (i > 5) {
+				throw new Exception("Processo não têm uma colocação mínina");
 			}
-			if(selecao.getSituacao() == 1) {
-				if(i <= 5) {
-					return;
-				}
-			}else if(selecao.getSituacao() == 2) {
-				if(i <= 3) {
-					return;
-				}
+			if (p.getIdProcesso().equals(processo.get().getIdProcesso())) {
+				break;
+			}
+			i++;
+		}
+		if (selecao.getSituacao() == 1) {
+			if (i < 5) {
+				return;
+			}
+		} else if (selecao.getSituacao() == 2) {
+			if (i <= 3) {
+				return;
 			}
 		}
 		throw new Exception("Processo não existe");
@@ -117,7 +116,7 @@ public class SelecaoService {
 		Optional<Processo> processo = this.processoRep.findById(idProcesso);
 
 		if (processo.isPresent()) {
-			if(!processo.get().getIdUsuario().isAtivo()) {
+			if (!processo.get().getIdUsuario().isAtivo()) {
 				throw new Exception("conta do Usuário desativada");
 			}
 			if (selecao.getProcessos().contains(processo.get())) {

@@ -5,7 +5,7 @@
 	<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
   
   <title>Termos de adoção</title>
-  
+   <link th:href="@{/css/como-funciona.css}" rel="stylesheet">
 </head>
 <body>
 <div th:replace="conteudo-padrao/navbar :: navbar"></div>
@@ -201,7 +201,8 @@
                 <div class="mbr-buttons mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-success" th:href="@{/quem-somos}">QUEM SOMOS</a></div>
             </div>
         </div>
-    </div>    
+    </div>
+    <button type="button" class="btn btn-info btn-sm" id="voltar-topo"><i class="fas fa-angle-up"></i></button>
 </section>
 
 <div th:replace="conteudo-padrao/footer :: footer"></div>
@@ -209,6 +210,12 @@
 
 <div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
   
-  
+  <script type="text/javascript">
+  	$("#voltar-topo").click(function() {
+  		$('html, body').animate({
+  			scrollTop: 0,
+  		}, 'slow');
+  	});
+  </script>
 </body>
 </html>

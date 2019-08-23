@@ -4,25 +4,37 @@ main {
 	margin-top: 80px;
 	margin-bottom: 50px;
 }
+
 .bg {
 	background-image: url(/assets/images/dog-and-cat.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
+
 .wide {
 	height: 100%;
-    padding-bottom: 7px;
-    padding-top: 7px;
+	padding-bottom: 7px;
+	padding-top: 7px;
 	margin-bottom: 10px;
 }
+
 .btn-success {
 	background-color: #7ac673;
 }
+
+.btn-info {
+	background-color: #27aae0 !important;
+	border-color: #1e9cd0 !important;
+	border-radius: 7px;
+	display: inline;
+}
+
 .container .bg-form {
 	background-color: #bebfc0;
 	opacity: 0.8;
 	border-radius: 20px;
 }
+
 .container .text-style, .container label {
 	font-style: italic;
 	color: #1d1d1d;
@@ -33,32 +45,41 @@ main {
 	margin-left: 5px;
 	margin-bottom: -10px;
 }
+
 .container label {
 	margin-bottom: -10px;
 }
+
 .container .btn-terms {
 	padding: 2px 5px 2px 7px;
 }
+
 .container table {
 	opacity: 0.9;
 }
+
 .container table td {
 	text-transform: uppercase;
 }
+
 .container .btn-success {
 	background-color: #7ac673;
 }
-.container table td:not(:first-child) {
+
+.container table td:not (:first-child ) {
 	text-align: center;
 }
+
 .container table thead .success th {
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 13px;
 }
+
 .container table thead .success th {
 	background-color: #7ac673;
 }
+
 .checkbox-marcado {
-	background-color: rgba(255,219,194,1) !important;
+	background-color: rgba(255, 219, 194, 1) !important;
 }
