@@ -46,7 +46,7 @@ public class Autorizacao implements HandlerInterceptor {
 		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
 		
 		if(request.getSession().getAttribute("usuarioLogado") == null) {
-			request.getRequestDispatcher("/login").forward(request, response);
+			request.getRequestDispatcher("/not-found").forward(request, response);
 			return false;
 		} else {
 			if(request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)
@@ -59,7 +59,7 @@ public class Autorizacao implements HandlerInterceptor {
 				
 				return true;
 			}
-			request.getRequestDispatcher("/login").forward(request, response);
+			request.getRequestDispatcher("/not-found").forward(request, response);
 			return false;
 		}
 

@@ -58,7 +58,7 @@ public class UserController {
 	private RespostaService respostaService;
 	@Autowired
 	private AnimalService animalService;
-	
+
 	@GetMapping({ "/perfil", "/perfil/editar" })
 	public ModelAndView exibirPerfil(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/perfil");
@@ -127,18 +127,23 @@ public class UserController {
 
 	@GetMapping("/quero-adotar/{idAnimal}")
 	public String iniciarSelecaoAnimal(@PathVariable Integer idAnimal, RedirectAttributes ra, HttpSession session) {
-		
+
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Processo processo = this.processoService.criarProcesso(usuario);
 		try {
+			Animal animal = this.animalService.findById(idAnimal);
+			if (!this.animalService.verificarSeDisponivel(animal, usuario)) {
+				return "redirect:/descricao-animal/" + idAnimal;
+			}
 			// verifica se existe uma selecao aberta pra este animal
 			// verifica se este processo já está nesta selecao
-			this.selecaoService.selecaoAnimal(idAnimal, processo);
+			this.selecaoService.selecaoAnimal(animal, processo);
 		} catch (Exception e) {
-			ra.addFlashAttribute("error", "Animal não existe");
+			ra.addFlashAttribute("error", "Animal não encontrado");
 			System.out.println(e.getMessage());
+			return "redirect:/adotar";
 		}
-		
+
 		if (this.usuarioService.verificarEndereco(usuario.getEndereco())) {
 			return "redirect:/user/quero-adotar/" + idAnimal + "/cadastro/endereco";
 		}
@@ -150,33 +155,56 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("/user/form-endereco");
 		// pega o usuario da sessao
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		/* bloco try destinado a verificar se o animal está disponivel */
+		try {
+			Animal animal = this.animalService.findById(idAnimal);
+			if (!this.animalService.verificarSeDisponivel(animal, usuario)) {
+				return new ModelAndView("redirect:/descricao-animal/" + idAnimal);
+			}
+		} catch (Exception e) {
+			return new ModelAndView("redirect:/adotar");
+		}
 		mv.addObject("endereco", usuario.getEndereco());
 		mv.addObject("idAnimal", idAnimal);
 		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
-	
+
 	@PostMapping("/quero-adotar/{idAnimal}/cadastro/endereco")
-	public ModelAndView salvarFormEndereco(@Valid Endereco endereco, BindingResult br, @PathVariable Integer idAnimal, HttpSession session) {
-		
+	public ModelAndView salvarFormEndereco(@Valid Endereco endereco, BindingResult br, @PathVariable Integer idAnimal,
+			HttpSession session) {
+
 		ModelAndView mv = new ModelAndView("/user/form-endereco");
-		if(endereco.getResidencia().getIdResidencia() == null) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		/* bloco try destinado a verificar se o animal está disponivel */
+		try {
+			Animal animal = this.animalService.findById(idAnimal);
+			if (!this.animalService.verificarSeDisponivel(animal, usuario)) {
+				return new ModelAndView("redirect:/descricao-animal/" + idAnimal);
+			}
+		} catch (Exception e) {
+			return new ModelAndView("redirect:/adotar");
+		}
+
+		if (endereco.getResidencia().getIdResidencia() == null) {
 			mv.addObject("erroResidencia", "Residencia é necessário");
 		}
-		if(br.hasErrors()) {
+		if (br.hasErrors()) {
 			mv.addObject("idAnimal", idAnimal);
 			mv.addObject("estados", Estado.values());
 			mv.addObject("listaResidencias", this.residenciaService.listar());
 			return mv;
 		}
 		try {
-			Residencia residencia = this.residenciaService.obterResidenciasDisponiveis(endereco.getResidencia().getIdResidencia());
+			Residencia residencia = this.residenciaService
+					.obterResidenciasDisponiveis(endereco.getResidencia().getIdResidencia());
 			endereco.setResidencia(residencia);
-			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+			// seta endereco do usuario e salva
 			usuario.setEndereco(endereco);
 			this.usuarioService.save(usuario);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			mv.setViewName("/user/form-endereco");
 			mv.addObject("idAnimal", idAnimal);
 			mv.addObject("estados", Estado.values());
@@ -185,43 +213,56 @@ public class UserController {
 			System.out.println(e.getMessage());
 			return mv;
 		}
-		return new ModelAndView("redirect:/user/quero-adotar/"+idAnimal+"/etapa/1");
+		return new ModelAndView("redirect:/user/quero-adotar/" + idAnimal + "/etapa/1");
 	}
 
 	@GetMapping("/quero-adotar/{idAnimal}/etapa/1")
 	public ModelAndView exibirEtapaUm(@PathVariable Integer idAnimal, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/user/form-etapa-1");
-		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		/* bloco try destinado a verificar se o animal está disponivel */
+		try {
+			Animal animal = this.animalService.findById(idAnimal);
+			if (!this.animalService.verificarSeDisponivel(animal, usuario)) {
+				return new ModelAndView("redirect:/descricao-animal/" + idAnimal);
+			}
+		} catch (Exception e) {
+			return new ModelAndView("redirect:/adotar");
+		}
 		mv.addObject("idAnimal", idAnimal);
 		// respostas relacionadas com as perguntas
-		List<Resposta> respostas =
-				this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario, idAnimal);
+		List<Resposta> respostas = this.respostaService.criarListaRespostas(this.perguntaService.listar(), usuario,
+				idAnimal);
 		mv.addObject("listaRespostas", respostas);
 		return mv;
 	}
-	
+
 	@PostMapping("/quero-adotar/{idAnimal}/etapa/1")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra, @PathVariable Integer idAnimal, HttpSession session) {
+	public String exibirEtapaUm(@RequestBody Resposta[] respostasUsuario, RedirectAttributes ra,
+			@PathVariable Integer idAnimal, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Animal animal;
+		/* bloco try destinado a verificar se o animal está disponivel */
 		try {
-			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			Animal animal = this.animalService.findById(idAnimal);
-			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario, animal);
+			animal = this.animalService.findById(idAnimal);
+			if (!this.animalService.verificarSeDisponivel(animal, usuario)) {
+				return "redirect:/descricao-animal/" + idAnimal;
+			}
+		} catch (Exception e) {
+			return "redirect:/adotar";
+		}
+		
+		try {
+			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario,
+					animal);
 			this.processoService.salvarRespostasAndProcesso(usuario, animal, respostas);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ra.addFlashAttribute("error", "Erro ao enviar, tente novamente");
 			System.out.println(e.getMessage());
-			return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/1";
+			return "redirect:/user/quero-adotar/" + idAnimal + "/etapa/1";
 		}
-		return "redirect:/user/quero-adotar/"+idAnimal+"/etapa/2";
-	}
-
-	@GetMapping("/quero-adotar/{idAnimal}/etapa/2")
-	public ModelAndView exibirEtapaDois(@PathVariable Integer idAnimal) {
-		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
-
-		return mv;
+		return "redirect:/user/quero-adotar/" + idAnimal + "/etapa/2";
 	}
 
 	@GetMapping("/logout")

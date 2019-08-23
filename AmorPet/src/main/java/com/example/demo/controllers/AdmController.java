@@ -228,6 +228,17 @@ public class AdmController {
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos/"+idProcesso+"/respostas";
 	}
 	
+	@GetMapping("/selecoes/{idSelecao}/processos/{idProcesso}/avaliacao")
+	public ModelAndView exibirAvaliacao(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso) {
+		ModelAndView mv = new ModelAndView("/adm/avaliacao");
+		try {
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return mv;
+	}
+	
 	@GetMapping("/selecoes/{idSelecao}/processos/iniciar/etapa/{etapa}")
 	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa) {
 		try {

@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.AnimalDAO;
 import com.example.demo.dao.ProcessoDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.dao.UsuarioDAO;
@@ -22,8 +21,6 @@ import com.example.demo.model.Usuario;
 public class SelecaoService {
 	@Autowired
 	private SelecaoDAO selecaoRep;
-	@Autowired
-	private AnimalDAO animalRep;
 	@Autowired
 	private ProcessoDAO processoRep;
 	@Autowired
@@ -42,10 +39,7 @@ public class SelecaoService {
 	}
 
 	/* CRIA UMA SELECAO OU USA A EXISTENTE */
-	public void selecaoAnimal(Integer idAnimal, Processo processo) throws Exception {
-
-		// verificar se o animal existe
-		Animal animal = this.animalRep.findById(idAnimal).orElseThrow(Exception::new);
+	public void selecaoAnimal(Animal animal, Processo processo) {
 
 		Selecao selecao = this.findBySelecao(animal);
 
