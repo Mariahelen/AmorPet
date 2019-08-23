@@ -29,14 +29,9 @@
 #table-selecao td {
 	padding-bottom: 0px;
 }
-#customers tbody tr:nth-child(1){
-	background-color: #5FD6B5;	
-}
-#customers tbody tr:nth-child(2){
-	background-color: #89D6C2;
-}
-#customers tbody tr:nth-child(3) {
-	background-color: #ADD5C4;
+.participantes-etapa {
+	font-size: 16px;
+	font-weight: bold;	
 }
 .container tbody tr {
 	background-color: #ccc;
@@ -69,6 +64,7 @@
 	float: right;
 }
 #status-selecao {
+	margin-bottom: 20px;
 	padding: 15px;
 	border: 1px solid lightblue;
 }
@@ -90,6 +86,9 @@
 }
 .fa-exclamation-triangle {
 	color: yellow;
+}
+.fa-user-alt {
+	float: left;
 }
 .fa-user-alt, .fa-star, .fa-calendar-alt, .fa-eye, .fa-trash-alt {
 	font-size: 18px;

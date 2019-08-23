@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#voltar-topo {
+	float: right;
+	z-index: 1;
+	position: fixed;
+	bottom: 20px;
+	right: 15px;
+	border-radius: 50%;
+	font-size: 25px;
+	clear: both;
+	background-color: #27aae0;
+}
+#voltar-topo:hover, #voltar-topo:focus {
+	background-color: #27aae0;
+	border-color: #27aae0;
+}
