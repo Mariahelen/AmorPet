@@ -128,11 +128,49 @@ public class SelecaoService {
 
 	public void iniciarProximaEtapa(Integer idSelecao, Integer etapa) throws Exception {
 		Selecao selecao = this.findById(idSelecao);
+		if(etapa == 2) {
+			int i = 0;
+			for (Processo p : selecao.getProcessos()) {
+				if(p.getAvaliacao().getAvaliacaoDono() != null && p.getAvaliacao().getAvaliacaoLar() != null) {
+					i++;
+				}
+			}
+			if(i != 5) {
+				throw new Exception("Ainda falta usuários para prosseguir para etapa 2");
+			}
+		}else if(etapa == 3) {
+			int i = 0;
+			for (Processo p : selecao.getProcessos()) {
+				if(p.getAvaliacao().getAvaliacaoDono() != null && p.getAvaliacao().getAvaliacaoLar() != null) {
+					i++;
+				}
+			}
+			if(i != 3) {
+				throw new Exception("Ainda falta usuários para prosseguir para etapa 3");
+			}
+		}else {
+			throw new Exception("Não foi possível prosseguir");
+		}
 		selecao.setSituacao(etapa);
 		this.selecaoRep.save(selecao);
 	}
+	
+	public boolean verificarProcessos(Selecao selecao) {
+		int qtdProcessos = selecao.getProcessos().size();
+		int qtdProcessosComPontosInsuficientes = 0;
+		
+		for (Processo p : selecao.getProcessos()) {
+			if(p.getPontuacaoFinal() <= 150) {
+				qtdProcessosComPontosInsuficientes++;
+			}
+		}
+		if(qtdProcessosComPontosInsuficientes == qtdProcessos) {
+			return true;
+		}
+		return false;
+	}
 
-	public void finalizarSelecao(Selecao selecao) throws Exception {
+	public void concluirSelecao(Selecao selecao) throws Exception {
 		if (selecao.getSituacao() != 3) {
 			throw new Exception("Seleção não está na etapa 3");
 		}
@@ -163,5 +201,10 @@ public class SelecaoService {
 			p.setPontuacaoFinal(p.getAvaliacao().getAvaliacaoDono() + p.getAvaliacao().getAvaliacaoLar());
 			this.processoRep.save(p);
 		}
+	}
+	
+	public void fecharSelecao(Selecao selecao) {
+		selecao.setSituacao(3);
+		this.selecaoRep.save(selecao);
 	}
 }

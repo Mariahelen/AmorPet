@@ -40,6 +40,9 @@
 		<div class="row">
 			<div class="conteudo">
 				<a th:href="@{/adm/selecoes}" id="btn-voltar" class="btn btn-info btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
+				<div th:if="${finalizar} and ${selecao.situacao} == 3">
+					<span class="title-pag">Não houve Participantes aptos</span>
+				</div>
 				<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 				<div class="row">
 					<h2 id="title-pag">LISTA DE PARTICIPANTES</h2>
@@ -62,12 +65,18 @@
 								<p th:if="${selecao.situacao} == 3"><span class="badge">3</span> ETAPA <span class="badge">Concluído</span></p>
 							</div>
 							<hr>
-							<div th:if="${selecao.situacao} < 3">
-								<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/iniciar/etapa/${selecao.situacao+1}|}" class="btn btn-info">Iniciar Próxima Etapa</a>
+							<div th:unless="${finalizar}">
+								<div th:if="${selecao.situacao} < 3">
+									<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/iniciar/etapa/${selecao.situacao+1}|}" class="btn btn-info">Iniciar Próxima Etapa</a>
+								</div>
+								<div th:if="${selecao.situacao} == 3">
+									<a th:href="@{|/adm//selecoes/${selecao.idSelecao}/processos/concluir|}" class="btn btn-info">Concluir Seleção</a>
+								</div>
 							</div>
-							<div th:if="${selecao.situacao} == 3">
-								<a th:href="@{|/adm//selecoes/${selecao.idSelecao}/processos/finalizar|}" class="btn btn-info">Finalizar Seleção</a>
+							<div th:if="${finalizar} and ${selecao.situacao} != 3">
+								<a th:href="@{|/adm//selecoes/${selecao.idSelecao}/processos/fechar|}" class="btn btn-info">Encerrar Seleção</a>
 							</div>
+							
 						</div>
 					</div>
 					<div class="col-sm-8">

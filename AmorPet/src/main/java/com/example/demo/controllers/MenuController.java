@@ -26,30 +26,39 @@ public class MenuController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private AnimalService animalService;
-	
+
 	@GetMapping("/home")
 	public String index() {
 		return "/index";
 	}
+
+	@GetMapping("/not-found")
+	public String notFound() {
+		return "/not-found";
+	}
+
 	@GetMapping("/como-funciona/termos")
 	public String termos() {
 		return "/termos";
 	}
+
 	@GetMapping("/como-funciona/navegacao")
 	public String navegacao() {
 		return "navegacao";
 	}
+
 	@GetMapping("/quem-somos")
 	public String quemSomos() {
 		return "quemsomos";
 	}
-	
+
 	@GetMapping("/login")
 	public ModelAndView login(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("email", session.getAttribute("email"));
 		return mv;
 	}
+
 	@PostMapping("/login")
 	public String efetuarLogin(@RequestParam(required = true) String email, @RequestParam(required = true) String senha,
 			RedirectAttributes ra, HttpSession session) {
@@ -61,23 +70,24 @@ public class MenuController {
 		} catch (LoginInvalido e) {
 			ra.addFlashAttribute("mensagemError", e.getMessage());
 			return "redirect:/login";
-		} catch(Exception e) {
+		} catch (Exception e) {
 			ra.addFlashAttribute("mensagemError", "Erro ao entrar, tente novamente.");
 			return "redirect:/login";
 		}
 		return "redirect:/user/perfil";
 	}
-	
+
 	@GetMapping("/cadastro")
 	public ModelAndView cadastro() {
 		ModelAndView mv = new ModelAndView("/cadastro");
 		mv.addObject("usuario", new Usuario());
 		return mv;
 	}
+
 	@PostMapping("/cadastro")
 	public ModelAndView salvarCad(@Valid Usuario usuario, BindingResult br, RedirectAttributes ra) {
-		
-		if(br.hasErrors()) {
+
+		if (br.hasErrors()) {
 			return new ModelAndView("/cadastro");
 		}
 		try {
@@ -86,7 +96,7 @@ public class MenuController {
 			this.usuarioService.criarUsuario(usuario);
 			ra.addFlashAttribute("mensagemSuccess", "Conta criada com sucesso!");
 			return mv;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ModelAndView mv = new ModelAndView("/cadastro");
 			mv.addObject("mensagemError", "Erro ao realizar o cadastro, tente novamente.");
 			mv.addObject("usuario", usuario);
@@ -94,7 +104,7 @@ public class MenuController {
 			return mv;
 		}
 	}
-	
+
 	@GetMapping("/adotar")
 	public ModelAndView adotar() {
 		ModelAndView mv = new ModelAndView("/quero-adotar");
@@ -105,9 +115,10 @@ public class MenuController {
 		}
 		return mv;
 	}
+
 	@GetMapping("/descricao-animal/{id}")
 	public ModelAndView descricaoAnimal(@PathVariable Integer id, HttpSession session) {
-		
+
 		ModelAndView mv = new ModelAndView("/descricao-animal");
 		try {
 			Animal animal = this.animalService.findById(id);
@@ -120,10 +131,10 @@ public class MenuController {
 		}
 		return mv;
 	}
+
 	@GetMapping("/mapa")
 	public String mapa() {
 		return "/mapa";
 	}
-	
-	
+
 }

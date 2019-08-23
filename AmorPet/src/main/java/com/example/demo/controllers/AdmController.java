@@ -177,6 +177,7 @@ public class AdmController {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
 			selecao = this.processoService.listarProcessos(selecao);
 			mv.addObject("selecao", selecao);
+			mv.addObject("finalizar", this.selecaoService.verificarProcessos(selecao));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			mv.setViewName("redirec:/adm/selecoes");
@@ -249,15 +250,26 @@ public class AdmController {
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
 	}
 	
-	@GetMapping("/selecoes/{idSelecao}/processos/finalizar")
+	@GetMapping("/selecoes/{idSelecao}/processos/concluir")
 	public String finalizarSelecao(@PathVariable Integer idSelecao) {
 		try {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
-			this.selecaoService.finalizarSelecao(selecao);
+			this.selecaoService.concluirSelecao(selecao);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:/adm/selecoes"+idSelecao+"/processos";
+		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+	}
+	
+	@GetMapping("/selecoes/{idSelecao}/processos/fechar")
+	public String fecharSelecao(@PathVariable Integer idSelecao) {
+		try {
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.fecharSelecao(selecao);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/adm/selecoes";
 	}
 	
 	@GetMapping("/logout")
