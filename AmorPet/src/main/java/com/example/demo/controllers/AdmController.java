@@ -241,10 +241,11 @@ public class AdmController {
 	}
 	
 	@GetMapping("/selecoes/{idSelecao}/processos/iniciar/etapa/{etapa}")
-	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa) {
+	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa, RedirectAttributes ra) {
 		try {
 			this.selecaoService.iniciarProximaEtapa(idSelecao, etapa);
 		}catch(Exception e) {
+			ra.addFlashAttribute("error", "Ainda há participantes que não foram verificados");
 			System.out.println(e.getMessage());
 		}
 		return "redirect:/adm/selecoes/"+idSelecao+"/processos";

@@ -43,7 +43,6 @@
 				<div th:if="${finalizar} and ${selecao.situacao} == 3">
 					<span class="title-pag">Não houve Participantes aptos</span>
 				</div>
-				<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 				<div class="row">
 					<h2 id="title-pag">LISTA DE PARTICIPANTES</h2>
 					<div class="col-sm-4">
@@ -73,13 +72,14 @@
 									<a th:href="@{|/adm//selecoes/${selecao.idSelecao}/processos/concluir|}" class="btn btn-info">Concluir Seleção</a>
 								</div>
 							</div>
-							<div th:if="${finalizar} and ${selecao.situacao} != 3">
+							<div th:if="${finalizar} and ${selecao.situacao} <= 3">
 								<a th:href="@{|/adm//selecoes/${selecao.idSelecao}/processos/fechar|}" class="btn btn-info">Encerrar Seleção</a>
 							</div>
 							
 						</div>
 					</div>
 					<div class="col-sm-8">
+						<div th:if="${error}" id="error" th:text="${error}"></div>
 						<table id="customers" class="table-responsive">
 							<thead>
 								<tr>
@@ -89,14 +89,14 @@
 									<th>Data de Entrada</th>
 									<th th:if="${selecao.situacao} == 1">Respostas</th>
 									<th th:if="${selecao.situacao} == 2">Avaliação</th>
-									<th>Excluir</th>
+									<th th:if="${selecao.situacao} != 4">Excluir</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="processo, status : ${selecao.processos}">
 									<td th:if="${processo.avaliacao} == null" title="Participante não visitado"><i class="fas fa-exclamation-triangle"></i></td>
 									<td th:unless="${processo.avaliacao} == null" title="Participante visitado"><i class="far fa-check-circle"></i></td>
-									<td title="Nome do Participante"><i class="fas fa-user-alt"></i> <span th:text="${processo.idUsuario.nome}"></span></td>
+									<td title="Nome do Participante"><i class="fas fa-user-alt"></i> <span th:text="${processo.idUsuario.nome.toUpperCase()}"></span></td>
 									<td title="Pontuação"><i class="far fa-star"></i> <span th:text="${processo.pontuacaoFinal}"></span></td>
 									<td title="Data de Entrada"><i class="far fa-calendar-alt"></i> <span
 										th:text="${#temporals.format(processo.dataRegistro, 'dd-MM-yyyy')}"></span></td>
@@ -106,20 +106,21 @@
 											<i class="fas fa-eye"></i> Ver
 										</a>
 									</td>
-									<td title="É necessária pontuação maior" th:if="${selecao.situacao} == 1 and ${status.index} >= 5">
+									<td title="Elegibilidade" th:if="${selecao.situacao} == 1 and ${status.index} >= 5">
 										Pontuação baixa
 									</td>
 									
-									<td title="Ver Avaliação" th:if="${selecao.situacao} == 2 and ${status.index} < 3 and ${processo.pontuacaoFinal} >= 150">
+									<td title="Ver Avaliação" th:if="${selecao.situacao} == 2 and ${status.index} < 3 and ${processo.pontuacaoFinal} >= 95"
+										th:classappend="${processo.avaliacao} != null ? 'verificado'">
 										<a th:href="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}/avaliacao|}" class="btn btn-info btn-sm">
 											<i class="fas fa-eye"></i> Ver
 										</a>
 									</td>
-									<td title="É necessária pontuação maior" th:if="${selecao.situacao} == 2 and ${processo.pontuacaoFinal} < 150">
-										Pontuação baixa
+									<td title="Não elegível" th:if="${selecao.situacao} == 2 and ${status.index} >= 3">
+										Não elegível
 									</td>
 									
-									<td title="Remover Participante">
+									<td title="Remover Participante" th:if="${selecao.situacao} != 4">
 										<form class="form-inline"
 											th:action="@{|/adm/selecoes/${selecao.idSelecao}/processos/${processo.idProcesso}|}"
 											th:method="delete">
@@ -166,6 +167,5 @@
 			}
 		});
 	</script>
-
 </body>
 </html>

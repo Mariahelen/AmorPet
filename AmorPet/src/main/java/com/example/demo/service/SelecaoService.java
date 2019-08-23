@@ -131,21 +131,30 @@ public class SelecaoService {
 		if(etapa == 2) {
 			int i = 0;
 			for (Processo p : selecao.getProcessos()) {
-				if(p.getAvaliacao().getAvaliacaoDono() != null && p.getAvaliacao().getAvaliacaoLar() != null) {
+				int qtdRespostas = p.getRespostas().size();
+				int qtdRespostasConfiradas = 0;
+				for (Resposta r : p.getRespostas()) {
+					if(r.getConfirmacaoPergunta() != null) {
+						qtdRespostasConfiradas++;
+					}
+				}
+				if(qtdRespostas == qtdRespostasConfiradas) {
 					i++;
 				}
 			}
-			if(i != 5) {
+			if(i == 0) {
 				throw new Exception("Ainda falta usuários para prosseguir para etapa 2");
 			}
 		}else if(etapa == 3) {
 			int i = 0;
 			for (Processo p : selecao.getProcessos()) {
-				if(p.getAvaliacao().getAvaliacaoDono() != null && p.getAvaliacao().getAvaliacaoLar() != null) {
-					i++;
+				if(p.getAvaliacao() != null) {
+					if(p.getAvaliacao().getAvaliacaoDono() != null && p.getAvaliacao().getAvaliacaoLar() != null) {
+						i++;
+					}
 				}
 			}
-			if(i != 3) {
+			if(i == 0) {
 				throw new Exception("Ainda falta usuários para prosseguir para etapa 3");
 			}
 		}else {
@@ -160,7 +169,7 @@ public class SelecaoService {
 		int qtdProcessosComPontosInsuficientes = 0;
 		
 		for (Processo p : selecao.getProcessos()) {
-			if(p.getPontuacaoFinal() <= 150) {
+			if(p.getPontuacaoFinal() <= 95) {
 				qtdProcessosComPontosInsuficientes++;
 			}
 		}
@@ -186,6 +195,8 @@ public class SelecaoService {
 		for (Processo processo : processosFinais) {
 			usuario = this.usuarioRep.findById(processo.getIdUsuario().getId());
 			if (usuario.isPresent()) {
+				selecao.setSituacao(4);
+				this.selecaoRep.save(selecao);
 				usuario.get().getAnimais().add(selecao.getIdAnimal());
 				this.usuarioRep.save(usuario.get());
 				break;
