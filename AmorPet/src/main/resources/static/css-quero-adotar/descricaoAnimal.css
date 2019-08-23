@@ -9,9 +9,10 @@
 }
 
 #imgAnimal{
-	width: 90%;
+	width: 70%;
 	height: auto;
 	border-radius: 15px;
+	margin-left: 30px;
 }
 
 form a, input[type=submit] {
@@ -32,7 +33,9 @@ form a, input[type=submit] {
 }
 #voltar {
 	margin-left: 30px;
-	margin-bottom: 10px;
+	padding: 8.5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 #info-adotar .badge {
 	background-color: #7ac673;
@@ -42,6 +45,43 @@ form a, input[type=submit] {
 }
 body{
 	background-color: #FFF8FA !important;
+}
+
+
+/*NOVAS ATTs DA PÁGINA DE DESCRIÇÃO CSS*/
+
+#btn-adotar:hover, #voltar:focus{
+	
+	background-color: #58b74f !important;
+	border-color: #58b74f;
+	transition: 1s;
+}
+
+
+h3{
+	
+	color: #808080 !important;
+	letter-spacing: normal !important;
+	font-family: 'Roboto', sans-Serif !important;
+	font-size: 15pt !important;
+	text-transform: uppercase;
+}
+
+p{
+	
+	color:#4F4F4F;
+
+}
+
+#voltar:hover, #voltar:focus{
+	
+	background-color: #00BFFF;
+	border-color: #00BFFF;
+}
+
+hr{
+	
+	border: 0.5px solid #A9A9A9 !important;
 }
 
 

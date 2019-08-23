@@ -134,7 +134,7 @@ public class SelecaoService {
 	}
 
 	public void finalizarSelecao(Selecao selecao) throws Exception {
-		if (selecao.getSituacao() != 3) {
+		if (selecao.getSituacao() != 4) {
 			throw new Exception("Seleção não está na etapa 3");
 		}
 		// soma os pontos da avaliacao

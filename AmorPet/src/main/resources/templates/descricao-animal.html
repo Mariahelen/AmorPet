@@ -60,7 +60,7 @@
 				<div class="alert alert-success" th:if="${sucessoEditar}"
 					th:text="${sucessoEditar}"></div>
 					
-				<a class="btn btn-success btn-sm" id="voltar" th:href="@{/adotar}">Voltar</a>
+				
 				
 				<div th:if="${animal}" class="col-sm-12">
 					<div class="col-sm-6">
@@ -72,45 +72,42 @@
 					<div class="col-sm-6">
 						<div class="row">
 							<div id="detalhes-animal">
+								
 								<div class="row">
 									<div class="col-sm-6">
-										<h2>
-											Nome
-										</h2>
+										<h3> Nome: </h3>
 										<p th:text="${animal.nome}"></p>
 									</div>
 									<div class="col-sm-6">
-										<h2>
-											Tipo
-										</h2>
+										<h3> Espécie: </h3>
 										<p th:text="${animal.tipoAnimal}"></p>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-4">
-										<h2>
-										Idade
-										</h2>
+										<h3>
+										Idade:
+										</h3>
 										<p th:text="${idadeAnimal}"></p>
 									</div>
 									<div class="col-sm-4">
-										<h2>
-										Sexo
-										</h2>
+										<h3>
+										Sexo:
+										</h3>
 										<p th:text="${animal.sexoAnimal.equalsIgnoreCase('FEMEA')} ? 'Fêmea' : 'Macho'"></p>
 									</div>
 									<div class="col-sm-4">
-										<h2>
-											Porte
-										</h2>
+										<h3>
+											Porte:
+										</h3>
 										<p th:text="${animal.porteAnimal}"></p>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-12">
-										<h2>Descrição</h2>
+										<h3>Descrição:</h3>
 										<p th:text="${animal.historiaAnimal}"></p>
 										<hr>
 									</div>
@@ -126,8 +123,9 @@
 
 											<div th:if="${session.usuarioLogado.role} == 'ROLE_USER'">
 												<div th:if="${disponivel}"></div>
-												<a class="btn btn-info"
+												<a class="btn btn-success" id="btn-adotar"
 													th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+													<a class="btn btn-info btn-sm" id="voltar" th:href="@{/adotar}">Voltar</a>
 											</div>
 											<div th:unless="${disponivel}">
 												<p>
