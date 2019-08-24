@@ -82,6 +82,7 @@ public class UserController {
 					Usuario usuario = this.usuarioService.editarPerfil(usuarioSessao);
 					// usar uma criptografia para nao haver conflitos no nome da foto
 					usuario.setCaminhoFoto("/img/usuarios/" + file.getOriginalFilename());
+					Util.apagarFotoAntiga(usuario.getCaminhoFoto());
 					this.usuarioService.save(usuario);
 					file.transferTo(destino);
 					session.setAttribute("usuarioLogado", usuario);

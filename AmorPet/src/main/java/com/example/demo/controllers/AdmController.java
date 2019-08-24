@@ -81,10 +81,14 @@ public class AdmController {
 			return "redirect:/adm/cadastro/animal";
 		}
 		try {
-			String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
-			File destino = new File(path);
-			animal.getFile().transferTo(destino);
-			animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
+			if(animal.getCaminhoFoto().trim().isEmpty() || animal.getCaminhoFoto() != null) {
+				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
+				File destino = new File(path);
+				animal.getFile().transferTo(destino);
+				animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
+			}else {
+				animal.setCaminhoFoto(null);
+			}
 			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
 			ra.addFlashAttribute("sucesso", "Animal cadastrado com sucesso!");
@@ -109,10 +113,28 @@ public class AdmController {
 			return "redirect:/descricao-animal/" + animal.getIdAnimal();
 		}
 		try {
+			// apaga foto antiga
+			Util.apagarFotoAntiga(animal.getCaminhoFoto());
+			if(animal.getCaminhoFoto().trim().isEmpty() || animal.getCaminhoFoto() != null) {
+				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
+				File destino = new File(path);
+				animal.getFile().transferTo(destino);
+				animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
+			}else {
+				animal.setCaminhoFoto(null);
+			}
+			animal.setDataRegistro(LocalDate.now());
 			this.animalService.criarAnimal(animal);
-			ra.addFlashAttribute("sucessoEditar", "Editado com sucesso");
+			ra.addFlashAttribute("sucesso", "Animal Editado com sucesso!");
+			// pra da o tempo de criar as pastas e mover os arquivos
+			Thread.sleep(5000);
+			
+		} catch (IllegalStateException | IOException e) {
+			ra.addFlashAttribute("error", "Não foi possível editar o animal");
+			System.out.println(e.getMessage());
 		} catch (Exception e) {
-			ra.addFlashAttribute("errorEditar", e.getMessage());
+			ra.addFlashAttribute("error", e.getMessage());
+			System.out.println(e.getMessage());
 		}
 		return "redirect:/descricao-animal/" + animal.getIdAnimal();
 	}

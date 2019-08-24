@@ -87,11 +87,8 @@ a:link {
 	border-color: #ee4840;
 }
 
-
 /* CSS (RONNY)*/
-
-h3.filtro-title{
-	
+h3.filtro-title {
 	color: #ffffff;
 	font-size: 12pt;
 	letter-spaccing: normal !important;
@@ -99,113 +96,119 @@ h3.filtro-title{
 	text-align: center;
 }
 
-.filtro-title{
-	
-
+.filtro-title {
 	font-size: 12pt;
 	letter-spaccing: normal !important;
 	font-family: 'Merriweather', serif;
 }
 
-.back-title{
-	
+.back-title {
 	background-color: #7ac673 !important;
 }
 
-.border-div{
-	
+.border-div {
 	border-color: #7ac673 !important;
 	border-top-color: #7ac673;
-	
 }
 
-.color-button{
-	
+.color-button {
 	color: #ffffff !important;
 	margin-left: 3px;
 }
 
-.button-position{
-	
+.button-position {
 	float: right;
 	margin-right: 40px !important;
 	margin-top: -40px !important;
 }
 
-
-.btn-style{
-	
+.btn-style {
 	background-color: #7ac673 !important;
 	font-family: 'Merriweather', Serif;
 	border-radius: 10px;
 }
 
-.btn-style:hover{
-	
+.btn-style:hover {
 	border-color: #136711;
 	transition: 0.5s;
 	background-color: #136711 !important;
 }
 
-.btn-style-rm{
-	
+.btn-style-rm {
 	background-color: #f74141 !important;
 	font-family: 'Merriweather', Serif;
 	color: #ffffff;
 	border-radius: 10px;
 }
 
-.btn-style-rm:hover{
-	
+.btn-style-rm:hover {
 	border-color: #a40000;
 	transition: 0.5s;
 	background-color: #a40000 !important;
-	
 }
 
-.nome-animal{
-	
-	
+.nome-animal {
 	font-family: 'Merriweather', Serif;
 	font-size: 14pt;
 	font-weigth: bolder;
 	margin-left: 20px;
-	
 }
 
-
-.labels-name{
+.labels-name {
 	font-size: 15px;
 	font-family: 'Merriweather', Serif;
 	text-align: center;
 	font-weigth: 900;
-	
 }
 
-.btn-cancel{
-	
-	background-color: #204a87!important;
+.btn-cancel {
+	background-color: #204a87 !important;
 	font-family: 'Merriweather', Serif;
 	color: #ffffff;
 }
 
-.btn-cancel:hover{
-	
+.btn-cancel:hover {
 	border-color: #003666;
 	transition: 0.5s;
-	background-color: #003666!important;
-	
+	background-color: #003666 !important;
 }
 
-/*.card-border{
-	
-	border: 1px solid #7ac673;
-	padding: 8px;
+.card {
+	border-radius: 20px;
+	border: 1px solid lightgray;
+	box-shadow: 0px 0px 10px 1px;
+}
+
+.card .card {
+	box-shadow: none;
+	border-radius: 20px;
+	padding: 15px;
 	padding-top: 25px;
+	border: 0px solid lightgray;
 }
-*/
 
+.card .card:hover {
+	box-shadow: 0px 0px 10px 1px;
+	background-color: #f1e9e9;
+}
 
+.card img {
+	border-radius: 20px;
+	box-shadow: 0px 0px 7px 2px;
+	padding: 1px;
+}
 
+.card .card-border hr {
+	border: 1px solid lightgray;
+}
 
+.card .card .card-body h4 {
+	margin: 15px;
+	margin-top: 20px;
+	border-bottom: 1px solid lightgray;
+}
 
+.card-border {
+	text-align: center;
+	margin-bottom: 15px;
+}

@@ -46,6 +46,12 @@ public class Util {
 		return caminhoCompleto;
 	}
 	
+	public static void apagarFotoAntiga(String caminhoFoto) {
+		String caminhoCompleto = new File("").getAbsolutePath() + "/src/main/resources/static" + caminhoFoto;
+		File fileDelete = new File(caminhoCompleto);
+		fileDelete.delete();
+	}
+
 	/**
 	 * 
 	 * @param String tipo do animal. Ex.: Cachorro ou Gato
@@ -63,6 +69,7 @@ public class Util {
 		}
 		return caminhoImagem;
 	}
+	
 
 	public static List<String> validaUsuario(Usuario usuario) {
 		List<String> errors = new ArrayList<>();

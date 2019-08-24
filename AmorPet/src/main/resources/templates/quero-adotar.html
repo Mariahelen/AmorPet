@@ -232,14 +232,22 @@
 		<div class="card">
 			<div th:if="${errorListaAnimais}" th:text="${errorListaAnimais}"></div>
 			<div class="row card-position" th:if="${listaAnimais}">
-				<div class="col-md-4 " th:each="animal : ${listaAnimais}">
+				<div class="col-md-4 " th:each="animal, status : ${listaAnimais}">
 					<div class="card mb-4 shadow-sm card-border">
-						<img th:src="${animal.caminhoFoto}" alt="Imagem do animalzinho" width="320px" height="200px"
+						<div th:if="${animal.caminhoFoto}">
+							<img th:src="${animal.caminhoFoto}" alt="Imagem do animalzinho" width="300px" height="200px"
 							role="img" aria-label="Placeholder: miniatura" class="img">
+						</div>
+						<div th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('GATO')}">
+							<img th:src="@{/img/animais/cats/gato-padrao.jpg}" alt="Imagem do animalzinho" width="300px" height="200px"
+							role="img" aria-label="Placeholder: miniatura" class="img">
+						</div>
+						<div th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('CACHORRO')}">
+							<img th:src="@{/img/animais/dogs/dog-padrao.png}" alt="Imagem do animalzinho" width="300px" height="200px"
+							role="img" aria-label="Placeholder: miniatura" class="img">
+						</div>
 						<div class="card-body">
-							<p>
 							<h4 class="nome-animal" th:text="${animal.nome}"></h4>
-							</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
 									<a class="btn btn-success btn-style"
