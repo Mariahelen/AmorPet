@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import com.example.demo.dao.ProcessoDAO;
 import com.example.demo.dao.RespostaDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.model.Animal;
+import com.example.demo.model.Avaliacao;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Processo;
 import com.example.demo.model.Resposta;
@@ -33,6 +34,10 @@ public class ProcessoService {
 	
 	public List<Processo> lista() {
 		return processoRep.findAll();
+	}
+	
+	public List<Processo> lista(Usuario usuario) {
+		return processoRep.findAllByUsuario(usuario);
 	}
 	
 	public Selecao listarProcessos(Selecao selecao) {
@@ -60,7 +65,7 @@ public class ProcessoService {
 		Processo processo = new Processo();
 		processo.setIdUsuario(usuario);
 		processo.setRespostas(new ArrayList<Resposta>());
-		processo.setDataRegistro(LocalDate.now());
+		processo.setDataRegistro(LocalDateTime.now());
 		return processo;
 	}
 
@@ -105,7 +110,7 @@ public class ProcessoService {
 					// seta a pontuacao com base na resposta
 					if (resposta.getRespostaPergunta().equals('S')) {
 						pontuacaoTotal += pergunta.getPontuacao();
-					} else if (resposta.getRespostaPergunta().equals('N')) {
+					}else if(resposta.getRespostaPergunta().equals('N')) {
 						pontuacaoTotal -= pergunta.getPontuacao();
 					}
 				}
@@ -115,10 +120,38 @@ public class ProcessoService {
 			resposta.setIdProcesso(processo);
 			this.respostaRep.save(resposta);
 		}
+		if(pontuacaoTotal < 0) {
+			pontuacaoTotal = 0;
+		}
 		// relaciona o processo com as respostas
 		processo.setRespostas(respostas);
 		processo.setPontuacaoFinal(pontuacaoTotal);
 		this.save(processo);
+	}
+	
+	public void salvarAvaliacaoAndProcesso(List<String> respostaPet, List<String> respostaDono, Integer idProcesso) throws Exception {
+		Processo processo = this.findById(idProcesso);
+		Avaliacao avaliacao = new Avaliacao();
+		if(processo.getAvaliacao() == null) {
+			processo.setAvaliacao(avaliacao);
+		}
+		// verifica o animalzinho
+		if(respostaPet.get(0).equalsIgnoreCase("S")) {
+			processo.getAvaliacao().setAvaliacaoLar(50);
+			
+		}else {
+			processo.getAvaliacao().setAvaliacaoLar(0);
+		}
+		
+		// verifica o dono
+		if(respostaDono.get(0).equalsIgnoreCase("S")) {
+			processo.getAvaliacao().setAvaliacaoDono(50);
+			
+		}else {
+			processo.getAvaliacao().setAvaliacaoDono(0);
+		}
+		processo.getAvaliacao().setDataAvaliacao(LocalDateTime.now());
+		this.processoRep.save(processo);
 	}
 
 	public void removerProcesso(Integer idSelecao, Integer idProcesso) throws Exception {

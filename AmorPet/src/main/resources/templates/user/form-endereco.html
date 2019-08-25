@@ -47,8 +47,8 @@
 							<div class="form-group">
 								<div th:if="${#fields.hasErrors('numero')}"
 									th:errors="*{numero}" class="text-danger"></div>
-								<input type="text" th:field="*{numero}" maxlength="4"
-									class="form-control input-lg" placeholder="Número" tabindex="2">
+								<input type="text" th:field="*{numero}" maxlength="20"
+									class="form-control input-lg" placeholder="Número da casa" tabindex="2">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-12">
@@ -83,18 +83,6 @@
 									class="text-danger"></div>
 								<input type="text" th:field="*{cep}" maxlength="8"
 									class="form-control input-lg " placeholder="CEP" tabindex="7">
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-12">
-							<div class="form-group">
-								<div th:if="${#fields.hasErrors('estado')}"
-									th:errors="*{estado}" class="text-danger"></div>
-								<select class="wide" th:field="*{estado}">
-									<option th:value="''" data-display="Selecione Estado">Selecione
-										Estado</option>
-									<option th:each="estado : ${estados}" th:value="${estado}"
-										th:text="${estado.toString()}"></option>
-								</select>
 							</div>
 						</div>
 

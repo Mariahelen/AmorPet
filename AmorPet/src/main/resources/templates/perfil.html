@@ -9,7 +9,9 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/cadastro.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/perfil.css}"
 	media="all">
-	
+	<!-- CSS DO FORMULARIO DAS ETAPAS -->
+<link rel="stylesheet" th:href="@{/css-quero-adotar/nice-select.css}">
+
 
 </head>
 <body>
@@ -97,11 +99,24 @@
 									<form role="form" enctype="multipart/form-data"
 										th:action="@{/user/perfil}" method="post">
 										<div class='input-wrapper'>
-											<input id="foto-usuario" type="file" name="file" /> <label
-												for="foto-usuario"><span
-												class="glyphicon glyphicon-open"></span> Adicionar foto</label> <input
-												type="submit" class="btn btn-success" value="Salvar">
-											<span th:if="${errorSalvarFoto}" th:text="${errorSalvarFoto}"></span>
+											<div class="col-sm-7" id="btns-foto">
+												<label for="btn-foto" title="Salvar"><i
+													class="fas fa-check-circle"></i></label> <input type="submit"
+													id="btn-foto" class="btn btn-success" value="salvar">
+
+												<label for="reset-foto" title="Cancelar"><i
+													class="fas fa-times-circle"></i></label> <input hidden="hidden"
+													type="reset" id="reset-foto" onclick="location.reload();"
+													class="btn btn-info">
+											</div>
+
+											<div class="col-sm-12">
+												<input id="foto-usuario" type="file" name="file" /> <label
+													for="foto-usuario"><span
+													class="glyphicon glyphicon-open"></span> Adicionar foto</label>
+
+												<div th:if="${errorSalvarFoto}" th:text="${errorSalvarFoto}"></div>
+											</div>
 										</div>
 									</form>
 								</div>
@@ -131,6 +146,8 @@
 											th:object="${usuario}" method="post">
 											<div th:if="${listaErrors}" th:each="err : ${listaErrors}"
 												th:text="${err.toString()}" class="text-danger"></div>
+											<div th:if="${errorIdade}" th:text="${errorIdade}"
+												class="text-danger"></div>
 											<div th:if="${error}" th:text="${error}" class="text-danger"></div>
 											<div th:if="${sucesso}" th:text="${sucesso}"
 												class="alert alert-success"></div>
@@ -172,37 +189,69 @@
 												<div class="form-group">
 
 													<div class="col-sm-12">
-														<label for="bairro" class="col-4 col-form-label">Bairro</label>
-														<input type="text" th:field="*{endereco.bairro}"
-															class="form-control" placeholder="Digite seu bairro"
-															aria-describedby="Bairro">
-													</div>
-
-													<div class="col-sm-12">
-														<label for="rua" class="col-4 col-form-label">Rua</label>
+														<label for="rua" class="col-4 col-form-label">Logradouro</label>
 														<input type="text" th:field="*{endereco.logradouro}"
-															class="form-control" placeholder="Digite sua rua"
-															aria-describedby="Rua">
+															class="form-control" maxlength="60" placeholder="Logradouro"
+															aria-describedby="Logradouro">
 													</div>
 
 													<div class="col-sm-6">
 														<label for="numero da casa" class="col-4 col-form-label">Nº
 															da Casa</label> <input type="text" th:field="*{endereco.numero}"
-															class="form-control" placeholder="Digite Numero da casa"
+															class="form-control" maxlength="20" placeholder="Número da casa"
 															aria-describedby="Numero da casa">
 													</div>
 
-													<div class="col-sm-6">
+													<div class="col-sm-12">
 														<label for="complemento" class="col-4 col-form-label">Complemento</label>
 														<input type="text" th:fiel="*{endereco.complemento}"
-															class="form-control" placeholder="Complemento"
+															class="form-control" maxlength="255" placeholder="Complemento"
 															aria-describedby="Complemento">
 													</div>
 
 													<div class="col-sm-12">
+														<label for="bairro" class="col-4 col-form-label">Bairro</label>
+														<input type="text" th:field="*{endereco.bairro}"
+															class="form-control" maxlength="45" placeholder="Bairro"
+															aria-describedby="Bairro">
+													</div>
+
+													<div class="col-sm-12">
+														<label for="cidade" class="col-4 col-form-label">Cidade</label>
+														<input type="text" th:field="*{endereco.cidade}"
+															class="form-control" maxlength="30" placeholder="Cidade"
+															aria-describedby="Cidade">
+													</div>
+													
+													<div class="col-sm-6">
+														<label for="Cep" class="col-4 col-form-label">Cep</label>
+														<input type="text" th:field="*{endereco.cep}"
+															class="form-control" maxlength="8" placeholder="Cep"
+															aria-describedby="Cep">
+													</div>
+
+													<div class="col-sm-12">
+														<div class="form-group">
+															<label class="col-4 col-form-label">Residencia</label>
+															<select class="wide"
+																th:field="*{endereco.residencia.idResidencia}">
+																<option th:value="''"
+																	data-display="Reside em casa ou apartamento?">Reside
+																	em casa ou apartamento?</option>
+																<option th:each="residencia : ${listaResidencias}"
+																	th:unless="${residencia.tipoResidencia} == 'Todos'"
+																	th:value="${residencia.idResidencia}"
+																	th:text="${residencia.tipoResidencia}"></option>
+															</select>
+														</div>
+													</div>
+
+													<div class="col-sm-12">
+														<div class="form-group">
 														<button class="btn btn-primary btn-lg">
 															<span class="glyphicon glyphicon-ok"></span> Salvar
 														</button>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -216,6 +265,7 @@
 			</div>
 		</div>
 	</section>
+	
 	<br />
 	<br />
 	<br />
@@ -228,13 +278,17 @@
 
 	<script
 		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js}"></script>
-
+	<!-- PLUGIN DE SELEC DO NICE-SELECT  -->
+	<script th:src="@{/js-quero-adotar/jquery.nice-select.min.js}"></script>
+	
 	<script type="text/javascript">
-  
+	
+	$('select').niceSelect();
   	$("#celular").mask("(00)0.0000-0000");
   
   	$("#form-perfil").hide();
 	$("#btn-desativar-conta").hide();
+	$("#dados-perfil label[for='btn-foto'], #dados-perfil label[for='reset-foto']").hide();
   
   	// QUANDO O PERFIL FOR CLICADO
     $("#btn-ver-perfil").click(function() {
@@ -257,13 +311,7 @@
       	$("#dados-perfil").hide();
       	$("#btn-desativar-conta").show();
     });
-    
-   	/* MOSTRA O NOME DO ARQUIVO DE FOTO */
-   	/* $("#foto-usuario").change(function() {
-   		$("#nome-arquivo").text($("input[type=file]").val());
-   	}); */
    	
-  	
   	/* Quando campo ficar vazio muda a classe do botao */
   	$("#form-perfil .form-group input").keyup(function() {
   			if(event.key === "Backspace" || event.key === "Delete" || event.key === "Enter") {
@@ -296,6 +344,9 @@
 	    const reader = new FileReader();
 	    reader.onload = e => previewImg.src = e.target.result;
 	    reader.readAsDataURL(fileToUpload);
+	    
+	   	$("label[for='btn-foto']").style = "display: inline";
+	   	$("label[for='reset-foto']").style = "display: inline";
 	};
   </script>
 </body>

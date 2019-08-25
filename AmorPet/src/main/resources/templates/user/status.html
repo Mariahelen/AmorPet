@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<title>Histórico De Seleções</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/status.css}">
+
+</head>
+<body>
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!-------------------------CORRETO ACIMA------------------>
+
+	<div class="container">
+		<div class="row">
+			<div th:unless="${listaProcessos}" id="info-status">
+				<h2>Status de adoção</h2>
+				<hr>
+				<p>
+					Olá! Esta página destina-se à usuários que estão em um processo de adoção<br>
+					e parece que você ainda não está participando de um :(
+				</p>
+				<p>
+					Clique no botão abaixo para visualizar os animais disponíveis<br> e achar um possível futuro companheirinho :)
+				</p>
+				<a th:href="@{/adotar}" class="btn btn-info">QUERO ADOTAR!</a>
+			</div>
+			<div th:if="${listaProcessos}" id="info-status">
+				<div class="col-sm-3">
+					<div class="panel panel-info" id="painel">
+						<div class="panel-heading">Meu histórico de adoção</div>
+						<div class="list-group">
+							<a href="#" class="list-group-item"> Todos </a>
+							<a href="#"
+								class="list-group-item"> Participando </a>
+							<a href="#"
+								class="list-group-item"> Adotados </a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-9">
+					<table class="table table-responsive table-bordered"
+						id="table-processos">
+						<thead>
+							<tr th:if="${listaProcessos}">
+								<th>Animalzinho</th>
+								<th>Data de entrada</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:if="${listaProcessos}"
+								th:each="processo : ${listaProcessos}">
+								<td class="nome-animal" th:text="${processo.idSelecao.idAnimal.nome}" title="Nome do animalzinho"></td>
+								<td class="data" th:text="${#temporals.format(processo.dataRegistro, 'dd/MM/yyyy')}" title="Data de entrada"></td>
+								<td class="acao">
+									<a class="btn btn-info btn-sm" th:href="@{|/user/status/${processo.idSelecao.idSelecao}|}"><i class="fas fa-eye"></i> Ver</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-------------------------------Correto-------------------------------------->
+
+	<br>
+	<br>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+</body>
+</html>

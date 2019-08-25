@@ -1,3 +1,4 @@
+@charset="utf8";
 
 .colorgraph {
     height: 5px;
@@ -29,7 +30,7 @@
     box-shadow: 0px 0px 4px 3px #403e3f;
 }
 
-/* para ficar um bot�o mais elegante */
+/* para ficar um botï¿½o mais elegante */
 .btn-success {
     background-color: #252525;
     border-color: #252525 !important;
@@ -52,7 +53,7 @@
     border-color: #7ac673 !important;
 }
 
-/* estiliza��o do badge */
+/* estilizaï¿½ï¿½o do badge */
 .badge {
     background-color: #029595;
     font-size: 17px;
@@ -88,7 +89,10 @@
     padding: 8px;
     padding-left: 28px;
     border-radius: 7px;
+}
 
+#erro-senha {
+	text-align: center;
 }
 
 .btn-terms {
@@ -263,7 +267,7 @@ input[type="date"] {
 =======
 
 
-/* CSS PÁGINA DE AVALIAÇÃO*/
+/* CSS PÃ�GINA DE AVALIAÃ‡ÃƒO*/
 
 .tit-processo-avaliacao {
 	

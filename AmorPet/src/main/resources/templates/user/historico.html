@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="conteudo-padrao/estilos :: estilos-padrao">
+
+<title>Histórico De Seleções</title>
+
+</head>
+<body>
+	<div th:replace="conteudo-padrao/navbar :: navbar"></div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!-------------------------CORRETO ACIMA------------------>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="panel panel-info">
+	  				<div class="panel-heading">Meu histórico de adoção</div>
+					<div class="list-group">
+						<a href="#" class="list-group-item"> Todos </a>
+						<a href="#" class="list-group-item"> Participando </a>
+						<a href="#" class="list-group-item"> Fechados </a>
+						<a href="#" class="list-group-item"> Adotados </a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div th:unless="${listaProcessos}">
+					<p>Você ainda não participou de nenhum processo</p>
+					<hr>
+				</div>
+				<table class="table table-responsive table-bordered"
+					id="table-selecao">
+					<thead>
+						<tr th:if="${listaProcessos}">
+							<th>Animalzinho</th>
+							<th>Situação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${listaProcessos}"
+							th:each="processo : ${listaProcessos}">
+							<td id="nome"></td>
+							<td id="situacao"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-------------------------------Correto-------------------------------------->
+
+	<br>
+	<br>
+
+	<div th:replace="conteudo-padrao/footer :: footer"></div>
+
+	<div th:replace="conteudo-padrao/scripts :: scripts-padrao"></div>
+
+</body>
+</html>

@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.AnimalDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.dao.UsuarioDAO;
+import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Processo;
 import com.example.demo.model.Selecao;
 import com.example.demo.model.Usuario;
+import com.example.demo.util.Util;
 
 @Service
 public class AnimalService {
@@ -40,7 +42,10 @@ public class AnimalService {
 		return animais;
 	}
 
-	public void criarAnimal(Animal animal) {
+	public void criarAnimal(Animal animal) throws IdadeInvalidaException {
+		if(Util.calcularIdade(animal.getDataNascimento()) < 0) {
+			throw new IdadeInvalidaException();
+		}
 		this.animalRep.save(animal);
 	}
 
@@ -72,19 +77,25 @@ public class AnimalService {
 	}
 
 	public boolean verificarSeDisponivel(Animal animal, Usuario usuario) {
-		if(animal.getUsuario() != null) {
+		if(this.verificarDono(animal)) {
 			return false;
 		}
+		if(usuario.getRole().equals("ROLE_ADMIN")) {
+			return false;
+		}
+		// caso nao tenha sido adotado
 		Optional<Selecao> selecao = this.selecaoRep.findByIdAnimal(animal.getIdAnimal());
 		if (selecao.isPresent()) {
-			if (usuario == null) {
-				return true;
-			}
+			
 			for (Processo p : selecao.get().getProcessos()) {
-				if (!p.getIdUsuario().getId().equals(usuario.getId())
-						&& selecao.get().getProcessos().size() >= 10) {
-					return false;
+				// verifica se ele está no processo
+				if (p.getIdUsuario().getId().equals(usuario.getId())) {
+					return true;
 				}
+			}
+			if(selecao.get().getProcessos().size() >= 10 
+					&& selecao.get().getSituacao() != 1) {
+				return false;
 			}
 		}
 		return true;

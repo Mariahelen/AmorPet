@@ -33,15 +33,14 @@ form a, input[type=submit] {
 	float: right;
 }
 
-#detalhes-animal .btn, #voltar {
+#detalhes-animal .btn {
 	border-radius: 7px;
 }
 
-#voltar {
-	margin-left: 30px;
-	padding: 8.5px;
-	padding-left: 10px;
-	padding-right: 10px;
+#btn-voltar {
+	display: inline-block;
+	margin-left: 40px;
+	border-radius: 7px;
 }
 
 #form-editar button, #form-editar input[type="submit"] {
@@ -64,7 +63,7 @@ body {
 }
 
 /*NOVAS ATTs DA PÁGINA DE DESCRIÇÃO CSS*/
-#btn-adotar:hover, #voltar:focus {
+#btn-adotar:hover, #btn-adotar:focus {
 	background-color: #58b74f !important;
 	border-color: #58b74f;
 	transition: 1s;
@@ -80,11 +79,6 @@ h3 {
 
 p {
 	color: #4F4F4F;
-}
-
-#voltar:hover, #voltar:focus {
-	background-color: #00BFFF;
-	border-color: #00BFFF;
 }
 
 hr {
@@ -125,6 +119,7 @@ label[for='file-chooser']:hover, label[for='file-chooser']:focus {
 	background-color: rgb(139, 5, 39) !important;
 }
 
-#btn-voltar {
-	display: inline;
+.badge a:link {
+	text-decoration: underline !important;
 }
+

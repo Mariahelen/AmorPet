@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Selecao {
@@ -23,9 +22,8 @@ public class Selecao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_selecao")
 	private Integer idSelecao;
-	@DateTimeFormat(pattern = "yy-MM-dd")
-	@Column(name = "data_registro", nullable = false)
-	private LocalDate dataRegistro;
+	@Column(name = "data_registro", nullable = false, columnDefinition = "DATETIME")
+	private LocalDateTime dataRegistro;
 	@OneToOne
 	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "id_animal")
@@ -45,11 +43,11 @@ public class Selecao {
 		this.idSelecao = idSelecao;
 	}
 
-	public LocalDate getDataRegistro() {
+	public LocalDateTime getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(LocalDate dataRegistro) {
+	public void setDataRegistro(LocalDateTime dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
 

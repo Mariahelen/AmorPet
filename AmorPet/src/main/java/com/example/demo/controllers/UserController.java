@@ -24,9 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Endereco;
-import com.example.demo.model.Estado;
 import com.example.demo.model.Processo;
 import com.example.demo.model.Residencia;
 import com.example.demo.model.Resposta;
@@ -64,6 +64,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("/perfil");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		mv.addObject("usuario", usuario);
+		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
 
@@ -99,9 +100,6 @@ public class UserController {
 				ra.addFlashAttribute("errorSalvarFoto",
 						"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 			}
-		} else {
-			ra.addFlashAttribute("errorSalvarFoto",
-					"Erro ao adicionar a foto, verifique o tipo de extensão do arquivo");
 		}
 		return "redirect:/user/perfil";
 	}
@@ -120,10 +118,30 @@ public class UserController {
 			this.usuarioService.save(usuario);
 			session.setAttribute("usuarioLogado", usuario);
 			ra.addFlashAttribute("sucesso", "Alteração realizada com sucesso");
-		} catch (Exception e) {
+		}catch(IdadeInvalidaException e) {
+			ra.addFlashAttribute("errorIdade", e.getMessage());
+		}catch (Exception e) {
 			ra.addFlashAttribute("error", "Não foi possível alterar");
 		}
 		return "redirect:/user/perfil/editar";
+	}
+	
+	@GetMapping("/historico")
+	public String exibirHistorico() {
+		return "/user/historico";
+	}
+	
+	@GetMapping("/status")
+	public ModelAndView exibirStatus(HttpSession session) {
+		ModelAndView mv = new ModelAndView("/user/status");
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		try {
+			List<Processo> processos = this.processoService.lista(usuario);
+			mv.addObject("listaProcessos", processos);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return mv;
 	}
 
 	@GetMapping("/quero-adotar/{idAnimal}")
@@ -167,7 +185,6 @@ public class UserController {
 		}
 		mv.addObject("endereco", usuario.getEndereco());
 		mv.addObject("idAnimal", idAnimal);
-		mv.addObject("estados", Estado.values());
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
 	}
@@ -193,7 +210,6 @@ public class UserController {
 		}
 		if (br.hasErrors()) {
 			mv.addObject("idAnimal", idAnimal);
-			mv.addObject("estados", Estado.values());
 			mv.addObject("listaResidencias", this.residenciaService.listar());
 			return mv;
 		}
@@ -208,7 +224,6 @@ public class UserController {
 		} catch (Exception e) {
 			mv.setViewName("/user/form-endereco");
 			mv.addObject("idAnimal", idAnimal);
-			mv.addObject("estados", Estado.values());
 			mv.addObject("listaResidencias", this.residenciaService.listar());
 			mv.addObject("error", "Erro ao realizar o cadastro, tente novamente");
 			System.out.println(e.getMessage());
@@ -253,7 +268,7 @@ public class UserController {
 		} catch (Exception e) {
 			return "redirect:/adotar";
 		}
-		
+
 		try {
 			List<Resposta> respostas = this.respostaService.criarListaRespostasUsuario(respostasUsuario, usuario,
 					animal);

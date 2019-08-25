@@ -45,11 +45,11 @@
 <li class="nav-item dropdown">
 	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false"><span th:text="${session.usuarioLogado.nome.toUpperCase()}"></span></a>
 	<div class="dropdown-menu">
-		<a class="dropdown-item" th:href="@{/user/perfil}">PERFIL</a>
-		<a class="dropdown-item" th:href="@{/adm/selecoes}">SELEÇÕES</a>
-		<a class="dropdown-item" th:href="@{/adm/avaliacao}">AVALIAÇÃO</a>
-		<a class="dropdown-item" th:href="@{/adm/cadastro/animal}">ANIMAIS</a>
-		<a class="dropdown-item" th:href="@{/adm/logout}">SAIR</a>
+		<a class="dropdown-item" th:href="@{/user/perfil}" title="Perfil"><i class="fas fa-user"></i> PERFIL</a>
+		<a class="dropdown-item" th:href="@{/adm/selecoes}" title="Seleções"><i class="far fa-list-alt"></i> SELEÇÕES</a>
+		<a class="dropdown-item" th:href="@{/adm/cadastro/animal}" title="Cadastrar animal"><i class="fas fa-plus-circle"></i> ANIMAL</a>
+		<a class="dropdown-item" th:href="@{/adm/cadastro/pergunta}" title="Cadastrar animal"><i class="fas fa-plus-circle"></i> PERGUNTA</a>
+		<a class="dropdown-item" th:href="@{/adm/logout}" title="Sair"><i class="fas fa-sign-out-alt"></i> SAIR</a>
 	</div>
 </li> 
 </th:block>
@@ -58,9 +58,10 @@
 <li class="nav-item dropdown">
 	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false"><span th:text="${session.usuarioLogado.nome.toUpperCase()}"></span></a>
 	<div class="dropdown-menu">
-		<a class="dropdown-item" th:href="@{/user/perfil}">PERFIL</a>
-		<a class="dropdown-item" th:href="@{/user/status}">STATUS</a>
-		<a class="dropdown-item" th:href="@{/user/logout}">SAIR</a>
+		<a class="dropdown-item" th:href="@{/user/perfil}" title="Perfil"><i class="fas fa-user"></i> PERFIL</a>
+		<a class="dropdown-item" th:href="@{/user/status}" title="Status"><i class="fas fa-envelope-open"></i> STATUS</a>
+		<!-- <a class="dropdown-item" th:href="@{/user/historico}" title="Histórico de adoções"><i class="fas fa-history"></i> HISTÓRICO</a> -->
+		<a class="dropdown-item" th:href="@{/user/logout}" title="Sair"><i class="fas fa-sign-out-alt"></i> SAIR</a>
 	</div>
 </li> 
 </th:block>
@@ -69,8 +70,8 @@
 <li class="nav-item dropdown">
 	<a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="" aria-expanded="false">ENTRAR</a>
 	<div class="dropdown-menu">
-		<a class="dropdown-item" th:href="@{/login}">ENTRAR&nbsp; &nbsp;</a>
-		<a class="dropdown-item" th:href="@{/cadastro}">CADASTRE-SE</a>
+		<a class="dropdown-item" th:href="@{/login}" title="Entrar"><i class="fas fa-sign-in-alt"></i> ENTRAR</a>
+		<a class="dropdown-item" th:href="@{/cadastro}" title="Cadastro"><i class="fas fa-user-plus"></i> CADASTRE-SE</a>
 	</div>
 </li> 
 </th:block>

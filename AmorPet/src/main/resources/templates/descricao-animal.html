@@ -20,7 +20,6 @@
 	<br>
 	<br>
 	<br>
-	<br>
 	<section>
 
 		<!-- MODAL DE REMOVER ANIMAL -->
@@ -60,32 +59,40 @@
 			</div>
 		</div>
 		<!-- FIM MODAL DE REMOVER ANIMAL -->
-		
+
 		<div class="mbr-section__container container">
-		<a th:href="@{/adotar}" id="btn-voltar" class="btn btn-info btn-sm"><i class="fas fa-arrow-left"></i> Voltar</a>
-		
+			<a th:href="@{/adotar}" id="btn-voltar" class="btn btn-info btn-sm"><i
+				class="fas fa-arrow-left"></i> Voltar</a>
+							
 			<div class="mbr-contacts mbr-contacts--wysiwyg row"
 				style="padding-top: 30px; padding-bottom: 45px;">
-				<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 				<div class="alert alert-danger" th:if="${errorEditar}"
 					th:each="err : ${errorEditar}" th:text="${err.getDefaultMessage()}"></div>
+				<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+				<div th:if="${errorIdade}"
+							th:text="${errorIdade}" class="text-danger"></div>
 				<div class="alert alert-success" th:if="${sucessoEditar}"
 					th:text="${sucessoEditar}"></div>
 
 				<div th:if="${animal}" class="col-sm-12">
-					<div class="col-sm-6">
+					<div class="col-sm-6" id="img-animal">
 						<div th:if="${animal.caminhoFoto}">
-							<img th:src="${animal.caminhoFoto}" id="imgAnimal" title="|foto do animalzinho ${animal.nome}|"
+							<img th:src="${animal.caminhoFoto}" id="imgAnimal"
+								title="|foto do animalzinho ${animal.nome}|"
 								alt="foto do animalzinho"
 								class="mbr-contacts__img mbr-contacts__img--left">
 						</div>
-						<div th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('GATO')}">
-							<img th:src="@{/img/animais/cats/gato-padrao.jpg}" id="imgAnimal" title="foto do animalzinho padrão"
+						<div
+							th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('GATO')}">
+							<img th:src="@{/img/animais/cats/gato-padrao.jpg}" id="imgAnimal"
+								title="foto do animalzinho padrão"
 								alt="foto do animalzinho padrão"
 								class="mbr-contacts__img mbr-contacts__img--left">
 						</div>
-						<div th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('CACHORRO')}">
-							<img th:src="@{/img/animais/dogs/dog-padrao.jpg}" id="imgAnimal" title="foto do animalzinho padrão"
+						<div
+							th:if="${animal.caminhoFoto} == null and ${animal.tipoAnimal.equalsIgnoreCase('CACHORRO')}">
+							<img th:src="@{/img/animais/dogs/dog-padrao.jpg}" id="imgAnimal"
+								title="foto do animalzinho padrão"
 								alt="foto do animalzinho padrão"
 								class="mbr-contacts__img mbr-contacts__img--left">
 						</div>
@@ -99,7 +106,7 @@
 										<h3>Nome:</h3>
 										<p th:text="${animal.nome}"></p>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-6" hidden="hidden">
 										<h3>Espécie:</h3>
 										<p th:text="${animal.tipoAnimal}"></p>
 									</div>
@@ -136,26 +143,39 @@
 
 												<button id="editar-animal" class="btn btn-success">Editar</button>
 											</div>
-
-											<div th:if="${session.usuarioLogado.role} == 'ROLE_USER'">
-												<div th:if="${disponivel}"></div>
-												<a class="btn btn-success" id="btn-adotar"
-													th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
-												<a class="btn btn-info btn-sm" id="voltar"
-													th:href="@{/adotar}">Voltar</a>
-											</div>
-											<div th:unless="${disponivel}">
+							
+											<div th:if="${animal.usuario.id} == ${session.usuarioLogado.id}">
 												<p>
-													Animalzinho indisponível, lamentamos muito, mas existem
+													Você adotou este animalzinho, esperamos que seja muito feliz com ele.
+												</p>
+											</div>
+											
+											<div
+												th:if="${disponivelUser}">
+												<a class="btn btn-info" id="btn-adotar"
+													th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
+											</div>
+											<div th:unless="${disponivelUser}"
+												th:if="${session.usuarioLogado.role} != 'ROLE_ADMIN' and ${animal.usuario.id} != ${session.usuarioLogado.id}">
+												<p>
+													Animalzinho indisponível no momento, lamentamos muito, mas existem
 													outros animalzinhos que querem amor e carrinho <i
 														class="far fa-smile-beam"></i>
 												</p>
 											</div>
 										</div>
-										<div th:unless="${session.usuarioLogado} and ${disponivel}">
+										<div
+											th:if="${session.usuarioLogado} == null and ${animal.usuario} == null">
 											<a class="btn btn-info" th:href="@{/login}">ADOTAR</a> <span
 												class="badge">Ainda não tem conta?<a class="badge"
 												th:href="@{/cadastro}"> Cadastre-se</a></span>
+										</div>
+										<div th:if="${animal.usuario} != null and ${session.usuarioLogado} == null">
+											<p>
+												Animalzinho já adotado, lamentamos muito, mas existem outros
+												animalzinhos que querem amor e carrinho <i
+													class="far fa-smile-beam"></i>
+											</p>
 										</div>
 									</div>
 								</div>
@@ -168,7 +188,8 @@
 									<input type="hidden" th:field="*{idAnimal}"> <label><h2>Nome:</h2></label>
 									<input type="text" th:field="*{nome}" name="nome"><br>
 
-									<label><h2>Idade:</h2></label> <input type="date"
+									<label><h2>Idade:</h2></label>
+									<input type="date"
 										th:field="*{dataNascimento}" name="dataNascimento"><br>
 
 									<label><h2>Sexo:</h2></label> <input type="radio"
@@ -186,8 +207,7 @@
 										value="Cachorro" id="cachorro"> <label for="cachorro">Cachorro</label>
 									<input type="radio" th:field="*{tipoAnimal}" value="Gato"
 										id="gato"> <label for="gato">Gato</label><br> <label><h2>Descrição:</h2>
-									</label>
-									<input type="hidden" th:field="*{caminhoFoto}">
+									</label> <input type="hidden" th:field="*{caminhoFoto}">
 									<textarea th:field="*{historiaAnimal}" rows="5" cols="70"></textarea>
 
 									<div class="form-group">
@@ -200,7 +220,7 @@
 													<label for="file-chooser">Adicionar Foto</label>
 												</div>
 												<input th:field="*{file}" name="filebutton"
-													id="file-chooser" class="input-file" type="file"/>
+													id="file-chooser" class="input-file" type="file" />
 
 											</div>
 										</div>
@@ -208,14 +228,13 @@
 
 									<input class="btn btn-success" type="submit" name="Alterar"
 										value="Salvar">
-										<button type="button" class="btn btn-style-rm">Cancelar</button>
+									<button type="button" class="btn btn-style-rm">Cancelar</button>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 

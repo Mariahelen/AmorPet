@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,7 +17,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Processo {
@@ -27,9 +26,8 @@ public class Processo {
 	private Integer idProcesso;
 	@Column(length = 3, columnDefinition = "INT(3)")
 	private Integer pontuacaoFinal;
-	@DateTimeFormat(pattern = "yy-MM-dd")
-	@Column(name = "data_registro")
-	private LocalDate dataRegistro;
+	@Column(name = "data_registro", columnDefinition = "DATETIME")
+	private LocalDateTime dataRegistro;
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario idUsuario;
@@ -62,11 +60,11 @@ public class Processo {
 		this.pontuacaoFinal = pontuacaoFinal;
 	}
 
-	public LocalDate getDataRegistro() {
+	public LocalDateTime getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(LocalDate dataRegistro) {
+	public void setDataRegistro(LocalDateTime dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
 

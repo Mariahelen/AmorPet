@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.model.Animal;
+import com.example.demo.model.Avaliacao;
 import com.example.demo.model.Pergunta;
 import com.example.demo.model.Pontuacao;
 import com.example.demo.model.Processo;
@@ -81,12 +83,14 @@ public class AdmController {
 			return "redirect:/adm/cadastro/animal";
 		}
 		try {
-			if(animal.getCaminhoFoto().trim().isEmpty() || animal.getCaminhoFoto() != null) {
-				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
+			if (animal.getCaminhoFoto().trim().isEmpty() && animal.getCaminhoFoto() != null) {
+				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(),
+						animal.getTipoAnimal());
 				File destino = new File(path);
 				animal.getFile().transferTo(destino);
-				animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
-			}else {
+				animal.setCaminhoFoto(
+						Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
+			} else {
 				animal.setCaminhoFoto(null);
 			}
 			animal.setDataRegistro(LocalDate.now());
@@ -98,7 +102,9 @@ public class AdmController {
 		} catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível cadastrar o animal");
 			System.out.println(e.getMessage());
-		} catch (Exception e) {
+		}catch(IdadeInvalidaException e) {
+			ra.addFlashAttribute("errorIdade", e.getMessage());
+		}catch (Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 			System.out.println(e.getMessage());
 		}
@@ -115,12 +121,14 @@ public class AdmController {
 		try {
 			// apaga foto antiga
 			Util.apagarFotoAntiga(animal.getCaminhoFoto());
-			if(animal.getCaminhoFoto().trim().isEmpty() || animal.getCaminhoFoto() != null) {
-				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(), animal.getTipoAnimal());
+			if (animal.getCaminhoFoto().trim().isEmpty() && animal.getCaminhoFoto() != null) {
+				String path = Util.pegarCaminhoCompletoParaImagemAnimal(animal.getFile().getOriginalFilename(),
+						animal.getTipoAnimal());
 				File destino = new File(path);
 				animal.getFile().transferTo(destino);
-				animal.setCaminhoFoto(Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
-			}else {
+				animal.setCaminhoFoto(
+						Util.pegarCaminhoImagemAnimal(animal.getTipoAnimal()) + animal.getFile().getOriginalFilename());
+			} else {
 				animal.setCaminhoFoto(null);
 			}
 			animal.setDataRegistro(LocalDate.now());
@@ -128,11 +136,13 @@ public class AdmController {
 			ra.addFlashAttribute("sucesso", "Animal Editado com sucesso!");
 			// pra da o tempo de criar as pastas e mover os arquivos
 			Thread.sleep(5000);
-			
+
 		} catch (IllegalStateException | IOException e) {
 			ra.addFlashAttribute("error", "Não foi possível editar o animal");
 			System.out.println(e.getMessage());
-		} catch (Exception e) {
+		}catch(IdadeInvalidaException e) {
+			ra.addFlashAttribute("errorIdade", e.getMessage());
+		}catch (Exception e) {
 			ra.addFlashAttribute("error", e.getMessage());
 			System.out.println(e.getMessage());
 		}
@@ -168,8 +178,8 @@ public class AdmController {
 	}
 
 	@PostMapping("/cadastro/pergunta")
-	public String cadastroPergunta(@Valid Pergunta pergunta, BindingResult br,
-			RedirectAttributes ra, HttpSession session) {
+	public String cadastroPergunta(@Valid Pergunta pergunta, BindingResult br, RedirectAttributes ra,
+			HttpSession session) {
 		if (br.hasErrors()) {
 			ra.addFlashAttribute("listError", br.getAllErrors());
 			return "redirect:/adm/cadastro/pergunta";
@@ -184,14 +194,14 @@ public class AdmController {
 		}
 		return "redirect:/adm/cadastro/pergunta";
 	}
-	
+
 	@GetMapping("/selecoes")
 	public ModelAndView exibirListaSelecao() {
 		ModelAndView mv = new ModelAndView("/adm/lista-selecoes");
 		mv.addObject("listaSelecoes", this.selecaoService.lista());
 		return mv;
 	}
-	
+
 	@GetMapping("/selecoes/{idSelecao}/processos")
 	public ModelAndView exibirSelecao(@PathVariable Integer idSelecao) {
 		ModelAndView mv = new ModelAndView("/adm/selecao");
@@ -199,110 +209,135 @@ public class AdmController {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
 			selecao = this.processoService.listarProcessos(selecao);
 			mv.addObject("selecao", selecao);
-			mv.addObject("finalizar", this.selecaoService.verificarProcessos(selecao));
+			mv.addObject("finalizado", this.selecaoService.verificarProcessosAptos(selecao));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			mv.setViewName("redirec:/adm/selecoes");
 		}
 		return mv;
 	}
-	
+
 	@DeleteMapping("/selecoes/{idSelecao}/processos/{idProcesso}")
-	public String removerProcesso(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso, RedirectAttributes ra) {
+	public String removerProcesso(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso,
+			RedirectAttributes ra) {
 		try {
 			this.processoService.removerProcesso(idSelecao, idProcesso);
-		}catch(Exception e) {
+		} catch (Exception e) {
 //			System.out.println(e.getMessage());
 			return "redirect:/adm/selecoes";
 		}
-		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos";
 	}
-	
-	
+
 	@GetMapping("/selecoes/{idSelecao}/processos/{idProcesso}/respostas")
-	public ModelAndView processo2(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso) {
-		ModelAndView mv = new ModelAndView("/user/form-etapa-2");
-		try{
+	public ModelAndView exibirRespostas(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso) {
+		ModelAndView mv = new ModelAndView("/adm/form-etapa-2");
+		try {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
 			this.selecaoService.verificarPosicaoProcesso(selecao, idProcesso);
 			mv.addObject("idSelecao", idSelecao);
 			mv.addObject("idProcesso", idProcesso);
 			mv.addObject("listaRespostas", this.selecaoService.buscaResposta(selecao, idProcesso));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new ModelAndView("redirect:/adm/selecoes/"+idSelecao+"/processos");
+			return new ModelAndView("redirect:/adm/selecoes/" + idSelecao + "/processos");
 		}
 		return mv;
 	}
-	
+
 	@PostMapping("/selecoes/{idSelecao}/processos/{idProcesso}/respostas")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String salvarProcesso2(@RequestBody Resposta[] respostas, @PathVariable Integer idSelecao,
+	public String salvarRespostas(@RequestBody Resposta[] respostas, @PathVariable Integer idSelecao,
 			@PathVariable Integer idProcesso) {
-		
+
 		try {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.verificarPosicaoProcesso(selecao, idProcesso);
 			Processo processo = this.processoService.findById(idProcesso);
-			List<Resposta> listaRespostas = this.respostaService.criarListaConfirmacoesUsuario(respostas, processo.getIdUsuario(), selecao.getIdAnimal());
-			this.processoService.salvarRespostasAndProcesso(processo.getIdUsuario(), selecao.getIdAnimal(), listaRespostas);
-		}catch(Exception e) {
+			List<Resposta> listaRespostas = this.respostaService.criarListaConfirmacoesUsuario(respostas,
+					processo.getIdUsuario(), selecao.getIdAnimal());
+			this.processoService.salvarRespostasAndProcesso(processo.getIdUsuario(), selecao.getIdAnimal(),
+					listaRespostas);
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			return "redirect:/adm/selecoes/" + idSelecao + "/processos";
 		}
-		return "redirect:/adm/selecoes/"+idSelecao+"/processos/"+idProcesso+"/respostas";
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos/" + idProcesso + "/respostas";
 	}
-	
+
 	@GetMapping("/selecoes/{idSelecao}/processos/{idProcesso}/avaliacao")
 	public ModelAndView exibirAvaliacao(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso) {
 		ModelAndView mv = new ModelAndView("/adm/avaliacao");
 		try {
-			
-		}catch(Exception e) {
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.verificarPosicaoProcesso(selecao, idProcesso);
+			mv.addObject("idSelecao", idSelecao);
+			mv.addObject("idProcesso", idProcesso);
+			mv.addObject("avaliacao", new Avaliacao());
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			return new ModelAndView("redirect:/adm/selecoes/" + idSelecao + "/processos");
 		}
 		return mv;
 	}
-	
+
+	@PostMapping("/selecoes/{idSelecao}/processos/{idProcesso}/avaliacao")
+	public String salvarAvaliacao(@PathVariable Integer idSelecao, @PathVariable Integer idProcesso,
+			@RequestParam(required = false) List<String> respostaPet, @RequestParam(required = false) List<String> respostaDono) {
+		try {
+			Selecao selecao = this.selecaoService.findById(idSelecao);
+			this.selecaoService.verificarPosicaoProcesso(selecao, idProcesso);
+			this.selecaoService.verificarRespostasAvaliacao(respostaPet, respostaDono);
+			this.processoService.salvarAvaliacaoAndProcesso(respostaPet, respostaDono, idProcesso);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return "redirect:/adm/selecoes/" + idSelecao + "/processos/";
+		}
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos/" + idProcesso + "/avaliacao";
+	}
+
 	@GetMapping("/selecoes/{idSelecao}/processos/iniciar/etapa/{etapa}")
-	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa, RedirectAttributes ra) {
+	public String iniciarProximaEtapa(@PathVariable Integer idSelecao, @PathVariable Integer etapa,
+			RedirectAttributes ra) {
 		try {
 			this.selecaoService.iniciarProximaEtapa(idSelecao, etapa);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ra.addFlashAttribute("error", "Ainda há participantes que não foram verificados");
 			System.out.println(e.getMessage());
 		}
-		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos";
 	}
-	
+
 	@GetMapping("/selecoes/{idSelecao}/processos/concluir")
-	public String finalizarSelecao(@PathVariable Integer idSelecao) {
+	public String concluirSelecao(@PathVariable Integer idSelecao) {
 		try {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
 			this.selecaoService.concluirSelecao(selecao);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:/adm/selecoes/"+idSelecao+"/processos";
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos";
 	}
-	
+
 	@GetMapping("/selecoes/{idSelecao}/processos/fechar")
 	public String fecharSelecao(@PathVariable Integer idSelecao) {
 		try {
 			Selecao selecao = this.selecaoService.findById(idSelecao);
 			this.selecaoService.fecharSelecao(selecao);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "redirect:/adm/selecoes";
+		return "redirect:/adm/selecoes/" + idSelecao + "/processos";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout() {
 		return "redirect:/user/logout";
 	}
-	
+
 	@GetMapping("/avaliacao")
 	public ModelAndView telaAvaliacao() {
-		
+
 		ModelAndView mv = new ModelAndView("/adm/avaliacao");
 		return mv;
 	}

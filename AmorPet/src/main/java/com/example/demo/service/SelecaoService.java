@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.AnimalDAO;
 import com.example.demo.dao.ProcessoDAO;
 import com.example.demo.dao.SelecaoDAO;
 import com.example.demo.dao.UsuarioDAO;
@@ -25,6 +26,8 @@ public class SelecaoService {
 	private ProcessoDAO processoRep;
 	@Autowired
 	private UsuarioDAO usuarioRep;
+	@Autowired
+	private AnimalDAO animalRep;
 
 	public List<Selecao> lista() {
 		return this.selecaoRep.findAll();
@@ -81,7 +84,7 @@ public class SelecaoService {
 	public Selecao novaSelecao(Animal animal) {
 		Selecao selecao = new Selecao();
 		selecao.setIdAnimal(animal);
-		selecao.setDataRegistro(LocalDate.now());
+		selecao.setDataRegistro(LocalDateTime.now());
 		selecao.setProcessos(new ArrayList<Processo>());
 		selecao.setSituacao(1);
 		return selecao;
@@ -164,12 +167,12 @@ public class SelecaoService {
 		this.selecaoRep.save(selecao);
 	}
 	
-	public boolean verificarProcessos(Selecao selecao) {
+	public boolean verificarProcessosAptos(Selecao selecao) {
 		int qtdProcessos = selecao.getProcessos().size();
 		int qtdProcessosComPontosInsuficientes = 0;
 		
 		for (Processo p : selecao.getProcessos()) {
-			if(p.getPontuacaoFinal() <= 95) {
+			if(p.getPontuacaoFinal() < 75) {
 				qtdProcessosComPontosInsuficientes++;
 			}
 		}
@@ -178,7 +181,16 @@ public class SelecaoService {
 		}
 		return false;
 	}
-
+	
+	public void verificarRespostasAvaliacao(List<String> respostaPet, List<String> respostaDono) throws Exception {
+		if(respostaPet == null || respostaDono == null) {
+			throw new Exception("Uma ou mais respostas da avaliação não foram marcadas");
+		}
+		if(respostaPet.size() > 1 || respostaDono.size() > 1
+				|| respostaPet.isEmpty() || respostaDono.isEmpty()) {
+			throw new Exception("Não há resposta da avaliação");
+		}
+	}
 
 	public void concluirSelecao(Selecao selecao) throws Exception {
 		if (selecao.getSituacao() != 3) {
@@ -197,9 +209,14 @@ public class SelecaoService {
 			usuario = this.usuarioRep.findById(processo.getIdUsuario().getId());
 			if (usuario.isPresent()) {
 				selecao.setSituacao(4);
-				this.selecaoRep.save(selecao);
+				selecao.getIdAnimal().setUsuario(usuario.get());
+				
 				usuario.get().getAnimais().add(selecao.getIdAnimal());
+				
+				this.selecaoRep.save(selecao);
+				this.animalRep.save(selecao.getIdAnimal());
 				this.usuarioRep.save(usuario.get());
+				this.selecaoRep.save(selecao);
 				break;
 			}
 		}
@@ -207,16 +224,17 @@ public class SelecaoService {
 
 	public void somarPontosAvaliacao(Selecao selecao) {
 		for (Processo p : selecao.getProcessos()) {
-			if (p.getAvaliacao().getAvaliacaoDono() == null) {
+			if (p.getAvaliacao().getAvaliacaoDono() == null || p.getAvaliacao().getAvaliacaoLar() == null) {
 				continue;
 			}
-			p.setPontuacaoFinal(p.getAvaliacao().getAvaliacaoDono() + p.getAvaliacao().getAvaliacaoLar());
+			int pontuacaoTotal = p.getPontuacaoFinal() + p.getAvaliacao().getAvaliacaoDono() + p.getAvaliacao().getAvaliacaoLar();
+			p.setPontuacaoFinal(pontuacaoTotal);
 			this.processoRep.save(p);
 		}
 	}
 	
 	public void fecharSelecao(Selecao selecao) {
-		selecao.setSituacao(3);
+		selecao.setSituacao(4);
 		this.selecaoRep.save(selecao);
 	}
 }

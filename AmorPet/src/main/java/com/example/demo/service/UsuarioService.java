@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.UsuarioDAO;
+import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.exception.SenhaInvalidaException;
 import com.example.demo.model.Endereco;
 import com.example.demo.model.Usuario;
 import com.example.demo.util.Util;
@@ -37,13 +39,16 @@ public class UsuarioService {
 		return null;
 	}
 
-	public void criarUsuario(Usuario usuario) throws Exception {
+	public void criarUsuario(Usuario usuario) throws SenhaInvalidaException, IdadeInvalidaException, Exception {
 
 		if (this.usuarioDAO.findByEmail(usuario.getEmail()) != null) {
 			throw new Exception("Email já cadastrado");
 
 		} else if (!usuario.getHashSenha().equals(usuario.getConfirmaSenha())) {
-			throw new Exception("As senhas não coincidem!");
+			throw new SenhaInvalidaException();
+			
+		}else if(Util.calcularIdade(usuario.getDataNascimento()) < 18) {
+			throw new IdadeInvalidaException();
 		}
 		usuario.setHashSenha(Util.criptografarSenha(usuario.getHashSenha()));
 		// USUARIO ESTARÁ ATIVO AUTOMATICAMENTE POR ENQUANTO
@@ -61,13 +66,19 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public Usuario editarPerfil(Usuario usuarioForm) throws Exception {
+	public Usuario editarPerfil(Usuario usuarioForm) throws IdadeInvalidaException, Exception {
 		Usuario usuarioParaSalvar = this.findById(usuarioForm.getId());
 		usuarioParaSalvar.setNome(usuarioForm.getNome());
+		if(Util.calcularIdade(usuarioForm.getDataNascimento()) < 18) {
+			throw new IdadeInvalidaException();
+		}
 		usuarioParaSalvar.setDataNascimento(usuarioForm.getDataNascimento());
 		usuarioParaSalvar.setEmail(usuarioParaSalvar.getEmail());
 		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
-		usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+		
+		if(! usuarioForm.getEndereco().getResidencia().getTipoResidencia().equalsIgnoreCase("TODOS")) {
+			usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+		}
 		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());
 		usuarioParaSalvar.setConfirmaSenha(usuarioParaSalvar.getHashSenha());
 		return usuarioParaSalvar;
@@ -78,7 +89,6 @@ public class UsuarioService {
 				|| endereco.getCep() == null
 				|| endereco.getCidade() == null
 				|| endereco.getComplemento() == null
-				|| endereco.getEstado() == null
 				|| endereco.getLogradouro() == null
 				|| endereco.getResidencia() == null
 				|| endereco.getNumero() == null) {
@@ -89,7 +99,8 @@ public class UsuarioService {
 				|| endereco.getCidade().trim().isEmpty()
 				|| endereco.getComplemento().trim().isEmpty()
 				|| endereco.getLogradouro().trim().isEmpty()
-				|| endereco.getResidencia().getTipoResidencia().trim().isEmpty()) {
+				|| endereco.getResidencia().getTipoResidencia().trim().isEmpty()
+				|| endereco.getResidencia().getTipoResidencia().equalsIgnoreCase("TODOS")) {
 			
 			return true;
 		}

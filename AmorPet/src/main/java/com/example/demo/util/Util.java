@@ -95,7 +95,7 @@ public class Util {
 	}
 	
 	public static String formataIdade(final LocalDate aniversario) {
-		int idade = Period.between(aniversario, LocalDate.now()).getYears();
+		int idade = calcularIdade(aniversario);
 	    if(idade >= 1) {
 	    	return idade + " Ano(s)";
 	    }
@@ -105,6 +105,10 @@ public class Util {
 	    }else {
 	    	return meses + " Meses";
 	    }
+	}
+	
+	public static int calcularIdade(final LocalDate aniversario) {
+		return Period.between(aniversario, LocalDate.now()).getYears();
 	}
 	
 	/**

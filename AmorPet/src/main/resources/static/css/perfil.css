@@ -111,6 +111,19 @@
 	color: #48554f;
 }
 
+.wide {
+	background-color: #e0e0e0 !important;
+	width: 97% !important;
+	padding-bottom: 7px;
+	margin-bottom: 10px;
+}
+.nice-select:focus, .nice-select:hover {
+	border-color: #136105 !important;
+}
+.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+	background-color: #b5e0b1 !important;
+}
+
 #form-perfil form .form-group button {
 	border-radius: 45px;
 	border: none;
@@ -121,6 +134,18 @@
 
 #form-perfil form label {
 	font-size: 15px;
+}
+
+#btn-foto {
+	display: none;
+	margin-left: 5px;
+	padding: 9px;
+	margin-bottom: 5px;
+	border: currentColor;
+}
+
+#reset-foto {
+	display: none;
 }
 
 /* deixar botões no padrão */
@@ -140,17 +165,40 @@ input[type=file] {
 	display: none;
 }
 
-.input-wrapper label {
+.input-wrapper label[for="foto-usuario"] {
 	background-color: #3498db;
 	border-radius: 5px;
 	color: #fff;
-	padding: 5px 20px;
+	padding: 2px 20px;
 	margin-top: 5px;
 	margin-left: 5px;
 }
 
-.input-wrapper label:hover {
+.input-wrapper label[for="foto-usuario"]:hover {
 	background-color: #2980b9;
+	cursor: pointer;
+}
+
+#btns-foto {
+	text-align: center;
+}
+
+.input-wrapper label[for="btn-foto"], .input-wrapper label[for="reset-foto"] {
+	font-size: 30px !important;
+}
+
+.input-wrapper label[for="btn-foto"] {
+	color: #7ac673;
+	margin-right: 10px;
+}
+
+.input-wrapper label[for="btn-foto"]:hover, .input-wrapper label[for="reset-foto"]:hover {
+	cursor: pointer;
+}
+
+.input-wrapper label[for="reset-foto"] {
+	color: #e75050;
+	margin-left: 10px;
 }
 
 /* RESPONSIVIDADE PARA TELAS ATE 990px ======================*/
@@ -182,4 +230,7 @@ input[type=file] {
 	letter-spacing: 2px;
 	
 }
+
+
+
 

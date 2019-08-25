@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,8 @@ public class Avaliacao {
 	private Integer avaliacaoLar;
 	@Column(name = "avaliacao_dono", nullable = false)
 	private Integer avaliacaoDono;
-	@Column(name = "data_avaliacao", nullable = false)
-	private LocalDate dataAvaliacao;
+	@Column(name = "data_avaliacao", nullable = false, columnDefinition = "DATETIME")
+	private LocalDateTime dataAvaliacao;
 
 	public Integer getIdAvaliacao() {
 		return idAvaliacao;
@@ -45,11 +45,11 @@ public class Avaliacao {
 		this.avaliacaoDono = avaliacaoDono;
 	}
 
-	public LocalDate getDataAvaliacao() {
+	public LocalDateTime getDataAvaliacao() {
 		return dataAvaliacao;
 	}
 
-	public void setDataAvaliacao(LocalDate dataAvaliacao) {
+	public void setDataAvaliacao(LocalDateTime dataAvaliacao) {
 		this.dataAvaliacao = dataAvaliacao;
 	}
 

@@ -2,8 +2,6 @@ package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
@@ -24,15 +22,15 @@ public class Endereco {
 	private Residencia residencia;
 
 	@NotBlank(message = "Logradouro é necessário")
-	@Column(length = 45)
+	@Column(length = 60)
 	private String logradouro;
 
-	@Size(max = 4, min = 0, message = "Tamanho máximo é 4 digitos")
-	@Column(name = "numero_casa", length = 4, columnDefinition = "INT(4)")
+	@Size(max = 20, min = 0, message = "Tamanho máximo é 20 caracteres")
+	@Column(name = "numero_casa", length = 20)
 	private String numero;
 
 	@NotBlank(message = "Complemento é necessário")
-	@Column(length = 60)
+	@Column(length = 255)
 	private String complemento;
 
 	@NotBlank(message = "Bairro é necessário")
@@ -42,11 +40,6 @@ public class Endereco {
 	@NotBlank(message = "Cidade é necessário")
 	@Column(length = 30)
 	private String cidade;
-
-	@NotNull(message = "Estado é necessário")
-	@Enumerated(EnumType.STRING)
-	@Column(length = 2)
-	private Estado estado;
 
 	@Digits(integer = 8, fraction = 0, message = "O CEP deve ter no máximo 8 digitos")
 	@Column(length = 8, columnDefinition = "INT(8)")
@@ -98,14 +91,6 @@ public class Endereco {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
-	}
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
 	}
 
 	public Integer getCep() {

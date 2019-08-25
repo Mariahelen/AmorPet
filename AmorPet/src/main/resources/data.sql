@@ -3,11 +3,45 @@
 insert into usuario (id, nome, email, hash_senha, telefone, role, ativo)
 values
 (default, 'Douglas', 'd@d', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
-'12467890153', 'ROLE_ADMIN', 1),
+'124678901', 'ROLE_ADMIN', 1),
 (default, 'Maria', 'm@m', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
-'12467890153', 'ROLE_ADMIN', 1),
+'124678901', 'ROLE_ADMIN', 1),
 (default, 'Ronny', 'r@r', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
-'12467890153', 'ROLE_ADMIN', 1);
+'124678901', 'ROLE_ADMIN', 1);
+
+/* INSERT DE USUÁRIOS SIMULADOS */
+insert into usuario (id, nome, email, hash_senha, telefone, role, ativo)
+values
+(default, 'Everton', 'everton@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Laís', 'lais@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Emerson', 'emerson@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Lays', 'lays@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Laila', 'laila@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Thuane', 'thuane@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Hugo', 'hugo@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Edesildo', 'edesildo@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Matheus toinho', 'toinho@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Lauanne', 'lauanne@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Pedro', 'pedro@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Adrielly', 'adrielly@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Manuelle', 'manu@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Lucas sena', 'lucas@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1),
+(default, 'Igor', 'igor@gmail.com', 'D9E6762DD1C8EAF6D61B3C6192FC408D4D6D5F1176D0C29169BC24E71C3F274AD27FCD5811B313D681F7E55EC02D73D499C95455B6B5BB503ACF574FBA8FFE85',
+'12345678901', 'ROLE_USER', 1);
 
 /* INSERT DOS TIPOS DE RESIDENCIA */
 insert into residencia (id_residencia, tipo_residencia) values (default, "Todos");
@@ -61,12 +95,13 @@ insert into pergunta
 values
 (default, now(), 'Em caso de ausência, há alguém que pode cuidar do animal?', 10, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
 (default, now(), 'Já tem ou teve algum animal?', 5, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'Seu apartamento possui telas protetoras?', 15, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1),
 (default, now(), 'Concorda que o pet possa adoecer, assim ele precisará de consultas veterinárias e isto terá um custo financeiro?', 15, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
-(default, now(), 'Concorda em nos devolver o gatinho se por qualquer motivo não puder continuar com ele?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+(default, now(), 'Concorda em nos devolver o pet se por qualquer motivo não puder continuar com ele?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
 (default, now(), 'Concorda em não repassar o pet a ninguém sem nos consultar?', 5, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
 (default, now(), 'Concorda que sua casa seja vistoriada para averiguação das respostas?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
 (default, now(), 'Concorda em assinar um contrato de adoção no ato da entrega, responsabilizando pelos cuidados com o animal e sua segurança?', 10, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+
+(default, now(), 'Seu apartamento possui telas protetoras?', 20, null, (select id_residencia from residencia where tipo_residencia = "Todos"), 1),
+
 (default, now(), 'Sua casa tem muro altos?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
-(default, now(), 'Sua casa tem portão vedados, que impeça alguma fuga?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1),
-(default, now(), 'Condomínio permite animais?', 20, null, (select id_residencia from residencia where tipo_residencia = "Apartamento"), 1);
+(default, now(), 'Sua casa tem portão vedados, que impeça alguma fuga?', 10, null, (select id_residencia from residencia where tipo_residencia = "Casa"), 1);

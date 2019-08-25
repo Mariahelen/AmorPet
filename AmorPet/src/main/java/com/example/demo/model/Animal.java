@@ -44,8 +44,8 @@ public class Animal {
 	private String nome;
 
 	@NotNull(message = "Data de Nascimento do é necessária")
-	@PastOrPresent(message = "Deve ser uma data de nascimento válida")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent(message = "Deve ser uma data de nascimento igual ou anterior a data atual")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "data_nasc")
 	private LocalDate dataNascimento;
 
@@ -64,6 +64,7 @@ public class Animal {
 	private String caminhoFoto;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "data_registro", columnDefinition = "DATETIME")
 	private LocalDate dataRegistro;
 
 	@NotNull(message = "O porte do animal é necessário")

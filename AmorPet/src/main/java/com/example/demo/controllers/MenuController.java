@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.exception.LoginInvalido;
+import com.example.demo.exception.SenhaInvalidaException;
 import com.example.demo.model.Animal;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.AnimalService;
@@ -64,8 +66,8 @@ public class MenuController {
 			RedirectAttributes ra, HttpSession session) {
 		Usuario usuarioLogado;
 		try {
-			usuarioLogado = this.usuarioService.efetuarLogin(email, senha);
 			session.setAttribute("email", email);
+			usuarioLogado = this.usuarioService.efetuarLogin(email, senha);
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} catch (LoginInvalido e) {
 			ra.addFlashAttribute("mensagemError", e.getMessage());
@@ -90,19 +92,29 @@ public class MenuController {
 		if (br.hasErrors()) {
 			return new ModelAndView("/cadastro");
 		}
+		ModelAndView mv = new ModelAndView("/cadastro");
 		try {
-			ModelAndView mv = new ModelAndView("redirect:/cadastro");
 			usuario.setRole("ROLE_USER");
 			this.usuarioService.criarUsuario(usuario);
-			ra.addFlashAttribute("mensagemSuccess", "Conta criada com sucesso!");
-			return mv;
-		} catch (Exception e) {
-			ModelAndView mv = new ModelAndView("/cadastro");
-			mv.addObject("mensagemError", "Erro ao realizar o cadastro, tente novamente.");
+			ra.addFlashAttribute("sucesso", "Conta criada com sucesso!");
+			mv.setViewName("redirect:/cadastro");
+			
+		}catch(SenhaInvalidaException e) {
+			mv.addObject("errorSenha", e.getMessage());
 			mv.addObject("usuario", usuario);
 			System.out.println(e.getMessage());
-			return mv;
+			
+		}catch(IdadeInvalidaException e) {
+			mv.addObject("errorIdade", e.getMessage());
+			mv.addObject("usuario", usuario);
+			System.out.println(e.getMessage());
+			
+		}catch (Exception e) {
+			mv.addObject("error", "Erro ao realizar o cadastro, tente novamente.");
+			mv.addObject("usuario", usuario);
+			System.out.println(e.getMessage());
 		}
+		return mv;
 	}
 
 	@GetMapping("/adotar")
@@ -125,7 +137,7 @@ public class MenuController {
 			mv.addObject("animal", animal);
 			mv.addObject("idadeAnimal", Util.formataIdade(animal.getDataNascimento()));
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			mv.addObject("disponivel", this.animalService.verificarSeDisponivel(animal, usuario));
+			mv.addObject("disponivelUser", this.animalService.verificarSeDisponivel(animal, usuario));
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}

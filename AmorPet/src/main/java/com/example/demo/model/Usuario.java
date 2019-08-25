@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -54,11 +52,10 @@ public class Usuario {
 	private String telefone;
 
 	@NotNull(message = "Data de Nascimento é necessária")
-	@Past(message = "Deve ser uma data de nascimento válida")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Past(message = "Deve ser uma data de nascimento anterior a data atual")
 	@Column(name = "data_nasc")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	@Column(length = 50)
 	private String caminhoFoto;
 	@Column(length = 15, nullable = false)
@@ -119,11 +116,11 @@ public class Usuario {
 		this.telefone = Util.limparMascaraTelefone(telefone);
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
