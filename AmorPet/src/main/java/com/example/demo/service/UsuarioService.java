@@ -81,16 +81,20 @@ public class UsuarioService {
 		usuarioParaSalvar.setEmail(usuarioParaSalvar.getEmail());
 		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
 		
-		Optional<Residencia> residencia = this.residenciaRep.findById(usuarioForm.getEndereco().getResidencia().getIdResidencia());
-		if(residencia.isPresent()) {
-			if(! residencia.get().getTipoResidencia().equalsIgnoreCase("TODOS")) {
-				usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
-				
-			}else {
-				throw new Exception("Residencia inválida");
+		if(usuarioForm.getEndereco().getResidencia().getIdResidencia() != null) {
+			Optional<Residencia> residencia = this.residenciaRep.findById(usuarioForm.getEndereco().getResidencia().getIdResidencia());
+			if(residencia.isPresent()) {
+				if(! residencia.get().getTipoResidencia().equalsIgnoreCase("TODOS")) {
+					usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+					
+				}else {
+					throw new Exception("Residencia inválida");
+				}
 			}
+		}else {
+			usuarioForm.getEndereco().setResidencia(null);
+			usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
 		}
-		
 		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());
 		usuarioParaSalvar.setConfirmaSenha(usuarioParaSalvar.getHashSenha());
 		return usuarioParaSalvar;
