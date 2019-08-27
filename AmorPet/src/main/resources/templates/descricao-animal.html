@@ -136,6 +136,7 @@
 									</div>
 									<div class="col-sm-12" id="info-adotar">
 										<div th:if="${session.usuarioLogado}">
+										
 											<div th:if="${session.usuarioLogado.role} == 'ROLE_ADMIN'">
 												<button id="btn-remove-animal" type="button"
 													th:value="${animal.idAnimal}" class="btn btn-style-rm"
@@ -144,10 +145,12 @@
 												<button id="editar-animal" class="btn btn-success">Editar</button>
 											</div>
 							
-											<div th:if="${animal.usuario.id} == ${session.usuarioLogado.id}">
-												<p>
-													Você adotou este animalzinho, esperamos que seja muito feliz com ele.
-												</p>
+											<div th:if="${animal.usuario}"> 
+												<div th:if="${animal.usuario.id} == ${session.usuarioLogado.id}">
+													<p>
+														Você adotou este animalzinho, esperamos que seja muito feliz com ele.
+													</p>
+												</div>
 											</div>
 											
 											<div
@@ -156,12 +159,16 @@
 													th:href="|/user/quero-adotar/${animal.idAnimal}|">ADOTAR</a>
 											</div>
 											<div th:unless="${disponivelUser}"
-												th:if="${session.usuarioLogado.role} != 'ROLE_ADMIN' and ${animal.usuario.id} != ${session.usuarioLogado.id}">
-												<p>
-													Animalzinho indisponível no momento, lamentamos muito, mas existem
-													outros animalzinhos que querem amor e carrinho <i
-														class="far fa-smile-beam"></i>
-												</p>
+												th:if="${session.usuarioLogado.role} != 'ROLE_ADMIN'">
+												
+												<div
+													th:if="${animal.usuario.id} != ${session.usuarioLogado.id}">
+													<p>
+														Animalzinho indisponível no momento, lamentamos muito, mas existem
+														outros animalzinhos que querem amor e carrinho <i
+															class="far fa-smile-beam"></i>
+													</p>
+												</div>
 											</div>
 										</div>
 										<div

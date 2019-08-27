@@ -63,6 +63,13 @@ public class UserController {
 	public ModelAndView exibirPerfil(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/perfil");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		
+		if(usuario.getEndereco() == null) {
+			usuario.setEndereco(new Endereco());
+		}else if(usuario.getEndereco().getResidencia() == null) {
+			usuario.getEndereco().setResidencia(new Residencia());
+		}
+		
 		mv.addObject("usuario", usuario);
 		mv.addObject("listaResidencias", this.residenciaService.listar());
 		return mv;
@@ -118,10 +125,13 @@ public class UserController {
 			this.usuarioService.save(usuario);
 			session.setAttribute("usuarioLogado", usuario);
 			ra.addFlashAttribute("sucesso", "Alteração realizada com sucesso");
+			
 		}catch(IdadeInvalidaException e) {
 			ra.addFlashAttribute("errorIdade", e.getMessage());
+			
 		}catch (Exception e) {
 			ra.addFlashAttribute("error", "Não foi possível alterar");
+			System.out.println(e.getMessage());
 		}
 		return "redirect:/user/perfil/editar";
 	}

@@ -12,9 +12,10 @@ public class Autorizacao implements HandlerInterceptor {
 
 	private static final boolean CONTROLAR_ACESSO = true;
 
-	private static final String[] RECURSOS_LIVRES = { "/home", "/termos", "/navegacao", "/quem-somos", "/login",
-			"/cadastro", "/adotar", "/descricao-animal", "/mapa", "/not-found",
-			"https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese"};
+	private static final String[] RECURSOS_LIVRES = { "/home", "/termos", "/navegacao", "/quem-somos",
+			"/adotar", "/descricao-animal", "/mapa", "/not-found"};
+	
+	private static final String[] RECURSOS_LOGIN = {"/login", "/cadastro"};
 
 	private static final String RECURSOS_USUARIOS_NORMAL = "/user/";
 
@@ -38,10 +39,18 @@ public class Autorizacao implements HandlerInterceptor {
 			if (request.getRequestURL().toString().contains(recurso)
 					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_ADM)
 					&& !request.getRequestURL().toString().contains(RECURSOS_USUARIOS_NORMAL)) {
+				
 				return true;
 			}
 		}
 		
+		for(String recurso : RECURSOS_LOGIN) {
+			if(request.getRequestURL().toString().endsWith(recurso) 
+				&& request.getSession().getAttribute("usuarioLogado") == null) {
+				
+				return true;
+			}
+		}
 
 		Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
 		

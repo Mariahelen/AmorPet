@@ -2,17 +2,20 @@ package com.example.demo.service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dao.ResidenciaDAO;
 import com.example.demo.dao.UsuarioDAO;
 import com.example.demo.exception.IdadeInvalidaException;
 import com.example.demo.exception.LoginInvalido;
 import com.example.demo.exception.SenhaInvalidaException;
 import com.example.demo.model.Endereco;
+import com.example.demo.model.Residencia;
 import com.example.demo.model.Usuario;
 import com.example.demo.util.Util;
 
@@ -22,6 +25,8 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+	@Autowired
+	private ResidenciaDAO residenciaRep;
 
 	public Usuario save(Usuario usuario) {
 		return this.usuarioDAO.save(usuario);
@@ -76,9 +81,18 @@ public class UsuarioService {
 		usuarioParaSalvar.setEmail(usuarioParaSalvar.getEmail());
 		usuarioParaSalvar.setTelefone(usuarioForm.getTelefone());
 		
-		if(! usuarioForm.getEndereco().getResidencia().getTipoResidencia().equalsIgnoreCase("TODOS")) {
-			usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+		Optional<Residencia> residencia = this.residenciaRep.findById(usuarioForm.getEndereco().getResidencia().getIdResidencia());
+		if(residencia.isPresent()) {
+			if(! residencia.get().getTipoResidencia().equalsIgnoreCase("TODOS")) {
+				usuarioParaSalvar.setEndereco(usuarioForm.getEndereco());
+				
+			}else {
+				throw new Exception("Residencia inválida");
+			}
+		}else {
+			throw new Exception("Residencia não encontrada");
 		}
+		
 		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());
 		usuarioParaSalvar.setConfirmaSenha(usuarioParaSalvar.getHashSenha());
 		return usuarioParaSalvar;
