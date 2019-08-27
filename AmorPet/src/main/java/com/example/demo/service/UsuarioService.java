@@ -89,8 +89,6 @@ public class UsuarioService {
 			}else {
 				throw new Exception("Residencia inválida");
 			}
-		}else {
-			throw new Exception("Residencia não encontrada");
 		}
 		
 		usuarioParaSalvar.setHashSenha(usuarioParaSalvar.getHashSenha());

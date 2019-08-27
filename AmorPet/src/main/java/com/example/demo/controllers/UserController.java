@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 //import javax.servlet.http.HttpServletRequest;
@@ -66,8 +67,12 @@ public class UserController {
 		
 		if(usuario.getEndereco() == null) {
 			usuario.setEndereco(new Endereco());
-		}else if(usuario.getEndereco().getResidencia() == null) {
+		}
+		if(usuario.getEndereco().getResidencia() == null) {
 			usuario.getEndereco().setResidencia(new Residencia());
+		}
+		if(usuario.getAnimais() == null) {
+			usuario.setAnimais(new ArrayList<Animal>());
 		}
 		
 		mv.addObject("usuario", usuario);
