@@ -128,7 +128,15 @@
 									<label for="lastname" class="col-4 col-form-label">Telefone</label>
 									<p th:text="${usuario.telefone}"></p>
 									<label for="text" class="col-4 col-form-label">Endereço</label>
-									<p></p>
+									<div th:with="end = ${usuario.endereco.logradouro} != null and
+										${usuario.endereco.numero} != null and ${usuario.endereco.complemento} != null">
+										<div th:if="${end}">
+											<p th:text="${usuario.endereco.logradouro}"></p>
+											<p th:text="${usuario.endereco.numero}"></p>
+											<p th:text="${usuario.endereco.complemento}"></p>
+										</div>
+									<div th:unless="${end}">Você ainda não preencheu o endereço</div>
+									</div>
 								</div>
 							</div>
 						</div>
